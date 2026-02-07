@@ -1,7 +1,7 @@
 {
   "name": "com.meta.xr.sdk.platform",
   "displayName": "Meta XR Platform SDK",
-  "version": "81.0.0",
+  "version": "81.0.1",
   "description": "Use the Platform SDK to create social VR applications. Add Matchmaking, DLC, In-App Purchases, Cloud Storage, and more to your experience using the individual components of the SDK.",
   "samples": [
     {
