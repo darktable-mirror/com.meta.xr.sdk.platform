@@ -5,7 +5,7 @@ namespace Oculus.Platform
 
   using Description = System.ComponentModel.DescriptionAttribute;
 
-  /// This `enum` represents the all possible statuses of a premission request.
+  /// This `enum` represents the all possible statuses of a permission request.
   /// For example, if an user wants to participate in a challenge, the user may
   /// request the permission to join the Models.Challenge first. If the
   /// permission grant status is granted, the user can call Challenges.Join() to

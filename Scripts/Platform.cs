@@ -1497,7 +1497,7 @@ namespace Oculus.Platform
   public static partial class GroupPresence
   {
     /// Clears the current group presence settings for your app. Use this when a
-    /// user’s group presence setting in your app needs to be changed when moving
+    /// user's group presence setting in your app needs to be changed when moving
     /// to new destinations in your app.
     ///
     public static Request Clear()
@@ -1573,7 +1573,7 @@ namespace Oculus.Platform
     }
 
     /// Launch the dialog allowing users to rejoin a previous lobby or match.
-    /// Either the user’s GroupPresenceOptions.SetLobbySessionId(), their
+    /// Either the user's GroupPresenceOptions.SetLobbySessionId(), their
     /// GroupPresenceOptions.SetMatchSessionId(), or both must be populated as
     /// valid rejoinable destinations. Check the Rejoin documentation for use cases
     /// and information on this feature.
@@ -1614,7 +1614,7 @@ namespace Oculus.Platform
     /// GroupPresence.LaunchInvitePanel() which delegates the invite flow to the
     /// system invite module. GroupPresence.LaunchInvitePanel() is the recommended
     /// approach.
-    /// \param userIDs userIDs is a list of users’ ids to send invites to.
+    /// \param userIDs userIDs is a list of users' ids to send invites to.
     ///
     public static Request<Models.SendInvitesResult> SendInvites(UInt64[] userIDs)
     {
@@ -1651,7 +1651,7 @@ namespace Oculus.Platform
     /// keeping the other group presence parameters the same. If the destination of
     /// the user is not set, the deeplink message cannot be set as there's no
     /// deeplink message to override. This method does not power travel from the
-    /// Meta Quest platform to your app. You must set a user’s
+    /// Meta Quest platform to your app. You must set a user's
     /// GroupPresenceOptions.SetDestinationApiName(),
     /// GroupPresenceOptions.SetIsJoinable() status, and
     /// GroupPresenceOptions.SetLobbySessionId() to enable travel to your app.
@@ -1692,13 +1692,13 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Sets a user’s current presence as joinable. Use this method to update a
-    /// user’s joinability as it changes. For example, when the game starts, the
+    /// Sets a user's current presence as joinable. Use this method to update a
+    /// user's joinability as it changes. For example, when the game starts, the
     /// lobby becomes full, the user moves to a private, non joinable instance
     /// while keeping all other GroupPresence parameters (i.e
     /// GroupPresenceOptions.SetDestinationApiName(),
     /// GroupPresenceOptions.SetLobbySessionId(),
-    /// GroupPresenceOptions.SetMatchSessionId()) the same. Setting a user’s
+    /// GroupPresenceOptions.SetMatchSessionId()) the same. Setting a user's
     /// destination is required to enable travel from the Meta Quest Platform to
     /// your app. Note: Instead of using this individual API, we recommend setting
     /// all GroupPresence information with the GroupPresence.Set() method and its
@@ -2234,7 +2234,8 @@ namespace Oculus.Platform
   {
     /// Load the current party the current Models.User is in. The returned
     /// Models.Party will then contain information about other users in the party
-    /// and invited users.
+    /// and invited users. If the user is not currently in a party, the request
+    /// will return an error message with code 10.
     ///
     public static Request<Models.Party> GetCurrent()
     {

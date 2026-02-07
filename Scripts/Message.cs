@@ -876,7 +876,7 @@ namespace Oculus.Platform
     internal static ExtraMessageTypesHandler HandleExtraMessageTypes { set; private get; }
   }
 
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithAbuseReportRecording : Message<AbuseReportRecording>
   {
@@ -893,7 +893,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithAchievementDefinitions : Message<AchievementDefinitionList>
   {
@@ -910,7 +910,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithAchievementProgressList : Message<AchievementProgressList>
   {
@@ -927,7 +927,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithAchievementUpdate : Message<AchievementUpdate>
   {
@@ -944,7 +944,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithAppDownloadProgressResult : Message<AppDownloadProgressResult>
   {
@@ -961,7 +961,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithAppDownloadResult : Message<AppDownloadResult>
   {
@@ -978,7 +978,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithApplicationInviteList : Message<ApplicationInviteList>
   {
@@ -995,7 +995,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithApplicationVersion : Message<ApplicationVersion>
   {
@@ -1012,7 +1012,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithAssetDetails : Message<AssetDetails>
   {
@@ -1029,7 +1029,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithAssetDetailsList : Message<AssetDetailsList>
   {
@@ -1046,7 +1046,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithAssetFileDeleteResult : Message<AssetFileDeleteResult>
   {
@@ -1063,7 +1063,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithAssetFileDownloadCancelResult : Message<AssetFileDownloadCancelResult>
   {
@@ -1080,7 +1080,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithAssetFileDownloadResult : Message<AssetFileDownloadResult>
   {
@@ -1097,7 +1097,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithAssetFileDownloadUpdate : Message<AssetFileDownloadUpdate>
   {
@@ -1114,7 +1114,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithAvatarEditorResult : Message<AvatarEditorResult>
   {
@@ -1131,7 +1131,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithBlockedUserList : Message<BlockedUserList>
   {
@@ -1148,7 +1148,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithChallenge : Message<Challenge>
   {
@@ -1165,7 +1165,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithChallengeList : Message<ChallengeList>
   {
@@ -1182,7 +1182,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithChallengeEntryList : Message<ChallengeEntryList>
   {
@@ -1199,7 +1199,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithCowatchViewerList : Message<CowatchViewerList>
   {
@@ -1216,7 +1216,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithCowatchViewerUpdate : Message<CowatchViewerUpdate>
   {
@@ -1233,7 +1233,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithCowatchingState : Message<CowatchingState>
   {
@@ -1250,7 +1250,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithDestinationList : Message<DestinationList>
   {
@@ -1267,7 +1267,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithGroupPresenceJoinIntent : Message<GroupPresenceJoinIntent>
   {
@@ -1284,7 +1284,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithGroupPresenceLeaveIntent : Message<GroupPresenceLeaveIntent>
   {
@@ -1301,7 +1301,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithInstalledApplicationList : Message<InstalledApplicationList>
   {
@@ -1318,7 +1318,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithInvitePanelResultInfo : Message<InvitePanelResultInfo>
   {
@@ -1335,7 +1335,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithLaunchBlockFlowResult : Message<LaunchBlockFlowResult>
   {
@@ -1352,7 +1352,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithLaunchFriendRequestFlowResult : Message<LaunchFriendRequestFlowResult>
   {
@@ -1369,7 +1369,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithLaunchInvitePanelFlowResult : Message<LaunchInvitePanelFlowResult>
   {
@@ -1386,7 +1386,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithLaunchReportFlowResult : Message<LaunchReportFlowResult>
   {
@@ -1403,7 +1403,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithLaunchUnblockFlowResult : Message<LaunchUnblockFlowResult>
   {
@@ -1420,7 +1420,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithLeaderboardList : Message<LeaderboardList>
   {
@@ -1437,7 +1437,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithLeaderboardEntryList : Message<LeaderboardEntryList>
   {
@@ -1454,7 +1454,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithLinkedAccountList : Message<LinkedAccountList>
   {
@@ -1471,7 +1471,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithLivestreamingApplicationStatus : Message<LivestreamingApplicationStatus>
   {
@@ -1488,7 +1488,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithLivestreamingStartResult : Message<LivestreamingStartResult>
   {
@@ -1505,7 +1505,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithLivestreamingStatus : Message<LivestreamingStatus>
   {
@@ -1522,7 +1522,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithLivestreamingVideoStats : Message<LivestreamingVideoStats>
   {
@@ -1539,7 +1539,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithMicrophoneAvailabilityState : Message<MicrophoneAvailabilityState>
   {
@@ -1556,7 +1556,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithNetSyncConnection : Message<NetSyncConnection>
   {
@@ -1573,7 +1573,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithNetSyncSessionList : Message<NetSyncSessionList>
   {
@@ -1590,7 +1590,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithNetSyncSessionsChangedNotification : Message<NetSyncSessionsChangedNotification>
   {
@@ -1607,7 +1607,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithNetSyncSetSessionPropertyResult : Message<NetSyncSetSessionPropertyResult>
   {
@@ -1624,7 +1624,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithNetSyncVoipAttenuationValueList : Message<NetSyncVoipAttenuationValueList>
   {
@@ -1641,7 +1641,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithOrgScopedID : Message<OrgScopedID>
   {
@@ -1658,7 +1658,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithParty : Message<Party>
   {
@@ -1675,7 +1675,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithPartyUnderCurrentParty : Message<Party>
   {
@@ -1692,7 +1692,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithPartyID : Message<PartyID>
   {
@@ -1709,7 +1709,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithPartyUpdateNotification : Message<PartyUpdateNotification>
   {
@@ -1726,7 +1726,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithPidList : Message<PidList>
   {
@@ -1743,7 +1743,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithProductList : Message<ProductList>
   {
@@ -1760,7 +1760,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithPurchase : Message<Purchase>
   {
@@ -1777,7 +1777,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithPurchaseList : Message<PurchaseList>
   {
@@ -1794,7 +1794,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithPushNotificationResult : Message<PushNotificationResult>
   {
@@ -1811,7 +1811,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithRejoinDialogResult : Message<RejoinDialogResult>
   {
@@ -1828,7 +1828,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithSdkAccountList : Message<SdkAccountList>
   {
@@ -1845,7 +1845,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithSendInvitesResult : Message<SendInvitesResult>
   {
@@ -1862,7 +1862,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithShareMediaResult : Message<ShareMediaResult>
   {
@@ -1879,7 +1879,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithString : Message<string>
   {
@@ -1893,7 +1893,7 @@ namespace Oculus.Platform
       return CAPI.ovr_Message_GetString(c_message);
     }
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithSystemVoipState : Message<SystemVoipState>
   {
@@ -1910,7 +1910,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithUser : Message<User>
   {
@@ -1927,7 +1927,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithUserAccountAgeCategory : Message<UserAccountAgeCategory>
   {
@@ -1944,7 +1944,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithUserList : Message<UserList>
   {
@@ -1961,7 +1961,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithUserCapabilityList : Message<UserCapabilityList>
   {
@@ -1978,7 +1978,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithUserProof : Message<UserProof>
   {
@@ -1995,7 +1995,7 @@ namespace Oculus.Platform
     }
 
   }
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithUserReportID : Message<UserReportID>
   {
@@ -2013,7 +2013,7 @@ namespace Oculus.Platform
 
   }
 
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithLeaderboardDidUpdate : Message<bool>
   {
@@ -2030,7 +2030,7 @@ namespace Oculus.Platform
     }
   }
 
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithHttpTransferUpdate : Message<HttpTransferUpdate>
   {
@@ -2047,7 +2047,7 @@ namespace Oculus.Platform
     }
   }
 
-  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithPlatformInitialize : Message<PlatformInitialize>
   {

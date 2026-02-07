@@ -16,7 +16,7 @@ namespace Oculus.Platform.Models
   public class ManagedInfo
   {
     /// A string represents the department name in the organization to which the
-    /// user blongs to.
+    /// user belongs to.
     public readonly string Department;
     /// The email address of the account user which owns the MMA, i.e., Meta
     /// Managed Account.
