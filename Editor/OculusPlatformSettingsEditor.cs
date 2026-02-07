@@ -28,6 +28,7 @@ namespace Oculus.Platform
         {
             isUnityEditorSettingsExpanded = true;
             isBuildSettingsExpanded = true;
+            EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_SETTINGS_PANEL_OPENED", "");
         }
 
         [UnityEditor.MenuItem("Meta/Platform/Edit Settings")]

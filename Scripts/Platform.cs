@@ -78,17 +78,23 @@ namespace Oculus.Platform
     public static Request<Models.PlatformInitialize> AsyncInitialize(string appId = null) {
       appId = getAppID(appId);
 
+      string jsonPayload = "{\"appId\":\"" + appId + "\"}";
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_AsyncInitialize", jsonPayload);
+
       Request<Models.PlatformInitialize> request;
       if (UnityEngine.Application.isEditor && PlatformSettings.UseStandalonePlatform) {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_AsyncInitialize_Standalone", jsonPayload);
         var platform = new StandalonePlatform();
         request = platform.InitializeInEditor();
       }
       else if (UnityEngine.Application.platform == RuntimePlatform.WindowsEditor ||
                UnityEngine.Application.platform == RuntimePlatform.WindowsPlayer) {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_AsyncInitialize_Windows", jsonPayload);
         var platform = new WindowsPlatform();
         request = platform.AsyncInitialize(appId);
       }
       else if (UnityEngine.Application.platform == RuntimePlatform.Android) {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_AsyncInitialize_Android", jsonPayload);
         var platform = new AndroidPlatform();
         request = platform.AsyncInitialize(appId);
       }
@@ -459,6 +465,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "AbuseReport" + "_" + "ReportRequestHandled", "");
         return new Request(CAPI.ovr_AbuseReport_ReportRequestHandled(response));
       }
 
@@ -497,6 +504,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Achievements" + "_" + "AddCount", "");
         return new Request<Models.AchievementUpdate>(CAPI.ovr_Achievements_AddCount(name, count));
       }
 
@@ -512,6 +520,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Achievements" + "_" + "AddFields", "");
         return new Request<Models.AchievementUpdate>(CAPI.ovr_Achievements_AddFields(name, fields));
       }
 
@@ -526,6 +535,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Achievements" + "_" + "GetAllDefinitions", "");
         return new Request<Models.AchievementDefinitionList>(CAPI.ovr_Achievements_GetAllDefinitions());
       }
 
@@ -539,6 +549,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Achievements" + "_" + "GetAllProgress", "");
         return new Request<Models.AchievementProgressList>(CAPI.ovr_Achievements_GetAllProgress());
       }
 
@@ -554,6 +565,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Achievements" + "_" + "GetDefinitionsByName", "");
         return new Request<Models.AchievementDefinitionList>(CAPI.ovr_Achievements_GetDefinitionsByName(names, (names != null ? names.Length : 0)));
       }
 
@@ -569,6 +581,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Achievements" + "_" + "GetProgressByName", "");
         return new Request<Models.AchievementProgressList>(CAPI.ovr_Achievements_GetProgressByName(names, (names != null ? names.Length : 0)));
       }
 
@@ -597,6 +610,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Achievements" + "_" + "Unlock", "");
         return new Request<Models.AchievementUpdate>(CAPI.ovr_Achievements_Unlock(name));
       }
 
@@ -619,6 +633,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Application" + "_" + "CancelAppDownload", "");
         return new Request<Models.AppDownloadResult>(CAPI.ovr_Application_CancelAppDownload());
       }
 
@@ -632,6 +647,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Application" + "_" + "CheckAppDownloadProgress", "");
         return new Request<Models.AppDownloadProgressResult>(CAPI.ovr_Application_CheckAppDownloadProgress());
       }
 
@@ -649,6 +665,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Application" + "_" + "GetVersion", "");
         return new Request<Models.ApplicationVersion>(CAPI.ovr_Application_GetVersion());
       }
 
@@ -666,6 +683,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Application" + "_" + "InstallAppUpdateAndRelaunch", "");
         return new Request<Models.AppDownloadResult>(CAPI.ovr_Application_InstallAppUpdateAndRelaunch((IntPtr)deeplink_options));
       }
 
@@ -683,6 +701,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Application" + "_" + "LaunchOtherApp", "");
         return new Request<string>(CAPI.ovr_Application_LaunchOtherApp(appID, (IntPtr)deeplink_options));
       }
 
@@ -698,6 +717,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Application" + "_" + "StartAppDownload", "");
         return new Request<Models.AppDownloadResult>(CAPI.ovr_Application_StartAppDownload());
       }
 
@@ -743,6 +763,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "AssetFile" + "_" + "Delete", "");
         return new Request<Models.AssetFileDeleteResult>(CAPI.ovr_AssetFile_Delete(assetFileID));
       }
 
@@ -759,6 +780,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "AssetFile" + "_" + "DeleteById", "");
         return new Request<Models.AssetFileDeleteResult>(CAPI.ovr_AssetFile_DeleteById(assetFileID));
       }
 
@@ -775,6 +797,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "AssetFile" + "_" + "DeleteByName", "");
         return new Request<Models.AssetFileDeleteResult>(CAPI.ovr_AssetFile_DeleteByName(assetFileName));
       }
 
@@ -789,6 +812,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "AssetFile" + "_" + "Download", "");
         return new Request<Models.AssetFileDownloadResult>(CAPI.ovr_AssetFile_Download(assetFileID));
       }
 
@@ -806,6 +830,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "AssetFile" + "_" + "DownloadById", "");
         return new Request<Models.AssetFileDownloadResult>(CAPI.ovr_AssetFile_DownloadById(assetFileID));
       }
 
@@ -822,6 +847,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "AssetFile" + "_" + "DownloadByName", "");
         return new Request<Models.AssetFileDownloadResult>(CAPI.ovr_AssetFile_DownloadByName(assetFileName));
       }
 
@@ -836,6 +862,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "AssetFile" + "_" + "DownloadCancel", "");
         return new Request<Models.AssetFileDownloadCancelResult>(CAPI.ovr_AssetFile_DownloadCancel(assetFileID));
       }
 
@@ -852,6 +879,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "AssetFile" + "_" + "DownloadCancelById", "");
         return new Request<Models.AssetFileDownloadCancelResult>(CAPI.ovr_AssetFile_DownloadCancelById(assetFileID));
       }
 
@@ -868,6 +896,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "AssetFile" + "_" + "DownloadCancelByName", "");
         return new Request<Models.AssetFileDownloadCancelResult>(CAPI.ovr_AssetFile_DownloadCancelByName(assetFileName));
       }
 
@@ -883,6 +912,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "AssetFile" + "_" + "GetList", "");
         return new Request<Models.AssetDetailsList>(CAPI.ovr_AssetFile_GetList());
       }
 
@@ -897,6 +927,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "AssetFile" + "_" + "Status", "");
         return new Request<Models.AssetDetails>(CAPI.ovr_AssetFile_Status(assetFileID));
       }
 
@@ -912,6 +943,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "AssetFile" + "_" + "StatusById", "");
         return new Request<Models.AssetDetails>(CAPI.ovr_AssetFile_StatusById(assetFileID));
       }
 
@@ -927,6 +959,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "AssetFile" + "_" + "StatusByName", "");
         return new Request<Models.AssetDetails>(CAPI.ovr_AssetFile_StatusByName(assetFileName));
       }
 
@@ -965,6 +998,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Avatar" + "_" + "LaunchAvatarEditor", "");
         return new Request<Models.AvatarEditorResult>(CAPI.ovr_Avatar_LaunchAvatarEditor((IntPtr)options));
       }
 
@@ -991,6 +1025,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Challenges" + "_" + "Create", "");
         return new Request<Models.Challenge>(CAPI.ovr_Challenges_Create(leaderboardName, (IntPtr)challengeOptions));
       }
 
@@ -1007,6 +1042,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Challenges" + "_" + "DeclineInvite", "");
         return new Request<Models.Challenge>(CAPI.ovr_Challenges_DeclineInvite(challengeID));
       }
 
@@ -1021,6 +1057,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Challenges" + "_" + "Delete", "");
         return new Request(CAPI.ovr_Challenges_Delete(challengeID));
       }
 
@@ -1036,6 +1073,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Challenges" + "_" + "Get", "");
         return new Request<Models.Challenge>(CAPI.ovr_Challenges_Get(challengeID));
       }
 
@@ -1059,6 +1097,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Challenges" + "_" + "GetEntries", "");
         return new Request<Models.ChallengeEntryList>(CAPI.ovr_Challenges_GetEntries(challengeID, limit, filter, startAt));
       }
 
@@ -1079,6 +1118,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Challenges" + "_" + "GetEntriesAfterRank", "");
         return new Request<Models.ChallengeEntryList>(CAPI.ovr_Challenges_GetEntriesAfterRank(challengeID, limit, afterRank));
       }
 
@@ -1099,6 +1139,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Challenges" + "_" + "GetEntriesByIds", "");
         return new Request<Models.ChallengeEntryList>(CAPI.ovr_Challenges_GetEntriesByIds(challengeID, limit, startAt, userIDs, (uint)(userIDs != null ? userIDs.Length : 0)));
       }
 
@@ -1117,6 +1158,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Challenges" + "_" + "GetList", "");
         return new Request<Models.ChallengeList>(CAPI.ovr_Challenges_GetList((IntPtr)challengeOptions, limit));
       }
 
@@ -1133,6 +1175,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Challenges" + "_" + "Join", "");
         return new Request<Models.Challenge>(CAPI.ovr_Challenges_Join(challengeID));
       }
 
@@ -1149,6 +1192,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Challenges" + "_" + "Leave", "");
         return new Request<Models.Challenge>(CAPI.ovr_Challenges_Leave(challengeID));
       }
 
@@ -1164,6 +1208,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Challenges" + "_" + "UpdateInfo", "");
         return new Request<Models.Challenge>(CAPI.ovr_Challenges_UpdateInfo(challengeID, (IntPtr)challengeOptions));
       }
 
@@ -1189,6 +1234,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Cowatching" + "_" + "GetPresenterData", "");
         return new Request<string>(CAPI.ovr_Cowatching_GetPresenterData());
       }
 
@@ -1204,6 +1250,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Cowatching" + "_" + "GetViewersData", "");
         return new Request<Models.CowatchViewerList>(CAPI.ovr_Cowatching_GetViewersData());
       }
 
@@ -1219,6 +1266,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Cowatching" + "_" + "IsInSession", "");
         return new Request<Models.CowatchingState>(CAPI.ovr_Cowatching_IsInSession());
       }
 
@@ -1233,6 +1281,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Cowatching" + "_" + "JoinSession", "");
         return new Request(CAPI.ovr_Cowatching_JoinSession());
       }
 
@@ -1246,6 +1295,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Cowatching" + "_" + "LaunchInviteDialog", "");
         return new Request(CAPI.ovr_Cowatching_LaunchInviteDialog());
       }
 
@@ -1260,6 +1310,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Cowatching" + "_" + "LeaveSession", "");
         return new Request(CAPI.ovr_Cowatching_LeaveSession());
       }
 
@@ -1274,6 +1325,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Cowatching" + "_" + "RequestToPresent", "");
         return new Request(CAPI.ovr_Cowatching_RequestToPresent());
       }
 
@@ -1288,6 +1340,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Cowatching" + "_" + "ResignFromPresenting", "");
         return new Request(CAPI.ovr_Cowatching_ResignFromPresenting());
       }
 
@@ -1306,6 +1359,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Cowatching" + "_" + "SetPresenterData", "");
         return new Request(CAPI.ovr_Cowatching_SetPresenterData(video_title, presenter_data));
       }
 
@@ -1323,6 +1377,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Cowatching" + "_" + "SetViewerData", "");
         return new Request(CAPI.ovr_Cowatching_SetViewerData(viewer_data));
       }
 
@@ -1440,6 +1495,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "DeviceApplicationIntegrity" + "_" + "GetIntegrityToken", "");
         return new Request<string>(CAPI.ovr_DeviceApplicationIntegrity_GetIntegrityToken(challenge_nonce));
       }
 
@@ -1472,6 +1528,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Entitlements" + "_" + "IsUserEntitledToApplication", "");
         return new Request(CAPI.ovr_Entitlement_GetIsViewerEntitled());
       }
 
@@ -1504,6 +1561,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "GroupPresence" + "_" + "Clear", "");
         return new Request(CAPI.ovr_GroupPresence_Clear());
       }
 
@@ -1519,6 +1577,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "GroupPresence" + "_" + "GetInvitableUsers", "");
         return new Request<Models.UserList>(CAPI.ovr_GroupPresence_GetInvitableUsers((IntPtr)options));
       }
 
@@ -1532,6 +1591,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "GroupPresence" + "_" + "GetSentInvites", "");
         return new Request<Models.ApplicationInviteList>(CAPI.ovr_GroupPresence_GetSentInvites());
       }
 
@@ -1548,6 +1608,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "GroupPresence" + "_" + "LaunchInvitePanel", "");
         return new Request<Models.InvitePanelResultInfo>(CAPI.ovr_GroupPresence_LaunchInvitePanel((IntPtr)options));
       }
 
@@ -1565,6 +1626,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "GroupPresence" + "_" + "LaunchMultiplayerErrorDialog", "");
         return new Request(CAPI.ovr_GroupPresence_LaunchMultiplayerErrorDialog((IntPtr)options));
       }
 
@@ -1585,6 +1647,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "GroupPresence" + "_" + "LaunchRejoinDialog", "");
         return new Request<Models.RejoinDialogResult>(CAPI.ovr_GroupPresence_LaunchRejoinDialog(lobby_session_id, match_session_id, destination_api_name));
       }
 
@@ -1601,6 +1664,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "GroupPresence" + "_" + "LaunchRosterPanel", "");
         return new Request(CAPI.ovr_GroupPresence_LaunchRosterPanel((IntPtr)options));
       }
 
@@ -1620,6 +1684,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "GroupPresence" + "_" + "SendInvites", "");
         return new Request<Models.SendInvitesResult>(CAPI.ovr_GroupPresence_SendInvites(userIDs, (uint)(userIDs != null ? userIDs.Length : 0)));
       }
 
@@ -1640,6 +1705,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "GroupPresence" + "_" + "Set", "");
         return new Request(CAPI.ovr_GroupPresence_Set((IntPtr)groupPresenceOptions));
       }
 
@@ -1664,6 +1730,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "GroupPresence" + "_" + "SetDeeplinkMessageOverride", "");
         return new Request(CAPI.ovr_GroupPresence_SetDeeplinkMessageOverride(deeplink_message));
       }
 
@@ -1685,6 +1752,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "GroupPresence" + "_" + "SetDestination", "");
         return new Request(CAPI.ovr_GroupPresence_SetDestination(api_name));
       }
 
@@ -1711,6 +1779,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "GroupPresence" + "_" + "SetIsJoinable", "");
         return new Request(CAPI.ovr_GroupPresence_SetIsJoinable(is_joinable));
       }
 
@@ -1733,6 +1802,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "GroupPresence" + "_" + "SetLobbySession", "");
         return new Request(CAPI.ovr_GroupPresence_SetLobbySession(id));
       }
 
@@ -1759,6 +1829,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "GroupPresence" + "_" + "SetMatchSession", "");
         return new Request(CAPI.ovr_GroupPresence_SetMatchSession(id));
       }
 
@@ -1845,6 +1916,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "IAP" + "_" + "ConsumePurchase", "");
         return new Request(CAPI.ovr_IAP_ConsumePurchase(sku));
       }
 
@@ -1863,6 +1935,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "IAP" + "_" + "GetProductsBySKU", "");
         return new Request<Models.ProductList>(CAPI.ovr_IAP_GetProductsBySKU(skus, (skus != null ? skus.Length : 0)));
       }
 
@@ -1880,6 +1953,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "IAP" + "_" + "GetViewerPurchases", "");
         return new Request<Models.PurchaseList>(CAPI.ovr_IAP_GetViewerPurchases());
       }
 
@@ -1897,6 +1971,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "IAP" + "_" + "GetViewerPurchasesDurableCache", "");
         return new Request<Models.PurchaseList>(CAPI.ovr_IAP_GetViewerPurchasesDurableCache());
       }
 
@@ -1918,6 +1993,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "IAP" + "_" + "LaunchCheckoutFlow", "");
         if (UnityEngine.Application.isEditor) {
           throw new NotImplementedException("LaunchCheckoutFlow() is not implemented in the editor yet.");
         }
@@ -1948,6 +2024,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "LanguagePack" + "_" + "GetCurrent", "");
         return new Request<Models.AssetDetails>(CAPI.ovr_LanguagePack_GetCurrent());
       }
 
@@ -1968,6 +2045,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "LanguagePack" + "_" + "SetCurrent", "");
         return new Request<Models.AssetFileDownloadResult>(CAPI.ovr_LanguagePack_SetCurrent(tag));
       }
 
@@ -1995,6 +2073,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Leaderboards" + "_" + "Get", "");
         return new Request<Models.LeaderboardList>(CAPI.ovr_Leaderboard_Get(leaderboardName));
       }
 
@@ -2018,6 +2097,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Leaderboards" + "_" + "GetEntries", "");
         return new Request<Models.LeaderboardEntryList>(CAPI.ovr_Leaderboard_GetEntries(leaderboardName, limit, filter, startAt));
       }
 
@@ -2034,6 +2114,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Leaderboards" + "_" + "GetEntriesAfterRank", "");
         return new Request<Models.LeaderboardEntryList>(CAPI.ovr_Leaderboard_GetEntriesAfterRank(leaderboardName, limit, afterRank));
       }
 
@@ -2052,6 +2133,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Leaderboards" + "_" + "GetEntriesByIds", "");
         return new Request<Models.LeaderboardEntryList>(CAPI.ovr_Leaderboard_GetEntriesByIds(leaderboardName, limit, startAt, userIDs, (uint)(userIDs != null ? userIDs.Length : 0)));
       }
 
@@ -2076,6 +2158,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Leaderboards" + "_" + "WriteEntry", "");
         return new Request<bool>(CAPI.ovr_Leaderboard_WriteEntry(leaderboardName, score, extraData, (uint)(extraData != null ? extraData.Length : 0), forceUpdate));
       }
 
@@ -2101,6 +2184,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Leaderboards" + "_" + "WriteEntryWithSupplementaryMetric", "");
         return new Request<bool>(CAPI.ovr_Leaderboard_WriteEntryWithSupplementaryMetric(leaderboardName, score, supplementaryMetric, extraData, (uint)(extraData != null ? extraData.Length : 0), forceUpdate));
       }
 
@@ -2159,6 +2243,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Media" + "_" + "ShareToFacebook", "");
         return new Request<Models.ShareMediaResult>(CAPI.ovr_Media_ShareToFacebook(postTextSuggestion, filePath, contentType));
       }
 
@@ -2217,6 +2302,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Notifications" + "_" + "MarkAsRead", "");
         return new Request(CAPI.ovr_Notification_MarkAsRead(notificationID));
       }
 
@@ -2241,6 +2327,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Parties" + "_" + "GetCurrent", "");
         return new Request<Models.Party>(CAPI.ovr_Party_GetCurrent());
       }
 
@@ -2274,6 +2361,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "PushNotification" + "_" + "Register", "");
         return new Request<Models.PushNotificationResult>(CAPI.ovr_PushNotification_Register());
       }
 
@@ -2294,6 +2382,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "RichPresence" + "_" + "Clear", "");
         return new Request(CAPI.ovr_RichPresence_Clear());
       }
 
@@ -2307,6 +2396,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "RichPresence" + "_" + "GetDestinations", "");
         return new Request<Models.DestinationList>(CAPI.ovr_RichPresence_GetDestinations());
       }
 
@@ -2321,6 +2411,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "RichPresence" + "_" + "Set", "");
         return new Request(CAPI.ovr_RichPresence_Set((IntPtr)richPresenceOptions));
       }
 
@@ -2349,6 +2440,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Users" + "_" + "Get", "");
         return new Request<Models.User>(CAPI.ovr_User_Get(userID));
       }
 
@@ -2363,6 +2455,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Users" + "_" + "GetAccessToken", "");
         return new Request<string>(CAPI.ovr_User_GetAccessToken());
       }
 
@@ -2377,6 +2470,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Users" + "_" + "GetBlockedUsers", "");
         return new Request<Models.BlockedUserList>(CAPI.ovr_User_GetBlockedUsers());
       }
 
@@ -2387,8 +2481,8 @@ namespace Oculus.Platform
     /// Returns a list of linked accounts that are associated with the specified
     /// service providers.
     ///
-    /// Customization can be done via UserOptions. Create this object
-    /// withUserOptions(). The params that could be used are:
+    /// Customization can be done via UserOptions. Create this object with
+    /// UserOptions(). The params that could be used are:
     ///
     /// 1. UserOptions.AddServiceProvider() - returns the list of linked accounts
     /// that are associated with these specified service providers.
@@ -2406,6 +2500,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Users" + "_" + "GetLinkedAccounts", "");
         return new Request<Models.LinkedAccountList>(CAPI.ovr_User_GetLinkedAccounts((IntPtr)userOptions));
       }
 
@@ -2427,6 +2522,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Users" + "_" + "GetLoggedInUser", "");
         return new Request<Models.User>(CAPI.ovr_User_GetLoggedInUser());
       }
 
@@ -2441,6 +2537,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Users" + "_" + "GetLoggedInUserFriends", "");
         return new Request<Models.UserList>(CAPI.ovr_User_GetLoggedInUserFriends());
       }
 
@@ -2458,6 +2555,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Users" + "_" + "GetLoggedInUserManagedInfo", "");
         return new Request<Models.User>(CAPI.ovr_User_GetLoggedInUserManagedInfo());
       }
 
@@ -2473,6 +2571,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Users" + "_" + "GetOrgScopedID", "");
         return new Request<Models.OrgScopedID>(CAPI.ovr_User_GetOrgScopedID(userID));
       }
 
@@ -2487,6 +2586,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Users" + "_" + "GetSdkAccounts", "");
         return new Request<Models.SdkAccountList>(CAPI.ovr_User_GetSdkAccounts());
       }
 
@@ -2506,6 +2606,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Users" + "_" + "GetUserProof", "");
         return new Request<Models.UserProof>(CAPI.ovr_User_GetUserProof());
       }
 
@@ -2522,6 +2623,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Users" + "_" + "LaunchBlockFlow", "");
         return new Request<Models.LaunchBlockFlowResult>(CAPI.ovr_User_LaunchBlockFlow(userID));
       }
 
@@ -2536,6 +2638,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Users" + "_" + "LaunchFriendRequestFlow", "");
         return new Request<Models.LaunchFriendRequestFlowResult>(CAPI.ovr_User_LaunchFriendRequestFlow(userID));
       }
 
@@ -2550,6 +2653,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Users" + "_" + "LaunchUnblockFlow", "");
         return new Request<Models.LaunchUnblockFlowResult>(CAPI.ovr_User_LaunchUnblockFlow(userID));
       }
 
@@ -2574,6 +2678,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "UserAgeCategory" + "_" + "Get", "");
         return new Request<Models.UserAccountAgeCategory>(CAPI.ovr_UserAgeCategory_Get());
       }
 
@@ -2588,6 +2693,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "UserAgeCategory" + "_" + "Report", "");
         return new Request(CAPI.ovr_UserAgeCategory_Report(age_category));
       }
 
@@ -2613,6 +2719,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Voip" + "_" + "GetMicrophoneAvailability", "");
         return new Request<Models.MicrophoneAvailabilityState>(CAPI.ovr_Voip_GetMicrophoneAvailability());
       }
 
@@ -2633,6 +2740,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Voip" + "_" + "SetSystemVoipSuppressed", "");
         return new Request<Models.SystemVoipState>(CAPI.ovr_Voip_SetSystemVoipSuppressed(suppressed));
       }
 
