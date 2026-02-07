@@ -28,6 +28,9 @@ namespace Oculus.Platform
     [Description("UNINSTALLING")]
     Uninstalling,
 
+    [Description("INSTALL_QUEUED")]
+    InstallQueued,
+
   }
 
 }
