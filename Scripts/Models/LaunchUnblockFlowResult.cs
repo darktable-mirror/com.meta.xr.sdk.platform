@@ -8,12 +8,19 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
-  /// Results of the launched unblock dialog including user actions.
+  /// It's used to unblock a user. Results of the launched unblock dialog
+  /// including whether the user was successfully unblocked and whether the
+  /// viewer canceled the unblock flow. It can be retrieved using
+  /// Users.LaunchUnblockFlow().
   public class LaunchUnblockFlowResult
   {
-    /// Whether the viewer chose to cancel the unblock flow.
+    /// A `boolean` indicates whether the viewer chose to cancel the unblock flow.
+    /// It will be 'true' if the viewer canceled 'Unblock' from the modal.
     public readonly bool DidCancel;
-    /// Whether the viewer successfully unblocked the user.
+    /// A `boolean` indicates whether the viewer successfully unblocked the user.
+    /// Learn more about [unblocking
+    /// users](https://developer.oculus.com/documentation/unity/ps-blockingsdk/)
+    /// from our website.
     public readonly bool DidUnblock;
 
 

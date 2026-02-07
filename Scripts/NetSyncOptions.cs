@@ -10,6 +10,7 @@ namespace Oculus.Platform
 
   public class NetSyncOptions {
 
+    /// Creates a new instance of ::NetSyncOptions which is used to customize the option flow. It returns a handle to the newly created options object, which can be used to set various properties for the options.
     public NetSyncOptions() {
       Handle = CAPI.ovr_NetSyncOptions_Create();
     }
@@ -31,11 +32,12 @@ namespace Oculus.Platform
     }
 
 
-    /// For passing to native C
+    /// This operator allows you to pass an instance of the ::NetSyncOptions class to native C code as an IntPtr. The operator returns the handle of the options object, or IntPtr.Zero if the object is null.
     public static explicit operator IntPtr(NetSyncOptions options) {
       return options != null ? options.Handle : IntPtr.Zero;
     }
 
+    /// Destroys an existing instance of the ::NetSyncOptions and frees up memory when you're done using it.
     ~NetSyncOptions() {
       CAPI.ovr_NetSyncOptions_Destroy(Handle);
     }

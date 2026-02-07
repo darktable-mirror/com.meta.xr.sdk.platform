@@ -4,10 +4,19 @@ namespace Oculus.Platform
     using System;
     using System.Collections.Generic;
 
+    /// This class represents a callback function that can be used to handle messages from the platform.
+    /// It provides a way to register and execute callback functions for specific message types (Message.MessageType),
+    /// allowing developers to customize the handling of incoming messages.
     public static class Callback
     {
         #region Notification Callbacks: Exposed through Oculus.Platform.Platform
 
+        /// This method sets the callback function for a specific notification message type.
+        /// It takes two parameters: the type of notification message to set the callback for, and the callback function itself.
+        /// If the provided callback is null, it throws an exception.
+        /// It stores the callback function in a dictionary, using the notification message type as the key.
+        /// If the notification message type is Notification_GroupPresence_JoinIntentReceived,
+        /// it flushes the join intent notification queue by calling FlushJoinIntentNotificationQueue().
         internal static void SetNotificationCallback<T>(Message.MessageType type, Message<T>.Callback callback)
         {
             if (callback == null)
@@ -23,6 +32,10 @@ namespace Oculus.Platform
             }
         }
 
+        /// This method sets the callback function for a specific notification message type.
+        /// It takes two parameters: the type of notification message to set the callback for, and the callback function itself.
+        /// If the provided callback is null, it throws an exception.
+        /// It stores the callback function in a dictionary, using the notification message type as the key.
         internal static void SetNotificationCallback(Message.MessageType type, Message.Callback callback)
         {
             if (callback == null)
@@ -37,6 +50,10 @@ namespace Oculus.Platform
 
         #region Adding and running request handlers
 
+        /// This method adds a request to the mapping of callbacks.
+        /// It takes one parameter: the request to be added.
+        /// If the request ID is 0, it means an early out error happened in the C SDK and the request is not added to the mapping.
+        /// An error message is logged in this case.
         internal static void AddRequest(Request request)
         {
             if (request.RequestID == 0)
@@ -49,6 +66,8 @@ namespace Oculus.Platform
             requestIDsToRequests[request.RequestID] = request;
         }
 
+        /// This method runs the callbacks for all pending messages.
+        /// It repeatedly pops a message from the message queue using Platform.Message.PopMessage() and handles it until the queue is empty.
         internal static void RunCallbacks()
         {
             while (true)
@@ -63,6 +82,8 @@ namespace Oculus.Platform
             }
         }
 
+        /// This method runs a limited number of callbacks for pending messages.
+        /// It pops a message from the message queue using Platform.Message.PopMessage() and handles it up to the specified limit.
         internal static void RunLimitedCallbacks(uint limit)
         {
             for (var i = 0; i < limit; ++i)
@@ -77,6 +98,8 @@ namespace Oculus.Platform
             }
         }
 
+        /// This method is called when the application quits.
+        /// It clears out all outstanding callbacks by clearing the request IDs to requests and notification callbacks dictionaries.
         internal static void OnApplicationQuit()
         {
             // Clear out all outstanding callbacks
@@ -107,19 +130,28 @@ namespace Oculus.Platform
             latestPendingJoinIntentNotifications = null;
         }
 
+        /// This class represents a callback function that can be used to handle responses HandleMessage(msg) to asynchronous requests made to the platform.
+        /// It provides a way for developers to specify how they want to handle incoming messages, allowing them to customize the behavior of their application.
+        /// By using this class, developers can ensure that their application is able to handle responses to asynchronous requests in a consistent and efficient manner.
         private class RequestCallback
         {
             private Message.Callback messageCallback;
 
+            /// This method initializes a new instance of the RequestCallback class.
+            /// It is used to handle asynchronous requests made to the platform.
             public RequestCallback()
             {
             }
 
+            /// This method initializes a new instance of the RequestCallback class with a specified callback function.
+            /// It sets the message callback to the provided callback function, which will be executed when a response is received for the associated request.
             public RequestCallback(Message.Callback callback)
             {
                 this.messageCallback = callback;
             }
 
+            /// This method handles a message by executing the associated callback function, if one is provided.
+            /// It checks if a message callback has been set, and if so, it calls the callback function: messageCallback(msg) with the provided message as an argument.
             public virtual void HandleMessage(Message msg)
             {
                 if (messageCallback != null)
@@ -129,15 +161,22 @@ namespace Oculus.Platform
             }
         }
 
+        /// This class represents a callback function that can be used to handle responses HandleMessage(msg) to asynchronous requests made to the platform.
+        /// It provides a way for developers to specify how they want to handle incoming messages, allowing them to customize the behavior of their application.
+        /// By using this class, developers can ensure that their application is able to handle responses to asynchronous requests in a consistent and efficient manner.
         private sealed class RequestCallback<T> : RequestCallback
         {
             private Message<T>.Callback callback;
 
+            /// This method initializes a new instance of the RequestCallback class with a specified callback function.
+            /// It sets the message callback to the provided callback function, which will be executed when a response is received for the associated request.
             public RequestCallback(Message<T>.Callback callback)
             {
                 this.callback = callback;
             }
 
+            /// This method handles a message by executing the associated callback function, if one is provided.
+            /// It checks if a message callback has been set, and if so, it calls the callback function: callback(msg) with the provided message as an argument.
             public override void HandleMessage(Message msg)
             {
                 if (callback != null)
@@ -154,6 +193,10 @@ namespace Oculus.Platform
             }
         }
 
+        /// This method handles a message by executing the associated callback function.
+        /// It checks if a message callback has been set for the request ID, and if so, it calls the request.HandleMessage(msg) method on the corresponding request object.
+        /// If no callback is registered for the request ID, it checks if there is a callback handler registered for the message type and calls the callbackHolder.HandleMessage(msg) method on it.
+        /// If there is no callback handler registered, it checks if the message is a Join Intent notification and queues it up for processing.
         internal static void HandleMessage(Message msg)
         {
             Request request;

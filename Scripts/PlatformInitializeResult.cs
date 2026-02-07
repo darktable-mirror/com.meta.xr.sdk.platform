@@ -5,6 +5,10 @@ namespace Oculus.Platform
 
   using Description = System.ComponentModel.DescriptionAttribute;
 
+  /// Describes the various results possible when attempting to initialize the
+  /// platform. Anything other than ovrPlatformInitialize_Success should be
+  /// considered a fatal error with respect to using the platform, as the
+  /// platform is not guaranteed to be legitimate or work correctly.
   public enum PlatformInitializeResult : int
   {
     /// Oculus Platform SDK initialization succeeded.
@@ -30,7 +34,7 @@ namespace Oculus.Platform
     SignatureInvalid = -4,
 
     /// Oculus Platform SDK failed to verify the application's signature during
-    /// initialization
+    /// initialization.
     [Description("UNABLE_TO_VERIFY")]
     UnableToVerify = -5,
 

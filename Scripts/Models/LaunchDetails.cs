@@ -10,6 +10,9 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
+  /// Details about the launch of the appplication. It can be used to check if
+  /// your app is being launched using App to App Travel. It can be retrieved
+  /// using ApplicationLifecycle.GetLaunchDetails().
   public class LaunchDetails
   {
     /// An opaque string provided by the developer to help them deeplink to content
@@ -21,12 +24,17 @@ namespace Oculus.Platform.Models
     /// instance, a DEEPLINK launch type could be coming from events or rich
     /// presence.
     public readonly string LaunchSource;
+    /// A LaunchType that defines the different ways in which an application can be
+    /// launched. LaunchType.Normal - Normal launch from the user's library.
+    /// LaunchType.Invite - Launch from the user accepting an invite.
+    /// LaunchType.Deeplink - Launched from a deeplink. This flow is typically
+    /// kicked off from Application.LaunchOtherApp()
     public readonly LaunchType LaunchType;
     /// If provided, the intended lobby the user would like to be in
     public readonly string LobbySessionID;
     /// If provided, the intended session the user would like to be in
     public readonly string MatchSessionID;
-    /// A unique identifer to keep track of a user going through the deeplinking
+    /// A unique identifier to keep track of a user going through the deeplinking
     /// flow
     public readonly string TrackingID;
     /// If provided, the intended users the user would like to be with

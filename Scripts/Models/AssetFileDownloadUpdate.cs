@@ -10,19 +10,22 @@ namespace Oculus.Platform.Models
 
   /// An AssetFileDownloadUpdate represents the download status of an update for
   /// an asset file. It contains the asset file ID, the download progress of the
-  /// update, and its completion status.
+  /// update, and its completion status. It can be retrieved using
+  /// Message::MessageType::Notification_AssetFile_DownloadUpdate.
   public class AssetFileDownloadUpdate
   {
-    /// DEPRECATED. Use AssetFileDownloadUpdate.GetAssetId().
+    /// \deprecated Use AssetFileDownloadUpdate#AssetId.
     public readonly UInt64 AssetFileId;
-    /// ID of the asset file
+    /// ID of the asset file. It can be retrieved using AssetDetails#AssetId.
     public readonly UInt64 AssetId;
-    /// Total number of bytes.
+    /// This field is of type uint and represents the total number of bytes in the
+    /// asset file.
     public readonly ulong BytesTotal;
-    /// Number of bytes have been downloaded. -1 If the download hasn't started
-    /// yet.
+    /// An integer represents the number of bytes that have been downloaded. -1 If
+    /// the download hasn't started yet.
     public readonly long BytesTransferred;
-    /// Flag indicating a download is completed.
+    /// This field is of type boolean and indicates whether the download has been
+    /// completed or not.
     public readonly bool Completed;
 
 

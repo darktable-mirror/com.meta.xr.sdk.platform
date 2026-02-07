@@ -5,6 +5,7 @@ namespace Oculus.Platform
 
   using Description = System.ComponentModel.DescriptionAttribute;
 
+  /// Determines the type of the achievement.
   public enum AchievementType : int
   {
     [Description("UNKNOWN")]

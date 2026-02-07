@@ -8,8 +8,12 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
+  /// An ID for a User which is unique per Developer Center organization. It can
+  /// be retrieved using Users.GetOrgScopedID().
   public class OrgScopedID
   {
+    /// The unique id of the user, allowing different apps within the same
+    /// Developer Center organization to have a consistent id for the same user.
     public readonly UInt64 ID;
 
 

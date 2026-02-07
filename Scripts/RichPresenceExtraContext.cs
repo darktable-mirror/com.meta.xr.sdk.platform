@@ -5,6 +5,7 @@ namespace Oculus.Platform
 
   using Description = System.ComponentModel.DescriptionAttribute;
 
+  /// Display extra information about the user's presence
   public enum RichPresenceExtraContext : int
   {
     [Description("UNKNOWN")]

@@ -5,6 +5,8 @@ namespace Oculus.Platform
 
   using Description = System.ComponentModel.DescriptionAttribute;
 
+  /// Determines under what circumstances the frontend UI will attempt to gather
+  /// video evidence to support a report
   public enum AbuseReportVideoMode : int
   {
     [Description("UNKNOWN")]

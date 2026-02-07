@@ -5,6 +5,8 @@ namespace Oculus.Platform
 
   using Description = System.ComponentModel.DescriptionAttribute;
 
+  /// The visibility of the challenge. A challenge may be invite-only, public, or
+  /// private.
   public enum ChallengeVisibility : int
   {
     [Description("UNKNOWN")]

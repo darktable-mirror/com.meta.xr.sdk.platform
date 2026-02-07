@@ -5,6 +5,8 @@ namespace Oculus.Platform
 
   using Description = System.ComponentModel.DescriptionAttribute;
 
+  /// Describe the current status of the user and it can be retrieved with
+  /// User#PresenceStatus.
   public enum UserPresenceStatus : int
   {
     [Description("UNKNOWN")]

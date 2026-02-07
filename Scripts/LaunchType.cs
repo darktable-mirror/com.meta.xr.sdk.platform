@@ -15,9 +15,8 @@ namespace Oculus.Platform
     Normal,
 
     /// Launch from the user accepting an invite. Check
-    /// LaunchDetails.GetLobbySessionID(), LaunchDetails.GetMatchSessionID(),
-    /// LaunchDetails.GetDestinationApiName() and
-    /// LaunchDetails.GetDeeplinkMessage().
+    /// LaunchDetails#LobbySessionID, LaunchDetails#MatchSessionID,
+    /// LaunchDetails#DestinationApiName and LaunchDetails#DeeplinkMessage.
     [Description("INVITE")]
     Invite,
 
@@ -26,7 +25,7 @@ namespace Oculus.Platform
     Coordinated,
 
     /// Launched from Application.LaunchOtherApp(). Check
-    /// LaunchDetails.GetLaunchSource() and LaunchDetails.GetDeeplinkMessage().
+    /// LaunchDetails#LaunchSource and LaunchDetails#DeeplinkMessage.
     [Description("DEEPLINK")]
     Deeplink,
 

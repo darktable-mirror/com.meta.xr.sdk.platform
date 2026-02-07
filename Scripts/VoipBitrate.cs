@@ -33,7 +33,7 @@ namespace Oculus.Platform
     [Description("B96000")]
     B96000,
 
-    /// At this point the audio quality should be preceptually indistinguishable
+    /// At this point the audio quality should be perceptually indistinguishable
     /// from the uncompressed input.
     [Description("B128000")]
     B128000,

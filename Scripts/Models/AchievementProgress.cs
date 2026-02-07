@@ -8,19 +8,24 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
-  /// The unlock progress of a particular achievement. See
-  /// [Achievements](https://developer.oculus.com/documentation/native/ps-
-  /// achievements/) for more information.
+  /// The unlock progress of a particular achievement can be retrieved using
+  /// Achievements.GetAllProgress(). It can be used to display the progress of
+  /// each achievement in your game. See the following
+  /// [link](https://developer.oculus.com/documentation/unity/ps-achievements/)
+  /// for more information.
   public class AchievementProgress
   {
-    /// For bitfield achievements, the current bitfield state.
+    /// If the type of the achievement is AchievementType.Bitfield it represents
+    /// the current bitfield state that the achievement has reached.
     public readonly string Bitfield;
-    /// For count achievements, the current counter state.
+    /// If the type of the achievement is AchievementType.Count, it represents the
+    /// current counter state that the achievement has reached.
     public readonly ulong Count;
     /// If the user has already unlocked this achievement.
     public readonly bool IsUnlocked;
     /// The unique string that you use to reference the achievement in your app, as
-    /// specified in the developer dashboard.
+    /// specified in the developer dashboard. It can be retrieved using
+    /// AchievementDefinition#Name.
     public readonly string Name;
     /// If the achievement is unlocked, the time when it was unlocked.
     public readonly DateTime UnlockTime;
@@ -36,7 +41,9 @@ namespace Oculus.Platform.Models
     }
   }
 
+  /// Represents a paginated list of AchievementProgress elements
   public class AchievementProgressList : DeserializableList<AchievementProgress> {
+    /// Instantiates a C# wrapper class that wraps a native list by pointer. Used internally by Platform SDK to wrap the list.
     public AchievementProgressList(IntPtr a) {
       var count = (int)CAPI.ovr_AchievementProgressArray_GetSize(a);
       _Data = new List<AchievementProgress>(count);

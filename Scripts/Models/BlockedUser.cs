@@ -8,9 +8,13 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
+  /// It contains an array of users who have been blocked by the logged in user.
+  /// You can't follow, be followed, invited, or searched by a blocked user. It
+  /// can be retrieved using Users.GetBlockedUsers().
   public class BlockedUser
   {
-    /// user ID that has been blocked by the logged in user
+    /// It represents the user ID that has been blocked by the logged in user. It
+    /// is a type of ID and can be retrieved using User#ID.
     public readonly UInt64 Id;
 
 
@@ -20,7 +24,9 @@ namespace Oculus.Platform.Models
     }
   }
 
+  /// Represents a paginated list of BlockedUser elements
   public class BlockedUserList : DeserializableList<BlockedUser> {
+    /// Instantiates a C# wrapper class that wraps a native list by pointer. Used internally by Platform SDK to wrap the list.
     public BlockedUserList(IntPtr a) {
       var count = (int)CAPI.ovr_BlockedUserArray_GetSize(a);
       _Data = new List<BlockedUser>(count);

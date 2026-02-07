@@ -10,8 +10,12 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
-  /// An ApplicationInvite contains information about the invite, including the
-  /// ID, destination, activity status, lobby, match, and recipient's user info.
+  /// An Application Invite contains information about the invite, including the
+  /// application ID, destination, activity status, the lobby session id, the
+  /// match session id, and recipient's user id or user alias. If the invite is
+  /// generated from rich presence, the lobby/match session id will be auto
+  /// populated by calling User#PresenceLobbySessionId and
+  /// User#PresenceMatchSessionId from the inviter's viewer context.
   public class ApplicationInvite
   {
     /// The destination to which the recipient is invited.
@@ -23,11 +27,16 @@ namespace Oculus.Platform.Models
     public readonly UInt64 ID;
     /// A boolean value indicating whether the invite is still active or not.
     public readonly bool IsActive;
-    /// The lobby session id to which the recipient is invited.
+    /// The lobby session id to which the recipient is invited. You can retrieve
+    /// this by calling User#PresenceLobbySessionId from the inviter's viewer
+    /// context.
     public readonly string LobbySessionId;
-    /// The match session id to which the recipient is invited.
+    /// The match session id to which the recipient is invited. You can retrieve
+    /// this by calling User#PresenceMatchSessionId from the inviter's viewer
+    /// context.
     public readonly string MatchSessionId;
-    /// The recipient's user information, such as their ID and alias.
+    /// The recipient's user information, such as their ID and alias. You can get
+    /// the ID of an user by calling User#ID.
     // May be null. Check before using.
     public readonly User RecipientOptional;
     [Obsolete("Deprecated in favor of RecipientOptional")]
@@ -61,7 +70,9 @@ namespace Oculus.Platform.Models
     }
   }
 
+  /// Represents a paginated list of ApplicationInvite elements
   public class ApplicationInviteList : DeserializableList<ApplicationInvite> {
+    /// Instantiates a C# wrapper class that wraps a native list by pointer. Used internally by Platform SDK to wrap the list.
     public ApplicationInviteList(IntPtr a) {
       var count = (int)CAPI.ovr_ApplicationInviteArray_GetSize(a);
       _Data = new List<ApplicationInvite>(count);

@@ -8,11 +8,16 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
+  /// Cowatch viewer represents a viewer in a cowatching session, including their
+  /// user ID and any data that they have set. The cowatch viewer data can be
+  /// retrieved using Cowatching.GetViewersData(). It can be useful for tracking
+  /// the participants in a cowatching session and managing their data.
   public class CowatchViewer
   {
-    /// Viewer data set by this cowatching viewer.
+    /// Represents the viewer data set by this cowatching viewer. It's an optional
+    /// `string` and can be set by Cowatching.SetViewerData().
     public readonly string Data;
-    /// User ID of the owner of data.
+    /// A unique user ID of the viewer.
     public readonly UInt64 Id;
 
 
@@ -23,7 +28,9 @@ namespace Oculus.Platform.Models
     }
   }
 
+  /// Represents a paginated list of CowatchViewer elements
   public class CowatchViewerList : DeserializableList<CowatchViewer> {
+    /// Instantiates a C# wrapper class that wraps a native list by pointer. Used internally by Platform SDK to wrap the list.
     public CowatchViewerList(IntPtr a) {
       var count = (int)CAPI.ovr_CowatchViewerArray_GetSize(a);
       _Data = new List<CowatchViewer>(count);

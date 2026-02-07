@@ -32,7 +32,9 @@ namespace Oculus.Platform.Models
     }
   }
 
+  /// Represents a paginated list of NetSyncSession elements
   public class NetSyncSessionList : DeserializableList<NetSyncSession> {
+    /// Instantiates a C# wrapper class that wraps a native list by pointer. Used internally by Platform SDK to wrap the list.
     public NetSyncSessionList(IntPtr a) {
       var count = (int)CAPI.ovr_NetSyncSessionArray_GetSize(a);
       _Data = new List<NetSyncSession>(count);

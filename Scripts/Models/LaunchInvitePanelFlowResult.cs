@@ -8,6 +8,9 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
+  /// Sent when the user is finished using the invite panel to send out
+  /// invitations. Contains a list of invitees. It can be retrieved using
+  /// Message::MessageType::Notification_GroupPresence_InvitationsSent.
   public class LaunchInvitePanelFlowResult
   {
     /// A list of users that were sent an invitation to the session.

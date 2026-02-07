@@ -67,7 +67,6 @@ namespace Oculus.Platform
       Room_GetSocialRooms                            = 0x61881D76,
       User_CancelRecordingForReportFlow              = 0x03E0D149,
       User_GetLinkedAccounts                         = 0x5793F456,
-      User_GetLoggedInUserManagedInfo                = 0x70BA3AEE,
       User_GetUserCapabilities                       = 0x121C317C,
       User_LaunchReportFlow                          = 0x5662A011,
       User_LaunchReportFlow2                         = 0x7F835863,
@@ -191,10 +190,6 @@ namespace Oculus.Platform
         case MessageTypeInternal.User_NewTestUser:
         case MessageTypeInternal.User_NewTestUserFriends:
           message = new MessageWithString(messageHandle);
-          break;
-
-        case MessageTypeInternal.User_GetLoggedInUserManagedInfo:
-          message = new MessageWithUser(messageHandle);
           break;
 
         case MessageTypeInternal.User_GetUserCapabilities:

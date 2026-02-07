@@ -5,6 +5,8 @@ namespace Oculus.Platform
 
   using Description = System.ComponentModel.DescriptionAttribute;
 
+  /// The available filtering options on the Challenge returned by
+  /// Challenges.GetList().
   public enum ChallengeViewerFilter : int
   {
     [Description("UNKNOWN")]

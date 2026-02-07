@@ -10,7 +10,12 @@ namespace Oculus.Platform
 
   public abstract class Message<T> : Message
   {
+    /// The Callback delegate represents a method that will be called when a message of type T is received.
+    /// The method takes a single parameter, message, which is an instance of the Message<T> class containing the message data.
     public new delegate void Callback(Message<T> message);
+    /// The Message(IntPtr c_message) constructor takes an IntPtr parameter c_message which represents the native message object.
+    /// It calls the base constructor Message() to initialize the message object. If the message is not an error message,
+    /// it retrieves the data from the message using the GetDataFromMessage() method and stores it in the data field.
     public Message(IntPtr c_message) : base(c_message) {
       if (!IsError)
       {
@@ -18,14 +23,22 @@ namespace Oculus.Platform
       }
     }
 
+    /// The data property provides access to the message's contents, allowing you to retrieve and manipulate the data within.
     public T Data { get { return data; } }
     protected abstract T GetDataFromMessage(IntPtr c_message);
     private T data;
   }
 
+  /// The Message class represents a message object that contains information about a specific event or action.
+  /// It provides a way to access and manipulate the message's contents, including its type, error status, request ID, and message.
+  /// See details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
   public class Message
   {
+    /// The Callback delegate represents a method that will be called when a Message.MessageType is received.
+    /// The method takes a single parameter, message, which is an instance of the Message.MessageType class containing the message data.
     public delegate void Callback(Message message);
+    /// The Message(IntPtr c_message) constructor takes an IntPtr parameter c_message which represents the native message object.
+    /// It initializes the Message object with the contents of the native message object.
     public Message(IntPtr c_message)
     {
       type = (MessageType)CAPI.ovr_Message_GetType(c_message);
@@ -182,6 +195,7 @@ namespace Oculus.Platform
       User_GetBlockedUsers                               = 0x7D201556,
       User_GetLoggedInUser                               = 0x436F345D,
       User_GetLoggedInUserFriends                        = 0x587C2A8D,
+      User_GetLoggedInUserManagedInfo                    = 0x70BA3AEE,
       User_GetNextBlockedUserArrayPage                   = 0x7C2AFDCB,
       User_GetNextUserArrayPage                          = 0x267CF743,
       User_GetNextUserCapabilityArrayPage                = 0x2309F399,
@@ -198,57 +212,83 @@ namespace Oculus.Platform
       /// pressing the Oculus button.
       Notification_AbuseReport_ReportButtonPressed = 0x24472F6C,
 
-      /// Sent when a launch intent is received (for both cold and warm starts). The
-      /// payload is the type of the intent. ApplicationLifecycle.GetLaunchDetails()
-      /// should be called to get the other details.
+      /// This event is triggered when a launch intent is received, whether it's a
+      /// cold or warm start. The payload contains the type of intent that was
+      /// received. To obtain additional details, you should call the
+      /// ApplicationLifecycle.GetLaunchDetails() function.
       Notification_ApplicationLifecycle_LaunchIntentChanged = 0x04B34CA3,
 
       /// Sent to indicate download progress for asset files.
       Notification_AssetFile_DownloadUpdate = 0x2FDD0CCD,
 
-      /// Sent when user is no longer copresent. Cowatching actions should not be
-      /// performed.
+      /// Sets a callback function that will be triggered when the user is no longer
+      /// in a copresent state and cowatching actions should not be performed.
       Notification_Cowatching_ApiNotReady = 0x66093981,
 
-      /// Sent when user is in copresent and cowatching is ready to go.
+      /// Sets a callback function that will be triggered when the user is in a
+      /// copresent state and cowatching is ready to begin.
       Notification_Cowatching_ApiReady = 0x09956693,
 
-      /// Sent when the current user joins/leaves the cowatching session.
+      /// Sets a callback function that will be triggered when the current user
+      /// joins/leaves the cowatching session.
       Notification_Cowatching_InSessionChanged = 0x0DF93113,
 
-      /// Sent when cowatching api has been initialized. The api is not yet ready at
-      /// this stage.
+      /// Sets a callback function that will be triggered when the cowatching API has
+      /// been initialized. At this stage, the API is not yet ready for use.
       Notification_Cowatching_Initialized = 0x74D948F3,
 
-      /// Sent when the presenter updates the presenter data.
+      /// Sets a callback function that will be triggered when the presenter updates
+      /// the presenter data.
       Notification_Cowatching_PresenterDataChanged = 0x4E078EEE,
 
-      /// Sent when a user has started a cowatching session whose id is reflected in
-      /// the payload.
+      /// Sets a callback function that will be triggered when a user has started a
+      /// cowatching session, and the ID of the session is reflected in the payload.
       Notification_Cowatching_SessionStarted = 0x7321939C,
 
-      /// Sent when a cowatching session has ended.
+      /// Sets a callback function that will be triggered when a cowatching session
+      /// has ended.
       Notification_Cowatching_SessionStopped = 0x49E6DBFA,
 
-      /// Sent when a user joins or updates their viewer data.
+      /// Sets a callback function that will be triggered when a user joins or
+      /// updates their viewer data.
       Notification_Cowatching_ViewersDataChanged = 0x68F2F1FF,
 
       /// Sent when the user is finished using the invite panel to send out
-      /// invitations. Contains a list of invitees.
+      /// invitations. Contains a list of invitees. Parameter: Callback is a function
+      /// that will be called when the invitation sent status changes.
+      /// LaunchInvitePanelFlowResult has 1 member: UserList
+      /// LaunchInvitePanelFlowResult#InvitedUsers - A list of users that were sent
+      /// an invitation to the session.
       Notification_GroupPresence_InvitationsSent = 0x679A84B6,
 
       /// Sent when a user has chosen to join the destination/lobby/match. Read all
       /// the fields to figure out where the user wants to go and take the
       /// appropriate actions to bring them there. If the user is unable to go there,
       /// provide adequate messaging to the user on why they cannot go there. These
-      /// notifications should be responded to immediately.
+      /// notifications should be responded to immediately. Parameter: Callback is a
+      /// function that will be called when a user has chosen to join the
+      /// destination/lobby/match. GroupPresenceJoinIntent has 4 members: string
+      /// GroupPresenceJoinIntent#DeeplinkMessage - An opaque string provided by the
+      /// developer to help them deeplink to content. string
+      /// GroupPresenceJoinIntent#DestinationApiName - The destination the current
+      /// user wants to go to. string GroupPresenceJoinIntent#LobbySessionId - The
+      /// lobby session the current user wants to go to. string
+      /// GroupPresenceJoinIntent#MatchSessionId - The match session the current user
+      /// wants to go to.
       Notification_GroupPresence_JoinIntentReceived = 0x773889F6,
 
       /// Sent when the user has chosen to leave the destination/lobby/match from the
       /// Oculus menu. Read the specific fields to check the user is currently from
       /// the destination/lobby/match and take the appropriate actions to remove
       /// them. Update the user's presence clearing the appropriate fields to
-      /// indicate the user has left.
+      /// indicate the user has left. Parameter: Callback is a function that will be
+      /// called when the user has chosen to leave the destination/lobby/match.
+      /// GroupPresenceLeaveIntent has 3 members: string
+      /// GroupPresenceLeaveIntent#DestinationApiName - The destination the current
+      /// user wants to leave. string GroupPresenceLeaveIntent#LobbySessionId - The
+      /// lobby session the current user wants to leave. string
+      /// GroupPresenceLeaveIntent#MatchSessionId - The match session the current
+      /// user wants to leave.
       Notification_GroupPresence_LeaveIntentReceived = 0x4737EA1D,
 
       /// Sent to indicate that more data has been read or an error occured.
@@ -256,15 +296,17 @@ namespace Oculus.Platform
 
       /// Indicates that the livestreaming session has been updated. You can use this
       /// information to throttle your game performance or increase CPU/GPU
-      /// performance. Use Message.GetLivestreamingStatus() to extract the updated
+      /// performance. Use Message#LivestreamingStatus to extract the updated
       /// livestreaming status.
       Notification_Livestreaming_StatusChange = 0x2247596E,
 
-      /// Sent when the status of a connection has changed.
+      /// Sent when the status of a connection has changed. The payload will be a
+      /// type of NetSyncConnection.
       Notification_NetSync_ConnectionStatusChanged = 0x073484CA,
 
       /// Sent when the list of known connected sessions has changed. Contains the
-      /// new list of sessions.
+      /// new list of sessions. The payload will be a type of
+      /// NetSyncSessionsChangedNotification.
       Notification_NetSync_SessionsChanged = 0x387E7F36,
 
       /// Indicates that party has been updated
@@ -276,8 +318,8 @@ namespace Oculus.Platform
       Notification_Voip_MicrophoneAvailabilityStateUpdate = 0x3E20CB57,
 
       /// Sent to indicate that some part of the overall state of SystemVoip has
-      /// changed. Use Message.GetSystemVoipState() and the properties of
-      /// SystemVoipState to extract the state that triggered the notification.
+      /// changed. Use Message#SystemVoipState and the properties of SystemVoipState
+      /// to extract the state that triggered the notification.
       ///
       /// Note that the state may have changed further since the notification was
       /// generated, and that you may call the `GetSystemVoip...()` family of
@@ -297,84 +339,155 @@ namespace Oculus.Platform
       Platform_InitializeWindowsAsynchronous = 0x6DA7BA8F,
     };
 
+    /// Returns the message type, which is defined as Message.MessageType, indicating the purpose or category of the message.
     public MessageType Type { get { return type; } }
+    /// Indicates whether the message represents an error or not, based on the presence of an error object.
     public bool IsError { get { return error != null; } }
+    /// Returns the unique identifier of the request that generated this message, if applicable.
     public ulong RequestID { get { return requestID; } }
 
     private MessageType type;
     private ulong requestID;
     private Error error;
 
+    /// Returns the error object associated with this message, or null if there is no error.
     public virtual Error GetError() { return error; }
+    /// Returns an object containing information about the HTTP transfer update, or null if there is no update.
     public virtual HttpTransferUpdate GetHttpTransferUpdate() { return null; }
-
+    /// Returns an object containing information about the platform initialization, or null if there is no initialization.
     public virtual PlatformInitialize GetPlatformInitialize() { return null; }
 
+    /// Returns the value of the AbuseReportRecording property, or false/null depending on the type of the property.
     public virtual AbuseReportRecording GetAbuseReportRecording() { return null; }
+    /// Returns the value of the AchievementDefinitions property, or false/null depending on the type of the property.
     public virtual AchievementDefinitionList GetAchievementDefinitions() { return null; }
+    /// Returns the value of the AchievementProgressList property, or false/null depending on the type of the property.
     public virtual AchievementProgressList GetAchievementProgressList() { return null; }
+    /// Returns the value of the AchievementUpdate property, or false/null depending on the type of the property.
     public virtual AchievementUpdate GetAchievementUpdate() { return null; }
+    /// Returns the value of the AppDownloadProgressResult property, or false/null depending on the type of the property.
     public virtual AppDownloadProgressResult GetAppDownloadProgressResult() { return null; }
+    /// Returns the value of the AppDownloadResult property, or false/null depending on the type of the property.
     public virtual AppDownloadResult GetAppDownloadResult() { return null; }
+    /// Returns the value of the ApplicationInviteList property, or false/null depending on the type of the property.
     public virtual ApplicationInviteList GetApplicationInviteList() { return null; }
+    /// Returns the value of the ApplicationVersion property, or false/null depending on the type of the property.
     public virtual ApplicationVersion GetApplicationVersion() { return null; }
+    /// Returns the value of the AssetDetails property, or false/null depending on the type of the property.
     public virtual AssetDetails GetAssetDetails() { return null; }
+    /// Returns the value of the AssetDetailsList property, or false/null depending on the type of the property.
     public virtual AssetDetailsList GetAssetDetailsList() { return null; }
+    /// Returns the value of the AssetFileDeleteResult property, or false/null depending on the type of the property.
     public virtual AssetFileDeleteResult GetAssetFileDeleteResult() { return null; }
+    /// Returns the value of the AssetFileDownloadCancelResult property, or false/null depending on the type of the property.
     public virtual AssetFileDownloadCancelResult GetAssetFileDownloadCancelResult() { return null; }
+    /// Returns the value of the AssetFileDownloadResult property, or false/null depending on the type of the property.
     public virtual AssetFileDownloadResult GetAssetFileDownloadResult() { return null; }
+    /// Returns the value of the AssetFileDownloadUpdate property, or false/null depending on the type of the property.
     public virtual AssetFileDownloadUpdate GetAssetFileDownloadUpdate() { return null; }
+    /// Returns the value of the AvatarEditorResult property, or false/null depending on the type of the property.
     public virtual AvatarEditorResult GetAvatarEditorResult() { return null; }
+    /// Returns the value of the BlockedUserList property, or false/null depending on the type of the property.
     public virtual BlockedUserList GetBlockedUserList() { return null; }
+    /// Returns the value of the Challenge property, or false/null depending on the type of the property.
     public virtual Challenge GetChallenge() { return null; }
+    /// Returns the value of the ChallengeEntryList property, or false/null depending on the type of the property.
     public virtual ChallengeEntryList GetChallengeEntryList() { return null; }
+    /// Returns the value of the ChallengeList property, or false/null depending on the type of the property.
     public virtual ChallengeList GetChallengeList() { return null; }
+    /// Returns the value of the CowatchingState property, or false/null depending on the type of the property.
     public virtual CowatchingState GetCowatchingState() { return null; }
+    /// Returns the value of the CowatchViewerList property, or false/null depending on the type of the property.
     public virtual CowatchViewerList GetCowatchViewerList() { return null; }
+    /// Returns the value of the CowatchViewerUpdate property, or false/null depending on the type of the property.
     public virtual CowatchViewerUpdate GetCowatchViewerUpdate() { return null; }
+    /// Returns the value of the DestinationList property, or false/null depending on the type of the property.
     public virtual DestinationList GetDestinationList() { return null; }
+    /// Returns the value of the GroupPresenceJoinIntent property, or false/null depending on the type of the property.
     public virtual GroupPresenceJoinIntent GetGroupPresenceJoinIntent() { return null; }
+    /// Returns the value of the GroupPresenceLeaveIntent property, or false/null depending on the type of the property.
     public virtual GroupPresenceLeaveIntent GetGroupPresenceLeaveIntent() { return null; }
+    /// Returns the value of the InstalledApplicationList property, or false/null depending on the type of the property.
     public virtual InstalledApplicationList GetInstalledApplicationList() { return null; }
+    /// Returns the value of the InvitePanelResultInfo property, or false/null depending on the type of the property.
     public virtual InvitePanelResultInfo GetInvitePanelResultInfo() { return null; }
+    /// Returns the value of the LaunchBlockFlowResult property, or false/null depending on the type of the property.
     public virtual LaunchBlockFlowResult GetLaunchBlockFlowResult() { return null; }
+    /// Returns the value of the LaunchFriendRequestFlowResult property, or false/null depending on the type of the property.
     public virtual LaunchFriendRequestFlowResult GetLaunchFriendRequestFlowResult() { return null; }
+    /// Returns the value of the LaunchInvitePanelFlowResult property, or false/null depending on the type of the property.
     public virtual LaunchInvitePanelFlowResult GetLaunchInvitePanelFlowResult() { return null; }
+    /// Returns the value of the LaunchReportFlowResult property, or false/null depending on the type of the property.
     public virtual LaunchReportFlowResult GetLaunchReportFlowResult() { return null; }
+    /// Returns the value of the LaunchUnblockFlowResult property, or false/null depending on the type of the property.
     public virtual LaunchUnblockFlowResult GetLaunchUnblockFlowResult() { return null; }
+    /// Returns the value of the LeaderboardDidUpdate property, or false/null depending on the type of the property.
     public virtual bool GetLeaderboardDidUpdate() { return false; }
+    /// Returns the value of the LeaderboardEntryList property, or false/null depending on the type of the property.
     public virtual LeaderboardEntryList GetLeaderboardEntryList() { return null; }
+    /// Returns the value of the LeaderboardList property, or false/null depending on the type of the property.
     public virtual LeaderboardList GetLeaderboardList() { return null; }
+    /// Returns the value of the LinkedAccountList property, or false/null depending on the type of the property.
     public virtual LinkedAccountList GetLinkedAccountList() { return null; }
+    /// Returns the value of the LivestreamingApplicationStatus property, or false/null depending on the type of the property.
     public virtual LivestreamingApplicationStatus GetLivestreamingApplicationStatus() { return null; }
+    /// Returns the value of the LivestreamingStartResult property, or false/null depending on the type of the property.
     public virtual LivestreamingStartResult GetLivestreamingStartResult() { return null; }
+    /// Returns the value of the LivestreamingStatus property, or false/null depending on the type of the property.
     public virtual LivestreamingStatus GetLivestreamingStatus() { return null; }
+    /// Returns the value of the LivestreamingVideoStats property, or false/null depending on the type of the property.
     public virtual LivestreamingVideoStats GetLivestreamingVideoStats() { return null; }
+    /// Returns the value of the MicrophoneAvailabilityState property, or false/null depending on the type of the property.
     public virtual MicrophoneAvailabilityState GetMicrophoneAvailabilityState() { return null; }
+    /// Returns the value of the NetSyncConnection property, or false/null depending on the type of the property.
     public virtual NetSyncConnection GetNetSyncConnection() { return null; }
+    /// Returns the value of the NetSyncSessionList property, or false/null depending on the type of the property.
     public virtual NetSyncSessionList GetNetSyncSessionList() { return null; }
+    /// Returns the value of the NetSyncSessionsChangedNotification property, or false/null depending on the type of the property.
     public virtual NetSyncSessionsChangedNotification GetNetSyncSessionsChangedNotification() { return null; }
+    /// Returns the value of the NetSyncSetSessionPropertyResult property, or false/null depending on the type of the property.
     public virtual NetSyncSetSessionPropertyResult GetNetSyncSetSessionPropertyResult() { return null; }
+    /// Returns the value of the NetSyncVoipAttenuationValueList property, or false/null depending on the type of the property.
     public virtual NetSyncVoipAttenuationValueList GetNetSyncVoipAttenuationValueList() { return null; }
+    /// Returns the value of the OrgScopedID property, or false/null depending on the type of the property.
     public virtual OrgScopedID GetOrgScopedID() { return null; }
+    /// Returns the value of the Party property, or false/null depending on the type of the property.
     public virtual Party GetParty() { return null; }
+    /// Returns the value of the PartyID property, or false/null depending on the type of the property.
     public virtual PartyID GetPartyID() { return null; }
+    /// Returns the value of the PartyUpdateNotification property, or false/null depending on the type of the property.
     public virtual PartyUpdateNotification GetPartyUpdateNotification() { return null; }
+    /// Returns the value of the PidList property, or false/null depending on the type of the property.
     public virtual PidList GetPidList() { return null; }
+    /// Returns the value of the ProductList property, or false/null depending on the type of the property.
     public virtual ProductList GetProductList() { return null; }
+    /// Returns the value of the Purchase property, or false/null depending on the type of the property.
     public virtual Purchase GetPurchase() { return null; }
+    /// Returns the value of the PurchaseList property, or false/null depending on the type of the property.
     public virtual PurchaseList GetPurchaseList() { return null; }
+    /// Returns the value of the RejoinDialogResult property, or false/null depending on the type of the property.
     public virtual RejoinDialogResult GetRejoinDialogResult() { return null; }
+    /// Returns the value of the SdkAccountList property, or false/null depending on the type of the property.
     public virtual SdkAccountList GetSdkAccountList() { return null; }
+    /// Returns the value of the SendInvitesResult property, or false/null depending on the type of the property.
     public virtual SendInvitesResult GetSendInvitesResult() { return null; }
+    /// Returns the value of the ShareMediaResult property, or false/null depending on the type of the property.
     public virtual ShareMediaResult GetShareMediaResult() { return null; }
+    /// Returns the value of the String property, or false/null depending on the type of the property.
     public virtual string GetString() { return null; }
+    /// Returns the value of the SystemVoipState property, or false/null depending on the type of the property.
     public virtual SystemVoipState GetSystemVoipState() { return null; }
+    /// Returns the value of the User property, or false/null depending on the type of the property.
     public virtual User GetUser() { return null; }
+    /// Returns the value of the UserAccountAgeCategory property, or false/null depending on the type of the property.
     public virtual UserAccountAgeCategory GetUserAccountAgeCategory() { return null; }
+    /// Returns the value of the UserCapabilityList property, or false/null depending on the type of the property.
     public virtual UserCapabilityList GetUserCapabilityList() { return null; }
+    /// Returns the value of the UserList property, or false/null depending on the type of the property.
     public virtual UserList GetUserList() { return null; }
+    /// Returns the value of the UserProof property, or false/null depending on the type of the property.
     public virtual UserProof GetUserProof() { return null; }
+    /// Returns the value of the UserReportID property, or false/null depending on the type of the property.
     public virtual UserReportID GetUserReportID() { return null; }
 
     internal static Message ParseMessageHandle(IntPtr messageHandle)
@@ -673,6 +786,7 @@ namespace Oculus.Platform
 
         case Message.MessageType.User_Get:
         case Message.MessageType.User_GetLoggedInUser:
+        case Message.MessageType.User_GetLoggedInUserManagedInfo:
           message = new MessageWithUser(messageHandle);
           break;
 
@@ -742,10 +856,15 @@ namespace Oculus.Platform
     internal static ExtraMessageTypesHandler HandleExtraMessageTypes { set; private get; }
   }
 
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithAbuseReportRecording : Message<AbuseReportRecording>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithAbuseReportRecording(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override AbuseReportRecording GetAbuseReportRecording() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override AbuseReportRecording GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -754,10 +873,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithAchievementDefinitions : Message<AchievementDefinitionList>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithAchievementDefinitions(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override AchievementDefinitionList GetAchievementDefinitions() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override AchievementDefinitionList GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -766,10 +890,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithAchievementProgressList : Message<AchievementProgressList>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithAchievementProgressList(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override AchievementProgressList GetAchievementProgressList() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override AchievementProgressList GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -778,10 +907,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithAchievementUpdate : Message<AchievementUpdate>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithAchievementUpdate(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override AchievementUpdate GetAchievementUpdate() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override AchievementUpdate GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -790,10 +924,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithAppDownloadProgressResult : Message<AppDownloadProgressResult>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithAppDownloadProgressResult(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override AppDownloadProgressResult GetAppDownloadProgressResult() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override AppDownloadProgressResult GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -802,10 +941,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithAppDownloadResult : Message<AppDownloadResult>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithAppDownloadResult(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override AppDownloadResult GetAppDownloadResult() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override AppDownloadResult GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -814,10 +958,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithApplicationInviteList : Message<ApplicationInviteList>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithApplicationInviteList(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override ApplicationInviteList GetApplicationInviteList() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override ApplicationInviteList GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -826,10 +975,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithApplicationVersion : Message<ApplicationVersion>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithApplicationVersion(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override ApplicationVersion GetApplicationVersion() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override ApplicationVersion GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -838,10 +992,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithAssetDetails : Message<AssetDetails>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithAssetDetails(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override AssetDetails GetAssetDetails() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override AssetDetails GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -850,10 +1009,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithAssetDetailsList : Message<AssetDetailsList>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithAssetDetailsList(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override AssetDetailsList GetAssetDetailsList() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override AssetDetailsList GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -862,10 +1026,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithAssetFileDeleteResult : Message<AssetFileDeleteResult>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithAssetFileDeleteResult(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override AssetFileDeleteResult GetAssetFileDeleteResult() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override AssetFileDeleteResult GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -874,10 +1043,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithAssetFileDownloadCancelResult : Message<AssetFileDownloadCancelResult>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithAssetFileDownloadCancelResult(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override AssetFileDownloadCancelResult GetAssetFileDownloadCancelResult() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override AssetFileDownloadCancelResult GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -886,10 +1060,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithAssetFileDownloadResult : Message<AssetFileDownloadResult>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithAssetFileDownloadResult(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override AssetFileDownloadResult GetAssetFileDownloadResult() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override AssetFileDownloadResult GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -898,10 +1077,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithAssetFileDownloadUpdate : Message<AssetFileDownloadUpdate>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithAssetFileDownloadUpdate(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override AssetFileDownloadUpdate GetAssetFileDownloadUpdate() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override AssetFileDownloadUpdate GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -910,10 +1094,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithAvatarEditorResult : Message<AvatarEditorResult>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithAvatarEditorResult(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override AvatarEditorResult GetAvatarEditorResult() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override AvatarEditorResult GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -922,10 +1111,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithBlockedUserList : Message<BlockedUserList>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithBlockedUserList(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override BlockedUserList GetBlockedUserList() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override BlockedUserList GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -934,10 +1128,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithChallenge : Message<Challenge>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithChallenge(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override Challenge GetChallenge() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override Challenge GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -946,10 +1145,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithChallengeList : Message<ChallengeList>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithChallengeList(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override ChallengeList GetChallengeList() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override ChallengeList GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -958,10 +1162,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithChallengeEntryList : Message<ChallengeEntryList>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithChallengeEntryList(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override ChallengeEntryList GetChallengeEntryList() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override ChallengeEntryList GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -970,10 +1179,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithCowatchViewerList : Message<CowatchViewerList>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithCowatchViewerList(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override CowatchViewerList GetCowatchViewerList() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override CowatchViewerList GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -982,10 +1196,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithCowatchViewerUpdate : Message<CowatchViewerUpdate>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithCowatchViewerUpdate(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override CowatchViewerUpdate GetCowatchViewerUpdate() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override CowatchViewerUpdate GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -994,10 +1213,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithCowatchingState : Message<CowatchingState>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithCowatchingState(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override CowatchingState GetCowatchingState() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override CowatchingState GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1006,10 +1230,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithDestinationList : Message<DestinationList>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithDestinationList(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override DestinationList GetDestinationList() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override DestinationList GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1018,10 +1247,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithGroupPresenceJoinIntent : Message<GroupPresenceJoinIntent>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithGroupPresenceJoinIntent(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override GroupPresenceJoinIntent GetGroupPresenceJoinIntent() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override GroupPresenceJoinIntent GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1030,10 +1264,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithGroupPresenceLeaveIntent : Message<GroupPresenceLeaveIntent>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithGroupPresenceLeaveIntent(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override GroupPresenceLeaveIntent GetGroupPresenceLeaveIntent() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override GroupPresenceLeaveIntent GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1042,10 +1281,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithInstalledApplicationList : Message<InstalledApplicationList>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithInstalledApplicationList(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override InstalledApplicationList GetInstalledApplicationList() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override InstalledApplicationList GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1054,10 +1298,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithInvitePanelResultInfo : Message<InvitePanelResultInfo>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithInvitePanelResultInfo(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override InvitePanelResultInfo GetInvitePanelResultInfo() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override InvitePanelResultInfo GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1066,10 +1315,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithLaunchBlockFlowResult : Message<LaunchBlockFlowResult>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithLaunchBlockFlowResult(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override LaunchBlockFlowResult GetLaunchBlockFlowResult() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override LaunchBlockFlowResult GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1078,10 +1332,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithLaunchFriendRequestFlowResult : Message<LaunchFriendRequestFlowResult>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithLaunchFriendRequestFlowResult(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override LaunchFriendRequestFlowResult GetLaunchFriendRequestFlowResult() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override LaunchFriendRequestFlowResult GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1090,10 +1349,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithLaunchInvitePanelFlowResult : Message<LaunchInvitePanelFlowResult>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithLaunchInvitePanelFlowResult(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override LaunchInvitePanelFlowResult GetLaunchInvitePanelFlowResult() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override LaunchInvitePanelFlowResult GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1102,10 +1366,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithLaunchReportFlowResult : Message<LaunchReportFlowResult>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithLaunchReportFlowResult(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override LaunchReportFlowResult GetLaunchReportFlowResult() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override LaunchReportFlowResult GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1114,10 +1383,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithLaunchUnblockFlowResult : Message<LaunchUnblockFlowResult>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithLaunchUnblockFlowResult(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override LaunchUnblockFlowResult GetLaunchUnblockFlowResult() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override LaunchUnblockFlowResult GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1126,10 +1400,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithLeaderboardList : Message<LeaderboardList>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithLeaderboardList(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override LeaderboardList GetLeaderboardList() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override LeaderboardList GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1138,10 +1417,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithLeaderboardEntryList : Message<LeaderboardEntryList>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithLeaderboardEntryList(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override LeaderboardEntryList GetLeaderboardEntryList() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override LeaderboardEntryList GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1150,10 +1434,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithLinkedAccountList : Message<LinkedAccountList>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithLinkedAccountList(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override LinkedAccountList GetLinkedAccountList() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override LinkedAccountList GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1162,10 +1451,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithLivestreamingApplicationStatus : Message<LivestreamingApplicationStatus>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithLivestreamingApplicationStatus(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override LivestreamingApplicationStatus GetLivestreamingApplicationStatus() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override LivestreamingApplicationStatus GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1174,10 +1468,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithLivestreamingStartResult : Message<LivestreamingStartResult>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithLivestreamingStartResult(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override LivestreamingStartResult GetLivestreamingStartResult() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override LivestreamingStartResult GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1186,10 +1485,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithLivestreamingStatus : Message<LivestreamingStatus>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithLivestreamingStatus(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override LivestreamingStatus GetLivestreamingStatus() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override LivestreamingStatus GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1198,10 +1502,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithLivestreamingVideoStats : Message<LivestreamingVideoStats>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithLivestreamingVideoStats(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override LivestreamingVideoStats GetLivestreamingVideoStats() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override LivestreamingVideoStats GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1210,10 +1519,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithMicrophoneAvailabilityState : Message<MicrophoneAvailabilityState>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithMicrophoneAvailabilityState(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override MicrophoneAvailabilityState GetMicrophoneAvailabilityState() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override MicrophoneAvailabilityState GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1222,10 +1536,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithNetSyncConnection : Message<NetSyncConnection>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithNetSyncConnection(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override NetSyncConnection GetNetSyncConnection() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override NetSyncConnection GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1234,10 +1553,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithNetSyncSessionList : Message<NetSyncSessionList>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithNetSyncSessionList(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override NetSyncSessionList GetNetSyncSessionList() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override NetSyncSessionList GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1246,10 +1570,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithNetSyncSessionsChangedNotification : Message<NetSyncSessionsChangedNotification>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithNetSyncSessionsChangedNotification(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override NetSyncSessionsChangedNotification GetNetSyncSessionsChangedNotification() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override NetSyncSessionsChangedNotification GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1258,10 +1587,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithNetSyncSetSessionPropertyResult : Message<NetSyncSetSessionPropertyResult>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithNetSyncSetSessionPropertyResult(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override NetSyncSetSessionPropertyResult GetNetSyncSetSessionPropertyResult() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override NetSyncSetSessionPropertyResult GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1270,10 +1604,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithNetSyncVoipAttenuationValueList : Message<NetSyncVoipAttenuationValueList>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithNetSyncVoipAttenuationValueList(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override NetSyncVoipAttenuationValueList GetNetSyncVoipAttenuationValueList() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override NetSyncVoipAttenuationValueList GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1282,10 +1621,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithOrgScopedID : Message<OrgScopedID>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithOrgScopedID(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override OrgScopedID GetOrgScopedID() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override OrgScopedID GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1294,10 +1638,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithParty : Message<Party>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithParty(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override Party GetParty() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override Party GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1306,10 +1655,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithPartyUnderCurrentParty : Message<Party>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithPartyUnderCurrentParty(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override Party GetParty() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override Party GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1318,10 +1672,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithPartyID : Message<PartyID>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithPartyID(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override PartyID GetPartyID() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override PartyID GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1330,10 +1689,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithPartyUpdateNotification : Message<PartyUpdateNotification>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithPartyUpdateNotification(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override PartyUpdateNotification GetPartyUpdateNotification() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override PartyUpdateNotification GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1342,10 +1706,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithPidList : Message<PidList>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithPidList(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override PidList GetPidList() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override PidList GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1354,10 +1723,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithProductList : Message<ProductList>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithProductList(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override ProductList GetProductList() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override ProductList GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1366,10 +1740,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithPurchase : Message<Purchase>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithPurchase(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override Purchase GetPurchase() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override Purchase GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1378,10 +1757,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithPurchaseList : Message<PurchaseList>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithPurchaseList(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override PurchaseList GetPurchaseList() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override PurchaseList GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1390,10 +1774,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithRejoinDialogResult : Message<RejoinDialogResult>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithRejoinDialogResult(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override RejoinDialogResult GetRejoinDialogResult() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override RejoinDialogResult GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1402,10 +1791,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithSdkAccountList : Message<SdkAccountList>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithSdkAccountList(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override SdkAccountList GetSdkAccountList() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override SdkAccountList GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1414,10 +1808,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithSendInvitesResult : Message<SendInvitesResult>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithSendInvitesResult(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override SendInvitesResult GetSendInvitesResult() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override SendInvitesResult GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1426,10 +1825,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithShareMediaResult : Message<ShareMediaResult>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithShareMediaResult(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override ShareMediaResult GetShareMediaResult() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override ShareMediaResult GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1438,19 +1842,29 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithString : Message<string>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithString(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override string GetString() { return Data; }
+    /// Retrieves the String payload from the response Message. Used internally by Platform SDK.
     protected override string GetDataFromMessage(IntPtr c_message)
     {
       return CAPI.ovr_Message_GetString(c_message);
     }
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithSystemVoipState : Message<SystemVoipState>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithSystemVoipState(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override SystemVoipState GetSystemVoipState() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override SystemVoipState GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1459,10 +1873,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithUser : Message<User>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithUser(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override User GetUser() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override User GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1471,10 +1890,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithUserAccountAgeCategory : Message<UserAccountAgeCategory>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithUserAccountAgeCategory(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override UserAccountAgeCategory GetUserAccountAgeCategory() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override UserAccountAgeCategory GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1483,10 +1907,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithUserList : Message<UserList>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithUserList(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override UserList GetUserList() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override UserList GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1495,10 +1924,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithUserCapabilityList : Message<UserCapabilityList>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithUserCapabilityList(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override UserCapabilityList GetUserCapabilityList() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override UserCapabilityList GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1507,10 +1941,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithUserProof : Message<UserProof>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithUserProof(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override UserProof GetUserProof() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override UserProof GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1519,10 +1958,15 @@ namespace Oculus.Platform
     }
 
   }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithUserReportID : Message<UserReportID>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithUserReportID(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override UserReportID GetUserReportID() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override UserReportID GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1532,10 +1976,15 @@ namespace Oculus.Platform
 
   }
 
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithLeaderboardDidUpdate : Message<bool>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithLeaderboardDidUpdate(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override bool GetLeaderboardDidUpdate() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override bool GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1544,10 +1993,15 @@ namespace Oculus.Platform
     }
   }
 
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithHttpTransferUpdate : Message<HttpTransferUpdate>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithHttpTransferUpdate(IntPtr c_message) : base(c_message) {}
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override HttpTransferUpdate GetHttpTransferUpdate() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override HttpTransferUpdate GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
@@ -1556,10 +2010,15 @@ namespace Oculus.Platform
     }
   }
 
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
   public class MessageWithPlatformInitialize : Message<PlatformInitialize>
   {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
     public MessageWithPlatformInitialize(IntPtr c_message) : base(c_message) {}
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
     public override PlatformInitialize GetPlatformInitialize() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
     protected override PlatformInitialize GetDataFromMessage(IntPtr c_message)
     {
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);

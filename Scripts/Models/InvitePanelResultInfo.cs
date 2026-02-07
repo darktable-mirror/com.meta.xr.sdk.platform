@@ -8,9 +8,11 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
+  /// The information about the user's invitation to others to join their current
+  /// session. It can be retrieved using GroupPresence.LaunchInvitePanel()}.
   public class InvitePanelResultInfo
   {
-    /// A boolean for whether or not any invites has been sent.
+    /// A boolean for whether or not any invites have been sent.
     public readonly bool InvitesSent;
 
 

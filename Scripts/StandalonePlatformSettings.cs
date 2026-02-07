@@ -1,7 +1,8 @@
 namespace Oculus.Platform
 {
     using System.Text.RegularExpressions;
-    // This only exists for the Unity Editor
+    /// Represents standalone platform settings in the Unity editor.These settings are used for StandalonePlatform initialization.
+    /// It contains properties and methods to manage test user credentials such as email, password, and access token.
     public sealed class StandalonePlatformSettings
     {
 #if UNITY_EDITOR
@@ -22,6 +23,7 @@ namespace Oculus.Platform
         }
 #endif
 
+        /// Represents the test user's email address for the Unity Editor settings. It has two methods to get and set the email address of the test user.
         public static string OculusPlatformTestUserEmail
         {
             get
@@ -39,7 +41,7 @@ namespace Oculus.Platform
 #endif
             }
         }
-
+        /// Represents the test user's password for the Unity Editor settings. It has two methods to get and set the password of the test user.
         public static string OculusPlatformTestUserPassword
         {
             get
@@ -59,7 +61,7 @@ namespace Oculus.Platform
 #endif
             }
         }
-
+        /// Represents the test user's access token for the Unity Editor settings. It has two methods to get and set the access token of the test user. It is used by StandalonePlatform.InitializeInEditor().
         public static string OculusPlatformTestUserAccessToken
         {
             get

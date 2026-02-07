@@ -9,11 +9,15 @@ namespace Oculus.Platform.Models
   using UnityEngine;
 
   /// An AssetFileDownloadResult represents an asset that has been successfully
-  /// downloaded. It contains the asset file ID and the file path of the
-  /// downloaded asset.
+  /// downloaded. It's used to store information about an asset that has been
+  /// downloaded, such as its location on the local file system and its unique
+  /// identifier asset file ID. It can be retrieved using
+  /// AssetFile.DownloadByName().
   public class AssetFileDownloadResult
   {
-    /// ID of the asset file
+    /// ID of the asset file. It can be retrieved using AssetDetails#AssetId. It
+    /// can be used to retrieve the AssetFileDownloadResult by
+    /// AssetFile.DownloadById().
     public readonly UInt64 AssetId;
     /// File path of the asset file.
     public readonly string Filepath;

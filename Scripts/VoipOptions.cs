@@ -10,6 +10,7 @@ namespace Oculus.Platform
 
   public class VoipOptions {
 
+    /// Creates a new instance of ::VoipOptions which is used to customize the option flow. It returns a handle to the newly created options object, which can be used to set various properties for the options.
     public VoipOptions() {
       Handle = CAPI.ovr_VoipOptions_Create();
     }
@@ -34,11 +35,12 @@ namespace Oculus.Platform
     }
 
 
-    /// For passing to native C
+    /// This operator allows you to pass an instance of the ::VoipOptions class to native C code as an IntPtr. The operator returns the handle of the options object, or IntPtr.Zero if the object is null.
     public static explicit operator IntPtr(VoipOptions options) {
       return options != null ? options.Handle : IntPtr.Zero;
     }
 
+    /// Destroys an existing instance of the ::VoipOptions and frees up memory when you're done using it.
     ~VoipOptions() {
       CAPI.ovr_VoipOptions_Destroy(Handle);
     }

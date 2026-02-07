@@ -11,18 +11,25 @@ namespace Oculus.Platform
   using System.Collections.Generic;
   using System.Runtime.InteropServices;
 
+  /// The Core class provides methods for initializing and checking the status of the Oculus Platform SDK.
+  /// This class is responsible for setting up the necessary components and configurations to enable
+  /// communication with the Oculus Platform, allowing developers to access features such as Entitlment checks: Entitlements.IsUserEntitledToApplication().
+  /// The Core class also provides methods for checking the initialization status of the platform,
+  /// allowing developers to determine whether the platform is ready for use.
   public sealed class Core {
     private static bool IsPlatformInitialized = false;
+
+    /// Returns whether the Oculus Platform SDK has been successfully initialized.
+    /// True if the platform is initialized, false otherwise.
     public static bool IsInitialized()
     {
       return IsPlatformInitialized;
     }
 
-    // If LogMessages is true, then the contents of each request response
-    // will be printed using Debug.Log. This allocates a lot of heap memory,
-    // and so should not be called outside of testing and debugging.
+    /// If true, the contents of each request response will be printed using Debug.Log. This can allocate a lot of heap memory, so it should only be used for testing and debugging purposes.
     public static bool LogMessages = false;
 
+    /// The error message that will be displayed to the user if the platform is not initialized.
     public static string PlatformUninitializedError = "This function requires an initialized Oculus Platform. Run Oculus.Platform.Core.[Initialize|AsyncInitialize] and try again.";
 
     internal static void ForceInitialized()
@@ -50,16 +57,24 @@ namespace Oculus.Platform
       return appId;
     }
 
-    // Asynchronously Initialize Platform SDK. The result will be put on the message
-    // queue with the message type: ovrMessage_PlatformInitializeAndroidAsynchronous
-    //
-    // While the platform is in an initializing state, it's not fully functional.
-    // [Requests]: will queue up and run once platform is initialized.
-    //    For example: ovr_User_GetLoggedInUser() can be called immediately after
-    //    asynchronous init and once platform is initialized, this request will run
-    // [Synchronous Methods]: will return the default value;
-    //    For example: ovr_GetLoggedInUserID() will return 0 until platform is
-    //    fully initialized
+    /// Asynchronously Initialize Platform SDK. The result will be the type of Models.PlatformInitialize.Result.
+    ///
+    /// While the platform is in an initializing state, it's not fully functional.
+    /// [Requests]: will queue up and run once platform is initialized.
+    ///    For example: Users.GetLoggedInUser() can be called immediately after
+    ///    asynchronous init and once platform is initialized, this request will run
+    /// [Synchronous Methods]: will return the default value;
+    ///    For example: Users.GetLoggedInUser() will return 0 until platform is
+    ///    fully initialized.
+    ///
+    /// Note that during initialization, some features may not be available or may
+    /// return default values. It's important to check the initialization status
+    /// before attempting to use certain features or functions.
+    /// Use Message.IsError to check if the result is an error.
+    /// Use Message.Type to check the message type.
+    /// Use Models.PlatformInitialize.Result to get the result of the
+    /// initialization.
+    /// \param names appId The app ID to use for initialization. If null, the app ID will be retrieved from the Oculus Platform Settings.
     public static Request<Models.PlatformInitialize> AsyncInitialize(string appId = null) {
       appId = getAppID(appId);
 
@@ -97,15 +112,21 @@ namespace Oculus.Platform
       return request;
     }
 
-    /// (BETA) For use on platforms where the Oculus service isn't running with additional
-    /// config options to pass in.
+    /// (BETA) For use on platforms where the Oculus service isn't running, with additional
+    /// configuration options to pass in.
     ///
-    /// eg:
+    /// This method allows you to initialize the Platform SDK with custom settings,
+    /// such as disabling P2P networking.
+    ///
+    /// Example usage:
     ///
     ///  var config = new Dictionary<InitConfigOptions, bool>{
     ///    [InitConfigOptions.DisableP2pNetworking] = true
     ///  };
     /// Platform.Core.AsyncInitialize("{access_token}", config);
+    ///
+    /// Note that this method is still in beta and may be subject to change.
+    /// Use at your own risk.
     public static Request<Models.PlatformInitialize> AsyncInitialize(string accessToken, Dictionary<InitConfigOptions, bool> initConfigOptions, string appId = null) {
       appId = getAppID(appId);
 
@@ -137,6 +158,25 @@ namespace Oculus.Platform
       return request;
     }
 
+    /// Synchronously Initialize Platform SDK. The result will be the type of Models.PlatformInitialize.Result.
+    ///
+    /// While the platform is in an initializing state, it's not fully functional.
+    /// [Requests]: will queue up and run once platform is initialized.
+    ///    For example: Users.GetLoggedInUser() can be called immediately after
+    ///    synchronous init and once platform is initialized, this request will run
+    /// [Synchronous Methods]: will return the default value;
+    ///    For example: Users.GetLoggedInUser() will return 0 until platform is
+    ///    fully initialized.
+    ///
+    /// Note that during initialization, some features may not be available or may
+    /// return default values. It's important to check the initialization status
+    /// before attempting to use certain features or functions.
+    /// Use Message.IsError to check if the result is an error.
+    /// Use Message.Type to check the message type.
+    /// Use Models.PlatformInitialize.Result to get the result of the
+    /// initialization.
+    ///
+    /// \param names appId The app ID to use for initialization. If null, the app ID will be retrieved from the Oculus Platform Settings.
     public static void Initialize(string appId = null)
     {
       appId = getAppID(appId);
@@ -179,6 +219,9 @@ namespace Oculus.Platform
       }
       else
       {
+        if (PlatformSettings.UseMobileAppIDInEditor) {
+          return PlatformSettings.MobileAppID;
+        }
         return PlatformSettings.AppID;
       }
     }
@@ -186,9 +229,18 @@ namespace Oculus.Platform
 
   public static partial class ApplicationLifecycle
   {
+    ///Returns information about how the application was started. This function provides details about the launch intent,
+    ///such as the type of intent LaunchDetails#LaunchType and any additional data that was passed along with it.
+    ///By calling this function, you can gain insight into how your application was launched and take appropriate action based on that information.
     public static Models.LaunchDetails GetLaunchDetails() {
       return new Models.LaunchDetails(CAPI.ovr_ApplicationLifecycle_GetLaunchDetails());
     }
+
+    /// Logs if the user successfully deeplinked to a destination. This function takes two parameters: a string tracking ID and a launch result.
+    /// The tracking ID is used to identify the specific deeplink attempt, while the launch result indicates whether the deeplink was LaunchResult#Success or not.
+    /// By logging this information, you can track the effectiveness of your deeplinking efforts and make adjustments as needed.
+    /// \param names trackingID The Tracking ID is a unique identifier assigned to each deeplink attempt. It allows developers to track the success or failure of individual deeplink attempts and gain insights into the effectiveness of their deeplinking efforts.
+    /// \param names result An enum that indicates the outcome of an attempt to launch this application through a deeplink, including whether the attempt was LaunchResult#Success or not, and if not, the specific reasons for the failure.
     public static void LogDeeplinkResult(string trackingID, LaunchResult result) {
       CAPI.ovr_ApplicationLifecycle_LogDeeplinkResult(trackingID, result);
     }
@@ -374,10 +426,16 @@ namespace Oculus.Platform
     }
   }
 
+  /// The Abuse Report API provides a way for users to report abusive behavior or
+  /// content within the platform. It allows developers to customize
+  /// AbuseReport.LaunchAdvancedReportFlow() and submit reports for various types
+  /// of content, including users AbuseReportType.User, or an object/content
+  /// AbuseReportType.Object.
   public static partial class AbuseReport
   {
     /// The currently running application has indicated they want to show their in-
     /// app reporting flow or that they choose to ignore the request.
+    /// \param response Possible states that an app can respond to the platform notification that the in-app reporting flow has been requested by the user.
     ///
     public static Request ReportRequestHandled(ReportRequestResponse response)
     {
@@ -403,13 +461,20 @@ namespace Oculus.Platform
 
   }
 
+  /// The Achievements API enables developers to create engaging experiences by
+  /// awarding trophies, badges, and awards for reaching goals. Users can see
+  /// friends' achievements(Achievements.GetAllDefinitions()), fostering
+  /// competition, and earned
+  /// achievements(requests.achievements.get_all_definitions) are displayed in
+  /// Meta Quest Home, showcasing progress(Achievements.Unlock()) and driving
+  /// engagement.
   public static partial class Achievements
   {
     /// Add 'count' to the achievement with the given name. This must be a COUNT
     /// achievement. The largest number that is supported by this method is the max
     /// value of a signed 64-bit integer. If the number is larger than that, it is
     /// clamped to that max value before being passed to the servers.
-    /// \param name The api_name of the achievement that will be adding count.
+    /// \param name The api_name of the achievement that will be adding count, which can be retrieved by AchievementDefinition#Name.
     /// \param count The value of count that will be added to the achievement.
     ///
     public static Request<Models.AchievementUpdate> AddCount(string name, ulong count)
@@ -424,7 +489,7 @@ namespace Oculus.Platform
     }
 
     /// Unlock fields of a BITFIELD achievement.
-    /// \param name The name of the achievement to unlock
+    /// \param name The api_name of the Bitfield achievement whose field(s) will be unlocked, which can be retrieved by AchievementDefinition#Name.
     /// \param fields A string containing either '0' or '1' characters. Every '1' will unlock the field in the corresponding position.
     ///
     public static Request<Models.AchievementUpdate> AddFields(string name, string fields)
@@ -438,7 +503,8 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Request all achievement definitions for the app.
+    /// Retrieve all achievement definitions for the app, including their name,
+    /// unlock requirements, and any additional details.
     ///
     public static Request<Models.AchievementDefinitionList> GetAllDefinitions()
     {
@@ -451,7 +517,7 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Request the progress for the user on all achievements in the app.
+    /// Retrieve the progress for the user on all achievements in the app.
     ///
     public static Request<Models.AchievementProgressList> GetAllProgress()
     {
@@ -464,8 +530,9 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Request the achievement definitions that match the specified names.
-    /// \param names The api_names(AchievementDefinition.GetName()) of the achievements used to retrieve the definition information.
+    /// Retrieve the achievement definitions that match the specified names,
+    /// including their name, unlock requirements, and any additional details.
+    /// \param names The api_names of the achievements used to retrieve the definition information, which can be retrieved by AchievementDefinition#Name.
     ///
     public static Request<Models.AchievementDefinitionList> GetDefinitionsByName(string[] names)
     {
@@ -478,8 +545,9 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Request the user's progress on the specified achievements.
-    /// \param names The api_names(AchievementDefinition.GetName()) of the achievements used to retrieve the progress information.
+    /// Retrieve the user's progress on the achievements that match the specified
+    /// names.
+    /// \param names The api_names of the achievements used to retrieve the progress information, which can be retrieved by AchievementDefinition#Name.
     ///
     public static Request<Models.AchievementProgressList> GetProgressByName(string[] names)
     {
@@ -493,8 +561,21 @@ namespace Oculus.Platform
     }
 
     /// Unlock the achievement with the given name. This can be of any achievement
-    /// type.
-    /// \param name The api_name of the achievement that will be unlocked.
+    /// type: a simple unlock, count-based, or bitfield-based achievement. The Meta
+    /// Quest Platform supports three types of achievements: simple, count and
+    /// bitfield. Each achievement type has a different unlock mechanism. Simple
+    /// achievements are all-or-nothing. They are unlocked by a single event or
+    /// objective completion. For example, a simple achievement is unlocked when
+    /// Frodo reaches Mount Doom. Count achievements are unlocked when a counter
+    /// reaches a defined target. Define the AchievementDefinition#Target to reach
+    /// that triggers the achievement. For example, a target achievement is
+    /// unlocked when Darth Vader chokes 3 disappointing Imperial officers.
+    /// Bitfield achievements are unlocked when a target number of bits in a
+    /// bitfield are set. Define the AchievementDefinition#Target and
+    /// AchievementDefinition#BitfieldLength that triggers the achievement. For
+    /// example, a bitfield achievement is unlocked when Harry destroys 5 of the 7
+    /// Horcruxes.
+    /// \param name The api_name of the achievement that will be unlocked, which can be retrieved by AchievementDefinition#Name.
     ///
     public static Request<Models.AchievementUpdate> Unlock(string name)
     {
@@ -509,6 +590,10 @@ namespace Oculus.Platform
 
   }
 
+  /// The Application API provides ways to manage and interact with applications
+  /// on the platform, including retrieving information about installed apps, for
+  /// example: getting ApplicationVersion#CurrentCode, launching other apps and
+  /// managing app downloads and updates.
   public static partial class Application
   {
     /// Cancel an app download that is in progress. It will return a result when
@@ -525,7 +610,7 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Track download progress for an app
+    /// Track download progress for an app.
     ///
     public static Request<Models.AppDownloadProgressResult> CheckAppDownloadProgress()
     {
@@ -538,9 +623,11 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Requests version information, including the version code and version name
-    /// of the currently installed app and version code, version name, size and
-    /// release date of the latest app update
+    /// Requests version information, including the ApplicationVersion#CurrentCode
+    /// and ApplicationVersion#CurrentName of the currently installed app and
+    /// ApplicationVersion#LatestCode, ApplicationVersion#LatestName,
+    /// ApplicationVersion#Size and ApplicationVersion#ReleaseDate of the latest
+    /// app update.
     ///
     public static Request<Models.ApplicationVersion> GetVersion()
     {
@@ -555,9 +642,9 @@ namespace Oculus.Platform
 
     /// Installs the app update that was previously downloaded. Once the install
     /// begins the application will exit automatically. After the installation
-    /// process is complete, the app will be relaunched based on the options
-    /// passed.
-    /// \param deeplink_options Additional configuration for this relaunch. Optional.
+    /// process is complete, the app will be relaunched based on the options passed
+    /// in.
+    /// \param deeplink_options Additional configuration for this relaunch, which is optional. It contains 5 fields ApplicationOptions.SetDeeplinkMessage(), ApplicationOptions.SetDestinationApiName(), ApplicationOptions.SetLobbySessionId(), ApplicationOptions.SetMatchSessionId() and ApplicationOptions.SetRoomId().
     ///
     public static Request<Models.AppDownloadResult> InstallAppUpdateAndRelaunch(ApplicationOptions deeplink_options = null)
     {
@@ -573,8 +660,8 @@ namespace Oculus.Platform
     /// Launches a different application in the user's library. If the user does
     /// not have that application installed, they will be taken to that app's page
     /// in the Oculus Store
-    /// \param appID The ID of the app to launch
-    /// \param deeplink_options Additional configuration for this requests. Optional.
+    /// \param appID The unique ID of the app to be launched.
+    /// \param deeplink_options Additional configuration for this request, which is optional. It contains 5 fields ApplicationOptions.SetDeeplinkMessage(), ApplicationOptions.SetDestinationApiName(), ApplicationOptions.SetLobbySessionId(), ApplicationOptions.SetMatchSessionId() and ApplicationOptions.SetRoomId().
     ///
     public static Request<string> LaunchOtherApp(UInt64 appID, ApplicationOptions deeplink_options = null)
     {
@@ -589,7 +676,7 @@ namespace Oculus.Platform
 
     /// Starts an app download. It will return a result when the download is
     /// finished. Download progress can be monitored using the
-    /// check_app_download_progress API.
+    /// Application.CheckAppDownloadProgress().
     ///
     public static Request<Models.AppDownloadResult> StartAppDownload()
     {
@@ -604,11 +691,18 @@ namespace Oculus.Platform
 
   }
 
+  /// This ApplicationLifecycle API provides methods for managing the lifecycle
+  /// of an application, including retrieving information about how the
+  /// application was started, such as the type of intent
+  /// LaunchDetails#LaunchType, logging the results of deeplinking attempts,
+  /// whether it was LaunchResult.Success or not, and handling changes to the
+  /// launch intent.
   public static partial class ApplicationLifecycle
   {
-    /// Sent when a launch intent is received (for both cold and warm starts). The
-    /// payload is the type of the intent. ApplicationLifecycle.GetLaunchDetails()
-    /// should be called to get the other details.
+    /// This event is triggered when a launch intent is received, whether it's a
+    /// cold or warm start. The payload contains the type of intent that was
+    /// received. To obtain additional details, you should call the
+    /// ApplicationLifecycle.GetLaunchDetails() function.
     ///
     public static void SetLaunchIntentChangedNotificationCallback(Message<string>.Callback callback)
     {
@@ -620,9 +714,13 @@ namespace Oculus.Platform
 
   }
 
+  /// The Asset File API provides methods for managing asset files in a virtual
+  /// environment. The methods include getting details and status
+  /// AssetDetails#DownloadStatus, downloading by ID or name, canceling
+  /// downloads, and deleting files by ID or name.
   public static partial class AssetFile
   {
-    /// DEPRECATED. Use AssetFile.DeleteById()
+    /// \deprecated Use AssetFile.DeleteById()
     ///
     public static Request<Models.AssetFileDeleteResult> Delete(UInt64 assetFileID)
     {
@@ -635,7 +733,7 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Removes an previously installed asset file from the device by its ID.
+    /// Removes a previously installed asset file from the device by its ID.
     /// Returns an object containing the asset ID and file name, and a success
     /// flag.
     /// \param assetFileID The asset file ID
@@ -651,7 +749,7 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Removes an previously installed asset file from the device by its name.
+    /// Removes a previously installed asset file from the device by its name.
     /// Returns an object containing the asset ID and file name, and a success
     /// flag.
     /// \param assetFileName The asset file name
@@ -667,7 +765,7 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// DEPRECATED. Use AssetFile.DownloadById()
+    /// \deprecated Use AssetFile.DownloadById()
     ///
     public static Request<Models.AssetFileDownloadResult> Download(UInt64 assetFileID)
     {
@@ -682,7 +780,8 @@ namespace Oculus.Platform
 
     /// Downloads an asset file by its ID on demand. Returns an object containing
     /// the asset ID and filepath. Sends periodic
-    /// MessageType.Notification_AssetFile_DownloadUpdate to track the downloads.
+    /// Message::MessageType::Notification_AssetFile_DownloadUpdate to track the
+    /// downloads.
     /// \param assetFileID The asset file ID
     ///
     public static Request<Models.AssetFileDownloadResult> DownloadById(UInt64 assetFileID)
@@ -712,7 +811,7 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// DEPRECATED. Use AssetFile.DownloadCancelById()
+    /// \deprecated Use AssetFile.DownloadCancelById()
     ///
     public static Request<Models.AssetFileDownloadCancelResult> DownloadCancel(UInt64 assetFileID)
     {
@@ -757,8 +856,9 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Returns an array of objects with asset file names and their associated IDs,
-    /// and and whether it's currently installed.
+    /// Returns an array of asset details with asset file names and their
+    /// associated IDs AssetDetails#AssetId, and whether it's currently installed
+    /// AssetDetails#DownloadStatus.
     ///
     public static Request<Models.AssetDetailsList> GetList()
     {
@@ -771,7 +871,7 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// DEPRECATED. Use AssetFile.StatusById()
+    /// \deprecated Use AssetFile.StatusById()
     ///
     public static Request<Models.AssetDetails> Status(UInt64 assetFileID)
     {
@@ -784,8 +884,8 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Returns the details on a single asset: ID, file name, and whether it's
-    /// currently installed
+    /// Returns the details AssetDetails on a single asset: ID, file name, and
+    /// whether it's currently installed
     /// \param assetFileID The asset file ID
     ///
     public static Request<Models.AssetDetails> StatusById(UInt64 assetFileID)
@@ -799,8 +899,8 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Returns the details on a single asset: ID, file name, and whether it's
-    /// currently installed
+    /// Returns the details AssetDetails on a single asset: ID, file name, and
+    /// whether it's currently installed
     /// \param assetFileName The asset file name
     ///
     public static Request<Models.AssetDetails> StatusByName(string assetFileName)
@@ -826,9 +926,22 @@ namespace Oculus.Platform
 
   }
 
+  /// The Avatars API allows developers to create highly expressive, diverse, and
+  /// customizable avatar identities for the Meta ecosystem, Unity VR apps, and
+  /// other multiplayer experiences. The Avatar.UpdateMetaData() method allows
+  /// users to update their avatar's image and metadata, while the
+  /// Avatar.LaunchAvatarEditor() method launches the Avatar Editor, where users
+  /// can create and customize their avatars, the result can be retrieved by
+  /// AvatarEditorResult#RequestSent.
   public static partial class Avatar
   {
-    /// Launches the Avatar Editor
+    /// Launches the Avatar Editor. Meta Avatars Editor is a feature that allows
+    /// users to edit their Meta Avatars appearances within the VR application that
+    /// they are currently using. This experience is often used by users to switch
+    /// their outfit and accessories to better suit the VR experience they are
+    /// experiencing. The result can be retrieved by
+    /// AvatarEditorResult#RequestSent.
+    /// \param options A AvatarEditorOptions() contains the options information, including an optional override for the source of the request, which is specified by AvatarEditorOptions.SetSourceOverride().
     ///
     public static Request<Models.AvatarEditorResult> LaunchAvatarEditor(AvatarEditorOptions options = null)
     {
@@ -843,9 +956,16 @@ namespace Oculus.Platform
 
   }
 
+  /// The Challenges API enhances social interactions in your app, which use
+  /// GroupPresence.SetDestination() to create shareable links for score-based
+  /// competition. Players can repeatedly challenge others, get to know them, and
+  /// compete asynchronously. Challenges can be ranked by highest/lowest scores
+  /// within a time period. Leaderboard-integrated apps get Challenges for free,
+  /// accessible through the Scoreboards UI. Players can create and invite others
+  /// to Challenges via the Challenges app.
   public static partial class Challenges
   {
-    /// DEPRECATED. Use server-to-server API call instead.
+    /// \deprecated Use server-to-server API call instead.
     ///
     public static Request<Models.Challenge> Create(string leaderboardName, ChallengeOptions challengeOptions)
     {
@@ -858,8 +978,10 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// If the current user has an invite to the challenge, decline the invite
-    /// \param challengeID The ID of challenge that the user is going to decline. It can be retrieved by Challenge.GetID().
+    /// If the current user has the necessary permissions, they can decline a
+    /// challenge by providing the challenge ID, which can be obtained using
+    /// Challenge#ID.
+    /// \param challengeID The ID of challenge that the user is going to decline. It can be retrieved by Challenge#ID.
     ///
     public static Request<Models.Challenge> DeclineInvite(UInt64 challengeID)
     {
@@ -872,7 +994,7 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// DEPRECATED. Use server-to-server API call instead.
+    /// \deprecated Use server-to-server API call instead.
     ///
     public static Request Delete(UInt64 challengeID)
     {
@@ -885,8 +1007,9 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Gets the information for a single challenge
-    /// \param challengeID The id of the challenge whose entries to return.
+    /// Gets detailed information for a single challenge by providing the challenge
+    /// ID, which can be retrieved by calling Challenge#ID.
+    /// \param challengeID The id of the challenge whose entries to return, which can be retrieved by calling Challenge#ID.
     ///
     public static Request<Models.Challenge> Get(UInt64 challengeID)
     {
@@ -899,11 +1022,17 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Requests a block of challenge entries.
-    /// \param challengeID The id of the challenge whose entries to return.
-    /// \param limit Defines the maximum number of entries to return.
-    /// \param filter By using ovrLeaderboard_FilterFriends, this allows you to filter the returned values to bidirectional followers.
-    /// \param startAt Defines whether to center the query on the user or start at the top of the challenge.
+    /// Retrieves a list of entries for a specific challenge, with options to
+    /// filter and limit the results. By providing the challengeID, you can specify
+    /// which challenge's entries you want to retrieve. The limit parameter allows
+    /// you to control the number of entries returned. The filter parameter enables
+    /// you to refine the results to only include entries from users who are
+    /// bidirectional followers. The startAt parameter allows you to define whether
+    /// to center the query on the user or start at the top of the challenge.
+    /// \param challengeID The id of the challenge whose entries to return, which can be retrieved by calling Challenge#ID.
+    /// \param limit Sets a limit on the maximum number of challenges to be fetched, which can be useful for pagination or performance reasons.
+    /// \param filter By using the LeaderboardFilterType, you can refine the results to only include entries from users who are bidirectional followers.
+    /// \param startAt Defines whether to center the query on the user or start at the top of the challenge. If this is LeaderboardStartAt.CenteredOnViewer or LeaderboardStartAt.CenteredOnViewerOrTop, then the current user's ID will be automatically added to the query.
     ///
     public static Request<Models.ChallengeEntryList> GetEntries(UInt64 challengeID, int limit, LeaderboardFilterType filter, LeaderboardStartAt startAt)
     {
@@ -916,10 +1045,14 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Requests a block of challenge entries.
-    /// \param challengeID The id of the challenge whose entries to return.
-    /// \param limit The maximum number of entries to return.
-    /// \param afterRank The position after which to start.  For example, 10 returns challenge results starting with the 11th user.
+    /// Returns a list of entries for a specific challenge, starting from a
+    /// specified rank. By providing the challengeID and rank, you can specify
+    /// which challenge's entries you want to retrieve and where to start the
+    /// query. The limit parameter allows you to control the number of entries
+    /// returned.
+    /// \param challengeID The id of the challenge whose entries to return, which can be retrieved by calling Challenge#ID.
+    /// \param limit Sets a limit on the maximum number of challenges to be fetched, which can be useful for pagination or performance reasons.
+    /// \param afterRank The position after which to start. For example, 10 returns challenge results starting with the 11th user.
     ///
     public static Request<Models.ChallengeEntryList> GetEntriesAfterRank(UInt64 challengeID, int limit, ulong afterRank)
     {
@@ -932,10 +1065,12 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Requests a block of challenge entries. Will return only entries matching
-    /// the user IDs passed in.
-    /// \param challengeID The id of the challenge whose entries to return.
-    /// \param limit Defines the maximum number of entries to return.
+    /// Retrieves a list of challenge entries for a specific set of user IDs, with
+    /// options to filter and limit the results. This method is useful for
+    /// retrieving a list of challenge entries for a specific set of users,
+    /// allowing you to display their progress and rankings within the challenge.
+    /// \param challengeID The id of the challenge whose entries to return, which can be retrieved by calling Challenge#ID.
+    /// \param limit Sets a limit on the maximum number of challenges to be fetched, which can be useful for pagination or performance reasons.
     /// \param startAt Defines whether to center the query on the user or start at the top of the challenge. If this is LeaderboardStartAt.CenteredOnViewer or LeaderboardStartAt.CenteredOnViewerOrTop, then the current user's ID will be automatically added to the query.
     /// \param userIDs Defines a list of user ids to get entries for.
     ///
@@ -950,9 +1085,12 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Requests for a list of challenge
+    /// Returns a list of challenges that match the specified options. The
+    /// ChallengeOptions() parameter allows you to specify the criteria for the
+    /// challenges you want to retrieve. The limit parameter allows you to control
+    /// the number of challenges returned.
     /// \param challengeOptions This indicates the options of the challenge and it can be retrieved by ChallengeOptions().
-    /// \param limit Limits the maximum number of challenges to be fetched.
+    /// \param limit Sets a limit on the maximum number of challenges to be fetched, which can be useful for pagination or performance reasons.
     ///
     public static Request<Models.ChallengeList> GetList(ChallengeOptions challengeOptions, int limit)
     {
@@ -965,8 +1103,10 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// If the current user has permission, join the challenge
-    /// \param challengeID The ID of challenge that the user is going to join. It can be retrieved by Challenge.GetID().
+    /// If the current user has the necessary permissions to join, participate in a
+    /// challenge by providing the challenge ID, which can be retrieved using
+    /// Challenge#ID.
+    /// \param challengeID The ID of challenge that the user is going to join. It can be retrieved by Challenge#ID.
     ///
     public static Request<Models.Challenge> Join(UInt64 challengeID)
     {
@@ -979,8 +1119,10 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// If the current user has permission, leave the challenge
-    /// \param challengeID The ID of challenge that the user is going to leave. It can be retrieved by Challenge.GetID().
+    /// If the current user has the necessary permissions, they can leave a
+    /// challenge by providing the challenge ID, which can be obtained using
+    /// Challenge#ID.
+    /// \param challengeID The ID of challenge that the user is going to leave. It can be retrieved by Challenge#ID.
     ///
     public static Request<Models.Challenge> Leave(UInt64 challengeID)
     {
@@ -993,7 +1135,7 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// DEPRECATED. Use server-to-server API call instead.
+    /// \deprecated Use server-to-server API call instead.
     ///
     public static Request<Models.Challenge> UpdateInfo(UInt64 challengeID, ChallengeOptions challengeOptions)
     {
@@ -1008,10 +1150,17 @@ namespace Oculus.Platform
 
   }
 
+  /// The Cowatching API provides a set of methods for managing cowatching
+  /// sessions in a shared virtual home environment. It allows users to request
+  /// to present, resign from presenting, join or leave a session, check if they
+  /// are in a session CowatchingState#InSession, set and get presenter data, set
+  /// and get viewer data, and launch an invite dialog.
   public static partial class Cowatching
   {
-    /// Presenter data is used to drive a cowatching session. This can be called
-    /// when there is an active cowatching session.
+    /// Retrieve the presenter data that drives an active cowatching session. This
+    /// method can be called when there is an ongoing cowatching session, allowing
+    /// developers to access and utilize the presenter data to enhance the user
+    /// experience.
     ///
     public static Request<string> GetPresenterData()
     {
@@ -1024,9 +1173,9 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Get the viewer data of everyone who is in a cowatching session whose data
-    /// was set by Cowatching.SetViewerData(). This can be called when there is an
-    /// active cowatching session.
+    /// Retrieve the viewer data of everyone who is in a cowatching session whose
+    /// data was set by Cowatching.SetViewerData() viewer_data. This can be called
+    /// when there is an active cowatching session.
     ///
     public static Request<Models.CowatchViewerList> GetViewersData()
     {
@@ -1039,7 +1188,9 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Check whether the current user is in the current cowatching session.
+    /// Check whether the current user is participating in the ongoing cowatching
+    /// session. It returns a boolean value CowatchingState#InSession indicating
+    /// the user's presence in the session.
     ///
     public static Request<Models.CowatchingState> IsInSession()
     {
@@ -1052,8 +1203,8 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Join the current cowatching session. Viewer data can only be updated by
-    /// users who are in the session.
+    /// Join the ongoing cowatching session as a viewer, updating data only
+    /// possible for users already in the session.
     ///
     public static Request JoinSession()
     {
@@ -1079,8 +1230,8 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Leave the current cowatching session. Viewer data will no longer be
-    /// relevant.
+    /// Leave the current cowatching session, rendering viewer data obsolete and no
+    /// longer relevant to the ongoing experience.
     ///
     public static Request LeaveSession()
     {
@@ -1093,8 +1244,8 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Request to start a cowatching session as the presenter while copresent in
-    /// home.
+    /// Request to initiate a cowatching session as the presenter while being
+    /// copresent in a shared virtual home environment.
     ///
     public static Request RequestToPresent()
     {
@@ -1107,7 +1258,8 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Stop being the presenter. This will end the cowatching session.
+    /// Stop being the presenter and terminate the ongoing cowatching session. This
+    /// action will effectively end the shared media experience.
     ///
     public static Request ResignFromPresenting()
     {
@@ -1121,9 +1273,11 @@ namespace Oculus.Platform
     }
 
     /// Set the data that drives a cowatching session. This method is only callable
-    /// by the presenter. Video title cannot exceed 100 characters, and data size
-    /// is limited to 500 characters. The data will be eventually consistent across
-    /// all users.
+    /// by the presenter. The video title cannot exceed 100 characters, and the
+    /// data size is limited to 500 characters. The data will be eventually
+    /// consistent across all users.
+    /// \param video_title A string representing the title of the video being played in the cowatching session. This parameter must not exceed 100 characters in length.
+    /// \param presenter_data A string containing data that drives the cowatching session, such as video metadata or playback information. This parameter is limited to 500 characters in length and will be eventually consistent across all users participating in the session.
     ///
     public static Request SetPresenterData(string video_title, string presenter_data)
     {
@@ -1137,9 +1291,10 @@ namespace Oculus.Platform
     }
 
     /// Set the current user's viewer data to be shared with copresent users. This
-    /// can be called when there is an active cowatching session. Data size is
-    /// limited to 500 characters. The data will be eventually consistent across
+    /// can be called when there is an active cowatching session. The data size is
+    /// limited to 500 characters, and it will eventually become consistent across
     /// all users.
+    /// \param viewer_data A string containing data about the current user's viewer state, such as their preferences or settings. This data is shared with copresent users during an active cowatching session and is limited to 500 characters in size. The data will eventually become consistent across all users participating in the session.
     ///
     public static Request SetViewerData(string viewer_data)
     {
@@ -1152,8 +1307,8 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Sent when user is no longer copresent. Cowatching actions should not be
-    /// performed.
+    /// Sets a callback function that will be triggered when the user is no longer
+    /// in a copresent state and cowatching actions should not be performed.
     ///
     public static void SetApiNotReadyNotificationCallback(Message<string>.Callback callback)
     {
@@ -1163,7 +1318,8 @@ namespace Oculus.Platform
       );
     }
 
-    /// Sent when user is in copresent and cowatching is ready to go.
+    /// Sets a callback function that will be triggered when the user is in a
+    /// copresent state and cowatching is ready to begin.
     ///
     public static void SetApiReadyNotificationCallback(Message<string>.Callback callback)
     {
@@ -1173,7 +1329,8 @@ namespace Oculus.Platform
       );
     }
 
-    /// Sent when the current user joins/leaves the cowatching session.
+    /// Sets a callback function that will be triggered when the current user
+    /// joins/leaves the cowatching session.
     ///
     public static void SetInSessionChangedNotificationCallback(Message<Models.CowatchingState>.Callback callback)
     {
@@ -1183,8 +1340,8 @@ namespace Oculus.Platform
       );
     }
 
-    /// Sent when cowatching api has been initialized. The api is not yet ready at
-    /// this stage.
+    /// Sets a callback function that will be triggered when the cowatching API has
+    /// been initialized. At this stage, the API is not yet ready for use.
     ///
     public static void SetInitializedNotificationCallback(Message<string>.Callback callback)
     {
@@ -1194,7 +1351,8 @@ namespace Oculus.Platform
       );
     }
 
-    /// Sent when the presenter updates the presenter data.
+    /// Sets a callback function that will be triggered when the presenter updates
+    /// the presenter data.
     ///
     public static void SetPresenterDataChangedNotificationCallback(Message<string>.Callback callback)
     {
@@ -1204,8 +1362,8 @@ namespace Oculus.Platform
       );
     }
 
-    /// Sent when a user has started a cowatching session whose id is reflected in
-    /// the payload.
+    /// Sets a callback function that will be triggered when a user has started a
+    /// cowatching session, and the ID of the session is reflected in the payload.
     ///
     public static void SetSessionStartedNotificationCallback(Message<string>.Callback callback)
     {
@@ -1215,7 +1373,8 @@ namespace Oculus.Platform
       );
     }
 
-    /// Sent when a cowatching session has ended.
+    /// Sets a callback function that will be triggered when a cowatching session
+    /// has ended.
     ///
     public static void SetSessionStoppedNotificationCallback(Message<string>.Callback callback)
     {
@@ -1225,7 +1384,8 @@ namespace Oculus.Platform
       );
     }
 
-    /// Sent when a user joins or updates their viewer data.
+    /// Sets a callback function that will be triggered when a user joins or
+    /// updates their viewer data.
     ///
     public static void SetViewersDataChangedNotificationCallback(Message<Models.CowatchViewerUpdate>.Callback callback)
     {
@@ -1237,11 +1397,21 @@ namespace Oculus.Platform
 
   }
 
+  /// The Device Application Integrity API is a key function for developers
+  /// committed to protecting their applications from unauthorized modifications
+  /// and potential security breaches. Leveraging this API can greatly enhance
+  /// the security of your applications, ensuring a seamless and safe user
+  /// experience. See more details
+  /// [here](https://developer.oculus.com/documentation/unity/ps-attestation-
+  /// api/).
   public static partial class DeviceApplicationIntegrity
   {
     /// Returns Device and Application Integrity Attestation JSON Web Token. The
     /// token has format of header.claims.signature encoded in base64. Header
-    /// contains algorithm type (PS256) and token type (JWT).
+    /// contains algorithm type (PS256) and token type (JWT). See more details
+    /// [here](https://developer.oculus.com/documentation/unity/ps-attestation-
+    /// api/#how-does-this-work).
+    /// \param challenge_nonce A string that represents a nonce value used to generate the attestation token, ensuring uniqueness and security.
     ///
     public static Request<string> GetIntegrityToken(string challenge_nonce)
     {
@@ -1256,9 +1426,24 @@ namespace Oculus.Platform
 
   }
 
+  /// The Entitlement API is a crucial component of the Meta Quest Store's app
+  /// verification process. It allows developers to check whether a user has
+  /// purchased or obtained their app legitimately, ensuring that only authorized
+  /// users can access the app. The API must be called within 10 seconds of the
+  /// user launching the app and does not require internet connectivity. In the
+  /// event of a failed entitlement check, developers are responsible for
+  /// handling the error in their app code, such as by displaying an error
+  /// message and quitting the app. This API plays a vital role in maintaining
+  /// the security and integrity of the Meta Quest Store ecosystem. See more
+  /// details [here](https://developer.oculus.com/documentation/unity/ps-
+  /// entitlement-check/).
   public static partial class Entitlements
   {
-    /// Returns whether the current user is entitled to the current app.
+    /// Returns whether the current user is entitled to the current app. The
+    /// primary purpose of this function is to verify user access rights to the
+    /// application, ensuring that the user is authorized to use it. See example
+    /// usage [here](https://developer.oculus.com/documentation/unity/ps-
+    /// entitlement-check/#entitlement).
     ///
     public static Request IsUserEntitledToApplication()
     {
@@ -1273,9 +1458,19 @@ namespace Oculus.Platform
 
   }
 
+  /// The Group Presence API updates the platform with a user's current
+  /// Destination#ApiName and status, whether they are
+  /// GroupPresenceOptions.SetIsJoinable(),
+  /// GroupPresenceOptions.SetLobbySessionId() and
+  /// GroupPresenceOptions.SetMatchSessionId() information. A user's location can
+  /// be shown both in VR and out of it on social platforms, and can highlight
+  /// popular destinations in your app. Joinable means that a user is in an area
+  /// of your app that supports other users playing with them.
   public static partial class GroupPresence
   {
-    /// Clear group presence for running app
+    /// Clears the current group presence settings for your app. Use this when a
+    /// user’s group presence setting in your app needs to be changed when moving
+    /// to new destinations in your app.
     ///
     public static Request Clear()
     {
@@ -1315,8 +1510,10 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Launch the flow to allow the user to invite others to their current
-    /// session. This can only be used if the user is in a joinable session.
+    /// Launches the system invite dialog with a roster of eligible users for the
+    /// current user to invite to the app. It is recommended that you surface a
+    /// button in your UI that triggers this dialog when a user is joinable.
+    /// \param options It contains two methods. 1. Add InviteOptions.SetSuggestedUsers() - Takes the userID as a parameter and adds it to the inevitable users list. 2. Clear InviteOptions.SetSuggestedUsers() - Clears the inevitable users list.
     ///
     public static Request<Models.InvitePanelResultInfo> LaunchInvitePanel(InviteOptions options)
     {
@@ -1329,8 +1526,11 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Launch an error dialog with predefined messages for common multiplayer
-    /// errors.
+    /// Launch an error dialog window with predefined messages for commonly
+    /// occurring multiplayer errors. Check the Invokable Error Dialogs
+    /// documentation for more information about these error messages and their
+    /// values.
+    /// \param options It contains a MultiplayerErrorOptions.SetErrorKey() associated with the predefined error message to be shown to users.
     ///
     public static Request LaunchMultiplayerErrorDialog(MultiplayerErrorOptions options)
     {
@@ -1343,9 +1543,11 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Launch the dialog which will allow the user to rejoin a previous
-    /// lobby/match. Either the lobby_session_id or the match_session_id, or both,
-    /// must be populated.
+    /// Launch the dialog allowing users to rejoin a previous lobby or match.
+    /// Either the user’s GroupPresenceOptions.SetLobbySessionId(), their
+    /// GroupPresenceOptions.SetMatchSessionId(), or both must be populated as
+    /// valid rejoinable destinations. Check the Rejoin documentation for use cases
+    /// and information on this feature.
     /// \param lobby_session_id The unique identifier of the lobby session to rejoin.
     /// \param match_session_id The unique identifier of the match session to rejoin.
     /// \param destination_api_name The unique name of the in-app destination to rejoin.
@@ -1361,9 +1563,10 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Launch the panel which displays the current users in the roster. Users with
-    /// the same lobby and match session id as part of their presence will show up
-    /// here.
+    /// Launch the panel displaying the current users in the roster. We do not
+    /// recommend using this API because the list current users is surfaced in the
+    /// Destination UI when the Meta Quest button is pressed.
+    /// \param options It contains 2 methods. 1. Add RosterOptions.SetSuggestedUsers() - it takes userID as a parameter and adds it to the inevitable users list. 2.Clear RosterOptions.SetSuggestedUsers() - it clears the inevitable users list.
     ///
     public static Request LaunchRosterPanel(RosterOptions options)
     {
@@ -1376,8 +1579,13 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Send application invites to the passed in userIDs.
-    /// \param userIDs Defines a list of user ids to get entries for.
+    /// Sends invites to the current application to the list of userIDs passed in.
+    /// You can fetch a list of users to pass in via the
+    /// GroupPresence.GetInvitableUsers(). This API works as an alternative to
+    /// GroupPresence.LaunchInvitePanel() which delegates the invite flow to the
+    /// system invite module. GroupPresence.LaunchInvitePanel() is the recommended
+    /// approach.
+    /// \param userIDs userIDs is a list of users’ ids to send invites to.
     ///
     public static Request<Models.SendInvitesResult> SendInvites(UInt64[] userIDs)
     {
@@ -1390,7 +1598,14 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Set group presence for running app
+    /// Sets group presence information for your current app. It is recommended
+    /// that you use this parameter and its methods to set group presence
+    /// information for your app. An example of using this parameter can be found
+    /// on the Group Presence overview page where the methods to set
+    /// GroupPresenceOptions.SetDestinationApiName(),
+    /// GroupPresenceOptions.SetMatchSessionId(), and
+    /// GroupPresenceOptions.SetLobbySessionId() are used.
+    /// \param groupPresenceOptions The groupPresenceOptions parameter contains five methods. 1. GroupPresenceOptions.SetDeeplinkMessageOverride() - Use GroupPresenceOptions.SetLobbySessionId() or GroupPresenceOptions.SetMatchSessionId() to specify the session. Use the GroupPresenceOptions.SetDeeplinkMessageOverride() for any additional data in whatever format you wish to aid in bringing users together. If not specified, the deeplink_message for the user will default to the one on the destination. 2.GroupPresenceOptions.SetDestinationApiName() - This the unique API Name that refers to an in-app destination. 3.GroupPresenceOptions.SetIsJoinable() - Set whether or not the person is shown as joinable or not to others. A user that is joinable can invite others to join them. Set this to false if other users would not be able to join this user. For example, the current session is full, or only the host can invite others and the current user is not the host. 4.GroupPresenceOptions.SetLobbySessionId() - This is a session that represents a closer group/squad/party of users. It is expected that all users with the same lobby session id can see or hear each other. Users with the same lobby session id in their group presence will show up in the roster and will show up as "Recently Played With" for future invites if they aren't already Oculus friends. This must be set in addition to GroupPresenceOptions.SetIsJoinable() being true for a user to use invites. 5.GroupPresenceOptions.SetMatchSessionId() - This is a session that represents all the users that are playing a specific instance of a map, game mode, round, etc. This can include users from multiple different lobbies that joined together and the users may or may not remain together after the match is over. Users with the same match session id in their group presence will not show up in the Roster, but will show up as "Recently Played with" for future invites.
     ///
     public static Request Set(GroupPresenceOptions groupPresenceOptions)
     {
@@ -1403,10 +1618,18 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Set the user's deeplink message while keeping the other group presence
-    /// parameters the same. If the destination of the user is not set, the
-    /// deeplink message cannot be set as there's no deeplink message to override.
-    /// \param deeplink_message The new deeplink message to set for the user, overriding the current deeplink message.
+    /// Sets the user's GroupPresenceOptions.SetDeeplinkMessageOverride() while
+    /// keeping the other group presence parameters the same. If the destination of
+    /// the user is not set, the deeplink message cannot be set as there's no
+    /// deeplink message to override. This method does not power travel from the
+    /// Meta Quest platform to your app. You must set a user’s
+    /// GroupPresenceOptions.SetDestinationApiName(),
+    /// GroupPresenceOptions.SetIsJoinable() status, and
+    /// GroupPresenceOptions.SetLobbySessionId() to enable travel to your app.
+    /// Check Group Presence overview for more information about these values.
+    /// Note: Instead of using this standalone API, we recommend setting all
+    /// GroupPresence parameters in one call to GroupPresence.Set().
+    /// \param deeplink_message deeplink_message is the new GroupPresenceOptions.SetDeeplinkMessageOverride() to set for the user, overriding the current deeplink message.
     ///
     public static Request SetDeeplinkMessageOverride(string deeplink_message)
     {
@@ -1419,9 +1642,15 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Replaces the user's current destination for the provided one. All other
-    /// existing group presence parameters will remain the same.
-    /// \param api_name The unique name of the in-app destination to set, replacing the user's current destination.
+    /// Replaces the user's current GroupPresenceOptions.SetDestinationApiName()
+    /// with the provided one. Use this to set a user's current destination while
+    /// keeping all the other Group Presence parameters the same. Setting a user's
+    /// destination is required to enable travel from the Meta Quest Platform to
+    /// your app. NOTE instead of using the standalone API, we recommend setting
+    /// all GroupPresence parameters in one call to GroupPresence.Set(). This helps
+    /// ensure that all relevant presence information is singularly updated and
+    /// helps reduce presence errors.
+    /// \param api_name api_name is the unique name of the in-app desination to set, replacing the user's current GroupPresenceOptions.SetDestinationApiName().
     ///
     public static Request SetDestination(string api_name)
     {
@@ -1434,10 +1663,20 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Set if the current user's destination and session is joinable while keeping
-    /// the other group presence parameters the same. If the destination or session
-    /// ids of the user is not set, they cannot be set to joinable.
-    /// \param is_joinable If true, the user can invite others to join them. If false, other users cannot join this user, for example, if the current session is full or only the host can invite others and the current user is not the host.
+    /// Sets a user’s current presence as joinable. Use this method to update a
+    /// user’s joinability as it changes. For example, when the game starts, the
+    /// lobby becomes full, the user moves to a private, non joinable instance
+    /// while keeping all other GroupPresence parameters (i.e
+    /// GroupPresenceOptions.SetDestinationApiName(),
+    /// GroupPresenceOptions.SetLobbySessionId(),
+    /// GroupPresenceOptions.SetMatchSessionId()) the same. Setting a user’s
+    /// destination is required to enable travel from the Meta Quest Platform to
+    /// your app. Note: Instead of using this individual API, we recommend setting
+    /// all GroupPresence information with the GroupPresence.Set() method and its
+    /// associated parameters to simply managing all presence information. This
+    /// helps ensure that all relevant presence information is singularly updated
+    /// and helps reduce presence errors.
+    /// \param is_joinable If GroupPresenceOptions.SetIsJoinable() is true, the user can invite others to join them. If false, other users cannot join this user, for example, if the current session is full or only the host can invite others and the current user is not the host.
     ///
     public static Request SetIsJoinable(bool is_joinable)
     {
@@ -1450,9 +1689,16 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Replaces the user's current lobby session id for the provided one. All
-    /// other existing group presence parameters will remain the same.
-    /// \param id The unique identifier of the lobby session to set, replacing the user's current lobby session id.
+    /// Replaces the user's current GroupPresenceOptions.SetLobbySessionId() for
+    /// the provided string. Use this to set a user's current lobby session id
+    /// while keeping all other GroupPresence parameters the same. Setting a user's
+    /// lobby session id is required to enable travel from the Meta Quest Platform
+    /// to your app. Check Group presence overview for more information. NOTE
+    /// instead of using the standalone API, we recommend setting all GroupPresence
+    /// parameters in one call to GroupPresence.Set(). This helps ensure that all
+    /// relevant presence information is singularly updated and helps reduce
+    /// presence errors.
+    /// \param id id is the unique identifier of the lobby session to set, replacing the user's current GroupPresenceOptions.SetLobbySessionId().
     ///
     public static Request SetLobbySession(string id)
     {
@@ -1465,9 +1711,20 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Replaces the user's current match session id for the provided one. All
-    /// other existing group presence parameters will remain the same.
-    /// \param id The unique identifier of the match session to set, replacing the user's current match session id.
+    /// Replaces the user's current GroupPresenceOptions.SetMatchSessionId() for
+    /// the provided one. Use this to update the user's current match session id
+    /// while keeping all other GroupPresence parameters the same.
+    /// GroupPresenceOptions.SetMatchSessionId() works in conjuction with
+    /// GroupPresenceOptions.SetLobbySessionId() to determine if users are playing
+    /// together. If a user's match and lobby session ids are the same, they should
+    /// be in the same multiplayer instance together. Users with the same lobby
+    /// session id but different match session ids may be in the same lobby for
+    /// things like voice chat while in different instances in your app. WARNING
+    /// match session id is often treated the same as lobby session id, but this is
+    /// in fact a distinct parameter and is not used for travel from the Meta Quest
+    /// Platform. NOTE instead of using the standalone API, we recommend setting
+    /// all GroupPresence parameters in one call to GroupPresence.Set().
+    /// \param id id is the unique identifier of the match session to set, replacing the user's current GroupPresenceOptions.SetMatchSessionId().
     ///
     public static Request SetMatchSession(string id)
     {
@@ -1481,7 +1738,11 @@ namespace Oculus.Platform
     }
 
     /// Sent when the user is finished using the invite panel to send out
-    /// invitations. Contains a list of invitees.
+    /// invitations. Contains a list of invitees. Parameter: Callback is a function
+    /// that will be called when the invitation sent status changes.
+    /// LaunchInvitePanelFlowResult has 1 member: UserList
+    /// LaunchInvitePanelFlowResult#InvitedUsers - A list of users that were sent
+    /// an invitation to the session.
     ///
     public static void SetInvitationsSentNotificationCallback(Message<Models.LaunchInvitePanelFlowResult>.Callback callback)
     {
@@ -1495,7 +1756,16 @@ namespace Oculus.Platform
     /// the fields to figure out where the user wants to go and take the
     /// appropriate actions to bring them there. If the user is unable to go there,
     /// provide adequate messaging to the user on why they cannot go there. These
-    /// notifications should be responded to immediately.
+    /// notifications should be responded to immediately. Parameter: Callback is a
+    /// function that will be called when a user has chosen to join the
+    /// destination/lobby/match. GroupPresenceJoinIntent has 4 members: string
+    /// GroupPresenceJoinIntent#DeeplinkMessage - An opaque string provided by the
+    /// developer to help them deeplink to content. string
+    /// GroupPresenceJoinIntent#DestinationApiName - The destination the current
+    /// user wants to go to. string GroupPresenceJoinIntent#LobbySessionId - The
+    /// lobby session the current user wants to go to. string
+    /// GroupPresenceJoinIntent#MatchSessionId - The match session the current user
+    /// wants to go to.
     ///
     public static void SetJoinIntentReceivedNotificationCallback(Message<Models.GroupPresenceJoinIntent>.Callback callback)
     {
@@ -1509,7 +1779,14 @@ namespace Oculus.Platform
     /// Oculus menu. Read the specific fields to check the user is currently from
     /// the destination/lobby/match and take the appropriate actions to remove
     /// them. Update the user's presence clearing the appropriate fields to
-    /// indicate the user has left.
+    /// indicate the user has left. Parameter: Callback is a function that will be
+    /// called when the user has chosen to leave the destination/lobby/match.
+    /// GroupPresenceLeaveIntent has 3 members: string
+    /// GroupPresenceLeaveIntent#DestinationApiName - The destination the current
+    /// user wants to leave. string GroupPresenceLeaveIntent#LobbySessionId - The
+    /// lobby session the current user wants to leave. string
+    /// GroupPresenceLeaveIntent#MatchSessionId - The match session the current
+    /// user wants to leave.
     ///
     public static void SetLeaveIntentReceivedNotificationCallback(Message<Models.GroupPresenceLeaveIntent>.Callback callback)
     {
@@ -1521,10 +1798,15 @@ namespace Oculus.Platform
 
   }
 
+  /// The IAP (In-App Purchases) API provides methods for managing in-app
+  /// purchases, including retrieving purchase history, getting product
+  /// information by Purchase#SKU, and consuming purchases. For more information,
+  /// see [here](https://developer.oculus.com/documentation/unity/ps-iap/).
   public static partial class IAP
   {
     /// Allow the consumable IAP product to be purchased again. Conceptually, this
     /// indicates that the item was used or consumed.
+    /// \param sku The SKU of the product of the purchase that will be consumed. This value is case-sensitive and should match exactly with the product SKU set in the Developer Dashboard.
     ///
     public static Request ConsumePurchase(string sku)
     {
@@ -1583,7 +1865,7 @@ namespace Oculus.Platform
 
     /// Launch the checkout flow to purchase the existing product. Oculus Home
     /// tries handle and fix as many errors as possible. Home returns the
-    /// appropriate error message and how to resolveit, if possible. Returns a
+    /// appropriate error message and how to resolve it, if possible. Returns a
     /// purchase on success, empty purchase on cancel, and an error on error.
     /// \param sku IAP sku for the item the user wishes to purchase.
     ///
@@ -1604,10 +1886,16 @@ namespace Oculus.Platform
 
   }
 
+  /// The LanguagePack API provides a way to manage language packs for an
+  /// application. A language pack is a collection of assets that are specific to
+  /// a particular language, such as translations of text, audio files, and
+  /// images. For more information, see
+  /// [here](https://developer.oculus.com/documentation/unity/ps-language-
+  /// packs/).
   public static partial class LanguagePack
   {
     /// Returns currently installed and selected language pack for an app in the
-    /// view of the `asset_details`. Use `language` field to extract neeeded
+    /// view of the AssetDetails. Use AssetDetails#Language field to extract needed
     /// language info. A particular language can be download and installed by a
     /// user from the Oculus app on the application page.
     ///
@@ -1625,10 +1913,11 @@ namespace Oculus.Platform
     /// Sets the current language to specified. The parameter is the BCP47 language
     /// tag. If a language pack is not downloaded yet, spawns automatically the
     /// AssetFile.DownloadByName() request, and sends periodic
-    /// MessageType.Notification_AssetFile_DownloadUpdate to track the downloads.
-    /// Once the language asset file is downloaded, call LanguagePack.GetCurrent()
-    /// to retrive the data, and use the language at runtime.
-    /// \param tag BCP47 language tag
+    /// Message::MessageType::Notification_AssetFile_DownloadUpdate to track the
+    /// downloads. Once the language asset file is downloaded, call
+    /// LanguagePack.GetCurrent() to retrieve the data, and use the language at
+    /// runtime.
+    /// \param tag The BCP47 language tag that identifies the language to be set as the current language.
     ///
     public static Request<Models.AssetFileDownloadResult> SetCurrent(string tag)
     {
@@ -1742,7 +2031,7 @@ namespace Oculus.Platform
     /// \param score The score to write.
     /// \param supplementaryMetric A metric that can be used for tiebreakers.
     /// \param extraData A 2KB custom data field that is associated with the leaderboard entry. This can be a game replay or anything that provides more detail about the entry to the viewer.
-    /// \param forceUpdate If true, the score always updates. This happens ecen if it is not the user's best score.
+    /// \param forceUpdate If true, the score always updates. This happens even if it is not the user's best score.
     ///
     /// <b>Error codes</b>
     /// - \b 100: Parameter {parameter}: invalid user id: {user_id}
@@ -1766,7 +2055,7 @@ namespace Oculus.Platform
   {
     /// Indicates that the livestreaming session has been updated. You can use this
     /// information to throttle your game performance or increase CPU/GPU
-    /// performance. Use Message.GetLivestreamingStatus() to extract the updated
+    /// performance. Use Message#LivestreamingStatus to extract the updated
     /// livestreaming status.
     ///
     public static void SetStatusUpdateNotificationCallback(Message<Models.LivestreamingStatus>.Callback callback)
@@ -1779,15 +2068,24 @@ namespace Oculus.Platform
 
   }
 
+  /// The media API provides a convenient and seamless way to share local media
+  /// files, such as photos (currently the only supported type), directly to
+  /// Facebook from within your application. This allows users to easily share
+  /// their favorite moments and memories with their friends and family on the
+  /// world's largest social media platform. With just a few simple steps, you
+  /// can enable your users to share their media files to Facebook, making it
+  /// easy for them to spread the word about your app and increase its
+  /// visibility. The payload returned for the sharing result is defined as
+  /// ShareMediaResult.
   public static partial class Media
   {
-    /// Launch the Share to Facebook modal via a deeplink to Home on Gear VR,
-    /// allowing users to share local media files to Facebook. Accepts a
-    /// postTextSuggestion string for the default text of the Facebook post.
-    /// Requires a filePath string as the path to the image to be shared to
-    /// Facebook. This image should be located in your app's internal storage
-    /// directory. Requires a contentType indicating the type of media to be shared
-    /// (only 'photo' is currently supported.)
+    /// Launch the Share to Facebook modal, allowing users to share local media
+    /// files to Facebook. Accepts a postTextSuggestion string for the default text
+    /// of the Facebook post. Requires a filePath string as the path to the image
+    /// to be shared to Facebook. This image should be located in your app's
+    /// internal storage directory. Requires a contentType indicating the type of
+    /// media to be shared (only 'photo' is currently supported). The payload for
+    /// the result is defined as ShareMediaResult.
     /// \param postTextSuggestion this text will prepopulate the facebook status text-input box within the share modal
     /// \param filePath path to the file to be shared to facebook
     /// \param contentType content type of the media to be shared
@@ -1805,9 +2103,15 @@ namespace Oculus.Platform
 
   }
 
+  /// It represents a network synchronization system that allows multiple clients
+  /// to connect and communicate with each other in real-time. It provides a way
+  /// to manage and facilitate real-time communication and data synchronization
+  /// between multiple clients in a networked environment and it can be retrieved
+  /// using NetSyncConnection.
   public static partial class NetSync
   {
-    /// Sent when the status of a connection has changed.
+    /// Sent when the status of a connection has changed. The payload will be a
+    /// type of NetSyncConnection.
     ///
     public static void SetConnectionStatusChangedNotificationCallback(Message<Models.NetSyncConnection>.Callback callback)
     {
@@ -1818,7 +2122,8 @@ namespace Oculus.Platform
     }
 
     /// Sent when the list of known connected sessions has changed. Contains the
-    /// new list of sessions.
+    /// new list of sessions. The payload will be a type of
+    /// NetSyncSessionsChangedNotification.
     ///
     public static void SetSessionsChangedNotificationCallback(Message<Models.NetSyncSessionsChangedNotification>.Callback callback)
     {
@@ -1877,7 +2182,7 @@ namespace Oculus.Platform
 
   public static partial class RichPresence
   {
-    /// DEPRECATED. Use the clear method in group presence
+    /// \deprecated Use the clear method in group presence
     ///
     public static Request Clear()
     {
@@ -1903,7 +2208,7 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// DEPRECATED. Use GroupPresence.Set().
+    /// \deprecated Use GroupPresence.Set().
     ///
     public static Request Set(RichPresenceOptions richPresenceOptions)
     {
@@ -1918,6 +2223,13 @@ namespace Oculus.Platform
 
   }
 
+  /// This class provides methods to access information about the User. It allows
+  /// you to retrieve a user's ID, access token, and org-scoped ID, as well as
+  /// their friends list and recently met users. Additionally, it provides
+  /// methods to launch various flows such as blocking, unblocking, reporting,
+  /// and sending friend requests. It's useful when you need to manage user
+  /// relationships or perform actions that require user authentication within
+  /// your application.
   public static partial class Users
   {
     /// Retrieve the user with the given ID. This might fail if the ID is invalid
@@ -1937,7 +2249,7 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Return an access token for this user, suitable for making REST calls
+    /// Return an access token string for this user, suitable for making REST calls
     /// against graph.oculus.com.
     ///
     public static Request<string> GetAccessToken()
@@ -1986,7 +2298,8 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Retrieve a list of the logged in user's bidirectional followers.
+    /// Retrieve a list of the logged in user's bidirectional followers. The
+    /// payload type will be an array of User
     ///
     public static Request<Models.UserList> GetLoggedInUserFriends()
     {
@@ -1999,9 +2312,26 @@ namespace Oculus.Platform
       return null;
     }
 
+    /// Retrieve the currently signed in user's managed info. This call is not
+    /// available offline.
+    ///
+    /// NOTE: This will return data only if the logged in user is a managed Meta
+    /// account (MMA).
+    ///
+    public static Request<Models.User> GetLoggedInUserManagedInfo()
+    {
+      if (Core.IsInitialized())
+      {
+        return new Request<Models.User>(CAPI.ovr_User_GetLoggedInUserManagedInfo());
+      }
+
+      Debug.LogError(Oculus.Platform.Core.PlatformUninitializedError);
+      return null;
+    }
+
     /// returns an ovrID which is unique per org. allows different apps within the
     /// same org to identify the user.
-    /// \param userID to load the org scoped id of
+    /// \param userID The id of the user that we are going to get its org scoped ID OrgScopedID.
     ///
     public static Request<Models.OrgScopedID> GetOrgScopedID(UInt64 userID)
     {
@@ -2030,9 +2360,9 @@ namespace Oculus.Platform
 
     /// Part of the scheme to confirm the identity of a particular user in your
     /// backend. You can pass the result of Users.GetUserProof() and a user ID from
-    /// Users.Get() to your your backend. Your server can then use our api to
-    /// verify identity. 'https://graph.oculus.com/user_nonce_validate?nonce=USER_P
-    /// ROOF&user_id=USER_ID&access_token=ACCESS_TOKEN'
+    /// Users.Get() to your backend. Your server can then use our api to verify
+    /// identity. 'https://graph.oculus.com/user_nonce_validate?nonce=USER_PROOF&us
+    /// er_id=USER_ID&access_token=ACCESS_TOKEN'
     ///
     /// NOTE: The nonce is only good for one check and then it is invalidated.
     ///
@@ -2050,7 +2380,7 @@ namespace Oculus.Platform
     /// Launch the flow for blocking the given user. You can't follow, be followed,
     /// invited, or searched by a blocked user, for example. You can remove the
     /// block via ovr_User_LaunchUnblockFlow.
-    /// \param userID User ID of user being blocked
+    /// \param userID The ID of the user that the viewer is going to laucnh the block flow request.
     ///
     public static Request<Models.LaunchBlockFlowResult> LaunchBlockFlow(UInt64 userID)
     {
@@ -2064,7 +2394,7 @@ namespace Oculus.Platform
     }
 
     /// Launch the flow for sending a follow request to a user.
-    /// \param userID User ID of user to send a follow request to
+    /// \param userID The ID of the target user that is going to send the friend follow request to.
     ///
     public static Request<Models.LaunchFriendRequestFlowResult> LaunchFriendRequestFlow(UInt64 userID)
     {
@@ -2078,7 +2408,7 @@ namespace Oculus.Platform
     }
 
     /// Launch the flow for unblocking a user that the viewer has blocked.
-    /// \param userID User ID of user to unblock
+    /// \param userID The ID of the user that the viewer is going to launch the unblock flow request.
     ///
     public static Request<Models.LaunchUnblockFlowResult> LaunchUnblockFlow(UInt64 userID)
     {
@@ -2093,9 +2423,16 @@ namespace Oculus.Platform
 
   }
 
+  /// Users are divided into three categories based on their age:
+  /// -AccountAgeCategory.Ch: Child age group for users between the ages of 10-12
+  /// (or applicable age in user's region). -AccountAgeCategory.Tn: Teenage age
+  /// group for users between the ages of 13-17 (or applicable age in user's
+  /// region). -AccountAgeCategory.Ad: Adult age group for users ages 18 and up
+  /// (or applicable age in user's region).
   public static partial class UserAgeCategory
   {
-    /// Retrieve the user age category for the current user.
+    /// Retrieve the user age category for the current user. It can be used in
+    /// UserAccountAgeCategory#AgeCategory
     ///
     public static Request<Models.UserAccountAgeCategory> Get()
     {
@@ -2109,6 +2446,7 @@ namespace Oculus.Platform
     }
 
     /// Report the current user's age category to Meta.
+    /// \param age_category Age category for developers to send to Meta. There are two members, children age group (AppAgeCategory.Ch) and non-children age group (AppAgeCategory.Nch).
     ///
     public static Request Report(AppAgeCategory age_category)
     {
@@ -2169,8 +2507,8 @@ namespace Oculus.Platform
     }
 
     /// Sent to indicate that some part of the overall state of SystemVoip has
-    /// changed. Use Message.GetSystemVoipState() and the properties of
-    /// SystemVoipState to extract the state that triggered the notification.
+    /// changed. Use Message#SystemVoipState and the properties of SystemVoipState
+    /// to extract the state that triggered the notification.
     ///
     /// Note that the state may have changed further since the notification was
     /// generated, and that you may call the `GetSystemVoip...()` family of

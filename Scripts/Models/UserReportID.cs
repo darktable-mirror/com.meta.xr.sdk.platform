@@ -8,8 +8,7 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
-  /// DEPRECATED. Do not add new requests using this. Use
-  /// launch_report_flow_result instead.
+  /// \deprecated Do not add new requests using this. Use launch_report_flow_result instead.
   public class UserReportID
   {
     /// Whether the viewer chose to cancel the report flow.

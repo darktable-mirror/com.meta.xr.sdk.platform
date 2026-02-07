@@ -10,11 +10,21 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
-  /// An leaderboard entry object contains information about a user in the
-  /// leaderboard.
+  /// A leaderboard entry object contains information about the User who made the
+  /// entry, their score, and other relevant details in the leaderboard. It
+  /// provides a way for a game to keep track of players and their scores in
+  /// relation to other. A single leaderboard entry can be written by
+  /// Leaderboards.WriteEntry(). A block of leaderboard entries can be retrieved
+  /// using Leaderboards.GetEntries(). Visit our
+  /// [website](https://developer.oculus.com/documentation/unity/ps-
+  /// leaderboards/) for more information about the leaderboard entry.
   public class LeaderboardEntry
   {
-    /// The score displayed in the leaderboard of this entry.
+    /// The formatted score that will be displayed in the leaderboard of this
+    /// entry. You can select a score type to determine how scores are displayed on
+    /// Leaderboard. See
+    /// [here](https://developer.oculus.com/documentation/unity/ps-
+    /// leaderboards/#create) for examples of different score type.
     public readonly string DisplayScore;
     /// A 2KB custom data field that is associated with the leaderboard entry. This
     /// can be a game replay or anything that provides more detail about the entry
@@ -22,21 +32,28 @@ namespace Oculus.Platform.Models
     /// Leaderboards.WriteEntry() and
     /// Leaderboards.WriteEntryWithSupplementaryMetric()
     public readonly byte[] ExtraData;
-    /// The ID of this leaderboard entry.
+    /// This is a unique identifier for the leaderboard entry. It is of type `id`
+    /// and is optional.
     public readonly UInt64 ID;
-    /// The rank of this leaderboard entry in the leaderboard.
+    /// The rank of this leaderboard entry in the leaderboard. It is of type `int`.
+    /// It can be used in Leaderboards.GetEntriesAfterRank() to retrieve
+    /// leaderboard entries starting from a specified rank.
     public readonly int Rank;
-    /// The raw underlying value of the leaderboard entry score.
+    /// The raw underlying value of the score achieved by the user in the
+    /// leaderboard. It's of type `long_as_string` and it's used to determine the
+    /// user's rank in the leaderboard.
     public readonly long Score;
-    /// A metric that can be used for tiebreakers by
-    /// Leaderboards.WriteEntryWithSupplementaryMetric().
+    /// SupplementaryMetric is a supplemental piece of data that can be used for
+    /// tiebreakers by Leaderboards.WriteEntryWithSupplementaryMetric().
     // May be null. Check before using.
     public readonly SupplementaryMetric SupplementaryMetricOptional;
     [Obsolete("Deprecated in favor of SupplementaryMetricOptional")]
     public readonly SupplementaryMetric SupplementaryMetric;
     /// The timestamp of this entry being created in the leaderboard.
     public readonly DateTime Timestamp;
-    /// User of this leaderboard entry.
+    /// User of this leaderboard entry. It is of type User. You can request a block
+    /// of leaderboard entries for the specified user ID(s) by
+    /// Leaderboards.GetEntriesByIds().
     public readonly User User;
 
 
@@ -61,7 +78,9 @@ namespace Oculus.Platform.Models
     }
   }
 
+  /// Represents a paginated list of LeaderboardEntry elements. It allows you to easily access and manipulate the elements in the paginated list, such as the size of the list and the next and previous URLs.
   public class LeaderboardEntryList : DeserializableList<LeaderboardEntry> {
+    /// Instantiates a C# wrapper class that wraps a native list by pointer. Used internally by Platform SDK to wrap the list.
     public LeaderboardEntryList(IntPtr a) {
       var count = (int)CAPI.ovr_LeaderboardEntryArray_GetSize(a);
       _Data = new List<LeaderboardEntry>(count);
@@ -74,6 +93,7 @@ namespace Oculus.Platform.Models
       _NextUrl = CAPI.ovr_LeaderboardEntryArray_GetNextUrl(a);
     }
 
+    /// It indicates the total number of entries in the list, across all pages from LeaderboardEntry.
     public readonly ulong TotalCount;
   }
 }

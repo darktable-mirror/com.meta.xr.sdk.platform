@@ -5,6 +5,8 @@ using UnityEngine;
 
 namespace Oculus.Platform
 {
+    /// This Request class provides a set of tools and services for developing VR applications.
+    /// It represents a request made to the Oculus Platform, such as a request to initialize the platform or to retrieve user data.
     public sealed class Request<T> : Request
     {
 #if OVR_PLATFORM_ASYNC_MESSAGES
@@ -15,7 +17,7 @@ namespace Oculus.Platform
         public Request(ulong requestID) : base(requestID)
         {
         }
-
+        /// This function takes a callback function as a parameter and attaches it to the request. When the request is completed, the callback function will be called with the result of the request.
         public Request<T> OnComplete(Message<T>.Callback callback)
         {
             if (callback_ != null)
@@ -48,7 +50,8 @@ namespace Oculus.Platform
       return await tcs_.Task;
     }
 #endif
-
+        ///  This function is called when a message is received from the Oculus Platform in response to the request.
+        /// It takes a Message object as a parameter, which contains the result of the request.
         override public void HandleMessage(Message msg)
         {
             if (!(msg is Message<T>))
@@ -86,7 +89,7 @@ namespace Oculus.Platform
         {
             this.RequestID = requestID;
         }
-
+        ///  It is a public property of the Request class that represents the unique identifier for a request. It can be used to identify and track requests.
         public ulong RequestID { get; set; }
 
         public Request OnComplete(Message.Callback callback)
@@ -103,7 +106,7 @@ namespace Oculus.Platform
       return await tcs_.Task;
     }
 #endif
-
+        /// It is called when a message is received in response to a request made by the application.
         virtual public void HandleMessage(Message msg)
         {
 #if OVR_PLATFORM_ASYNC_MESSAGES

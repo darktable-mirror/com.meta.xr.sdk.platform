@@ -5,6 +5,11 @@ namespace Oculus.Platform
 
   using Description = System.ComponentModel.DescriptionAttribute;
 
+  /// Result of installing an app. In case of an error during install process,
+  /// the error message contains the string representation of this result. This
+  /// is returned from Application.StartAppDownload(),
+  /// Application.CancelAppDownload() and
+  /// Application.InstallAppUpdateAndRelaunch() APIs.
   public enum AppInstallResult : int
   {
     [Description("UNKNOWN")]
@@ -27,7 +32,7 @@ namespace Oculus.Platform
     [Description("INSTALLER_ERROR")]
     InstallerError,
 
-    /// Install of the app failed because the user cancelled the install operation
+    /// Install of the app failed because the user canceled the install operation
     [Description("USER_CANCELLED")]
     UserCancelled,
 

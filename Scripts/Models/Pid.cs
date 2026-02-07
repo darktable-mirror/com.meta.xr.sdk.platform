@@ -19,7 +19,9 @@ namespace Oculus.Platform.Models
     }
   }
 
+  /// Represents a paginated list of Pid elements
   public class PidList : DeserializableList<Pid> {
+    /// Instantiates a C# wrapper class that wraps a native list by pointer. Used internally by Platform SDK to wrap the list.
     public PidList(IntPtr a) {
       var count = (int)CAPI.ovr_PidArray_GetSize(a);
       _Data = new List<Pid>(count);

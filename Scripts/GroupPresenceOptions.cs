@@ -8,8 +8,14 @@ namespace Oculus.Platform
   using System.Collections.Generic;
   using UnityEngine;
 
+  /// The Group Presence Option, to be passed in to GroupPresence.Set(), is a set
+  /// of fields that allows developers to specify the presence of a user in a
+  /// group/squad/party. It provides a way for developers to create a more
+  /// immersive and social experience for their users by allowing them to join
+  /// and interact with other users.
   public class GroupPresenceOptions {
 
+    /// Creates a new instance of ::GroupPresenceOptions which is used to customize the option flow. It returns a handle to the newly created options object, which can be used to set various properties for the options.
     public GroupPresenceOptions() {
       Handle = CAPI.ovr_GroupPresenceOptions_Create();
     }
@@ -58,11 +64,12 @@ namespace Oculus.Platform
     }
 
 
-    /// For passing to native C
+    /// This operator allows you to pass an instance of the ::GroupPresenceOptions class to native C code as an IntPtr. The operator returns the handle of the options object, or IntPtr.Zero if the object is null.
     public static explicit operator IntPtr(GroupPresenceOptions options) {
       return options != null ? options.Handle : IntPtr.Zero;
     }
 
+    /// Destroys an existing instance of the ::GroupPresenceOptions and frees up memory when you're done using it.
     ~GroupPresenceOptions() {
       CAPI.ovr_GroupPresenceOptions_Destroy(Handle);
     }

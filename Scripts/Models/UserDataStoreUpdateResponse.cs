@@ -8,9 +8,15 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
+  /// This payload contains information about the result of an update request to
+  /// the user data store. It includes a success field
+  /// UserDataStoreUpdateResponse#Success that indicates whether the update was
+  /// successful or not.
   public class UserDataStoreUpdateResponse
   {
-    /// Whether the update request is succeeded.
+    /// Indicates whether the update request was successful or not. A value of true
+    /// indicates that the update was successful, while a value of false indicates
+    /// that the update failed.
     public readonly bool Success;
 
 

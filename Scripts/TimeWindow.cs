@@ -5,6 +5,8 @@ namespace Oculus.Platform
 
   using Description = System.ComponentModel.DescriptionAttribute;
 
+  /// How far should we go back in time looking at history? This is used in some
+  /// requests such as Users.GetLoggedInUserRecentlyMetUsersAndRooms()
   public enum TimeWindow : int
   {
     [Description("UNKNOWN")]

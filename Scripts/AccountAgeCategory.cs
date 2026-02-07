@@ -5,6 +5,8 @@ namespace Oculus.Platform
 
   using Description = System.ComponentModel.DescriptionAttribute;
 
+  /// Age category in Meta account. The values are used in UserAgeCategory.Get()
+  /// API.
   public enum AccountAgeCategory : int
   {
     [Description("UNKNOWN")]

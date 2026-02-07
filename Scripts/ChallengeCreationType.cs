@@ -5,6 +5,7 @@ namespace Oculus.Platform
 
   using Description = System.ComponentModel.DescriptionAttribute;
 
+  /// Describes the creator of the associated challenge.
   public enum ChallengeCreationType : int
   {
     [Description("UNKNOWN")]

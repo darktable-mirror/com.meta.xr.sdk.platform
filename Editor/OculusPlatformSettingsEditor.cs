@@ -65,7 +65,13 @@ namespace Oculus.Platform
 #else
       if (String.IsNullOrEmpty(PlatformSettings.AppID))
       {
-        EditorGUILayout.HelpBox("Please enter a valid Oculus Rift App ID.", MessageType.Error);
+        if (!PlatformSettings.UseMobileAppIDInEditor) {
+          EditorGUILayout.HelpBox("Please enter a valid Oculus Rift App ID. Or use standalone platform with Meta Quest App ID ", MessageType.Warning);
+        }
+        else {
+          var msg = "Configured to connect with App ID " + PlatformSettings.MobileAppID;
+          EditorGUILayout.HelpBox(msg, MessageType.Info);
+        }
       }
       else
       {
@@ -110,6 +116,16 @@ namespace Oculus.Platform
 
           PlatformSettings.UseStandalonePlatform =
             MakeToggle(new GUIContent(useStandaloneLabel, useStandaloneHint), PlatformSettings.UseStandalonePlatform);
+
+          if (PlatformSettings.UseStandalonePlatform) {
+            var useMobileAppIdLabel = "Use Meta Quest App ID over Rift App ID in Editor [?]";
+            var useMobileAppIdHint = "If this is checked Platform SDK will use Mobile App ID instead of Rift ID when testing in editor" ;
+
+            PlatformSettings.UseMobileAppIDInEditor =
+              MakeToggle(new GUIContent(useMobileAppIdLabel, useMobileAppIdHint), PlatformSettings.UseMobileAppIDInEditor);
+          } else {
+            PlatformSettings.UseMobileAppIDInEditor = false;
+          }
 
           GUI.enabled = PlatformSettings.UseStandalonePlatform;
 

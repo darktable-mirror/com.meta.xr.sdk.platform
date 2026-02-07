@@ -5,6 +5,8 @@ namespace Oculus.Platform
 
   using Description = System.ComponentModel.DescriptionAttribute;
 
+  /// Possible states that an app can respond to the platform notification that
+  /// the in-app reporting flow has been requested by the user.
   public enum ReportRequestResponse : int
   {
     [Description("UNKNOWN")]

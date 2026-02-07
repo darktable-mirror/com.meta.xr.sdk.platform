@@ -5,6 +5,8 @@ namespace Oculus.Platform
 
   using Description = System.ComponentModel.DescriptionAttribute;
 
+  /// Current status of the app on the device. An app can only check its own
+  /// status.
   public enum AppStatus : int
   {
     [Description("UNKNOWN")]

@@ -26,11 +26,20 @@ namespace Oculus.Platform
             set { Instance.ovrUseStandalonePlatform = value; }
         }
 
+        public static bool UseMobileAppIDInEditor
+        {
+           get { return Instance.ovrUseMobileAppIDInEditor; }
+           set { Instance.ovrUseMobileAppIDInEditor = value; }
+        }
+
         [SerializeField]
         private string ovrAppID = "";
 
         [SerializeField]
         private string ovrMobileAppID = "";
+
+        [SerializeField]
+        private bool ovrUseMobileAppIDInEditor = false;
 
 #if UNITY_EDITOR_WIN
         [SerializeField]

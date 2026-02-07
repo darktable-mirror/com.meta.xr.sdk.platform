@@ -12,10 +12,12 @@ namespace Oculus.Platform.Models
 
   /// An AssetDetails object contains detailed metadata for an asset file,
   /// including the asset file ID, file path, asset type, and additional metadata
-  /// that characterizes the asset.
+  /// that characterizes the asset. You can retrieve the asset details using
+  /// AssetFile.GetList()
   public class AssetDetails
   {
-    /// ID of the asset file
+    /// ID of the asset file. You can use this ID to uniquely identify a single
+    /// asset. You can find more details from AssetFile.StatusById()
     public readonly UInt64 AssetId;
     /// One of 'default', 'store', or 'language_pack'. The 'default' type denotes
     /// this Asset File is used purely as an implementation detail (to download
@@ -28,9 +30,13 @@ namespace Oculus.Platform.Models
     public readonly string DownloadStatus;
     /// File path of the asset file
     public readonly string Filepath;
-    /// One of 'free', 'entitled', or 'not-entitled'
+    /// The status of in app purchases which are some extra content that users can
+    /// buy right from apps. The value could be one of 'free', 'entitled', or 'not-
+    /// entitled'.
     public readonly string IapStatus;
-    /// For 'language_pack' assets type, contains language info.
+    /// This field gives information about currently selected and installed
+    /// language for the asset. The language info contains language name and tag in
+    /// BCP47 format.
     // May be null. Check before using.
     public readonly LanguagePackInfo LanguageOptional;
     [Obsolete("Deprecated in favor of LanguageOptional")]
@@ -59,7 +65,9 @@ namespace Oculus.Platform.Models
     }
   }
 
+  /// Represents a paginated list of AssetDetails elements
   public class AssetDetailsList : DeserializableList<AssetDetails> {
+    /// Instantiates a C# wrapper class that wraps a native list by pointer. Used internally by Platform SDK to wrap the list.
     public AssetDetailsList(IntPtr a) {
       var count = (int)CAPI.ovr_AssetDetailsArray_GetSize(a);
       _Data = new List<AssetDetails>(count);

@@ -8,9 +8,23 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
+  /// A single user can have multiple sdk accounts associated with it. SDK
+  /// accounts represent the oculus user and x-accounts that are linked to the
+  /// particular user. Retrieve the SDK accounts by using,
+  /// Users.GetSdkAccounts().
   public class SdkAccount
   {
+    /// The specific type of account that this sdk account represents. The type can
+    /// be one of the following:
+    ///
+    /// SdkAccountType.Unknown
+    ///
+    /// SdkAccountType.Oculus
+    ///
+    /// SdkAccountType.FacebookGameroom
     public readonly SdkAccountType AccountType;
+    /// The ID of the user, User#ID, of the sdk account. This is a unique value for
+    /// every User.
     public readonly UInt64 UserId;
 
 
@@ -21,7 +35,9 @@ namespace Oculus.Platform.Models
     }
   }
 
+  /// Represents a paginated list of SdkAccount elements
   public class SdkAccountList : DeserializableList<SdkAccount> {
+    /// Instantiates a C# wrapper class that wraps a native list by pointer. Used internally by Platform SDK to wrap the list.
     public SdkAccountList(IntPtr a) {
       var count = (int)CAPI.ovr_SdkAccountArray_GetSize(a);
       _Data = new List<SdkAccount>(count);

@@ -5,6 +5,7 @@ namespace Oculus.Platform
 
   using Description = System.ComponentModel.DescriptionAttribute;
 
+  /// Describe the filter type that can be enabled on the leaderboard.
   public enum LeaderboardFilterType : int
   {
     /// No filter enabled on the leaderboard.

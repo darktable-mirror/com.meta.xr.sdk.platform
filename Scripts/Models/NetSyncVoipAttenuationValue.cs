@@ -23,7 +23,9 @@ namespace Oculus.Platform.Models
     }
   }
 
+  /// Represents a paginated list of NetSyncVoipAttenuationValue elements
   public class NetSyncVoipAttenuationValueList : DeserializableList<NetSyncVoipAttenuationValue> {
+    /// Instantiates a C# wrapper class that wraps a native list by pointer. Used internally by Platform SDK to wrap the list.
     public NetSyncVoipAttenuationValueList(IntPtr a) {
       var count = (int)CAPI.ovr_NetSyncVoipAttenuationValueArray_GetSize(a);
       _Data = new List<NetSyncVoipAttenuationValue>(count);

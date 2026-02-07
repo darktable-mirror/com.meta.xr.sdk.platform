@@ -5,6 +5,8 @@ namespace Oculus.Platform
 
   using Description = System.ComponentModel.DescriptionAttribute;
 
+  /// The ordering that is used when returning a list of users. This is used in
+  /// some requests such as Rooms.GetInvitableUsers2()
   public enum UserOrdering : int
   {
     [Description("UNKNOWN")]

@@ -10,7 +10,8 @@ namespace Oculus.Platform.Models
 
   /// An AchievementDefinition defines an achievement; this includes its name and
   /// how it is unlocked. For an individual user's progress in unlocking an
-  /// achievement, see AchievementProgress.
+  /// achievement, see AchievementProgress. It can be retrieved using
+  /// Achievements.GetAllDefinitions().
   public class AchievementDefinition
   {
     /// This is the type of achievement. There are three types of achievement:
@@ -19,8 +20,12 @@ namespace Oculus.Platform.Models
     /// bitfield are set, and AchievementType.Count - unlocked when a counter
     /// reaches a defined target.
     public readonly AchievementType Type;
-    /// The name of the achievement.
+    /// A string of the api name of the achievement. It can be used to get the
+    /// achievement progress by name by the function
+    /// Achievements.GetProgressByName().
     public readonly string Name;
+    /// It is required for bitfield achievements(AchievementType.Bitfield). This
+    /// represents the size of the bitfield for this achievement.
     public readonly uint BitfieldLength;
     public readonly ulong Target;
 
@@ -34,7 +39,9 @@ namespace Oculus.Platform.Models
     }
   }
 
+  /// Represents a paginated list of AchievementDefinition elements
   public class AchievementDefinitionList : DeserializableList<AchievementDefinition> {
+    /// Instantiates a C# wrapper class that wraps a native list by pointer. Used internally by Platform SDK to wrap the list.
     public AchievementDefinitionList(IntPtr a) {
       var count = (int)CAPI.ovr_AchievementDefinitionArray_GetSize(a);
       _Data = new List<AchievementDefinition>(count);
