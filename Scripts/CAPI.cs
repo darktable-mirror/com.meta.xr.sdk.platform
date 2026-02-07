@@ -2049,12 +2049,6 @@ namespace Oculus.Platform
     /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
     /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
-    public static extern ulong ovr_User_NewEntitledTestUser();
-
-    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
-    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
-    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
-    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
     public static extern ulong ovr_User_NewTestUser();
 
     /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
@@ -2100,22 +2094,6 @@ namespace Oculus.Platform
     /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl, EntryPoint="ovr_User_StopRecordingAndLaunchReportFlow2")]
     private static extern ulong ovr_User_StopRecordingAndLaunchReportFlow2_Native(UInt64 optionalUserID, IntPtr optionalRecordingUUID, IntPtr abuseReportOptions);
-
-    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
-    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
-    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
-    public static ulong ovr_User_TestUserCreateDeviceManifest(string deviceID, UInt64[] appIDs, int numAppIDs) {
-      IntPtr deviceID_native = StringToNative(deviceID);
-      var result = (ovr_User_TestUserCreateDeviceManifest_Native(deviceID_native, appIDs, numAppIDs));
-      Marshal.FreeCoTaskMem(deviceID_native);
-      return result;
-    }
-
-    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
-    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
-    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
-    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl, EntryPoint="ovr_User_TestUserCreateDeviceManifest")]
-    private static extern ulong ovr_User_TestUserCreateDeviceManifest_Native(IntPtr deviceID, UInt64[] appIDs, int numAppIDs);
 
     /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
     /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.

@@ -9,9 +9,10 @@ namespace Oculus.Platform.Models
   using UnityEngine;
 
   /// Results of the launched report dialog including resulting report ID and
-  /// user action. It can be retrieved using AbuseReport.ReportRequestHandled()
-  /// to handle the result of a report request. Learn more about our [User
-  /// Reporting Service](https://developer.oculus.com/resources/reporting-
+  /// user action. It can be retrieved using
+  /// AbuseReport.LaunchAdvancedReportFlow() to handle the result of a report
+  /// request. Learn more about our [User Reporting
+  /// Service](https://developer.oculus.com/resources/reporting-
   /// service#faq_856753478660534).
   public class LaunchReportFlowResult
   {

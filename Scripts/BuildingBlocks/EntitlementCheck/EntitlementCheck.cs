@@ -47,13 +47,30 @@ namespace Oculus.Platform.BuildingBlocks
             // Init the Oculust Platform SDK and send an entitlement check request.
             if (!Core.IsInitialized())
             {
+                // Surround the platform API initialization code with a try/catch block
                 try
                 {
+                    // Use AsyncInitialize() rather than Initialize() for Android apps.
+                    // This is important because AsyncInitialize() does not block the
+                    // initialization code, which allows your application to load faster.
+                    // In addition, AsyncInitialize() does not throw an exception on
+                    // Android if the initialization failed.
+
+                    // You either need to set up the App ID in OculusPlatformSettings
+                    // in the Unity Editor or call AsyncInitialize() with an explicit
+                    // AppId argument.
+
+                    // For mobile developers, If you need to run mobile applications
+                    // in the Unity Editor, you must provide Meta login credentials
+                    // (username/password) in the OculusPlatformSettings.
+                    // Simply setting App Id isn’t sufficient.
+
                     Core.AsyncInitialize().OnComplete(PlatformInitializeCallback);
                 }
-                catch (Exception e)
+                catch (UnityException e)
                 {
                     Debug.LogError($"Exception occured during OvrPlatform init - {e.Message}");
+                    UserFailedEntitlementCheck?.Invoke();
                 }
             }
         }
@@ -67,6 +84,7 @@ namespace Oculus.Platform.BuildingBlocks
             }
             else
             {
+                // Surround the platform API initialization code with a try/catch block
                 try
                 {
                     Entitlements.IsUserEntitledToApplication().OnComplete(EntitlementCheckCallback);
@@ -74,6 +92,7 @@ namespace Oculus.Platform.BuildingBlocks
                 catch (Exception e)
                 {
                     Debug.LogError($"Exception occured during Entitlement Check - {e.Message}");
+                    UserFailedEntitlementCheck?.Invoke();
                 }
             }
         }

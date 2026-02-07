@@ -346,6 +346,7 @@ namespace Oculus.Platform
       Platform_InitializeStandaloneOculus = 0x51F8CE0C,
       Platform_InitializeAndroidAsynchronous = 0x1AD307B4,
       Platform_InitializeWindowsAsynchronous = 0x6DA7BA8F,
+      Notification_Session_InvitationsSent = 0x07F9C880,
     };
 
     /// Returns the message type, which is defined as Message.MessageType, indicating the purpose or category of the message.
@@ -836,6 +837,10 @@ namespace Oculus.Platform
         case Message.MessageType.Platform_InitializeAndroidAsynchronous:
         case Message.MessageType.Platform_InitializeWindowsAsynchronous:
           message = new MessageWithPlatformInitialize(messageHandle);
+          break;
+
+        case Message.MessageType.Notification_Session_InvitationsSent:
+          Debug.Log(string.Format("Received legacy message type for invites {0}, returning no message\n", message_type));
           break;
 
         default:

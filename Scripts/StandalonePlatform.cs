@@ -21,7 +21,7 @@ namespace Oculus.Platform
 #if UNITY_ANDROID
             if (String.IsNullOrEmpty(PlatformSettings.MobileAppID))
             {
-                throw new UnityException("Update your App ID by selecting 'Oculus Platform' -> 'Edit Settings'");
+                throw new UnityException("Update your App ID by selecting 'Meta' > 'Platform' > 'Edit Settings'");
             }
 
             var appID = PlatformSettings.MobileAppID;
@@ -37,13 +37,13 @@ namespace Oculus.Platform
             }
             if (String.IsNullOrEmpty(appID))
             {
-                throw new UnityException("Update your App ID by selecting 'Oculus Platform' -> 'Edit Settings'");
+                throw new UnityException("Update your App ID by selecting 'Meta' > 'Platform' > 'Edit Settings'");
             }
 #endif
             if (String.IsNullOrEmpty(StandalonePlatformSettings.OculusPlatformTestUserAccessToken))
             {
                 throw new UnityException(
-                    "Update your standalone credentials by selecting 'Oculus Platform' -> 'Edit Settings'");
+                    "Update your standalone credentials by selecting 'Meta' > 'Platform' > 'Edit Settings'");
             }
 
             var accessToken = StandalonePlatformSettings.OculusPlatformTestUserAccessToken;

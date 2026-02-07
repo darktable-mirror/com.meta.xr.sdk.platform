@@ -2,6 +2,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 
 #if USING_META_CORE_SDK_77_OR_NEWER && UNITY_EDITOR
+using System;
 using UnityEditor;
 #endif
 
@@ -46,8 +47,7 @@ namespace Oculus.Platform
                 projectGUID,
                 event_type,
                 event_target,
-                error_msg,
-                is_internal
+                error_msg
             );
 #endif
         }
