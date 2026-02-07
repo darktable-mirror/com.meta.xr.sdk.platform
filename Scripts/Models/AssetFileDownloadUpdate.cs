@@ -12,6 +12,10 @@ namespace Oculus.Platform.Models
   /// an asset file. It contains the asset file ID, the download progress of the
   /// update, and its completion status. It can be retrieved using
   /// Message::MessageType::Notification_AssetFile_DownloadUpdate.
+  ///
+  /// AssetFileDownloadUpdate#Completed is true means downloaded but probably not
+  /// installed yet. Call AssetFile.StatusById() until
+  /// AssetDetails#DownloadStatus changes from 'available' to 'installed'.
   public class AssetFileDownloadUpdate
   {
     /// \deprecated Use AssetFileDownloadUpdate#AssetId.
