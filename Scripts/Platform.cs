@@ -2255,9 +2255,12 @@ namespace Oculus.Platform
 
   }
 
+  /// Rich Presence has been deprecated in favor of [Group
+  /// Presence](https://developers.meta.com/horizon/documentation/unity/ps-group-
+  /// presence-overview).
   public static partial class RichPresence
   {
-    /// \deprecated Use the clear method in group presence
+    /// \deprecated Use GroupPresence.Clear()
     ///
     public static Request Clear()
     {
@@ -2270,7 +2273,7 @@ namespace Oculus.Platform
       return null;
     }
 
-    /// Gets all the destinations that the presence can be set to
+    /// Gets all the Models.Destination that the presence can be set to
     ///
     public static Request<Models.DestinationList> GetDestinations()
     {

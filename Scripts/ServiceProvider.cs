@@ -5,6 +5,10 @@ namespace Oculus.Platform
 
   using Description = System.ComponentModel.DescriptionAttribute;
 
+  /// The service provider enum describes the specific provider that is
+  /// associated with the Models.LinkedAccount of a Models.User. Linked accounts
+  /// for users represent the third party identities that are used for services
+  /// or apps in association with user.
   public enum ServiceProvider : int
   {
     [Description("UNKNOWN")]

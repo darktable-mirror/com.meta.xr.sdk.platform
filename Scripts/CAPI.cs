@@ -2741,6 +2741,30 @@ namespace Oculus.Platform
     /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
     /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern IntPtr ovr_BillingPlan_GetPaidOffer(IntPtr obj);
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern IntPtr ovr_BillingPlan_GetTrialOffers(IntPtr obj);
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern IntPtr ovr_BillingPlanArray_GetElement(IntPtr obj, UIntPtr index);
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern UIntPtr ovr_BillingPlanArray_GetSize(IntPtr obj);
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
     public static extern UInt64 ovr_BlockedUser_GetId(IntPtr obj);
 
     /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
@@ -3054,6 +3078,88 @@ namespace Oculus.Platform
     /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
     public static extern bool ovr_ChallengeEntryArray_HasPreviousPage(IntPtr obj);
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    public static string ovr_ContentRating_GetAgeRatingImageUri(IntPtr obj) {
+      var result = StringFromNative(ovr_ContentRating_GetAgeRatingImageUri_Native(obj));
+      return result;
+    }
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl, EntryPoint="ovr_ContentRating_GetAgeRatingImageUri")]
+    private static extern IntPtr ovr_ContentRating_GetAgeRatingImageUri_Native(IntPtr obj);
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    public static string ovr_ContentRating_GetAgeRatingText(IntPtr obj) {
+      var result = StringFromNative(ovr_ContentRating_GetAgeRatingText_Native(obj));
+      return result;
+    }
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl, EntryPoint="ovr_ContentRating_GetAgeRatingText")]
+    private static extern IntPtr ovr_ContentRating_GetAgeRatingText_Native(IntPtr obj);
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    public static string ovr_ContentRating_GetDescriptor(IntPtr obj, uint index) {
+      var result = StringFromNative(ovr_ContentRating_GetDescriptor_Native(obj, index));
+      return result;
+    }
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl, EntryPoint="ovr_ContentRating_GetDescriptor")]
+    private static extern IntPtr ovr_ContentRating_GetDescriptor_Native(IntPtr obj, uint index);
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern uint ovr_ContentRating_GetDescriptorsSize(IntPtr obj);
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    public static string ovr_ContentRating_GetInteractiveElement(IntPtr obj, uint index) {
+      var result = StringFromNative(ovr_ContentRating_GetInteractiveElement_Native(obj, index));
+      return result;
+    }
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl, EntryPoint="ovr_ContentRating_GetInteractiveElement")]
+    private static extern IntPtr ovr_ContentRating_GetInteractiveElement_Native(IntPtr obj, uint index);
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern uint ovr_ContentRating_GetInteractiveElementsSize(IntPtr obj);
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    public static string ovr_ContentRating_GetRatingDefinitionUri(IntPtr obj) {
+      var result = StringFromNative(ovr_ContentRating_GetRatingDefinitionUri_Native(obj));
+      return result;
+    }
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl, EntryPoint="ovr_ContentRating_GetRatingDefinitionUri")]
+    private static extern IntPtr ovr_ContentRating_GetRatingDefinitionUri_Native(IntPtr obj);
 
     /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
     /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
@@ -4841,6 +4947,18 @@ namespace Oculus.Platform
     /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
     /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern IntPtr ovr_PaidOffer_GetPrice(IntPtr obj);
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern OfferTerm ovr_PaidOffer_GetSubscriptionTerm(IntPtr obj);
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
     public static extern UInt64 ovr_Party_GetID(IntPtr obj);
 
     /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
@@ -5002,6 +5120,32 @@ namespace Oculus.Platform
     /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
     /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
     /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern IntPtr ovr_Product_GetBillingPlans(IntPtr obj);
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern IntPtr ovr_Product_GetContentRating(IntPtr obj);
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    public static string ovr_Product_GetCoverUrl(IntPtr obj) {
+      var result = StringFromNative(ovr_Product_GetCoverUrl_Native(obj));
+      return result;
+    }
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl, EntryPoint="ovr_Product_GetCoverUrl")]
+    private static extern IntPtr ovr_Product_GetCoverUrl_Native(IntPtr obj);
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
     public static string ovr_Product_GetDescription(IntPtr obj) {
       var result = StringFromNative(ovr_Product_GetDescription_Native(obj));
       return result;
@@ -5030,6 +5174,20 @@ namespace Oculus.Platform
     /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
     /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
     /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    public static string ovr_Product_GetIconUrl(IntPtr obj) {
+      var result = StringFromNative(ovr_Product_GetIconUrl_Native(obj));
+      return result;
+    }
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl, EntryPoint="ovr_Product_GetIconUrl")]
+    private static extern IntPtr ovr_Product_GetIconUrl_Native(IntPtr obj);
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
     public static string ovr_Product_GetName(IntPtr obj) {
       var result = StringFromNative(ovr_Product_GetName_Native(obj));
       return result;
@@ -5046,6 +5204,20 @@ namespace Oculus.Platform
     /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
     public static extern IntPtr ovr_Product_GetPrice(IntPtr obj);
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    public static string ovr_Product_GetShortDescription(IntPtr obj) {
+      var result = StringFromNative(ovr_Product_GetShortDescription_Native(obj));
+      return result;
+    }
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl, EntryPoint="ovr_Product_GetShortDescription")]
+    private static extern IntPtr ovr_Product_GetShortDescription_Native(IntPtr obj);
 
     /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
     /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
@@ -5188,6 +5360,12 @@ namespace Oculus.Platform
     /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl, EntryPoint="ovr_Purchase_GetSKU")]
     private static extern IntPtr ovr_Purchase_GetSKU_Native(IntPtr obj);
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern ProductType ovr_Purchase_GetType(IntPtr obj);
 
     /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
     /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
@@ -5396,6 +5574,42 @@ namespace Oculus.Platform
     /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
     public static extern UIntPtr ovr_TestUserAppAccessArray_GetSize(IntPtr obj);
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern int ovr_TrialOffer_GetMaxTermCount(IntPtr obj);
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern IntPtr ovr_TrialOffer_GetPrice(IntPtr obj);
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern OfferTerm ovr_TrialOffer_GetTrialTerm(IntPtr obj);
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern OfferType ovr_TrialOffer_GetTrialType(IntPtr obj);
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern IntPtr ovr_TrialOfferArray_GetElement(IntPtr obj, UIntPtr index);
+
+    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
+    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
+    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern UIntPtr ovr_TrialOfferArray_GetSize(IntPtr obj);
 
     /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
     /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.

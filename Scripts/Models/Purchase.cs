@@ -28,6 +28,9 @@ namespace Oculus.Platform.Models
     /// sensitive. To retrieve the product information, you can use this value when
     /// calling IAP.GetProductsBySKU().
     public readonly string Sku;
+    /// The Type of the IAP Models.Product that was purchased. The values can be
+    /// ProductType.DURABLE, ProductType.CONSUMABLE, or a ProductType.SUBSCRIPTION.
+    public readonly ProductType Type;
 
 
     public Purchase(IntPtr o)
@@ -38,6 +41,7 @@ namespace Oculus.Platform.Models
       ID = CAPI.ovr_Purchase_GetPurchaseStrID(o);
       ReportingId = CAPI.ovr_Purchase_GetReportingId(o);
       Sku = CAPI.ovr_Purchase_GetSKU(o);
+      Type = CAPI.ovr_Purchase_GetType(o);
     }
   }
 
