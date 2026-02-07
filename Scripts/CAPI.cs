@@ -1456,6 +1456,9 @@ namespace Oculus.Platform
     public static extern AppStatus ovr_AppDownloadProgressResult_GetStatusCode(IntPtr obj);
 
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern AppInstallResult ovr_AppDownloadResult_GetAppInstallResult(IntPtr obj);
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
     public static extern long ovr_AppDownloadResult_GetTimestamp(IntPtr obj);
 
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]

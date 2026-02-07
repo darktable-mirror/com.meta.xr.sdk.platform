@@ -10,6 +10,9 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
+  /// An AssetDetails object contains detailed metadata for an asset file,
+  /// including the asset file ID, file path, asset type, and additional metadata
+  /// that characterizes the asset.
   public class AssetDetails
   {
     /// ID of the asset file

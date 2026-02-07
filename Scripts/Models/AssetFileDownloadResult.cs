@@ -8,6 +8,9 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
+  /// An AssetFileDownloadResult represents an asset that has been successfully
+  /// downloaded. It contains the asset file ID and the file path of the
+  /// downloaded asset.
   public class AssetFileDownloadResult
   {
     /// ID of the asset file

@@ -8,6 +8,9 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
+  /// An AssetFileDeleteResult contains the result of a deleted asset file. It
+  /// contains the asset file ID, the file path, and success status of the
+  /// deleted asset.
   public class AssetFileDeleteResult
   {
     /// DEPRECATED. Use AssetFileDeleteResult.GetAssetId().

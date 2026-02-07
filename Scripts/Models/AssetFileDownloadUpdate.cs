@@ -8,6 +8,9 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
+  /// An AssetFileDownloadUpdate represents the download status of an update for
+  /// an asset file. It contains the asset file ID, the download progress of the
+  /// update, and its completion status.
   public class AssetFileDownloadUpdate
   {
     /// DEPRECATED. Use AssetFileDownloadUpdate.GetAssetId().

@@ -8,6 +8,9 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
+  /// An AssetFileDownloadCancelResult represents the result of a cancelled
+  /// download action of an asset file. It contains the asset file ID, the file
+  /// path, and success status of the cancelled download.
   public class AssetFileDownloadCancelResult
   {
     /// DEPRECATED. Use AssetFileDownloadCancelResult.GetAssetId().
