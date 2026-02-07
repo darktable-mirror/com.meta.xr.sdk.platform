@@ -8,6 +8,9 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
+  /// An GroupPresenceLeaveIntent represents a user's intent to leave a
+  /// destination/lobby/match. This class contains fields about the user's
+  /// desired destination, lobby, and match.
   public class GroupPresenceLeaveIntent
   {
     /// If populated, the destination the current user wants to leave

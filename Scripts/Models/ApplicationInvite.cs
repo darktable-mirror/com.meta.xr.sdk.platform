@@ -10,16 +10,24 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
+  /// An ApplicationInvite contains information about the invite, including the
+  /// ID, destination, activity status, lobby, match, and recipient's user info.
   public class ApplicationInvite
   {
+    /// The destination to which the recipient is invited.
     // May be null. Check before using.
     public readonly Destination DestinationOptional;
     [Obsolete("Deprecated in favor of DestinationOptional")]
     public readonly Destination Destination;
+    /// The ID of the application invite.
     public readonly UInt64 ID;
+    /// A boolean value indicating whether the invite is still active or not.
     public readonly bool IsActive;
+    /// The lobby session id to which the recipient is invited.
     public readonly string LobbySessionId;
+    /// The match session id to which the recipient is invited.
     public readonly string MatchSessionId;
+    /// The recipient's user information, such as their ID and alias.
     // May be null. Check before using.
     public readonly User RecipientOptional;
     [Obsolete("Deprecated in favor of RecipientOptional")]

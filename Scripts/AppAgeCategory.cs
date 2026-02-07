@@ -10,12 +10,13 @@ namespace Oculus.Platform
     [Description("UNKNOWN")]
     Unknown,
 
-    /// Child age group for users between the ages of 10-12 (age may vary by
-    /// region)
+    /// Child age group for users between the ages of 10-12 (or applicable age in
+    /// user's region)
     [Description("CH")]
     Ch,
 
-    /// Non-child age group for users ages 13 and up (age may vary by region)
+    /// Non-child age group for users ages 13 and up (or applicable age in user's
+    /// region)
     [Description("NCH")]
     Nch,
 

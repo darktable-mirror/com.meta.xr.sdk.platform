@@ -8,6 +8,9 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
+  /// An GroupPresenceJoinIntent represents a user's intent to join a
+  /// destination/lobby/match. This class contains fields about the user's
+  /// desired destination, lobby, match, and deeplink message.
   public class GroupPresenceJoinIntent
   {
     /// An opaque string provided by the developer to help them deeplink to

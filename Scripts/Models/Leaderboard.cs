@@ -10,13 +10,20 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
+  /// The leaderboard object contains information about this leaderboard ID, API
+  /// name and destination.
   public class Leaderboard
   {
+    /// The API name of this leaderboard. This is a unique string that your
+    /// application will refer to this leaderboard in your app code.
     public readonly string ApiName;
+    /// An optional Deep Link Destination, which means when a user clicks on the
+    /// leaderboard, they will be taken to this in-app destination.
     // May be null. Check before using.
     public readonly Destination DestinationOptional;
     [Obsolete("Deprecated in favor of DestinationOptional")]
     public readonly Destination Destination;
+    /// The generated GUID of this leaderboard.
     public readonly UInt64 ID;
 
 

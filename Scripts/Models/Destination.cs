@@ -17,6 +17,8 @@ namespace Oculus.Platform.Models
     /// user enters via a deeplink. Alternatively will be in
     /// User.GetPresenceDeeplinkMessage() if the rich presence is set for the user.
     public readonly string DeeplinkMessage;
+    /// A displayable string of the destination name and it can be retrieved with
+    /// Destination.GetDisplayName().
     public readonly string DisplayName;
     /// A URL that allows the user to deeplink directly to this destination
     public readonly string ShareableUri;

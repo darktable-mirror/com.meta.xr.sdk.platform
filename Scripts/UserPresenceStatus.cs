@@ -10,9 +10,11 @@ namespace Oculus.Platform
     [Description("UNKNOWN")]
     Unknown,
 
+    /// The user status is currently online.
     [Description("ONLINE")]
     Online,
 
+    /// The user status is currently offline.
     [Description("OFFLINE")]
     Offline,
 

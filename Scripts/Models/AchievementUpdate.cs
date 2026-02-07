@@ -8,9 +8,13 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
+  /// Represents an update to an existing achievement.
   public class AchievementUpdate
   {
+    /// This indicates if this update caused the achievement to unlock.
     public readonly bool JustUnlocked;
+    /// The unique AchievementDefinition.GetName() used to reference the updated
+    /// achievement.
     public readonly string Name;
 
 

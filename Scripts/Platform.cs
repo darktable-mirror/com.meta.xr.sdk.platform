@@ -409,6 +409,8 @@ namespace Oculus.Platform
     /// achievement. The largest number that is supported by this method is the max
     /// value of a signed 64-bit integer. If the number is larger than that, it is
     /// clamped to that max value before being passed to the servers.
+    /// \param name The api_name of the achievement that will be adding count.
+    /// \param count The value of count that will be added to the achievement.
     ///
     public static Request<Models.AchievementUpdate> AddCount(string name, ulong count)
     {
@@ -463,6 +465,7 @@ namespace Oculus.Platform
     }
 
     /// Request the achievement definitions that match the specified names.
+    /// \param names The api_names(AchievementDefinition.GetName()) of the achievements used to retrieve the definition information.
     ///
     public static Request<Models.AchievementDefinitionList> GetDefinitionsByName(string[] names)
     {
@@ -476,6 +479,7 @@ namespace Oculus.Platform
     }
 
     /// Request the user's progress on the specified achievements.
+    /// \param names The api_names(AchievementDefinition.GetName()) of the achievements used to retrieve the progress information.
     ///
     public static Request<Models.AchievementProgressList> GetProgressByName(string[] names)
     {
@@ -490,6 +494,7 @@ namespace Oculus.Platform
 
     /// Unlock the achievement with the given name. This can be of any achievement
     /// type.
+    /// \param name The api_name of the achievement that will be unlocked.
     ///
     public static Request<Models.AchievementUpdate> Unlock(string name)
     {
@@ -854,6 +859,7 @@ namespace Oculus.Platform
     }
 
     /// If the current user has an invite to the challenge, decline the invite
+    /// \param challengeID The ID of challenge that the user is going to decline. It can be retrieved by Challenge.GetID().
     ///
     public static Request<Models.Challenge> DeclineInvite(UInt64 challengeID)
     {
@@ -945,6 +951,8 @@ namespace Oculus.Platform
     }
 
     /// Requests for a list of challenge
+    /// \param challengeOptions This indicates the options of the challenge and it can be retrieved by ChallengeOptions().
+    /// \param limit Limits the maximum number of challenges to be fetched.
     ///
     public static Request<Models.ChallengeList> GetList(ChallengeOptions challengeOptions, int limit)
     {
@@ -958,6 +966,7 @@ namespace Oculus.Platform
     }
 
     /// If the current user has permission, join the challenge
+    /// \param challengeID The ID of challenge that the user is going to join. It can be retrieved by Challenge.GetID().
     ///
     public static Request<Models.Challenge> Join(UInt64 challengeID)
     {
@@ -971,6 +980,7 @@ namespace Oculus.Platform
     }
 
     /// If the current user has permission, leave the challenge
+    /// \param challengeID The ID of challenge that the user is going to leave. It can be retrieved by Challenge.GetID().
     ///
     public static Request<Models.Challenge> Leave(UInt64 challengeID)
     {
@@ -1336,6 +1346,9 @@ namespace Oculus.Platform
     /// Launch the dialog which will allow the user to rejoin a previous
     /// lobby/match. Either the lobby_session_id or the match_session_id, or both,
     /// must be populated.
+    /// \param lobby_session_id The unique identifier of the lobby session to rejoin.
+    /// \param match_session_id The unique identifier of the match session to rejoin.
+    /// \param destination_api_name The unique name of the in-app destination to rejoin.
     ///
     public static Request<Models.RejoinDialogResult> LaunchRejoinDialog(string lobby_session_id, string match_session_id, string destination_api_name)
     {
@@ -1364,6 +1377,7 @@ namespace Oculus.Platform
     }
 
     /// Send application invites to the passed in userIDs.
+    /// \param userIDs Defines a list of user ids to get entries for.
     ///
     public static Request<Models.SendInvitesResult> SendInvites(UInt64[] userIDs)
     {
@@ -1392,6 +1406,7 @@ namespace Oculus.Platform
     /// Set the user's deeplink message while keeping the other group presence
     /// parameters the same. If the destination of the user is not set, the
     /// deeplink message cannot be set as there's no deeplink message to override.
+    /// \param deeplink_message The new deeplink message to set for the user, overriding the current deeplink message.
     ///
     public static Request SetDeeplinkMessageOverride(string deeplink_message)
     {
@@ -1406,6 +1421,7 @@ namespace Oculus.Platform
 
     /// Replaces the user's current destination for the provided one. All other
     /// existing group presence parameters will remain the same.
+    /// \param api_name The unique name of the in-app destination to set, replacing the user's current destination.
     ///
     public static Request SetDestination(string api_name)
     {
@@ -1421,6 +1437,7 @@ namespace Oculus.Platform
     /// Set if the current user's destination and session is joinable while keeping
     /// the other group presence parameters the same. If the destination or session
     /// ids of the user is not set, they cannot be set to joinable.
+    /// \param is_joinable If true, the user can invite others to join them. If false, other users cannot join this user, for example, if the current session is full or only the host can invite others and the current user is not the host.
     ///
     public static Request SetIsJoinable(bool is_joinable)
     {
@@ -1435,6 +1452,7 @@ namespace Oculus.Platform
 
     /// Replaces the user's current lobby session id for the provided one. All
     /// other existing group presence parameters will remain the same.
+    /// \param id The unique identifier of the lobby session to set, replacing the user's current lobby session id.
     ///
     public static Request SetLobbySession(string id)
     {
@@ -1449,6 +1467,7 @@ namespace Oculus.Platform
 
     /// Replaces the user's current match session id for the provided one. All
     /// other existing group presence parameters will remain the same.
+    /// \param id The unique identifier of the match session to set, replacing the user's current match session id.
     ///
     public static Request SetMatchSession(string id)
     {

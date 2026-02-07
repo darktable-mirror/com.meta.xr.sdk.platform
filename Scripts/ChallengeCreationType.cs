@@ -10,9 +10,11 @@ namespace Oculus.Platform
     [Description("UNKNOWN")]
     Unknown,
 
+    /// The challenge was created by a User.
     [Description("USER_CREATED")]
     UserCreated,
 
+    /// The challenge was created by the app developer.
     [Description("DEVELOPER_CREATED")]
     DeveloperCreated,
 

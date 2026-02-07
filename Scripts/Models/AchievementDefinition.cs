@@ -13,6 +13,11 @@ namespace Oculus.Platform.Models
   /// achievement, see AchievementProgress.
   public class AchievementDefinition
   {
+    /// This is the type of achievement. There are three types of achievement:
+    /// AchievementType.Simple - unlocked by completion of a single event or
+    /// objective, AchievementType.Bitfield - unlocked when a number of bits in a
+    /// bitfield are set, and AchievementType.Count - unlocked when a counter
+    /// reaches a defined target.
     public readonly AchievementType Type;
     /// The name of the achievement.
     public readonly string Name;

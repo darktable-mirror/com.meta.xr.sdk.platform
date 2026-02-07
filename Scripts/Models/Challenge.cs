@@ -10,28 +10,50 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
+  /// Challenges leverage Destinations and Group Presence to create shareable
+  /// links that allow players to compete directly based on score.
+  ///
+  /// Challenges can be ranked by highest or lowest scores within a time period.
+  /// Any application that uses Leaderboards gets Challenges for free. It appears
+  /// in the Scoreboards UI. Players can create Challenges and send invites
+  /// through the Challenges app.
   public class Challenge
   {
-    /// Was this challenge created by a user or the app developer
+    /// An enum that specifies if this challenge was created by a user
+    /// (ChallengeCreationType.UserCreated) or the app developer
+    /// (ChallengeCreationType.DeveloperCreated).
     public readonly ChallengeCreationType CreationType;
-    /// A displayable string of the challenge's description
+    /// A displayable string of the challenge's description.
     public readonly string Description;
+    /// The timestamp when this challenge ends.
     public readonly DateTime EndDate;
     public readonly UInt64 ID;
+    /// Users that are invited to this challenge.
     // May be null. Check before using.
     public readonly UserList InvitedUsersOptional;
     [Obsolete("Deprecated in favor of InvitedUsersOptional")]
     public readonly UserList InvitedUsers;
-    /// The leaderboard associated with this challenge
+    /// The Leaderboard associated with this challenge.
     public readonly Leaderboard Leaderboard;
+    /// Users that have participated in this challenge.
     // May be null. Check before using.
     public readonly UserList ParticipantsOptional;
     [Obsolete("Deprecated in favor of ParticipantsOptional")]
     public readonly UserList Participants;
+    /// The timestamp when this challenge begins.
     public readonly DateTime StartDate;
-    /// A displayable string of the challenge's title
+    /// A displayable string of the challenge's title.
     public readonly string Title;
-    /// A enum that specify who can see this challenge
+    /// An enum that specifies who can see and participate in this challenge.
+    ///
+    /// ChallengeVisibility.InviteOnly - Only those invited can participate in it.
+    /// Everyone can see it.
+    ///
+    /// ChallengeVisibility.Public - Everyone can participate and see this
+    /// challenge.
+    ///
+    /// ChallengeVisibility.Private - Only those invited can participate and see
+    /// this challenge.
     public readonly ChallengeVisibility Visibility;
 
 
