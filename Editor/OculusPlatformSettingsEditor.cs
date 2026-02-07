@@ -28,7 +28,7 @@ namespace Oculus.Platform
         {
             isUnityEditorSettingsExpanded = true;
             isBuildSettingsExpanded = true;
-            EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_SETTINGS_PANEL_OPENED", "");
+            EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_EDITOR_SETTINGS_PANEL_OPENED", "");
         }
 
         [UnityEditor.MenuItem("Meta/Platform/Edit Settings")]
@@ -209,19 +209,6 @@ namespace Oculus.Platform
             {
                 GUIHelper.HInset(6, () =>
                 {
-#if !USING_XR_SDK
-#if UNITY_2020_1_OR_NEWER
-          EditorGUILayout.HelpBox("The Oculus XR Plugin isn't enabled from XR Plugin Management in Project Settings", MessageType.Warning);
-#else
-                    if (!PlayerSettings.virtualRealitySupported)
-                    {
-                        EditorGUILayout.HelpBox("VR Support isn't enabled in the Player Settings", MessageType.Warning);
-                    }
-
-                    PlayerSettings.virtualRealitySupported = MakeToggle(new GUIContent("Virtual Reality Support"), PlayerSettings.virtualRealitySupported);
-#endif
-#endif
-
                     PlayerSettings.bundleVersion = MakeTextBox(new GUIContent("Bundle Version"), PlayerSettings.bundleVersion);
 #if UNITY_5_3 || UNITY_5_4 || UNITY_5_5
           PlayerSettings.bundleIdentifier = MakeTextBox(new GUIContent("Bundle Identifier"), PlayerSettings.bundleIdentifier);

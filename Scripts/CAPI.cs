@@ -1835,12 +1835,6 @@ namespace Oculus.Platform
     /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
     /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
-    public static extern ulong ovr_Party_GetCurrent();
-
-    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
-    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
-    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
-    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
     public static extern ulong ovr_Party_GetCurrentForUser(UInt64 userID);
 
     /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.

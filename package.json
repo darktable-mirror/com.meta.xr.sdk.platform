@@ -1,7 +1,7 @@
 {
   "name": "com.meta.xr.sdk.platform",
   "displayName": "Meta XR Platform SDK",
-  "version": "78.0.0",
+  "version": "81.0.0",
   "description": "Use the Platform SDK to create social VR applications. Add Matchmaking, DLC, In-App Purchases, Cloud Storage, and more to your experience using the individual components of the SDK.",
   "samples": [
     {
@@ -20,6 +20,11 @@
       "path": "Samples~/GroupPresenceSample"
     },
     {
+      "displayName": "Leaderboards",
+      "description": "Scenes that demonstrate Leaderboards functionalities",
+      "path": "Samples~/LeaderboardSample"
+    },
+    {
       "displayName": "Reporting Callback",
       "description": "Scenes that demonstrate reporting callback",
       "path": "Samples~/ReportingCallbackSample"
@@ -34,17 +39,17 @@
   "unityRelease": "15f1",
   "author": {
     "name": "Meta Platforms, Inc.",
-    "url": "https://developer.oculus.com/"
+    "url": "https://developers.meta.com/horizon/"
   },
-  "licensesUrl": "https://developer.oculus.com/licenses/oculussdk",
+  "licensesUrl": "https://developers.meta.com/horizon/licenses/oculussdk/",
   "licenseMessage": "By adding or using this package you agree to the terms and conditions of the Meta Platforms Technologies SDK License Agreement: https://developer.oculus.com/licenses/oculussdk",
   "keywords": [
-    "Quest",
     "XR",
+    "Platform",
     "Oculus",
     "Meta",
-    "Platform",
-    "SDK"
+    "SDK",
+    "Quest"
   ],
   "dependencies": {
     "com.unity.ugui": "1.0.0"

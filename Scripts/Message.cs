@@ -183,7 +183,6 @@ namespace Oculus.Platform
       Leaderboard_WriteEntryWithSupplementaryMetric      = 0x72C692FA,
       Media_ShareToFacebook                              = 0x00E38AEF,
       Notification_MarkAsRead                            = 0x717259E3,
-      Party_GetCurrent                                   = 0x47933760,
       PushNotification_Register                          = 0x663A8B5F,
       RichPresence_Clear                                 = 0x57B752B3,
       RichPresence_GetDestinations                       = 0x586F2D14,
@@ -732,10 +731,6 @@ namespace Oculus.Platform
 
         case Message.MessageType.User_GetOrgScopedID:
           message = new MessageWithOrgScopedID(messageHandle);
-          break;
-
-        case Message.MessageType.Party_GetCurrent:
-          message = new MessageWithPartyUnderCurrentParty(messageHandle);
           break;
 
         case Message.MessageType.Notification_Party_PartyUpdate:

@@ -38,22 +38,29 @@ namespace Oculus.Platform
     }
 
     private static string getAppID(string appId = null) {
+      const string kMenuBarPath = "'Meta' > 'Platform' > 'Edit Settings'";
       string configAppID = GetAppIDFromConfig();
+
       if (String.IsNullOrEmpty(appId))
       {
         if (String.IsNullOrEmpty(configAppID))
         {
-          throw new UnityException("Update your app id by selecting 'Oculus Platform' -> 'Edit Settings'");
+          throw new UnityException($"Update your app id by selecting {kMenuBarPath}");
         }
-        appId = configAppID;
+        return configAppID;
       }
-      else
+
+      if (!string.IsNullOrEmpty(configAppID) && appId != configAppID)
       {
-        if (!String.IsNullOrEmpty(configAppID))
-        {
-          Debug.LogWarningFormat("The 'Oculus App Id ({0})' field in 'Oculus Platform/Edit Settings' is being overridden by the App Id ({1}) that you passed in to Platform.Core.Initialize.  You should only specify this in one place.  We recommend the menu location.", configAppID, appId);
-        }
+        Debug.LogWarning(
+          $"The App Id set in 'Resources/OculusPlatformSettings.asset' " +
+          $"({configAppID}) is being overridden by an App Id provided to " +
+          $"Platform.Core.Initialize ({appId})." +
+          $"  You should only specify this in one place." +
+          $"  Navigate to {kMenuBarPath} to enter an App Id."
+        );
       }
+
       return appId;
     }
 
@@ -239,6 +246,7 @@ namespace Oculus.Platform
     ///such as the type of intent LaunchDetails#LaunchType and any additional data that was passed along with it.
     ///By calling this function, you can gain insight into how your application was launched and take appropriate action based on that information.
     public static Models.LaunchDetails GetLaunchDetails() {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_ApplicationLifecycle_GetLaunchDetails", "");
       return new Models.LaunchDetails(CAPI.ovr_ApplicationLifecycle_GetLaunchDetails());
     }
 
@@ -248,6 +256,7 @@ namespace Oculus.Platform
     /// \param trackingID The Tracking ID is a unique identifier assigned to each deeplink attempt. It allows developers to track the success or failure of individual deeplink attempts and gain insights into the effectiveness of their deeplinking efforts.
     /// \param result An enum that indicates the outcome of an attempt to launch this application through a deeplink, including whether the attempt was LaunchResult#Success or not, and if not, the specific reasons for the failure.
     public static void LogDeeplinkResult(string trackingID, LaunchResult result) {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_ApplicationLifecycle_LogDeeplinkResult", "");
       CAPI.ovr_ApplicationLifecycle_LogDeeplinkResult(trackingID, result);
     }
   }
@@ -258,6 +267,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Leaderboards_GetNextEntries", "");
         return new Request<Models.LeaderboardEntryList>(CAPI.ovr_HTTP_GetWithMessageType(list.NextUrl, (int)Message.MessageType.Leaderboard_GetNextEntries));
       }
 
@@ -269,6 +279,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Leaderboards_GetPreviousEntries", "");
         return new Request<Models.LeaderboardEntryList>(CAPI.ovr_HTTP_GetWithMessageType(list.PreviousUrl, (int)Message.MessageType.Leaderboard_GetPreviousEntries));
       }
 
@@ -284,6 +295,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Challenges_GetNextEntries", "");
         return new Request<Models.ChallengeEntryList>(CAPI.ovr_HTTP_GetWithMessageType(list.NextUrl, (int)Message.MessageType.Challenges_GetNextEntries));
       }
 
@@ -296,6 +308,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Challenges_GetPreviousEntries", "");
         return new Request<Models.ChallengeEntryList>(CAPI.ovr_HTTP_GetWithMessageType(list.PreviousUrl, (int)Message.MessageType.Challenges_GetPreviousEntries));
       }
 
@@ -308,6 +321,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Challenges_GetNextChallenges", "");
         return new Request<Models.ChallengeList>(CAPI.ovr_HTTP_GetWithMessageType(list.NextUrl, (int)Message.MessageType.Challenges_GetNextChallenges));
       }
 
@@ -320,6 +334,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Challenges_GetPreviousChallenges", "");
         return new Request<Models.ChallengeList>(CAPI.ovr_HTTP_GetWithMessageType(list.PreviousUrl, (int)Message.MessageType.Challenges_GetPreviousChallenges));
       }
 
@@ -336,6 +351,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Voip_Start", "");
         CAPI.ovr_Voip_Start(userID);
       }
     }
@@ -345,6 +361,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Voip_Accept", "");
         CAPI.ovr_Voip_Accept(userID);
       }
     }
@@ -355,6 +372,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Voip_Stop", "");
         CAPI.ovr_Voip_Stop(userID);
       }
     }
@@ -365,6 +383,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Voip_SetMicrophoneFilterCallback", "");
         CAPI.ovr_Voip_SetMicrophoneFilterCallbackWithFixedSizeBuffer(callback, (UIntPtr)CAPI.VoipFilterBufferSize);
       }
     }
@@ -375,6 +394,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Voip_SetMicrophoneMuted", "");
         CAPI.ovr_Voip_SetMicrophoneMuted(state);
       }
     }
@@ -384,6 +404,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Voip_GetSystemVoipMicrophoneMuted", "");
         return CAPI.ovr_Voip_GetSystemVoipMicrophoneMuted();
       }
       return VoipMuteState.Unknown;
@@ -394,6 +415,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Voip_GetSystemVoipStatus", "");
         return CAPI.ovr_Voip_GetSystemVoipStatus();
       }
       return SystemVoipStatus.Unknown;
@@ -404,6 +426,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Voip_GetIsConnectionUsingDtx", "");
         return CAPI.ovr_Voip_GetIsConnectionUsingDtx(peerID);
       }
       return Oculus.Platform.VoipDtxState.Unknown;
@@ -414,6 +437,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Voip_GetLocalBitrate", "");
         return CAPI.ovr_Voip_GetLocalBitrate(peerID);
       }
       return Oculus.Platform.VoipBitrate.Unknown;
@@ -424,6 +448,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Voip_GetRemoteBitrate", "");
         return CAPI.ovr_Voip_GetRemoteBitrate(peerID);
       }
       return Oculus.Platform.VoipBitrate.Unknown;
@@ -434,6 +459,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Voip_SetNewConnectionOptions", "");
         CAPI.ovr_Voip_SetNewConnectionOptions((IntPtr)voipOptions);
       }
     }
@@ -445,6 +471,7 @@ namespace Oculus.Platform
     {
       if (Core.IsInitialized())
       {
+        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Users_GetLoggedInUserLocale", "");
         return CAPI.ovr_GetLoggedInUserLocale();
       }
       return "";
@@ -478,6 +505,7 @@ namespace Oculus.Platform
     ///
     public static void SetReportButtonPressedNotificationCallback(Message<string>.Callback callback)
     {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_AbuseReport_ReportButtonPressedNotificationCallback", "");
       Callback.SetNotificationCallback(
         Message.MessageType.Notification_AbuseReport_ReportButtonPressed,
         callback
@@ -742,6 +770,7 @@ namespace Oculus.Platform
     ///
     public static void SetLaunchIntentChangedNotificationCallback(Message<string>.Callback callback)
     {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_ApplicationLifecycle_LaunchIntentChangedNotificationCallback", "");
       Callback.SetNotificationCallback(
         Message.MessageType.Notification_ApplicationLifecycle_LaunchIntentChanged,
         callback
@@ -971,6 +1000,7 @@ namespace Oculus.Platform
     ///
     public static void SetDownloadUpdateNotificationCallback(Message<Models.AssetFileDownloadUpdate>.Callback callback)
     {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_AssetFile_DownloadUpdateNotificationCallback", "");
       Callback.SetNotificationCallback(
         Message.MessageType.Notification_AssetFile_DownloadUpdate,
         callback
@@ -1390,6 +1420,7 @@ namespace Oculus.Platform
     ///
     public static void SetApiNotReadyNotificationCallback(Message<string>.Callback callback)
     {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Cowatching_ApiNotReadyNotificationCallback", "");
       Callback.SetNotificationCallback(
         Message.MessageType.Notification_Cowatching_ApiNotReady,
         callback
@@ -1401,6 +1432,7 @@ namespace Oculus.Platform
     ///
     public static void SetApiReadyNotificationCallback(Message<string>.Callback callback)
     {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Cowatching_ApiReadyNotificationCallback", "");
       Callback.SetNotificationCallback(
         Message.MessageType.Notification_Cowatching_ApiReady,
         callback
@@ -1412,6 +1444,7 @@ namespace Oculus.Platform
     ///
     public static void SetInSessionChangedNotificationCallback(Message<Models.CowatchingState>.Callback callback)
     {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Cowatching_InSessionChangedNotificationCallback", "");
       Callback.SetNotificationCallback(
         Message.MessageType.Notification_Cowatching_InSessionChanged,
         callback
@@ -1423,6 +1456,7 @@ namespace Oculus.Platform
     ///
     public static void SetInitializedNotificationCallback(Message<string>.Callback callback)
     {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Cowatching_InitializedNotificationCallback", "");
       Callback.SetNotificationCallback(
         Message.MessageType.Notification_Cowatching_Initialized,
         callback
@@ -1434,6 +1468,7 @@ namespace Oculus.Platform
     ///
     public static void SetPresenterDataChangedNotificationCallback(Message<string>.Callback callback)
     {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Cowatching_PresenterDataChangedNotificationCallback", "");
       Callback.SetNotificationCallback(
         Message.MessageType.Notification_Cowatching_PresenterDataChanged,
         callback
@@ -1445,6 +1480,7 @@ namespace Oculus.Platform
     ///
     public static void SetSessionStartedNotificationCallback(Message<string>.Callback callback)
     {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Cowatching_SessionStartedNotificationCallback", "");
       Callback.SetNotificationCallback(
         Message.MessageType.Notification_Cowatching_SessionStarted,
         callback
@@ -1456,6 +1492,7 @@ namespace Oculus.Platform
     ///
     public static void SetSessionStoppedNotificationCallback(Message<string>.Callback callback)
     {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Cowatching_SessionStoppedNotificationCallback", "");
       Callback.SetNotificationCallback(
         Message.MessageType.Notification_Cowatching_SessionStopped,
         callback
@@ -1467,6 +1504,7 @@ namespace Oculus.Platform
     ///
     public static void SetViewersDataChangedNotificationCallback(Message<Models.CowatchViewerUpdate>.Callback callback)
     {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Cowatching_ViewersDataChangedNotificationCallback", "");
       Callback.SetNotificationCallback(
         Message.MessageType.Notification_Cowatching_ViewersDataChanged,
         callback
@@ -1571,7 +1609,7 @@ namespace Oculus.Platform
 
     /// Returns a list of users that can be invited to your current lobby. These
     /// are pulled from your bidirectional followers and recently met lists.
-    /// \param options It contains two methods. 1. InviteOptions.AddSuggestedUser() - Takes the userID as a parameter and adds it to the inevitable users list. 2. InviteOptions.ClearSuggestedUsers() - Clears the inevitable users list.
+    /// \param options It contains two methods. 1. InviteOptions.AddSuggestedUser() - Takes the userID as a parameter and adds it to the invitable users list. 2. InviteOptions.ClearSuggestedUsers() - Clears the invitable users list.
     ///
     public static Request<Models.UserList> GetInvitableUsers(InviteOptions options)
     {
@@ -1602,7 +1640,7 @@ namespace Oculus.Platform
     /// Launches the system invite dialog with a roster of eligible users for the
     /// current user to invite to the app. It is recommended that you surface a
     /// button in your UI that triggers this dialog when a user is joinable.
-    /// \param options It contains two methods. 1. InviteOptions.AddSuggestedUser() - Takes the userID as a parameter and adds it to the inevitable users list. 2. InviteOptions.ClearSuggestedUsers() - Clears the inevitable users list.
+    /// \param options It contains two methods. 1. InviteOptions.AddSuggestedUser() - Takes the userID as a parameter and adds it to the invitable users list. 2. InviteOptions.ClearSuggestedUsers() - Clears the invitable users list.
     ///
     public static Request<Models.InvitePanelResultInfo> LaunchInvitePanel(InviteOptions options)
     {
@@ -1658,7 +1696,7 @@ namespace Oculus.Platform
     /// Launch the panel displaying the current users in the roster. We do not
     /// recommend using this API because the list current users is surfaced in the
     /// Destination UI when the Meta Quest button is pressed.
-    /// \param options It contains 2 methods. 1. RosterOptions.AddSuggestedUser() - it takes userID as a parameter and adds it to the inevitable users list. 2. RosterOptions.ClearSuggestedUsers() - it clears the inevitable users list.
+    /// \param options It contains 2 methods. 1. RosterOptions.AddSuggestedUser() - it takes userID as a parameter and adds it to the invitable users list. 2. RosterOptions.ClearSuggestedUsers() - it clears the invitable users list.
     ///
     public static Request LaunchRosterPanel(RosterOptions options)
     {
@@ -1846,6 +1884,7 @@ namespace Oculus.Platform
     ///
     public static void SetInvitationsSentNotificationCallback(Message<Models.LaunchInvitePanelFlowResult>.Callback callback)
     {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_GroupPresence_InvitationsSentNotificationCallback", "");
       Callback.SetNotificationCallback(
         Message.MessageType.Notification_GroupPresence_InvitationsSent,
         callback
@@ -1869,6 +1908,7 @@ namespace Oculus.Platform
     ///
     public static void SetJoinIntentReceivedNotificationCallback(Message<Models.GroupPresenceJoinIntent>.Callback callback)
     {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_GroupPresence_JoinIntentReceivedNotificationCallback", "");
       Callback.SetNotificationCallback(
         Message.MessageType.Notification_GroupPresence_JoinIntentReceived,
         callback
@@ -1890,6 +1930,7 @@ namespace Oculus.Platform
     ///
     public static void SetLeaveIntentReceivedNotificationCallback(Message<Models.GroupPresenceLeaveIntent>.Callback callback)
     {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_GroupPresence_LeaveIntentReceivedNotificationCallback", "");
       Callback.SetNotificationCallback(
         Message.MessageType.Notification_GroupPresence_LeaveIntentReceived,
         callback
@@ -2209,6 +2250,7 @@ namespace Oculus.Platform
     ///
     public static void SetStatusUpdateNotificationCallback(Message<Models.LivestreamingStatus>.Callback callback)
     {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Livestreaming_StatusUpdateNotificationCallback", "");
       Callback.SetNotificationCallback(
         Message.MessageType.Notification_Livestreaming_StatusChange,
         callback
@@ -2265,6 +2307,7 @@ namespace Oculus.Platform
     ///
     public static void SetConnectionStatusChangedNotificationCallback(Message<Models.NetSyncConnection>.Callback callback)
     {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_NetSync_ConnectionStatusChangedNotificationCallback", "");
       Callback.SetNotificationCallback(
         Message.MessageType.Notification_NetSync_ConnectionStatusChanged,
         callback
@@ -2277,6 +2320,7 @@ namespace Oculus.Platform
     ///
     public static void SetSessionsChangedNotificationCallback(Message<Models.NetSyncSessionsChangedNotification>.Callback callback)
     {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_NetSync_SessionsChangedNotificationCallback", "");
       Callback.SetNotificationCallback(
         Message.MessageType.Notification_NetSync_SessionsChanged,
         callback
@@ -2318,28 +2362,12 @@ namespace Oculus.Platform
   /// the associated metadata.
   public static partial class Parties
   {
-    /// Load the current party the current Models.User is in. The returned
-    /// Models.Party will then contain information about other users in the party
-    /// and invited users. If the user is not currently in a party, the request
-    /// will return an error message with code 10.
-    ///
-    public static Request<Models.Party> GetCurrent()
-    {
-      if (Core.IsInitialized())
-      {
-        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Parties" + "_" + "GetCurrent", "");
-        return new Request<Models.Party>(CAPI.ovr_Party_GetCurrent());
-      }
-
-      Debug.LogError(Oculus.Platform.Core.PlatformUninitializedError);
-      return null;
-    }
-
     /// Indicates that party has been updated. This will return a
     /// Models.PartyUpdateNotification object.
     ///
     public static void SetPartyUpdateNotificationCallback(Message<Models.PartyUpdateNotification>.Callback callback)
     {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Parties_PartyUpdateNotificationCallback", "");
       Callback.SetNotificationCallback(
         Message.MessageType.Notification_Party_PartyUpdate,
         callback
@@ -2510,8 +2538,12 @@ namespace Oculus.Platform
 
     /// Retrieve the currently signed in user. This call is available offline.
     ///
-    /// NOTE: This will not return the user's presence as it should always be
-    /// 'online' in your application.
+    /// NOTE: Please be aware that this function will only return the following
+    /// information about the user: Alias (Oculus ID), ID (App Scoped ID), Profile
+    /// URL (image_url). If you need to retrieve additional user information, such
+    /// as presence details, please use the App Scoped ID obtained from
+    /// Users.GetLoggedInUser() in conjunction with Users.Get(ulong UserID). This
+    /// will provide access to more comprehensive user data.
     ///
     /// NOTE: Users will have a unique ID per application.
     ///
@@ -2754,6 +2786,7 @@ namespace Oculus.Platform
     ///
     public static void SetMicrophoneAvailabilityStateUpdateNotificationCallback(Message<string>.Callback callback)
     {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Voip_MicrophoneAvailabilityStateUpdateNotificationCallback", "");
       Callback.SetNotificationCallback(
         Message.MessageType.Notification_Voip_MicrophoneAvailabilityStateUpdate,
         callback
@@ -2769,6 +2802,7 @@ namespace Oculus.Platform
     ///
     public static void SetSystemVoipStateNotificationCallback(Message<Models.SystemVoipState>.Callback callback)
     {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Voip_SystemVoipStateNotificationCallback", "");
       Callback.SetNotificationCallback(
         Message.MessageType.Notification_Voip_SystemVoipState,
         callback
@@ -2793,6 +2827,7 @@ namespace Oculus.Platform
     ///
     public static void SetGetDataChannelMessageUpdateNotificationCallback(Message<string>.Callback callback)
     {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Vrcamera_GetDataChannelMessageUpdateNotificationCallback", "");
       Callback.SetNotificationCallback(
         Message.MessageType.Notification_Vrcamera_GetDataChannelMessageUpdate,
         callback
@@ -2808,6 +2843,7 @@ namespace Oculus.Platform
     ///
     public static void SetGetSurfaceUpdateNotificationCallback(Message<string>.Callback callback)
     {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Vrcamera_GetSurfaceUpdateNotificationCallback", "");
       Callback.SetNotificationCallback(
         Message.MessageType.Notification_Vrcamera_GetSurfaceUpdate,
         callback
@@ -2819,6 +2855,7 @@ namespace Oculus.Platform
 
   public static partial class Achievements {
     public static Request<Models.AchievementDefinitionList> GetNextAchievementDefinitionListPage(Models.AchievementDefinitionList list) {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Achievements_GetNextAchievementDefinitionListPage", "");
       if (!list.HasNextPage)
       {
         Debug.LogWarning("Oculus.Platform.GetNextAchievementDefinitionListPage: List has no next page");
@@ -2840,6 +2877,7 @@ namespace Oculus.Platform
     }
 
     public static Request<Models.AchievementProgressList> GetNextAchievementProgressListPage(Models.AchievementProgressList list) {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Achievements_GetNextAchievementProgressListPage", "");
       if (!list.HasNextPage)
       {
         Debug.LogWarning("Oculus.Platform.GetNextAchievementProgressListPage: List has no next page");
@@ -2864,6 +2902,7 @@ namespace Oculus.Platform
 
   public static partial class Cowatching {
     public static Request<Models.CowatchViewerList> GetNextCowatchViewerListPage(Models.CowatchViewerList list) {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Cowatching_GetNextCowatchViewerListPage", "");
       if (!list.HasNextPage)
       {
         Debug.LogWarning("Oculus.Platform.GetNextCowatchViewerListPage: List has no next page");
@@ -2888,6 +2927,7 @@ namespace Oculus.Platform
 
   public static partial class GroupPresence {
     public static Request<Models.ApplicationInviteList> GetNextApplicationInviteListPage(Models.ApplicationInviteList list) {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_GroupPresence_GetNextApplicationInviteListPage", "");
       if (!list.HasNextPage)
       {
         Debug.LogWarning("Oculus.Platform.GetNextApplicationInviteListPage: List has no next page");
@@ -2912,6 +2952,7 @@ namespace Oculus.Platform
 
   public static partial class IAP {
     public static Request<Models.ProductList> GetNextProductListPage(Models.ProductList list) {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_IAP_GetNextProductListPage", "");
       if (!list.HasNextPage)
       {
         Debug.LogWarning("Oculus.Platform.GetNextProductListPage: List has no next page");
@@ -2933,6 +2974,7 @@ namespace Oculus.Platform
     }
 
     public static Request<Models.PurchaseList> GetNextPurchaseListPage(Models.PurchaseList list) {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_IAP_GetNextPurchaseListPage", "");
       if (!list.HasNextPage)
       {
         Debug.LogWarning("Oculus.Platform.GetNextPurchaseListPage: List has no next page");
@@ -2957,6 +2999,7 @@ namespace Oculus.Platform
 
   public static partial class Leaderboards {
     public static Request<Models.LeaderboardList> GetNextLeaderboardListPage(Models.LeaderboardList list) {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Leaderboards_GetNextLeaderboardListPage", "");
       if (!list.HasNextPage)
       {
         Debug.LogWarning("Oculus.Platform.GetNextLeaderboardListPage: List has no next page");
@@ -2984,6 +3027,7 @@ namespace Oculus.Platform
 
   public static partial class RichPresence {
     public static Request<Models.DestinationList> GetNextDestinationListPage(Models.DestinationList list) {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_RichPresence_GetNextDestinationListPage", "");
       if (!list.HasNextPage)
       {
         Debug.LogWarning("Oculus.Platform.GetNextDestinationListPage: List has no next page");
@@ -3008,6 +3052,7 @@ namespace Oculus.Platform
 
   public static partial class Users {
     public static Request<Models.BlockedUserList> GetNextBlockedUserListPage(Models.BlockedUserList list) {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Users_GetNextBlockedUserListPage", "");
       if (!list.HasNextPage)
       {
         Debug.LogWarning("Oculus.Platform.GetNextBlockedUserListPage: List has no next page");
@@ -3029,6 +3074,7 @@ namespace Oculus.Platform
     }
 
     public static Request<Models.UserList> GetNextUserListPage(Models.UserList list) {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Users_GetNextUserListPage", "");
       if (!list.HasNextPage)
       {
         Debug.LogWarning("Oculus.Platform.GetNextUserListPage: List has no next page");
@@ -3050,6 +3096,7 @@ namespace Oculus.Platform
     }
 
     public static Request<Models.UserCapabilityList> GetNextUserCapabilityListPage(Models.UserCapabilityList list) {
+      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_Users_GetNextUserCapabilityListPage", "");
       if (!list.HasNextPage)
       {
         Debug.LogWarning("Oculus.Platform.GetNextUserCapabilityListPage: List has no next page");
