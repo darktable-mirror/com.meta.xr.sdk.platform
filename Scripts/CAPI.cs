@@ -1910,6 +1910,14 @@ namespace Oculus.Platform
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl, EntryPoint="ovr_Destination_GetDisplayName")]
     private static extern IntPtr ovr_Destination_GetDisplayName_Native(IntPtr obj);
 
+    public static string ovr_Destination_GetShareableUri(IntPtr obj) {
+      var result = StringFromNative(ovr_Destination_GetShareableUri_Native(obj));
+      return result;
+    }
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl, EntryPoint="ovr_Destination_GetShareableUri")]
+    private static extern IntPtr ovr_Destination_GetShareableUri_Native(IntPtr obj);
+
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
     public static extern IntPtr ovr_DestinationArray_GetElement(IntPtr obj, UIntPtr index);
 

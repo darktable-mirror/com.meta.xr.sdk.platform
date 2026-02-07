@@ -18,6 +18,8 @@ namespace Oculus.Platform.Models
     /// User.GetPresenceDeeplinkMessage() if the rich presence is set for the user.
     public readonly string DeeplinkMessage;
     public readonly string DisplayName;
+    /// A URL that allows the user to deeplink directly to this destination
+    public readonly string ShareableUri;
 
 
     public Destination(IntPtr o)
@@ -25,6 +27,7 @@ namespace Oculus.Platform.Models
       ApiName = CAPI.ovr_Destination_GetApiName(o);
       DeeplinkMessage = CAPI.ovr_Destination_GetDeeplinkMessage(o);
       DisplayName = CAPI.ovr_Destination_GetDisplayName(o);
+      ShareableUri = CAPI.ovr_Destination_GetShareableUri(o);
     }
   }
 
