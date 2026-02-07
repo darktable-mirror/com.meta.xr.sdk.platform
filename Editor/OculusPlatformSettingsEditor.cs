@@ -239,7 +239,6 @@ namespace Oculus.Platform
     private string getFRLAccountAccessToken() {
       WWWForm form = new WWWForm();
       form.AddField("access_token", "FRL|778542610035039|2e189079414d3a6e5642a789322b1940");
-      form.AddField("contact_point_type", "EMAIL_ADDRESS");
       form.AddField("contact_point", StandalonePlatformSettings.OculusPlatformTestUserEmail);
       form.AddField("password", StandalonePlatformSettings.OculusPlatformTestUserPassword);
 
