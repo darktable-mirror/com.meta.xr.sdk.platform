@@ -5,14 +5,17 @@ namespace Oculus.Platform
 
   using Description = System.ComponentModel.DescriptionAttribute;
 
-  /// Describe the filter type that can be enabled on the leaderboard.
+  /// An enum that defines the different types of filters that can be applied to
+  /// a leaderboard. It can be used in Leaderboards.GetEntries() to filter the
+  /// leaderboard entries, such as only friends or specific user IDs.
   public enum LeaderboardFilterType : int
   {
     /// No filter enabled on the leaderboard.
     [Description("NONE")]
     None,
 
-    /// Filter the leaderboard to include only friends of the current user.
+    /// This value indicates that the leaderboard should be filtered to include
+    /// only friends (bidirectional followers) of the current user.
     [Description("FRIENDS")]
     Friends,
 

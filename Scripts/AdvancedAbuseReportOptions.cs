@@ -8,10 +8,9 @@ namespace Oculus.Platform
   using System.Collections.Generic;
   using UnityEngine;
 
-  /// The Advanced Abuse Report Options contains additional configuration to be
-  /// passed in to AbuseReport.LaunchAdvancedReportFlow(). It provides a way for
-  /// developers to customize the reporting flow and specify the type of content
-  /// being reported, which can be either a AbuseReportType.User or an
+  /// The Advanced Abuse Report Options provides a way for developers to
+  /// customize the reporting flow and specify the type of content being
+  /// reported, which can be either a AbuseReportType.User or an
   /// AbuseReportType.Object, helping to maintain a safe and respectful community
   /// within their application.
   public class AdvancedAbuseReportOptions {
@@ -22,8 +21,8 @@ namespace Oculus.Platform
     }
 
     /// This field is intended to allow developers to pass custom metadata through
-    /// the report flow AbuseReport.LaunchAdvancedReportFlow(). The metadata passed
-    /// through is included with the report received by the developer.
+    /// the report flow. The metadata passed through is included with the report
+    /// received by the developer.
     public void SetDeveloperDefinedContext(string key, string value) {
       CAPI.ovr_AdvancedAbuseReportOptions_SetDeveloperDefinedContextString(Handle, key, value);
     }
@@ -33,15 +32,15 @@ namespace Oculus.Platform
       CAPI.ovr_AdvancedAbuseReportOptions_ClearDeveloperDefinedContext(Handle);
     }
 
-    /// If AbuseReportType is AbuseReportType.Object, a string representing the
+    /// If #AbuseReportType is AbuseReportType.Object, a string representing the
     /// type of content being reported. This should correspond to the object_type
-    /// string used in the UI
+    /// string used in the UI.
     public void SetObjectType(string value) {
       CAPI.ovr_AdvancedAbuseReportOptions_SetObjectType(Handle, value);
     }
 
-    /// The intended entity type AbuseReportType being reported, it can be either a
-    /// user AbuseReportType.User or an object/content AbuseReportType.Object.
+    /// The intended entity type #AbuseReportType being reported, it can be either
+    /// a user AbuseReportType.User or an object/content AbuseReportType.Object.
     public void SetReportType(AbuseReportType value) {
       CAPI.ovr_AdvancedAbuseReportOptions_SetReportType(Handle, value);
     }
@@ -58,7 +57,7 @@ namespace Oculus.Platform
       CAPI.ovr_AdvancedAbuseReportOptions_ClearSuggestedUsers(Handle);
     }
 
-    /// The video mode AbuseReportVideoMode controls whether or not the abuse
+    /// The video mode #AbuseReportVideoMode controls whether or not the abuse
     /// report flow should collect evidence and whether it is optional or not.
     /// AbuseReportVideoMode.Collect requires video evidence to be provided by the
     /// user. AbuseReportVideoMode.Optional presents the user with the option to

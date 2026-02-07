@@ -10,9 +10,9 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
-  /// A leaderboard entry object contains information about the User who made the
-  /// entry, their score, and other relevant details in the leaderboard. It
-  /// provides a way for a game to keep track of players and their scores in
+  /// A leaderboard entry object contains information about the Models.User who
+  /// made the entry, their score, and other relevant details in the leaderboard.
+  /// It provides a way for a game to keep track of players and their scores in
   /// relation to other. A single leaderboard entry can be written by
   /// Leaderboards.WriteEntry(). A block of leaderboard entries can be retrieved
   /// using Leaderboards.GetEntries(). Visit our
@@ -43,16 +43,16 @@ namespace Oculus.Platform.Models
     /// leaderboard. It's of type `long_as_string` and it's used to determine the
     /// user's rank in the leaderboard.
     public readonly long Score;
-    /// SupplementaryMetric is a supplemental piece of data that can be used for
-    /// tiebreakers by Leaderboards.WriteEntryWithSupplementaryMetric().
+    /// Models.SupplementaryMetric is a supplemental piece of data that can be used
+    /// for tiebreakers by Leaderboards.WriteEntryWithSupplementaryMetric().
     // May be null. Check before using.
     public readonly SupplementaryMetric SupplementaryMetricOptional;
     [Obsolete("Deprecated in favor of SupplementaryMetricOptional")]
     public readonly SupplementaryMetric SupplementaryMetric;
     /// The timestamp of this entry being created in the leaderboard.
     public readonly DateTime Timestamp;
-    /// User of this leaderboard entry. It is of type User. You can request a block
-    /// of leaderboard entries for the specified user ID(s) by
+    /// User of this leaderboard entry. It is of type Models.User. You can request
+    /// a block of leaderboard entries for the specified user ID(s) by
     /// Leaderboards.GetEntriesByIds().
     public readonly User User;
 

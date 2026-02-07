@@ -20,8 +20,8 @@ namespace Oculus.Platform.Models
     /// The API name of this leaderboard. This is a unique string that your
     /// application will refer to this leaderboard in your app code.
     public readonly string ApiName;
-    /// An optional deep link Destination, which means when a user clicks on the
-    /// leaderboard, they will be taken to this in-app destination.
+    /// An optional deep link Models.Destination, which means when a user clicks on
+    /// the leaderboard, they will be taken to this in-app destination.
     // May be null. Check before using.
     public readonly Destination DestinationOptional;
     [Obsolete("Deprecated in favor of DestinationOptional")]
@@ -46,7 +46,9 @@ namespace Oculus.Platform.Models
     }
   }
 
-  /// Represents a paginated list of Leaderboard elements
+  /// Represents a paginated list of Models.Leaderboard elements. It allows you
+  /// to easily access and manipulate the elements in the paginated list, such as
+  /// the size of the list and if there is a next page of elements available.
   public class LeaderboardList : DeserializableList<Leaderboard> {
     /// Instantiates a C# wrapper class that wraps a native list by pointer. Used internally by Platform SDK to wrap the list.
     public LeaderboardList(IntPtr a) {

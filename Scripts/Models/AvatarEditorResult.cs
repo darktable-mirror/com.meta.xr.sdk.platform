@@ -9,11 +9,14 @@ namespace Oculus.Platform.Models
   using UnityEngine;
 
   /// This is the result that can be extracted from message payload when the
-  /// avatar editor is launched. It can be retrieved using
-  /// Avatar.LaunchAvatarEditor().
+  /// avatar editor is launched via a call to Avatar.LaunchAvatarEditor(). It
+  /// contains information about whether the avatar editor result has
+  /// successfully been sent.
   public class AvatarEditorResult
   {
-    /// Whether the request has sent.
+    /// This indicates whether the request has been sent successfully. This is an
+    /// optional `boolean`. If the boolean field isn't there, it indicates that the
+    /// response is an error and will throw an error message.
     public readonly bool RequestSent;
 
 

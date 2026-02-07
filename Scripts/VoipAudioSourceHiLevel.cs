@@ -4,12 +4,15 @@ namespace Oculus.Platform
     using System;
     using System.Collections.Generic;
 
+    /// A class that is used in Oculus Platform SDK to provide audio source helper functions and fields for high-level audio processing.
+    /// Is used to hold a PCM source for receiving and decoding VoIP data. Read more about VoIP options [here](https://developer.oculus.com/documentation/unity/ps-parties/#voip-options).
     public class VoipAudioSourceHiLevel : MonoBehaviour
     {
-        // This is a delegate that exists as a surface for OnAudioFilterRead
-        // It will be callled on unity's audio thread
+        /// This is a delegate that exists as a surface for OnAudioFilterRead
+        /// It will be called on unity's audio thread and has a custom filter to determine whether the audio system is able to handle the ring buffer size. It is a subclass of VoipAudioSourceHiLevel.
         public class FilterReadDelegate : MonoBehaviour
         {
+            /// This field is used to hold a reference to the parent object which is a class type of VoipAudioSourceHiLevel.
             public VoipAudioSourceHiLevel parent;
             float[] scratchBuffer;
 
@@ -79,14 +82,18 @@ namespace Oculus.Platform
 
         int initialPlaybackDelayMS;
 
+        /// The ID of the sender of the PCM source. This is the User who is the source for the audio.
         public UInt64 senderID
         {
             set { pcmSource.SetSenderID(value); }
         }
 
+        /// The AudioSource object that will be used to control the audio source such as muting and unmuting.
         public AudioSource audioSource;
+        /// This field is used to indicate the peak ampltitude value of the audio source data.
         public float peakAmplitude;
 
+        /// Represents the PCM source that is used to read analogue data. It is of type IVoipPCMSource.
         protected IVoipPCMSource pcmSource;
 
         static int audioSystemPlaybackFrequency;
@@ -111,6 +118,7 @@ namespace Oculus.Platform
             }
         }
 
+        /// This function is used to initialize the VoipAudioSourceHiLevel. It is used to set up the PCM source and the audio source component attached to the game object.
         protected void Awake()
         {
             CreatePCMSource();
@@ -143,6 +151,7 @@ namespace Oculus.Platform
             pcmSource = new VoipPCMSourceNative();
         }
 
+        /// Converts delay in milliseconds to number of PCM elements to compare against PCM buffer to determine when to initiate playback.
         protected static int MSToElements(int ms)
         {
             return ms * audioSystemPlaybackFrequency / 1000;

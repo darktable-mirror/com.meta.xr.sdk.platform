@@ -27,9 +27,12 @@ namespace Oculus.Platform
             var appID = PlatformSettings.MobileAppID;
 #else
             var appID = "";
-            if (PlatformSettings.UseMobileAppIDInEditor) {
+            if (PlatformSettings.UseMobileAppIDInEditor)
+            {
                 appID = PlatformSettings.MobileAppID;
-            } else {
+            }
+            else
+            {
                 appID = PlatformSettings.AppID;
             }
             if (String.IsNullOrEmpty(appID))

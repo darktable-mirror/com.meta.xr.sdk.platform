@@ -11,9 +11,9 @@ namespace Oculus.Platform.Models
   /// An AssetFileDownloadCancelResult represents the result of a canceled
   /// download action of an asset file. You can cancel a download of an asset
   /// file by using AssetFile.DownloadCancelById() or
-  /// AssetFile.DownloadCancelById(). The result contains three fields which are
-  /// the asset file ID(use AssetFileDownloadCancelResult#AssetId to access), the
-  /// file path, and success status of the canceled download.
+  /// AssetFile.DownloadCancelByName(). The result contains three fields which
+  /// are the asset file ID(use AssetFileDownloadCancelResult#AssetId to access),
+  /// the file path, and success status of the canceled download.
   public class AssetFileDownloadCancelResult
   {
     /// \deprecated You can use AssetFileDownloadCancelResult#AssetId to retrieve the ID of the asset file instead.

@@ -78,7 +78,7 @@ namespace Oculus.Platform
     /// challenges.
     ///
     /// Returns all public (ChallengeVisibility.Public) and invite-only
-    /// (ChallengeVisibility.InviteOnly) Challenges in which the user is a
+    /// (ChallengeVisibility.InviteOnly) Models.Challenge in which the user is a
     /// participant or invitee. Excludes private (ChallengeVisibility.Private)
     /// challenges.
     ///

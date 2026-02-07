@@ -9,10 +9,10 @@ namespace Oculus.Platform.Models
   using UnityEngine;
 
   /// An GroupPresenceJoinIntent represents a user's intent to join a group
-  /// presence which is user's presence to be at a Destination and session.
-  /// People with same session id are considered to be co-present together. Every
-  /// combination of destination api name, lobby session id and match session id
-  /// can uniquely identify a destination.
+  /// presence which is user's presence to be at a Models.Destination and
+  /// session. People with same session id are considered to be co-present
+  /// together. Every combination of destination api name, lobby session id and
+  /// match session id can uniquely identify a destination.
   public class GroupPresenceJoinIntent
   {
     /// An opaque string provided by the developer to help bringing users together.

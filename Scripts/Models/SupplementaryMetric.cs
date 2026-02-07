@@ -15,7 +15,7 @@ namespace Oculus.Platform.Models
   public class SupplementaryMetric
   {
     /// The ID of the leaderboard that this supplementary metric belongs to. This
-    /// is the unique value for every Leaderboard.
+    /// is the unique value for every Models.Leaderboard.
     public readonly UInt64 ID;
     /// This is the metric that is used to determine tiebreaks.
     public readonly long Metric;

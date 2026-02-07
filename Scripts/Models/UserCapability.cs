@@ -8,23 +8,22 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
-  /// This object represents a permission or capability for a particular user.
-  /// You can fetch all the user capabilities for a logged-in User by using
-  /// Users.GetUserCapabilities(). There is a unique name for every user
-  /// capability.
+  /// This object represents a permission or capability for the logged in user,
+  /// which can be retrieved by Users.GetLoggedInUser(). It's a type of array and
+  /// there is a unique name for every user capability.
   public class UserCapability
   {
     /// The human readable description of the capability describing what possessing
-    /// it entails for a given User.
+    /// it entails for a given Models.User.
     public readonly string Description;
     /// Whether the capability is currently enabled for the user. When false, this
-    /// field will gate the User from the specified services.
+    /// field will gate the Models.User from the specified services.
     public readonly bool IsEnabled;
     /// The unique identifier for the capability. An example capability could be
     /// "earn_achievements".
     public readonly string Name;
     /// This field specifies the reason the capability was enabled or disabled for
-    /// the given User.
+    /// the given Models.User.
     ///
     /// List of Reason Codes:
     ///
@@ -59,7 +58,10 @@ namespace Oculus.Platform.Models
     }
   }
 
-  /// Represents a paginated list of UserCapability elements
+  /// Represents a paginated list of Models.UserCapability elements. It allows
+  /// you to easily access and manipulate the elements in the paginated list,
+  /// such as the size of the list and if there is a next page of elements
+  /// available.
   public class UserCapabilityList : DeserializableList<UserCapability> {
     /// Instantiates a C# wrapper class that wraps a native list by pointer. Used internally by Platform SDK to wrap the list.
     public UserCapabilityList(IntPtr a) {

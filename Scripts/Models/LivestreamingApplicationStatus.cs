@@ -10,7 +10,7 @@ namespace Oculus.Platform.Models
 
   /// The livestreaming application status represents the status result of
   /// whether the livestreaming is enabled for an app. If your app is enabled,
-  /// you will receive
+  /// you will receive a notification by
   /// Message::MessageType::Notification_Livestreaming_StatusChange when the
   /// livestreaming session gets updated.
   public class LivestreamingApplicationStatus

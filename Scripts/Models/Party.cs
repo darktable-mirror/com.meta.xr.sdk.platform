@@ -12,12 +12,11 @@ namespace Oculus.Platform.Models
 
   /// Parties allow users to start a voice chat with other members of the party.
   /// Party voice chats persist across apps in VR and users can continue to
-  /// interact while navigating between apps. You can load a user's party by
-  /// using Parties.GetCurrent().
+  /// interact while navigating between apps. You can use Parties.GetCurrent() to
+  /// load the party the current user is in.
   public class Party
   {
-    /// A unique identifier of this party. It can be used by Parties.Join(),
-    /// Parties.Leave(), and Parties.Invite().
+    /// A unique identifier of this party.
     public readonly UInt64 ID;
     /// An array of users who are invited to this party. These users are not a part
     /// of the party yet but have been invited.
@@ -32,7 +31,10 @@ namespace Oculus.Platform.Models
     [Obsolete("Deprecated in favor of LeaderOptional")]
     public readonly User Leader;
     /// An array that contains the users who are currently in this party. These
-    /// users will remain in the party while navigating between apps.
+    /// users will remain in the party while navigating between apps. Each user in
+    /// the party will get the update by
+    /// Message::MessageType::Notification_Party_PartyUpdate which is intended to
+    /// update the user on various actions that are occurring in the party.
     // May be null. Check before using.
     public readonly UserList UsersOptional;
     [Obsolete("Deprecated in favor of UsersOptional")]

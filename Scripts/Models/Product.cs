@@ -1,5 +1,7 @@
 // This file was @generated with LibOVRPlatform/codegen/main. Do not modify it!
 
+#pragma warning disable 0618
+
 namespace Oculus.Platform.Models
 {
   using System;
@@ -16,17 +18,21 @@ namespace Oculus.Platform.Models
     /// The description for the product. The description should be meaningful and
     /// explanatory to help outline the product and its features.
     public readonly string Description;
-    /// The formatted string for the Price. This is the same value stored in Price.
+    /// The formatted string for the Models.Price. This is the same value stored in
+    /// Models.Price.
     public readonly string FormattedPrice;
     /// The name of the product. This will be used as a the display name and should
     /// be aligned with the user facing title.
     public readonly string Name;
-    /// The Price of the product contains the currency code, the amount in
+    /// The Models.Price of the product contains the currency code, the amount in
     /// hundredths, and the formatted string representation.
     public readonly Price Price;
     /// The unique string that you use to reference the product in your app. The
     /// SKU is case-sensitive and should match the SKU reference in your code.
     public readonly string Sku;
+    /// The type of product. An In-app purchase (IAP) add-on can be
+    /// ProductType.DURABLE, ProductType.CONSUMABLE, or a ProductType.SUBSCRIPTION.
+    public readonly ProductType Type;
 
 
     public Product(IntPtr o)
@@ -36,10 +42,13 @@ namespace Oculus.Platform.Models
       Name = CAPI.ovr_Product_GetName(o);
       Price = new Price(CAPI.ovr_Product_GetPrice(o));
       Sku = CAPI.ovr_Product_GetSKU(o);
+      Type = CAPI.ovr_Product_GetType(o);
     }
   }
 
-  /// Represents a paginated list of Product elements
+  /// Represents a paginated list of Models.Product elements. It allows you to
+  /// easily access and manipulate the elements in the paginated list, such as
+  /// the size of the list and if there is a next page of elements available.
   public class ProductList : DeserializableList<Product> {
     /// Instantiates a C# wrapper class that wraps a native list by pointer. Used internally by Platform SDK to wrap the list.
     public ProductList(IntPtr a) {

@@ -19,16 +19,15 @@ namespace Oculus.Platform
       Handle = CAPI.ovr_AbuseReportOptions_Create();
     }
 
-    /// Set whether or not to show the user selection step in the
-    /// AbuseReport.LaunchAdvancedReportFlow(). If the reported object is a user,
-    /// they can choose to block the reported user from further interactions within
-    /// the platform.
+    /// Set whether or not to show the user selection step. If the reported object
+    /// is a user, they can choose to block the reported user from further
+    /// interactions within the platform.
     public void SetPreventPeopleChooser(bool value) {
       CAPI.ovr_AbuseReportOptions_SetPreventPeopleChooser(Handle, value);
     }
 
-    /// The intended entity type AbuseReportType being reported, it can be either a
-    /// user AbuseReportType.User or an object/content AbuseReportType.Object.
+    /// The intended entity type #AbuseReportType being reported, it can be either
+    /// a user AbuseReportType.User or an object/content AbuseReportType.Object.
     public void SetReportType(AbuseReportType value) {
       CAPI.ovr_AbuseReportOptions_SetReportType(Handle, value);
     }

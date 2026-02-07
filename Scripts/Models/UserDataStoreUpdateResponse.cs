@@ -11,7 +11,9 @@ namespace Oculus.Platform.Models
   /// This payload contains information about the result of an update request to
   /// the user data store. It includes a success field
   /// UserDataStoreUpdateResponse#Success that indicates whether the update was
-  /// successful or not.
+  /// successful or not. See more info about Platform Solutions
+  /// [here](https://developer.oculus.com/documentation/unity/ps-platform-
+  /// intro/).
   public class UserDataStoreUpdateResponse
   {
     /// Indicates whether the update request was successful or not. A value of true

@@ -15,7 +15,7 @@ namespace Oculus.Platform.Models
   public class LivestreamingStartResult
   {
     /// This livestreaming result represents the start status of your livestream.
-    /// You can refer to LivestreamingStartStatus for possible status info.
+    /// You can refer to #LivestreamingStartStatus for possible status info.
     public readonly LivestreamingStartStatus StreamingResult;
 
 

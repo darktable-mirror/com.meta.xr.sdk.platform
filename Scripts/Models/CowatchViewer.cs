@@ -28,7 +28,9 @@ namespace Oculus.Platform.Models
     }
   }
 
-  /// Represents a paginated list of CowatchViewer elements
+  /// Represents a paginated list of Models.CowatchViewer elements. It allows you
+  /// to easily access and manipulate the elements in the paginated list, such as
+  /// the size of the list and if there is a next page of elements available.
   public class CowatchViewerList : DeserializableList<CowatchViewer> {
     /// Instantiates a C# wrapper class that wraps a native list by pointer. Used internally by Platform SDK to wrap the list.
     public CowatchViewerList(IntPtr a) {

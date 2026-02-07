@@ -10,7 +10,7 @@ namespace Oculus.Platform.Models
 
   /// A PlatformInitialize object defines an attempt at initializing the Platform
   /// SDK. It contains the result of attempting to initialize the platform. The
-  /// different types of initialization results are PlatformInitializeResult.
+  /// different types of initialization results are #PlatformInitializeResult.
   public class PlatformInitialize
   {
     /// The result of attempting to initialize the platform:

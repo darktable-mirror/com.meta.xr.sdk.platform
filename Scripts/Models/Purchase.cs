@@ -8,23 +8,23 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
-  /// A purchase is made when a user buys a Product. The IAP product, which can
-  /// represent a consumable item, a durable item, or a subscription, must be
-  /// defined for purchase through the developer dashboard.
+  /// A purchase is made when a user buys a Models.Product. The IAP product,
+  /// which can represent a consumable item, a durable item, or a subscription,
+  /// must be defined for purchase through the developer dashboard.
   public class Purchase
   {
     /// The developer payload feature is unimplemented.
     public readonly string DeveloperPayload;
-    /// The time when the purchased Product expires. This value only applies to
-    /// subscriptions, and will be null for durable and consumable IAP items.
+    /// The time when the purchased Models.Product expires. This value only applies
+    /// to subscriptions, and will be null for durable and consumable IAP items.
     public readonly DateTime ExpirationTime;
     /// The timestamp that represents when the user was granted entitlement to the
-    /// Product that was purchased.
+    /// Models.Product that was purchased.
     public readonly DateTime GrantTime;
     public readonly string ID;
     /// The Reporting ID feature is not implemented.
     public readonly string ReportingId;
-    /// The SKU of the IAP Product that was purchased. This value is case-
+    /// The SKU of the IAP Models.Product that was purchased. This value is case-
     /// sensitive. To retrieve the product information, you can use this value when
     /// calling IAP.GetProductsBySKU().
     public readonly string Sku;
@@ -41,7 +41,9 @@ namespace Oculus.Platform.Models
     }
   }
 
-  /// Represents a paginated list of Purchase elements
+  /// Represents a paginated list of Models.Purchase elements. It allows you to
+  /// easily access and manipulate the elements in the paginated list, such as
+  /// the size of the list and if there is a next page of elements available.
   public class PurchaseList : DeserializableList<Purchase> {
     /// Instantiates a C# wrapper class that wraps a native list by pointer. Used internally by Platform SDK to wrap the list.
     public PurchaseList(IntPtr a) {

@@ -256,7 +256,7 @@ namespace Oculus.Platform
       /// Sent when the user is finished using the invite panel to send out
       /// invitations. Contains a list of invitees. Parameter: Callback is a function
       /// that will be called when the invitation sent status changes.
-      /// LaunchInvitePanelFlowResult has 1 member: UserList
+      /// Models.LaunchInvitePanelFlowResult has 1 member: UserList
       /// LaunchInvitePanelFlowResult#InvitedUsers - A list of users that were sent
       /// an invitation to the session.
       Notification_GroupPresence_InvitationsSent = 0x679A84B6,
@@ -267,9 +267,9 @@ namespace Oculus.Platform
       /// provide adequate messaging to the user on why they cannot go there. These
       /// notifications should be responded to immediately. Parameter: Callback is a
       /// function that will be called when a user has chosen to join the
-      /// destination/lobby/match. GroupPresenceJoinIntent has 4 members: string
-      /// GroupPresenceJoinIntent#DeeplinkMessage - An opaque string provided by the
-      /// developer to help them deeplink to content. string
+      /// destination/lobby/match. Models.GroupPresenceJoinIntent has 4 members:
+      /// string GroupPresenceJoinIntent#DeeplinkMessage - An opaque string provided
+      /// by the developer to help them deeplink to content. string
       /// GroupPresenceJoinIntent#DestinationApiName - The destination the current
       /// user wants to go to. string GroupPresenceJoinIntent#LobbySessionId - The
       /// lobby session the current user wants to go to. string
@@ -283,7 +283,7 @@ namespace Oculus.Platform
       /// them. Update the user's presence clearing the appropriate fields to
       /// indicate the user has left. Parameter: Callback is a function that will be
       /// called when the user has chosen to leave the destination/lobby/match.
-      /// GroupPresenceLeaveIntent has 3 members: string
+      /// Models.GroupPresenceLeaveIntent has 3 members: string
       /// GroupPresenceLeaveIntent#DestinationApiName - The destination the current
       /// user wants to leave. string GroupPresenceLeaveIntent#LobbySessionId - The
       /// lobby session the current user wants to leave. string
@@ -296,20 +296,21 @@ namespace Oculus.Platform
 
       /// Indicates that the livestreaming session has been updated. You can use this
       /// information to throttle your game performance or increase CPU/GPU
-      /// performance. Use Message#LivestreamingStatus to extract the updated
+      /// performance. Use Models.LivestreamingStatus to extract the updated
       /// livestreaming status.
       Notification_Livestreaming_StatusChange = 0x2247596E,
 
       /// Sent when the status of a connection has changed. The payload will be a
-      /// type of NetSyncConnection.
+      /// type of Models.NetSyncConnection.
       Notification_NetSync_ConnectionStatusChanged = 0x073484CA,
 
       /// Sent when the list of known connected sessions has changed. Contains the
       /// new list of sessions. The payload will be a type of
-      /// NetSyncSessionsChangedNotification.
+      /// Models.NetSyncSessionsChangedNotification.
       Notification_NetSync_SessionsChanged = 0x387E7F36,
 
-      /// Indicates that party has been updated
+      /// Indicates that party has been updated. This will return a
+      /// Models.PartyUpdateNotification object.
       Notification_Party_PartyUpdate = 0x1D118AB2,
 
       /// Indicates that the current microphone availability state has been updated.
@@ -318,18 +319,25 @@ namespace Oculus.Platform
       Notification_Voip_MicrophoneAvailabilityStateUpdate = 0x3E20CB57,
 
       /// Sent to indicate that some part of the overall state of SystemVoip has
-      /// changed. Use Message#SystemVoipState and the properties of SystemVoipState
-      /// to extract the state that triggered the notification.
-      ///
-      /// Note that the state may have changed further since the notification was
-      /// generated, and that you may call the `GetSystemVoip...()` family of
-      /// functions at any time to get the current state directly.
+      /// changed. Use SystemVoipState#Status and the properties of
+      /// Models.SystemVoipState to extract the state that triggered the
+      /// notification. Note that the state may have changed further since the
+      /// notification was generated, and that you may call the `GetSystemVoip...()`
+      /// family of functions at any time to get the current state directly.
       Notification_Voip_SystemVoipState = 0x58D254A5,
 
-      /// Get vr camera related webrtc data channel messages for update.
+      /// Gets VR camera related WebRTC data channel messages for update. This method
+      /// is used to retrieve messages that are sent over the WebRTC data channel,
+      /// which can include information about the VR camera system, such as its
+      /// current state or any errors that may have occurred.
       Notification_Vrcamera_GetDataChannelMessageUpdate = 0x6EE4F33C,
 
-      /// Get surface and update action from platform webrtc for update.
+      /// Gets the surface and update action from the platform WebRTC for update.
+      /// This method is used to retrieve information about the current state of the
+      /// VR camera system, including any updates that may be required. See more info
+      /// about Platform Solutions
+      /// [here](https://developer.oculus.com/documentation/unity/ps-platform-
+      /// intro/).
       Notification_Vrcamera_GetSurfaceUpdate = 0x37F21084,
 
 

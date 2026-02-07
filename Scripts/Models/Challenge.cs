@@ -10,8 +10,8 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
-  /// Challenges leverage Destination and Group Presence to create shareable
-  /// links that allow players to compete directly based on score.
+  /// Challenges leverage Models.Destination and Group Presence to create
+  /// shareable links that allow players to compete directly based on score.
   ///
   /// Challenges can be ranked by highest or lowest scores within a time period.
   /// Any application that uses Leaderboards gets Challenges for free. It appears
@@ -36,7 +36,7 @@ namespace Oculus.Platform.Models
     public readonly UserList InvitedUsersOptional;
     [Obsolete("Deprecated in favor of InvitedUsersOptional")]
     public readonly UserList InvitedUsers;
-    /// The Leaderboard associated with this challenge. You can retrieve the
+    /// The Models.Leaderboard associated with this challenge. You can retrieve the
     /// leaderboard ID from the response of the challenge creation request.
     public readonly Leaderboard Leaderboard;
     /// Users that have participated in this challenge.

@@ -17,7 +17,7 @@ namespace Oculus.Platform.Models
   public class AppDownloadResult
   {
     /// Result of the install operation returned by the installer. You can find
-    /// more information about possible members from AppInstallResult. In case of
+    /// more information about possible members from #AppInstallResult. In case of
     /// an error during install process, the error message contains the string
     /// representation of this result.
     public readonly AppInstallResult AppInstallResult;

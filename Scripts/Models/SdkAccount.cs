@@ -24,7 +24,7 @@ namespace Oculus.Platform.Models
     /// SdkAccountType.FacebookGameroom
     public readonly SdkAccountType AccountType;
     /// The ID of the user, User#ID, of the sdk account. This is a unique value for
-    /// every User.
+    /// every Models.User.
     public readonly UInt64 UserId;
 
 
@@ -35,7 +35,9 @@ namespace Oculus.Platform.Models
     }
   }
 
-  /// Represents a paginated list of SdkAccount elements
+  /// Represents a paginated list of Models.SdkAccount elements. It allows you to
+  /// easily access and manipulate the elements in the paginated list, such as
+  /// the size of the list and if there is a next page of elements available.
   public class SdkAccountList : DeserializableList<SdkAccount> {
     /// Instantiates a C# wrapper class that wraps a native list by pointer. Used internally by Platform SDK to wrap the list.
     public SdkAccountList(IntPtr a) {

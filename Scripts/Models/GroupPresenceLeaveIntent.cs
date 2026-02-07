@@ -9,10 +9,10 @@ namespace Oculus.Platform.Models
   using UnityEngine;
 
   /// An GroupPresenceLeaveIntent represents a user's intent to leave a group
-  /// presence which is user's presence to be at a Destination and session.
-  /// People with same session id are considered to be co-present together. Every
-  /// combination of destination api name, lobby session id and match session id
-  /// can uniquely identify a destination.
+  /// presence which is user's presence to be at a Models.Destination and
+  /// session. People with same session id are considered to be co-present
+  /// together. Every combination of destination api name, lobby session id and
+  /// match session id can uniquely identify a destination.
   public class GroupPresenceLeaveIntent
   {
     /// Destination#ApiName is the unique API Name that refers to an in-app

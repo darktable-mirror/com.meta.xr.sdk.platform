@@ -10,41 +10,39 @@ namespace Oculus.Platform.Models
 
   /// The notification about updating a party status information to a
   /// participating user. Party Notifications are intended to update the user on
-  /// various actions that are occurring in the user's party. This is primarily
-  /// used in {'party_update':
-  /// 'Message::MessageType::Notification_Party_PartyUpdate'}.
+  /// various actions that are occurring in the user's party. It can be retrieved
+  /// using Message::MessageType::Notification_Party_PartyUpdate.
   public class PartyUpdateNotification
   {
     /// An enum that specifies the type of action related to the party and user
-    /// that this notification holds. It can be retrieved by using
-    /// PartyUpdateNotification#Action.
+    /// that this notification holds.
     ///
-    /// PartyUpdateAction.Join: The user is going to join the party.
+    /// PartyUpdateAction.Join: The user joined the party.
     ///
-    /// PartyUpdateAction.Leave: The user is going to leave the party.
+    /// PartyUpdateAction.Leave: The user left the party.
     ///
-    /// PartyUpdateAction.Invite: The user is invited to the party.
+    /// PartyUpdateAction.Invite: The user was invited to the party.
     ///
-    /// PartyUpdateAction.Uninvite: The user is uninvited from the party.
+    /// PartyUpdateAction.Uninvite: The user was uninvited to the party.
     public readonly PartyUpdateAction Action;
     /// The ID of the party that will be updated. This can be retrieved with
-    /// PartyID.
+    /// Models.PartyID.
     public readonly UInt64 PartyId;
-    /// The id of the User who initiated the action that this party update status
-    /// notification is in reference to. This is equivalent to User#ID for this
-    /// user.
+    /// The id of the Models.User who initiated the action that this party update
+    /// status notification is in reference to. This is equivalent to User#ID for
+    /// this user.
     public readonly UInt64 SenderId;
     /// A timestamp denoting when the party action occurred that this status update
     /// notification refers to.
     public readonly string UpdateTimestamp;
-    /// The alias of the User whose party status has changed. This is an alias that
-    /// is set by the user.
+    /// The alias of the Models.User whose party status has changed. This is an
+    /// alias that is set by the user.
     public readonly string UserAlias;
     /// The ID of the user, User#ID, whose party status has changed. This is a
-    /// unique value for every User.
+    /// unique value for every Models.User.
     public readonly UInt64 UserId;
-    /// The displayable name of the User whose party status has changed. This is
-    /// equivalent to User#DisplayName for this user.
+    /// The displayable name of the Models.User whose party status has changed.
+    /// This is equivalent to User#DisplayName for this user.
     public readonly string UserName;
 
 

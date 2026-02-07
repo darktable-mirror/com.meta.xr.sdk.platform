@@ -11,7 +11,8 @@ namespace Oculus.Platform.Models
   /// A challenge entry object contains information about an individual entry
   /// within a challenge such as the user who made the entry, the score achieved,
   /// and other relevant details. It's the array element type of
-  /// ChallengeEntryArray and can be retrieved using Challenges.GetEntries().
+  /// Models.ChallengeEntryArray and can be retrieved using
+  /// Challenges.GetEntries().
   public class ChallengeEntry
   {
     /// A displayable score for this challenge entry. The score is formatted with

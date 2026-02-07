@@ -23,7 +23,7 @@ namespace Oculus.Platform
 
             return CAPI.ovr_UnityInitWrapper(appId);
 #else
-      return false;
+            return false;
 #endif
         }
 
@@ -41,7 +41,7 @@ namespace Oculus.Platform
 
             return new Request<Models.PlatformInitialize>(CAPI.ovr_UnityInitWrapperAsynchronous(appId));
 #else
-      return new Request<Models.PlatformInitialize>(0);
+            return new Request<Models.PlatformInitialize>(0);
 #endif
         }
     }

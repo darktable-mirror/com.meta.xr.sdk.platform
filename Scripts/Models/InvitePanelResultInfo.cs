@@ -8,11 +8,16 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
-  /// The information about the user's invitation to others to join their current
-  /// session. It can be retrieved using GroupPresence.LaunchInvitePanel()}.
+  /// It contains information about the user's invitation to others to join their
+  /// current session. It is used to provide feedback to the user about whether
+  /// their invitations have been successfully sent. It can be retrieved using
+  /// GroupPresence.LaunchInvitePanel().
   public class InvitePanelResultInfo
   {
-    /// A boolean for whether or not any invites have been sent.
+    /// This field indicates whether any invitations have been sent successfully.
+    /// It is a boolean value where true means that one or more invites have been
+    /// successfully sent, and false indicates that no invites were sent or the
+    /// sending process failed.
     public readonly bool InvitesSent;
 
 

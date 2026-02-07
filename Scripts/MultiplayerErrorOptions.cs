@@ -8,10 +8,13 @@ namespace Oculus.Platform
   using System.Collections.Generic;
   using UnityEngine;
 
-  /// The multiplayer error option. This is used in invokable error dialogs that
-  /// provide general error messages to a User. Read more about error dialogues
-  /// in our [docs](https://developer.oculus.com/documentation/unity/ps-error-
-  /// dialogs/).
+  /// The multiplayer error option is a feature that allows developers to display
+  /// general error messages to Models.User in invokable error dialogs. This
+  /// option is particularly useful in multiplayer games or applications where
+  /// errors can occur due to various reasons such as network connectivity
+  /// issues, server downtime, or other technical problems. Read more about error
+  /// dialogues in our
+  /// [docs](https://developer.oculus.com/documentation/unity/ps-error-dialogs/).
   public class MultiplayerErrorOptions {
 
     /// Creates a new instance of ::MultiplayerErrorOptions which is used to customize the option flow. It returns a handle to the newly created options object, which can be used to set various properties for the options.

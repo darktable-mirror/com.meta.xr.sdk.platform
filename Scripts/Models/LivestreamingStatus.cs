@@ -9,7 +9,7 @@ namespace Oculus.Platform.Models
   using UnityEngine;
 
   /// The livestreaming status represents the status of a livestreaming event in
-  /// your app. You will receive
+  /// your app. You will receive a notification by
   /// Message::MessageType::Notification_Livestreaming_StatusChange whenever your
   /// livestreaming session gets updated. The status contains info about your
   /// livestream type, whether your mic is enabled, whether the comments are
@@ -23,7 +23,7 @@ namespace Oculus.Platform.Models
     /// not.
     public readonly bool IsPaused;
     /// This boolean field indicates if your app is livestreaming enabled. If your
-    /// app is enabled, you will receive
+    /// app is enabled, you will receive a notification by
     /// Message::MessageType::Notification_Livestreaming_StatusChange when the
     /// livestreaming session gets updated.
     public readonly bool LivestreamingEnabled;

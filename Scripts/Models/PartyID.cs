@@ -10,12 +10,12 @@ namespace Oculus.Platform.Models
 
   /// The party ID is a unique identifier of the party that will be generated for
   /// every distinct party. This ID can be used to make requests such as
-  /// Parties.Join(), Parties.Leave(), Parties.Create(), etc. Read more about
+  /// Parties.GetCurrent() to get the current party by its id. Read more about
   /// [parties](https://developer.oculus.com/documentation/unity/ps-parties/).
   public class PartyID
   {
-    /// The party ID can be used to retrieve Party. Every party will have a unique
-    /// ID that is associated with it.
+    /// The party ID can be used to retrieve Models.Party. Every party will have a
+    /// unique ID that is associated with it.
     public readonly UInt64 ID;
 
 

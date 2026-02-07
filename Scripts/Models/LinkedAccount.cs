@@ -8,10 +8,10 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
-  /// Represents a linked account that is associated with the User's account in
-  /// the system. It provides a way to store and manage information about linked
-  /// accounts in the system, allowing users to easily access and manage their
-  /// data or services from multiple platforms in one place
+  /// Represents a linked account that is associated with the Models.User's
+  /// account in the system. It provides a way to store and manage information
+  /// about linked accounts in the system, allowing users to easily access and
+  /// manage their data or services from multiple platforms in one place
   public class LinkedAccount
   {
     /// Access token of the linked account. This token is used to authenticate the
@@ -19,7 +19,7 @@ namespace Oculus.Platform.Models
     /// services.
     public readonly string AccessToken;
     /// Service provider with which the linked account is associated. There are
-    /// several possible service providers that can be found in ServiceProvider.
+    /// several possible service providers that can be found in #ServiceProvider.
     public readonly ServiceProvider ServiceProvider;
     /// A unique identifier represents the user ID of the linked account. It can be
     /// retrieved using User#ID
@@ -34,7 +34,9 @@ namespace Oculus.Platform.Models
     }
   }
 
-  /// Represents a paginated list of LinkedAccount elements
+  /// Represents a paginated list of Models.LinkedAccount elements. It allows you
+  /// to easily access and manipulate the elements in the paginated list, such as
+  /// the size of the list and if there is a next page of elements available.
   public class LinkedAccountList : DeserializableList<LinkedAccount> {
     /// Instantiates a C# wrapper class that wraps a native list by pointer. Used internally by Platform SDK to wrap the list.
     public LinkedAccountList(IntPtr a) {

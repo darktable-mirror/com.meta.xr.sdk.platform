@@ -8,6 +8,10 @@ namespace Oculus.Platform
   using System.Collections.Generic;
   using UnityEngine;
 
+  /// The roster option, to be passed into GroupPresence.LaunchRosterPanel()
+  /// which is used to launch the panel displaying the current users in the
+  /// roster/party. You can read more about rosters in our
+  /// [docs](https://developer.oculus.com/documentation/unity/ps-roster/).
   public class RosterOptions {
 
     /// Creates a new instance of ::RosterOptions which is used to customize the option flow. It returns a handle to the newly created options object, which can be used to set various properties for the options.
@@ -16,8 +20,8 @@ namespace Oculus.Platform
     }
 
     /// Passing in these users will add them to the invitable users list. From the
-    /// GroupPresence.LaunchRosterPanel(), the user can open the invite list, where
-    /// the suggested users will be added.
+    /// GroupPresence.LaunchRosterPanel(), the Models.User can open the invite
+    /// list, where the suggested users will be added.
     public void AddSuggestedUser(UInt64 userID) {
       CAPI.ovr_RosterOptions_AddSuggestedUser(Handle, userID);
     }

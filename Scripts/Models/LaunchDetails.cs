@@ -24,8 +24,8 @@ namespace Oculus.Platform.Models
     /// instance, a DEEPLINK launch type could be coming from events or rich
     /// presence.
     public readonly string LaunchSource;
-    /// A LaunchType that defines the different ways in which an application can be
-    /// launched. LaunchType.Normal - Normal launch from the user's library.
+    /// A #LaunchType that defines the different ways in which an application can
+    /// be launched. LaunchType.Normal - Normal launch from the user's library.
     /// LaunchType.Invite - Launch from the user accepting an invite.
     /// LaunchType.Deeplink - Launched from a deeplink. This flow is typically
     /// kicked off from Application.LaunchOtherApp()

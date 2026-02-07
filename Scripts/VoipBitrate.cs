@@ -5,6 +5,10 @@ namespace Oculus.Platform
 
   using Description = System.ComponentModel.DescriptionAttribute;
 
+  /// It's a set of predefined values that represent different levels of audio
+  /// quality for Voice over IP (VoIP) connections. It can be used in
+  /// VoipOptions.SetBitrateForNewConnections() to set the maximum average
+  /// bitrate the audio codec should use for new VoIP connections.
   public enum VoipBitrate : int
   {
     [Description("UNKNOWN")]

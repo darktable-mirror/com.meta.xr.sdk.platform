@@ -10,6 +10,7 @@ using Oculus.Platform;
 /// Update() updates playback based on remaining buffer time, while AddData() adds new data to the buffer,
 /// wrapping around if necessary. This class is useful for real-time audio streaming, such as playing back
 /// audio from a network connection or generating audio dynamically.
+/// This class is used in VoipAudioSource, which has been deprecated. See details [here](https://developer.oculus.com/blog/deprecating-oculus-rooms-api-in-january-2023/).
 public class BufferedAudioStream
 {
     const bool VerboseLogging = false;
@@ -28,7 +29,7 @@ public class BufferedAudioStream
 
     /// The constructor of BufferedAudioStream takes an AudioSource object as a parameter and initializes the audio buffer with a specified size.
     /// It also sets the loop property of the AudioSource object to true and creates an AudioClip object with the specified buffer size,
-    /// sample rate, and number of channels.
+    /// sample rate, and number of channels. This class is used in VoipAudioSource, which has been deprecated. See details [here](https://developer.oculus.com/blog/deprecating-oculus-rooms-api-in-january-2023/).
     public BufferedAudioStream(AudioSource audio)
     {
         audioBuffer = new float[bufferSize];
@@ -43,6 +44,7 @@ public class BufferedAudioStream
     /// This method updates the audio playback based on the remaining buffer time. If there is still buffer time remaining,
     /// it checks if the audio should start playing and updates the playback delay timer. If the audio is currently playing,
     /// it decrements the remaining buffer time. If the buffer is empty, it stops the audio playback and logs a message.
+    /// This method is used in VoipAudioSource which got drecated, which has been deprecated. See details [here](https://developer.oculus.com/blog/deprecating-oculus-rooms-api-in-january-2023/).
     public void Update()
     {
         if (remainingBufferTime > 0)
@@ -101,6 +103,7 @@ public class BufferedAudioStream
     /// This method adds new audio data to the buffer. It takes an array of float samples as input and writes them to the internal audio buffer.
     /// If there is not enough space in the buffer, it will wrap around to the beginning of the buffer. If the write position exceeds the buffer length,
     /// an exception is thrown. The method returns the number of samples written to the buffer.
+    /// This method is used in VoipAudioSource which got drecated, which has been deprecated. See details [here](https://developer.oculus.com/blog/deprecating-oculus-rooms-api-in-january-2023/).
     public void AddData(float[] samples)
     {
         int remainingWriteLength = samples.Length;

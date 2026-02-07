@@ -8,10 +8,18 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
+  /// When a new list of sessions was added or the list of known connected
+  /// sessions has changed, this
+  /// Message::MessageType::Notification_NetSync_SessionsChanged will be sent.
+  /// When the status of a connection has changed, the
+  /// Message::MessageType::Notification_NetSync_ConnectionStatusChanged will be
+  /// sent.
   public class NetSyncSessionsChangedNotification
   {
+    /// A `long` integer ID which can be used to uniquely identify the network
+    /// synchronization connection.
     public readonly long ConnectionId;
-    /// The new list of sessions
+    /// An `array` which contains the new list of Models.NetSyncSession.
     public readonly NetSyncSessionList Sessions;
 
 

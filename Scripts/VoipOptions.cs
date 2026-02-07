@@ -8,6 +8,12 @@ namespace Oculus.Platform
   using System.Collections.Generic;
   using UnityEngine;
 
+  /// The voip_options configuration is used to specify additional settings for
+  /// the VoIP transmission for a Models.User. It consists of two primary options
+  /// which include using DTX for transmission and setting a maxmimum bitrate for
+  /// the network connection. You can read more about VoIP
+  /// [here](https://developer.oculus.com/documentation/unity/ps-parties/#voip-
+  /// options).
   public class VoipOptions {
 
     /// Creates a new instance of ::VoipOptions which is used to customize the option flow. It returns a handle to the newly created options object, which can be used to set various properties for the options.
@@ -25,11 +31,11 @@ namespace Oculus.Platform
     }
 
     /// Set the opus codec to use discontinous transmission (DTX). DTX only
-    /// transmits data when a person is speaking. Setting this to true takes
-    /// advantage of the fact that in a two-way converstation each individual
-    /// speaks for less than half the time. Enabling DTX will conserve battery
-    /// power and reduce transmission rate when a pause in the voice chat is
-    /// detected.
+    /// transmits data when a person is speaking. Setting this to
+    /// VoipDtxState.Enabled takes advantage of the fact that in a two-way
+    /// converstation each individual speaks for less than half the time. Enabling
+    /// DTX will conserve battery power and reduce transmission rate when a pause
+    /// in the voice chat is detected.
     public void SetCreateNewConnectionUseDtx(VoipDtxState value) {
       CAPI.ovr_VoipOptions_SetCreateNewConnectionUseDtx(Handle, value);
     }

@@ -19,7 +19,8 @@ namespace Oculus.Platform.Models
     public readonly UInt64 AssetFileId;
     /// This represents the ID of the asset file. When you want to use
     /// AssetFileDeleteResult#AssetFileId, you need to use
-    /// AssetFileDeleteResult#AssetId instead.
+    /// AssetFileDeleteResult#AssetId instead. It can be retrieved using
+    /// AssetDetails#AssetId.
     public readonly UInt64 AssetId;
     /// File path of the asset file.
     public readonly string Filepath;

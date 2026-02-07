@@ -31,7 +31,7 @@ namespace Oculus.Platform
 #if UNITY_EDITOR
                 return UnityEditor.EditorPrefs.GetString("OculusStandaloneUserEmail_" + _ProjectName);
 #else
-        return string.Empty;
+                return string.Empty;
 #endif
             }
             set
@@ -50,7 +50,7 @@ namespace Oculus.Platform
                 ClearOldStoredPassword();
                 return _OculusPlatformTestUserPassword;
 #else
-        return string.Empty;
+                return string.Empty;
 #endif
             }
             set
@@ -69,7 +69,7 @@ namespace Oculus.Platform
 #if UNITY_EDITOR
                 return UnityEditor.EditorPrefs.GetString("OculusStandaloneUserAccessToken_" + _ProjectName);
 #else
-        return string.Empty;
+                return string.Empty;
 #endif
             }
             set

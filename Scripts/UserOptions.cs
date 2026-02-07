@@ -9,10 +9,9 @@ namespace Oculus.Platform
   using UnityEngine;
 
   /// The user_options configuration is used to specify additional settings for
-  /// the User when making a request to retrieve linked accounts using
-  /// Users.GetLinkedAccounts(). It allows you to customize the response by
-  /// specifying the time window, maximum number of users, and service providers
-  /// for which linked accounts should be retrieved.
+  /// the Models.User. It allows you to customize the response by specifying the
+  /// time window, maximum number of users, and service providers for which
+  /// linked accounts should be retrieved.
   public class UserOptions {
 
     /// Creates a new instance of ::UserOptions which is used to customize the option flow. It returns a handle to the newly created options object, which can be used to set various properties for the options.
@@ -20,13 +19,13 @@ namespace Oculus.Platform
       Handle = CAPI.ovr_UserOptions_Create();
     }
 
-    /// This field specifies the maximum number of User that should be returned in
-    /// the response.
+    /// This field specifies the maximum number of Models.User that should be
+    /// returned in the response.
     public void SetMaxUsers(uint value) {
       CAPI.ovr_UserOptions_SetMaxUsers(Handle, value);
     }
 
-    /// It's an array of ServiceProvider objects that specifies the service
+    /// It's an array of #ServiceProvider objects that specifies the service
     /// providers for which linked accounts should be retrieved.
     public void AddServiceProvider(ServiceProvider value) {
       CAPI.ovr_UserOptions_AddServiceProvider(Handle, value);

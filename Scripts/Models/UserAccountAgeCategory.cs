@@ -12,12 +12,12 @@ namespace Oculus.Platform.Models
   /// object contains information about the user's age group, which can be used
   /// for various purposes such as targeted advertising or content restriction.
   /// The possible values for the age category are defined in the
-  /// AccountAgeCategory.
+  /// #AccountAgeCategory.
   public class UserAccountAgeCategory
   {
     /// Age category of the user in Meta account. This field represents the age
     /// group that the user falls into, and the possible values for this field are
-    /// defined in the AccountAgeCategory.
+    /// defined in the #AccountAgeCategory.
     public readonly AccountAgeCategory AgeCategory;
 
 

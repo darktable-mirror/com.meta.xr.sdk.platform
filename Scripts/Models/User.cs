@@ -21,24 +21,24 @@ namespace Oculus.Platform.Models
   /// [here](https://developer.oculus.com/resources/publish-data-use/).
   public class User
   {
-    /// A potentially non unique displayable name chosen by the User. Could also be
+    /// A potentially non unique displayable name chosen by the user. Could also be
     /// the same as the oculus_ID. This is often the name shown to other users.
     public readonly string DisplayName;
     /// The ID of the user, User#ID. This is a unique value for every individual
-    /// User.
+    /// user.
     public readonly UInt64 ID;
     /// The url of the profile picture that is chosen by the user. Retrieve this
-    /// url by using User#ImageUrl.
+    /// url by using Users.GetLoggedInUser().
     public readonly string ImageURL;
-    /// Managed account info, ManagedInfo, for the user which contains further
-    /// metadata that is only available if the user is a Meta Managed Account(MMA).
-    /// There must be user consent via dialog during installation, your app must
-    /// have DUC enabled, and the app must be admin-approved.
+    /// Managed account info, Models.ManagedInfo, for the user which contains
+    /// further metadata that is only available if the user is a Meta Managed
+    /// Account(MMA). There must be user consent via dialog during installation,
+    /// your app must have DUC enabled, and the app must be admin-approved.
     // May be null. Check before using.
     public readonly ManagedInfo ManagedInfoOptional;
     [Obsolete("Deprecated in favor of ManagedInfoOptional")]
     public readonly ManagedInfo ManagedInfo;
-    /// The oculus ID of the User. This is used across the developer dashboard and
+    /// The oculus ID of the user. This is used across the developer dashboard and
     /// is unique to oculus.
     public readonly string OculusID;
     /// Human readable string of what the user is currently doing. Not intended to
@@ -48,10 +48,10 @@ namespace Oculus.Platform.Models
     /// about deeplinking
     /// [here](https://developer.oculus.com/documentation/unity/ps-deep-linking/).
     public readonly string PresenceDeeplinkMessage;
-    /// If provided, this is the unique API Name that refers to the Destination
-    /// this user is currently at in the app. Read more about destinations
-    /// [here](https://developer.oculus.com/documentation/unity/ps-destinations-
-    /// overview/)
+    /// If provided, this is the unique API Name that refers to the
+    /// Models.Destination this user is currently at in the app. Read more about
+    /// destinations [here](https://developer.oculus.com/documentation/unity/ps-
+    /// destinations-overview/)
     public readonly string PresenceDestinationApiName;
     /// If provided, the lobby session this user is currently at in the
     /// application. If the ApplicationInvite is generated from rich presence, the
@@ -97,7 +97,9 @@ namespace Oculus.Platform.Models
     }
   }
 
-  /// Represents a paginated list of User elements
+  /// Represents a paginated list of Models.User elements. It allows you to
+  /// easily access and manipulate the elements in the paginated list, such as
+  /// the size of the list and if there is a next page of elements available.
   public class UserList : DeserializableList<User> {
     /// Instantiates a C# wrapper class that wraps a native list by pointer. Used internally by Platform SDK to wrap the list.
     public UserList(IntPtr a) {
