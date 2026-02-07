@@ -22,6 +22,10 @@ namespace Oculus.Platform.Models
     /// presence.
     public readonly string LaunchSource;
     public readonly LaunchType LaunchType;
+    /// If provided, the intended lobby the user would like to be in
+    public readonly string LobbySessionID;
+    /// If provided, the intended session the user would like to be in
+    public readonly string MatchSessionID;
     /// A unique identifer to keep track of a user going through the deeplinking
     /// flow
     public readonly string TrackingID;
@@ -38,6 +42,8 @@ namespace Oculus.Platform.Models
       DestinationApiName = CAPI.ovr_LaunchDetails_GetDestinationApiName(o);
       LaunchSource = CAPI.ovr_LaunchDetails_GetLaunchSource(o);
       LaunchType = CAPI.ovr_LaunchDetails_GetLaunchType(o);
+      LobbySessionID = CAPI.ovr_LaunchDetails_GetLobbySessionID(o);
+      MatchSessionID = CAPI.ovr_LaunchDetails_GetMatchSessionID(o);
       TrackingID = CAPI.ovr_LaunchDetails_GetTrackingID(o);
       {
         var pointer = CAPI.ovr_LaunchDetails_GetUsers(o);

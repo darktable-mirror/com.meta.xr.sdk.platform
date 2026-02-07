@@ -2139,6 +2139,22 @@ namespace Oculus.Platform
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
     public static extern LaunchType ovr_LaunchDetails_GetLaunchType(IntPtr obj);
 
+    public static string ovr_LaunchDetails_GetLobbySessionID(IntPtr obj) {
+      var result = StringFromNative(ovr_LaunchDetails_GetLobbySessionID_Native(obj));
+      return result;
+    }
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl, EntryPoint="ovr_LaunchDetails_GetLobbySessionID")]
+    private static extern IntPtr ovr_LaunchDetails_GetLobbySessionID_Native(IntPtr obj);
+
+    public static string ovr_LaunchDetails_GetMatchSessionID(IntPtr obj) {
+      var result = StringFromNative(ovr_LaunchDetails_GetMatchSessionID_Native(obj));
+      return result;
+    }
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl, EntryPoint="ovr_LaunchDetails_GetMatchSessionID")]
+    private static extern IntPtr ovr_LaunchDetails_GetMatchSessionID_Native(IntPtr obj);
+
     public static string ovr_LaunchDetails_GetTrackingID(IntPtr obj) {
       var result = StringFromNative(ovr_LaunchDetails_GetTrackingID_Native(obj));
       return result;
