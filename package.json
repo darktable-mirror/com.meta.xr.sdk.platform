@@ -1,7 +1,7 @@
 {
   "name": "com.meta.xr.sdk.platform",
   "displayName": "Meta XR Platform SDK",
-  "version": "56.0.0-preview",
+  "version": "57.0.0-preview",
   "description": "Use the Platform SDK to create social VR applications. Add Matchmaking, DLC, In-App Purchases, Cloud Storage, Voice Chat, Custom Items, Achievements, and more to your experience using the individual components of the SDK.",
   "samples": [
     {
@@ -21,7 +21,8 @@
       "path": "Samples~/SimplePlatformSample"
     }
   ],
-  "unity": "2020.3",
+  "unity": "2021.3",
+  "unityRelease": "26f1",
   "author": {
     "name": "Meta Platforms, Inc.",
     "url": "https://developer.oculus.com/"
@@ -30,15 +31,15 @@
   "changelogUrl": "https://developer.oculus.com/downloads/package/unity-integration/",
   "licensesUrl": "https://developer.oculus.com/licenses/oculussdk",
   "keywords": [
-    "Meta",
-    "Oculus",
-    "Quest",
-    "XR",
     "SDK",
-    "Platform"
+    "Platform",
+    "XR",
+    "Meta",
+    "Quest",
+    "Oculus"
   ],
   "dependencies": {
-    "com.meta.xr.sdk.utilities": "56.0.0-preview",
+    "com.meta.xr.sdk.utilities": "57.0.0-preview",
     "com.unity.ugui": "1.0.0"
   }
 }
