@@ -21,6 +21,9 @@ namespace Oculus.Platform.Models
     /// The timestamp that represents when the user was granted entitlement to the
     /// Models.Product that was purchased.
     public readonly DateTime GrantTime;
+    /// The unique identifier of a Models.Purchase represents a user's unique
+    /// entitlement to a Models.Product. This value is 0 for shared IAP
+    /// entitlements.
     public readonly string ID;
     /// The Reporting ID feature is not implemented.
     public readonly string ReportingId;

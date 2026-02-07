@@ -1481,14 +1481,19 @@ namespace Oculus.Platform
 
   }
 
-  /// The Group Presence API updates the platform with a user's current
-  /// Destination#ApiName and status, whether they are
-  /// GroupPresenceOptions.SetIsJoinable(),
-  /// GroupPresenceOptions.SetLobbySessionId() and
-  /// GroupPresenceOptions.SetMatchSessionId() information. A user's location can
-  /// be shown both in VR and out of it on social platforms, and can highlight
-  /// popular destinations in your app. Joinable means that a user is in an area
-  /// of your app that supports other users playing with them.
+  /// The Group Presence API currently supports immersive apps and is designed to
+  /// update the platform with a user's current Destination#ApiName and status,
+  /// including whether they are GroupPresenceOptions.SetIsJoinable(), their
+  /// GroupPresenceOptions.SetLobbySessionId(), and
+  /// GroupPresenceOptions.SetMatchSessionId(). This allows a user's location to
+  /// be displayed both in VR and outside of it on social platforms, and
+  /// highlights popular destinations in your app. "Joinable" indicates that a
+  /// user is in an area of your app that supports other users interacting with
+  /// them.
+  ///
+  /// Note These APIs are currently supported only for immersive mode. For non-
+  /// immersive apps, such as regular Android-based panel apps or 2D experiences,
+  /// this functionality is not yet supported.
   public static partial class GroupPresence
   {
     /// Clears the current group presence settings for your app. Use this when a
@@ -2255,6 +2260,28 @@ namespace Oculus.Platform
 
   }
 
+  /// Push notification Models.PushNotificationResult provides a simple and
+  /// efficient way for devices to register for and receive push notifications,
+  /// enabling developers to build engaging and interactive applications that
+  /// deliver timely updates and alerts to users.
+  public static partial class PushNotification
+  {
+    /// Register the device to receive push notification. The registered
+    /// notification id can be fetched by PushNotificationResult#Id.
+    ///
+    public static Request<Models.PushNotificationResult> Register()
+    {
+      if (Core.IsInitialized())
+      {
+        return new Request<Models.PushNotificationResult>(CAPI.ovr_PushNotification_Register());
+      }
+
+      Debug.LogError(Oculus.Platform.Core.PlatformUninitializedError);
+      return null;
+    }
+
+  }
+
   /// Rich Presence has been deprecated in favor of [Group
   /// Presence](https://developers.meta.com/horizon/documentation/unity/ps-group-
   /// presence-overview).
@@ -2350,6 +2377,35 @@ namespace Oculus.Platform
       if (Core.IsInitialized())
       {
         return new Request<Models.BlockedUserList>(CAPI.ovr_User_GetBlockedUsers());
+      }
+
+      Debug.LogError(Oculus.Platform.Core.PlatformUninitializedError);
+      return null;
+    }
+
+    /// Returns a list of linked accounts that are associated with the specified
+    /// service providers.
+    ///
+    /// Customization can be done via UserOptions. Create this object
+    /// withUserOptions(). The params that could be used are:
+    ///
+    /// 1. UserOptions.AddServiceProvider() - returns the list of linked accounts
+    /// that are associated with these specified service providers.
+    ///
+    /// Example custom C++ usage:
+    ///
+    ///   auto options = ovr_UserOptions_Create();
+    ///   ovr_UserOptions_AddServiceProvider(options, ovrServiceProvider_Google);
+    ///   ovr_UserOptions_AddServiceProvider(options, ovrServiceProvider_Dropbox);
+    ///   ovr_User_GetLinkedAccounts(options);
+    ///   ovr_UserOptions_Destroy(options);
+    /// \param userOptions Additional configuration for this request It is optional and the options can be created by UserOptions()
+    ///
+    public static Request<Models.LinkedAccountList> GetLinkedAccounts(UserOptions userOptions)
+    {
+      if (Core.IsInitialized())
+      {
+        return new Request<Models.LinkedAccountList>(CAPI.ovr_User_GetLinkedAccounts((IntPtr)userOptions));
       }
 
       Debug.LogError(Oculus.Platform.Core.PlatformUninitializedError);

@@ -66,7 +66,6 @@ namespace Oculus.Platform
       Room_GetNamedRooms                             = 0x077D6E8C,
       Room_GetSocialRooms                            = 0x61881D76,
       User_CancelRecordingForReportFlow              = 0x03E0D149,
-      User_GetLinkedAccounts                         = 0x5793F456,
       User_GetUserCapabilities                       = 0x121C317C,
       User_LaunchReportFlow                          = 0x5662A011,
       User_LaunchReportFlow2                         = 0x7F835863,
@@ -124,10 +123,6 @@ namespace Oculus.Platform
         case MessageTypeInternal.AbuseReport_LaunchAdvancedReportFlow:
         case MessageTypeInternal.User_LaunchReportFlow2:
           message = new MessageWithLaunchReportFlowResult(messageHandle);
-          break;
-
-        case MessageTypeInternal.User_GetLinkedAccounts:
-          message = new MessageWithLinkedAccountList(messageHandle);
           break;
 
         case MessageTypeInternal.Livestreaming_IsAllowedForApplication:

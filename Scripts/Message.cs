@@ -184,6 +184,7 @@ namespace Oculus.Platform
       Media_ShareToFacebook                              = 0x00E38AEF,
       Notification_MarkAsRead                            = 0x717259E3,
       Party_GetCurrent                                   = 0x47933760,
+      PushNotification_Register                          = 0x663A8B5F,
       RichPresence_Clear                                 = 0x57B752B3,
       RichPresence_GetDestinations                       = 0x586F2D14,
       RichPresence_GetNextDestinationArrayPage           = 0x67367F45,
@@ -193,6 +194,7 @@ namespace Oculus.Platform
       User_Get                                           = 0x6BCF9E47,
       User_GetAccessToken                                = 0x06A85ABE,
       User_GetBlockedUsers                               = 0x7D201556,
+      User_GetLinkedAccounts                             = 0x5793F456,
       User_GetLoggedInUser                               = 0x436F345D,
       User_GetLoggedInUserFriends                        = 0x587C2A8D,
       User_GetLoggedInUserManagedInfo                    = 0x70BA3AEE,
@@ -473,6 +475,8 @@ namespace Oculus.Platform
     public virtual Purchase GetPurchase() { return null; }
     /// Returns the value of the PurchaseList property, or false/null depending on the type of the property.
     public virtual PurchaseList GetPurchaseList() { return null; }
+    /// Returns the value of the PushNotificationResult property, or false/null depending on the type of the property.
+    public virtual PushNotificationResult GetPushNotificationResult() { return null; }
     /// Returns the value of the RejoinDialogResult property, or false/null depending on the type of the property.
     public virtual RejoinDialogResult GetRejoinDialogResult() { return null; }
     /// Returns the value of the SdkAccountList property, or false/null depending on the type of the property.
@@ -706,6 +710,10 @@ namespace Oculus.Platform
           message = new MessageWithLeaderboardDidUpdate(messageHandle);
           break;
 
+        case Message.MessageType.User_GetLinkedAccounts:
+          message = new MessageWithLinkedAccountList(messageHandle);
+          break;
+
         case Message.MessageType.Notification_Livestreaming_StatusChange:
           message = new MessageWithLivestreamingStatus(messageHandle);
           break;
@@ -751,6 +759,10 @@ namespace Oculus.Platform
         case Message.MessageType.IAP_GetViewerPurchases:
         case Message.MessageType.IAP_GetViewerPurchasesDurableCache:
           message = new MessageWithPurchaseList(messageHandle);
+          break;
+
+        case Message.MessageType.PushNotification_Register:
+          message = new MessageWithPushNotificationResult(messageHandle);
           break;
 
         case Message.MessageType.GroupPresence_LaunchRejoinDialog:
@@ -1779,6 +1791,23 @@ namespace Oculus.Platform
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
       var obj = CAPI.ovr_Message_GetPurchaseArray(msg);
       return new PurchaseList(obj);
+    }
+
+  }
+  /// Represents a response from the backend with a typed and structured model payload. See more details here:'https://developer.oculus.com/documentation/native/ps-requests-and-messages/'.
+  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
+  public class MessageWithPushNotificationResult : Message<PushNotificationResult>
+  {
+    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
+    public MessageWithPushNotificationResult(IntPtr c_message) : base(c_message) { }
+    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
+    public override PushNotificationResult GetPushNotificationResult() { return Data; }
+    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
+    protected override PushNotificationResult GetDataFromMessage(IntPtr c_message)
+    {
+      var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
+      var obj = CAPI.ovr_Message_GetPushNotificationResult(msg);
+      return new PushNotificationResult(obj);
     }
 
   }

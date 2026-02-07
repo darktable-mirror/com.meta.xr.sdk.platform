@@ -226,11 +226,13 @@ namespace Oculus.Platform
           PlayerSettings.bundleIdentifier = MakeTextBox(new GUIContent("Bundle Identifier"), PlayerSettings.bundleIdentifier);
 #else
                     BuildTargetGroup buildTargetGroup = EditorUserBuildSettings.selectedBuildTargetGroup;
+#pragma warning disable CS0618 // Type or member is obsolete
                     PlayerSettings.SetApplicationIdentifier(
                       buildTargetGroup,
                       MakeTextBox(
                         new GUIContent("Bundle Identifier"),
                         PlayerSettings.GetApplicationIdentifier(buildTargetGroup)));
+#pragma warning restore CS0618 // Type or member is obsolete
 #endif
                     bool canEnableARM64Support = false;
 #if UNITY_2018_1_OR_NEWER

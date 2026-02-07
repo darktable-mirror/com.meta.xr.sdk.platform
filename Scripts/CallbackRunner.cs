@@ -21,7 +21,9 @@ namespace Oculus.Platform
         /// If the IsPersistantBetweenSceneLoads variable is true, it sets the game object to not be destroyed on load.
         void Awake()
         {
+#pragma warning disable CS0618 // Type or member is obsolete
             var existingCallbackRunner = FindObjectOfType<CallbackRunner>();
+#pragma warning restore CS0618 // Type or member is obsolete
             if (existingCallbackRunner != this)
             {
                 Debug.LogWarning("You only need one instance of CallbackRunner");
