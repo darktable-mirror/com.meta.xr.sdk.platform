@@ -736,6 +736,52 @@ namespace Oculus.Platform
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl, EntryPoint="ovr_Colocation_ShareMap")]
     private static extern ulong ovr_Colocation_ShareMap_Native(IntPtr uuid);
 
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern ulong ovr_Cowatching_GetPresenterData();
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern ulong ovr_Cowatching_GetViewersData();
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern ulong ovr_Cowatching_IsInSession();
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern ulong ovr_Cowatching_JoinSession();
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern ulong ovr_Cowatching_LaunchInviteDialog();
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern ulong ovr_Cowatching_LeaveSession();
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern ulong ovr_Cowatching_RequestToPresent();
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern ulong ovr_Cowatching_ResignFromPresenting();
+
+    public static ulong ovr_Cowatching_SetPresenterData(string video_title, string presenter_data) {
+      IntPtr video_title_native = StringToNative(video_title);
+      IntPtr presenter_data_native = StringToNative(presenter_data);
+      var result = (ovr_Cowatching_SetPresenterData_Native(video_title_native, presenter_data_native));
+      Marshal.FreeCoTaskMem(video_title_native);
+      Marshal.FreeCoTaskMem(presenter_data_native);
+      return result;
+    }
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl, EntryPoint="ovr_Cowatching_SetPresenterData")]
+    private static extern ulong ovr_Cowatching_SetPresenterData_Native(IntPtr video_title, IntPtr presenter_data);
+
+    public static ulong ovr_Cowatching_SetViewerData(string viewer_data) {
+      IntPtr viewer_data_native = StringToNative(viewer_data);
+      var result = (ovr_Cowatching_SetViewerData_Native(viewer_data_native));
+      Marshal.FreeCoTaskMem(viewer_data_native);
+      return result;
+    }
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl, EntryPoint="ovr_Cowatching_SetViewerData")]
+    private static extern ulong ovr_Cowatching_SetViewerData_Native(IntPtr viewer_data);
+
     public static ulong ovr_DeviceApplicationIntegrity_GetAttestationToken(string challenge_nonce) {
       IntPtr challenge_nonce_native = StringToNative(challenge_nonce);
       var result = (ovr_DeviceApplicationIntegrity_GetAttestationToken_Native(challenge_nonce_native));
@@ -1855,6 +1901,43 @@ namespace Oculus.Platform
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
     public static extern bool ovr_ChallengeEntryArray_HasPreviousPage(IntPtr obj);
 
+    public static string ovr_CowatchViewer_GetData(IntPtr obj) {
+      var result = StringFromNative(ovr_CowatchViewer_GetData_Native(obj));
+      return result;
+    }
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl, EntryPoint="ovr_CowatchViewer_GetData")]
+    private static extern IntPtr ovr_CowatchViewer_GetData_Native(IntPtr obj);
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern UInt64 ovr_CowatchViewer_GetId(IntPtr obj);
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern IntPtr ovr_CowatchViewerArray_GetElement(IntPtr obj, UIntPtr index);
+
+    public static string ovr_CowatchViewerArray_GetNextUrl(IntPtr obj) {
+      var result = StringFromNative(ovr_CowatchViewerArray_GetNextUrl_Native(obj));
+      return result;
+    }
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl, EntryPoint="ovr_CowatchViewerArray_GetNextUrl")]
+    private static extern IntPtr ovr_CowatchViewerArray_GetNextUrl_Native(IntPtr obj);
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern UIntPtr ovr_CowatchViewerArray_GetSize(IntPtr obj);
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern bool ovr_CowatchViewerArray_HasNextPage(IntPtr obj);
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern IntPtr ovr_CowatchViewerUpdate_GetDataList(IntPtr obj);
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern UInt64 ovr_CowatchViewerUpdate_GetId(IntPtr obj);
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern bool ovr_CowatchingState_GetInSession(IntPtr obj);
+
     public static uint ovr_DataStore_Contains(IntPtr obj, string key) {
       IntPtr key_native = StringToNative(key);
       var result = (ovr_DataStore_Contains_Native(obj, key_native));
@@ -2387,6 +2470,15 @@ namespace Oculus.Platform
 
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
     public static extern IntPtr ovr_Message_GetChallengeEntryArray(IntPtr obj);
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern IntPtr ovr_Message_GetCowatchViewerArray(IntPtr obj);
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern IntPtr ovr_Message_GetCowatchViewerUpdate(IntPtr obj);
+
+    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
+    public static extern IntPtr ovr_Message_GetCowatchingState(IntPtr obj);
 
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
     public static extern IntPtr ovr_Message_GetDataStore(IntPtr obj);

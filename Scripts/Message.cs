@@ -122,6 +122,17 @@ namespace Oculus.Platform
       Challenges_Join                                    = 0x21248069,
       Challenges_Leave                                   = 0x296116E5,
       Challenges_UpdateInfo                              = 0x1175BE60,
+      Cowatching_GetNextCowatchViewerArrayPage           = 0x1D403932,
+      Cowatching_GetPresenterData                        = 0x49864735,
+      Cowatching_GetViewersData                          = 0x5CD7A24F,
+      Cowatching_IsInSession                             = 0x651B4884,
+      Cowatching_JoinSession                             = 0x6388A554,
+      Cowatching_LaunchInviteDialog                      = 0x22933297,
+      Cowatching_LeaveSession                            = 0x3C9E46CD,
+      Cowatching_RequestToPresent                        = 0x7F79BCAA,
+      Cowatching_ResignFromPresenting                    = 0x4B49C202,
+      Cowatching_SetPresenterData                        = 0x6D1C8906,
+      Cowatching_SetViewerData                           = 0x3CDBE826,
       DeviceApplicationIntegrity_GetIntegrityToken       = 0x3271ABDA,
       Entitlement_GetIsViewerEntitled                    = 0x186B58B1,
       GroupPresence_Clear                                = 0x6DAA9CC3,
@@ -202,6 +213,33 @@ namespace Oculus.Platform
 
       /// Sent to indicate download progress for asset files.
       Notification_AssetFile_DownloadUpdate = 0x2FDD0CCD,
+
+      /// Sent when user is no longer copresent. Cowatching actions should not be
+      /// performed.
+      Notification_Cowatching_ApiNotReady = 0x66093981,
+
+      /// Sent when user is in copresent and cowatching is ready to go.
+      Notification_Cowatching_ApiReady = 0x09956693,
+
+      /// Sent when the current user joins/leaves the cowatching session.
+      Notification_Cowatching_InSessionChanged = 0x0DF93113,
+
+      /// Sent when cowatching api has been initialized. The api is not yet ready at
+      /// this stage.
+      Notification_Cowatching_Initialized = 0x74D948F3,
+
+      /// Sent when the presenter updates the presenter data.
+      Notification_Cowatching_PresenterDataChanged = 0x4E078EEE,
+
+      /// Sent when a user has started a cowatching session whose id is reflected in
+      /// the payload.
+      Notification_Cowatching_SessionStarted = 0x7321939C,
+
+      /// Sent when a cowatching session has ended.
+      Notification_Cowatching_SessionStopped = 0x49E6DBFA,
+
+      /// Sent when a user joins or updates their viewer data.
+      Notification_Cowatching_ViewersDataChanged = 0x68F2F1FF,
 
       /// Sent when the user is finished using the invite panel to send out
       /// invitations. Contains a list of invitees.
@@ -299,6 +337,9 @@ namespace Oculus.Platform
     public virtual Challenge GetChallenge() { return null; }
     public virtual ChallengeEntryList GetChallengeEntryList() { return null; }
     public virtual ChallengeList GetChallengeList() { return null; }
+    public virtual CowatchingState GetCowatchingState() { return null; }
+    public virtual CowatchViewerList GetCowatchViewerList() { return null; }
+    public virtual CowatchViewerUpdate GetCowatchViewerUpdate() { return null; }
     public virtual Dictionary<string, string> GetDataStore() { return null; }
     public virtual DestinationList GetDestinationList() { return null; }
     public virtual GroupPresenceJoinIntent GetGroupPresenceJoinIntent() { return null; }
@@ -461,6 +502,20 @@ namespace Oculus.Platform
           message = new MessageWithChallengeEntryList(messageHandle);
           break;
 
+        case Message.MessageType.Cowatching_GetNextCowatchViewerArrayPage:
+        case Message.MessageType.Cowatching_GetViewersData:
+          message = new MessageWithCowatchViewerList(messageHandle);
+          break;
+
+        case Message.MessageType.Notification_Cowatching_ViewersDataChanged:
+          message = new MessageWithCowatchViewerUpdate(messageHandle);
+          break;
+
+        case Message.MessageType.Cowatching_IsInSession:
+        case Message.MessageType.Notification_Cowatching_InSessionChanged:
+          message = new MessageWithCowatchingState(messageHandle);
+          break;
+
         case Message.MessageType.UserDataStore_PrivateGetEntries:
         case Message.MessageType.UserDataStore_PrivateGetEntryByKey:
           message = new MessageWithDataStoreUnderPrivateUserDataStore(messageHandle);
@@ -479,6 +534,13 @@ namespace Oculus.Platform
         case Message.MessageType.AbuseReport_ReportRequestHandled:
         case Message.MessageType.ApplicationLifecycle_RegisterSessionKey:
         case Message.MessageType.Challenges_Delete:
+        case Message.MessageType.Cowatching_JoinSession:
+        case Message.MessageType.Cowatching_LaunchInviteDialog:
+        case Message.MessageType.Cowatching_LeaveSession:
+        case Message.MessageType.Cowatching_RequestToPresent:
+        case Message.MessageType.Cowatching_ResignFromPresenting:
+        case Message.MessageType.Cowatching_SetPresenterData:
+        case Message.MessageType.Cowatching_SetViewerData:
         case Message.MessageType.Entitlement_GetIsViewerEntitled:
         case Message.MessageType.GroupPresence_Clear:
         case Message.MessageType.GroupPresence_LaunchMultiplayerErrorDialog:
@@ -608,9 +670,16 @@ namespace Oculus.Platform
 
         case Message.MessageType.ApplicationLifecycle_GetSessionKey:
         case Message.MessageType.Application_LaunchOtherApp:
+        case Message.MessageType.Cowatching_GetPresenterData:
         case Message.MessageType.DeviceApplicationIntegrity_GetIntegrityToken:
         case Message.MessageType.Notification_AbuseReport_ReportButtonPressed:
         case Message.MessageType.Notification_ApplicationLifecycle_LaunchIntentChanged:
+        case Message.MessageType.Notification_Cowatching_ApiNotReady:
+        case Message.MessageType.Notification_Cowatching_ApiReady:
+        case Message.MessageType.Notification_Cowatching_Initialized:
+        case Message.MessageType.Notification_Cowatching_PresenterDataChanged:
+        case Message.MessageType.Notification_Cowatching_SessionStarted:
+        case Message.MessageType.Notification_Cowatching_SessionStopped:
         case Message.MessageType.Notification_Voip_MicrophoneAvailabilityStateUpdate:
         case Message.MessageType.Notification_Vrcamera_GetDataChannelMessageUpdate:
         case Message.MessageType.Notification_Vrcamera_GetSurfaceUpdate:
@@ -925,6 +994,42 @@ namespace Oculus.Platform
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
       var obj = CAPI.ovr_Message_GetChallengeEntryArray(msg);
       return new ChallengeEntryList(obj);
+    }
+
+  }
+  public class MessageWithCowatchViewerList : Message<CowatchViewerList>
+  {
+    public MessageWithCowatchViewerList(IntPtr c_message) : base(c_message) { }
+    public override CowatchViewerList GetCowatchViewerList() { return Data; }
+    protected override CowatchViewerList GetDataFromMessage(IntPtr c_message)
+    {
+      var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
+      var obj = CAPI.ovr_Message_GetCowatchViewerArray(msg);
+      return new CowatchViewerList(obj);
+    }
+
+  }
+  public class MessageWithCowatchViewerUpdate : Message<CowatchViewerUpdate>
+  {
+    public MessageWithCowatchViewerUpdate(IntPtr c_message) : base(c_message) { }
+    public override CowatchViewerUpdate GetCowatchViewerUpdate() { return Data; }
+    protected override CowatchViewerUpdate GetDataFromMessage(IntPtr c_message)
+    {
+      var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
+      var obj = CAPI.ovr_Message_GetCowatchViewerUpdate(msg);
+      return new CowatchViewerUpdate(obj);
+    }
+
+  }
+  public class MessageWithCowatchingState : Message<CowatchingState>
+  {
+    public MessageWithCowatchingState(IntPtr c_message) : base(c_message) { }
+    public override CowatchingState GetCowatchingState() { return Data; }
+    protected override CowatchingState GetDataFromMessage(IntPtr c_message)
+    {
+      var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
+      var obj = CAPI.ovr_Message_GetCowatchingState(msg);
+      return new CowatchingState(obj);
     }
 
   }

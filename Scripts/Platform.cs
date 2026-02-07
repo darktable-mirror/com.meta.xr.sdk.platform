@@ -998,6 +998,235 @@ namespace Oculus.Platform
 
   }
 
+  public static partial class Cowatching
+  {
+    /// Presenter data is used to drive a cowatching session. This can be called
+    /// when there is an active cowatching session.
+    ///
+    public static Request<string> GetPresenterData()
+    {
+      if (Core.IsInitialized())
+      {
+        return new Request<string>(CAPI.ovr_Cowatching_GetPresenterData());
+      }
+
+      Debug.LogError(Oculus.Platform.Core.PlatformUninitializedError);
+      return null;
+    }
+
+    /// Get the viewer data of everyone who is in a cowatching session whose data
+    /// was set by Cowatching.SetViewerData(). This can be called when there is an
+    /// active cowatching session.
+    ///
+    public static Request<Models.CowatchViewerList> GetViewersData()
+    {
+      if (Core.IsInitialized())
+      {
+        return new Request<Models.CowatchViewerList>(CAPI.ovr_Cowatching_GetViewersData());
+      }
+
+      Debug.LogError(Oculus.Platform.Core.PlatformUninitializedError);
+      return null;
+    }
+
+    /// Check whether the current user is in the current cowatching session.
+    ///
+    public static Request<Models.CowatchingState> IsInSession()
+    {
+      if (Core.IsInitialized())
+      {
+        return new Request<Models.CowatchingState>(CAPI.ovr_Cowatching_IsInSession());
+      }
+
+      Debug.LogError(Oculus.Platform.Core.PlatformUninitializedError);
+      return null;
+    }
+
+    /// Join the current cowatching session. Viewer data can only be updated by
+    /// users who are in the session.
+    ///
+    public static Request JoinSession()
+    {
+      if (Core.IsInitialized())
+      {
+        return new Request(CAPI.ovr_Cowatching_JoinSession());
+      }
+
+      Debug.LogError(Oculus.Platform.Core.PlatformUninitializedError);
+      return null;
+    }
+
+    /// Launch a dialog for inviting users to cowatch in Copresent Home.
+    ///
+    public static Request LaunchInviteDialog()
+    {
+      if (Core.IsInitialized())
+      {
+        return new Request(CAPI.ovr_Cowatching_LaunchInviteDialog());
+      }
+
+      Debug.LogError(Oculus.Platform.Core.PlatformUninitializedError);
+      return null;
+    }
+
+    /// Leave the current cowatching session. Viewer data will no longer be
+    /// relevant.
+    ///
+    public static Request LeaveSession()
+    {
+      if (Core.IsInitialized())
+      {
+        return new Request(CAPI.ovr_Cowatching_LeaveSession());
+      }
+
+      Debug.LogError(Oculus.Platform.Core.PlatformUninitializedError);
+      return null;
+    }
+
+    /// Request to start a cowatching session as the presenter while copresent in
+    /// home.
+    ///
+    public static Request RequestToPresent()
+    {
+      if (Core.IsInitialized())
+      {
+        return new Request(CAPI.ovr_Cowatching_RequestToPresent());
+      }
+
+      Debug.LogError(Oculus.Platform.Core.PlatformUninitializedError);
+      return null;
+    }
+
+    /// Stop being the presenter. This will end the cowatching session.
+    ///
+    public static Request ResignFromPresenting()
+    {
+      if (Core.IsInitialized())
+      {
+        return new Request(CAPI.ovr_Cowatching_ResignFromPresenting());
+      }
+
+      Debug.LogError(Oculus.Platform.Core.PlatformUninitializedError);
+      return null;
+    }
+
+    /// Set the data that drives a cowatching session. This method is only callable
+    /// by the presenter. Video title cannot exceed 100 characters, and data size
+    /// is limited to 500 characters. The data will be eventually consistent across
+    /// all users.
+    ///
+    public static Request SetPresenterData(string video_title, string presenter_data)
+    {
+      if (Core.IsInitialized())
+      {
+        return new Request(CAPI.ovr_Cowatching_SetPresenterData(video_title, presenter_data));
+      }
+
+      Debug.LogError(Oculus.Platform.Core.PlatformUninitializedError);
+      return null;
+    }
+
+    /// Set the current user's viewer data to be shared with copresent users. This
+    /// can be called when there is an active cowatching session. Data size is
+    /// limited to 500 characters. The data will be eventually consistent across
+    /// all users.
+    ///
+    public static Request SetViewerData(string viewer_data)
+    {
+      if (Core.IsInitialized())
+      {
+        return new Request(CAPI.ovr_Cowatching_SetViewerData(viewer_data));
+      }
+
+      Debug.LogError(Oculus.Platform.Core.PlatformUninitializedError);
+      return null;
+    }
+
+    /// Sent when user is no longer copresent. Cowatching actions should not be
+    /// performed.
+    ///
+    public static void SetApiNotReadyNotificationCallback(Message<string>.Callback callback)
+    {
+      Callback.SetNotificationCallback(
+        Message.MessageType.Notification_Cowatching_ApiNotReady,
+        callback
+      );
+    }
+
+    /// Sent when user is in copresent and cowatching is ready to go.
+    ///
+    public static void SetApiReadyNotificationCallback(Message<string>.Callback callback)
+    {
+      Callback.SetNotificationCallback(
+        Message.MessageType.Notification_Cowatching_ApiReady,
+        callback
+      );
+    }
+
+    /// Sent when the current user joins/leaves the cowatching session.
+    ///
+    public static void SetInSessionChangedNotificationCallback(Message<Models.CowatchingState>.Callback callback)
+    {
+      Callback.SetNotificationCallback(
+        Message.MessageType.Notification_Cowatching_InSessionChanged,
+        callback
+      );
+    }
+
+    /// Sent when cowatching api has been initialized. The api is not yet ready at
+    /// this stage.
+    ///
+    public static void SetInitializedNotificationCallback(Message<string>.Callback callback)
+    {
+      Callback.SetNotificationCallback(
+        Message.MessageType.Notification_Cowatching_Initialized,
+        callback
+      );
+    }
+
+    /// Sent when the presenter updates the presenter data.
+    ///
+    public static void SetPresenterDataChangedNotificationCallback(Message<string>.Callback callback)
+    {
+      Callback.SetNotificationCallback(
+        Message.MessageType.Notification_Cowatching_PresenterDataChanged,
+        callback
+      );
+    }
+
+    /// Sent when a user has started a cowatching session whose id is reflected in
+    /// the payload.
+    ///
+    public static void SetSessionStartedNotificationCallback(Message<string>.Callback callback)
+    {
+      Callback.SetNotificationCallback(
+        Message.MessageType.Notification_Cowatching_SessionStarted,
+        callback
+      );
+    }
+
+    /// Sent when a cowatching session has ended.
+    ///
+    public static void SetSessionStoppedNotificationCallback(Message<string>.Callback callback)
+    {
+      Callback.SetNotificationCallback(
+        Message.MessageType.Notification_Cowatching_SessionStopped,
+        callback
+      );
+    }
+
+    /// Sent when a user joins or updates their viewer data.
+    ///
+    public static void SetViewersDataChangedNotificationCallback(Message<Models.CowatchViewerUpdate>.Callback callback)
+    {
+      Callback.SetNotificationCallback(
+        Message.MessageType.Notification_Cowatching_ViewersDataChanged,
+        callback
+      );
+    }
+
+  }
+
   public static partial class DeviceApplicationIntegrity
   {
     /// Returns Device and Application Integrity Attestation JSON Web Token. The
@@ -2122,6 +2351,30 @@ namespace Oculus.Platform
           CAPI.ovr_HTTP_GetWithMessageType(
             list.NextUrl,
             (int)Message.MessageType.Achievements_GetNextAchievementProgressArrayPage
+          )
+        );
+      }
+
+      Debug.LogError(Oculus.Platform.Core.PlatformUninitializedError);
+      return null;
+    }
+
+  }
+
+  public static partial class Cowatching {
+    public static Request<Models.CowatchViewerList> GetNextCowatchViewerListPage(Models.CowatchViewerList list) {
+      if (!list.HasNextPage)
+      {
+        Debug.LogWarning("Oculus.Platform.GetNextCowatchViewerListPage: List has no next page");
+        return null;
+      }
+
+      if (Core.IsInitialized())
+      {
+        return new Request<Models.CowatchViewerList>(
+          CAPI.ovr_HTTP_GetWithMessageType(
+            list.NextUrl,
+            (int)Message.MessageType.Cowatching_GetNextCowatchViewerArrayPage
           )
         );
       }
