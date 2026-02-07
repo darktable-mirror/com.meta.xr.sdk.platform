@@ -177,14 +177,6 @@ namespace Oculus.Platform
       RichPresence_Set                                   = 0x3C147509,
       UserAgeCategory_Get                                = 0x21CBE0C0,
       UserAgeCategory_Report                             = 0x2E4DD8D6,
-      UserDataStore_PrivateDeleteEntryByKey              = 0x5C896F3E,
-      UserDataStore_PrivateGetEntries                    = 0x6C8A8228,
-      UserDataStore_PrivateGetEntryByKey                 = 0x1C068319,
-      UserDataStore_PrivateWriteEntry                    = 0x41D2828B,
-      UserDataStore_PublicDeleteEntryByKey               = 0x1DD5E5FB,
-      UserDataStore_PublicGetEntries                     = 0x167D4BC2,
-      UserDataStore_PublicGetEntryByKey                  = 0x195C66C6,
-      UserDataStore_PublicWriteEntry                     = 0x34364A0A,
       User_Get                                           = 0x6BCF9E47,
       User_GetAccessToken                                = 0x06A85ABE,
       User_GetBlockedUsers                               = 0x7D201556,
@@ -340,7 +332,6 @@ namespace Oculus.Platform
     public virtual CowatchingState GetCowatchingState() { return null; }
     public virtual CowatchViewerList GetCowatchViewerList() { return null; }
     public virtual CowatchViewerUpdate GetCowatchViewerUpdate() { return null; }
-    public virtual Dictionary<string, string> GetDataStore() { return null; }
     public virtual DestinationList GetDestinationList() { return null; }
     public virtual GroupPresenceJoinIntent GetGroupPresenceJoinIntent() { return null; }
     public virtual GroupPresenceLeaveIntent GetGroupPresenceLeaveIntent() { return null; }
@@ -382,7 +373,6 @@ namespace Oculus.Platform
     public virtual User GetUser() { return null; }
     public virtual UserAccountAgeCategory GetUserAccountAgeCategory() { return null; }
     public virtual UserCapabilityList GetUserCapabilityList() { return null; }
-    public virtual UserDataStoreUpdateResponse GetUserDataStoreUpdateResponse() { return null; }
     public virtual UserList GetUserList() { return null; }
     public virtual UserProof GetUserProof() { return null; }
     public virtual UserReportID GetUserReportID() { return null; }
@@ -514,16 +504,6 @@ namespace Oculus.Platform
         case Message.MessageType.Cowatching_IsInSession:
         case Message.MessageType.Notification_Cowatching_InSessionChanged:
           message = new MessageWithCowatchingState(messageHandle);
-          break;
-
-        case Message.MessageType.UserDataStore_PrivateGetEntries:
-        case Message.MessageType.UserDataStore_PrivateGetEntryByKey:
-          message = new MessageWithDataStoreUnderPrivateUserDataStore(messageHandle);
-          break;
-
-        case Message.MessageType.UserDataStore_PublicGetEntries:
-        case Message.MessageType.UserDataStore_PublicGetEntryByKey:
-          message = new MessageWithDataStoreUnderPublicUserDataStore(messageHandle);
           break;
 
         case Message.MessageType.RichPresence_GetDestinations:
@@ -708,13 +688,6 @@ namespace Oculus.Platform
 
         case Message.MessageType.User_GetNextUserCapabilityArrayPage:
           message = new MessageWithUserCapabilityList(messageHandle);
-          break;
-
-        case Message.MessageType.UserDataStore_PrivateDeleteEntryByKey:
-        case Message.MessageType.UserDataStore_PrivateWriteEntry:
-        case Message.MessageType.UserDataStore_PublicDeleteEntryByKey:
-        case Message.MessageType.UserDataStore_PublicWriteEntry:
-          message = new MessageWithUserDataStoreUpdateResponse(messageHandle);
           break;
 
         case Message.MessageType.User_GetUserProof:
@@ -1030,30 +1003,6 @@ namespace Oculus.Platform
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
       var obj = CAPI.ovr_Message_GetCowatchingState(msg);
       return new CowatchingState(obj);
-    }
-
-  }
-  public class MessageWithDataStoreUnderPrivateUserDataStore : Message<Dictionary<string, string>>
-  {
-    public MessageWithDataStoreUnderPrivateUserDataStore(IntPtr c_message) : base(c_message) { }
-    public override Dictionary<string, string> GetDataStore() { return Data; }
-    protected override Dictionary<string, string> GetDataFromMessage(IntPtr c_message)
-    {
-      var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
-      var obj = CAPI.ovr_Message_GetDataStore(msg);
-      return CAPI.DataStoreFromNative(obj);
-    }
-
-  }
-  public class MessageWithDataStoreUnderPublicUserDataStore : Message<Dictionary<string, string>>
-  {
-    public MessageWithDataStoreUnderPublicUserDataStore(IntPtr c_message) : base(c_message) { }
-    public override Dictionary<string, string> GetDataStore() { return Data; }
-    protected override Dictionary<string, string> GetDataFromMessage(IntPtr c_message)
-    {
-      var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
-      var obj = CAPI.ovr_Message_GetDataStore(msg);
-      return CAPI.DataStoreFromNative(obj);
     }
 
   }
@@ -1555,18 +1504,6 @@ namespace Oculus.Platform
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
       var obj = CAPI.ovr_Message_GetUserCapabilityArray(msg);
       return new UserCapabilityList(obj);
-    }
-
-  }
-  public class MessageWithUserDataStoreUpdateResponse : Message<UserDataStoreUpdateResponse>
-  {
-    public MessageWithUserDataStoreUpdateResponse(IntPtr c_message) : base(c_message) { }
-    public override UserDataStoreUpdateResponse GetUserDataStoreUpdateResponse() { return Data; }
-    protected override UserDataStoreUpdateResponse GetDataFromMessage(IntPtr c_message)
-    {
-      var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
-      var obj = CAPI.ovr_Message_GetUserDataStoreUpdateResponse(msg);
-      return new UserDataStoreUpdateResponse(obj);
     }
 
   }
