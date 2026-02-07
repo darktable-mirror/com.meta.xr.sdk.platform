@@ -32,6 +32,18 @@ public class AppDeeplinkRunner : MonoBehaviour
 
     void Update()
     {
+        // Touch Controller A, Keyboard Ctrl, Mouse LMB
+        if (Input.GetButtonDown("Fire1"))
+            LaunchSelf();
+
+        // Left Touch Controller Down, Keyboard Alt, Mouse RMB
+        if (Input.GetAxis("Vertical") < -0.8f || Input.GetButtonDown("Fire2"))
+            LaunchUnityDeeplinkSample();
+
+        // Left Touch Controller Up, Keyboard Shift, Mouse Middle
+        if (Input.GetAxis("Vertical") > 0.8f || Input.GetButtonDown("Fire3"))
+            LaunchUnrealDeeplinkSample();
+
         if (Application.platform != RuntimePlatform.Android)
             return;
 

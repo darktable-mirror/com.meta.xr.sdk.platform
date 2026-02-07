@@ -8,6 +8,7 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
+  /// Results of the launched block dialog including user actions.
   public class LaunchBlockFlowResult
   {
     /// Whether the viewer successfully blocked the user.

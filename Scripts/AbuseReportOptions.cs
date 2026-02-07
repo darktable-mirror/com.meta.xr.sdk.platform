@@ -14,10 +14,12 @@ namespace Oculus.Platform
       Handle = CAPI.ovr_AbuseReportOptions_Create();
     }
 
+    /// Set whether or not to show the user selection step in the report dialog.
     public void SetPreventPeopleChooser(bool value) {
       CAPI.ovr_AbuseReportOptions_SetPreventPeopleChooser(Handle, value);
     }
 
+    /// The intended entity being reported, whether user or object/content.
     public void SetReportType(AbuseReportType value) {
       CAPI.ovr_AbuseReportOptions_SetReportType(Handle, value);
     }

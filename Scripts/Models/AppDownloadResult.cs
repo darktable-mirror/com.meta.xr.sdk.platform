@@ -8,6 +8,9 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
+  /// Represents the result of a Application.StartAppDownload(),
+  /// Application.CancelAppDownload() or
+  /// Application.InstallAppUpdateAndRelaunch() API call.
   public class AppDownloadResult
   {
     /// Result of the download or install operation returned by the installer

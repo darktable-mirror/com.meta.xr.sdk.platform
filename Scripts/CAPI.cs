@@ -13,9 +13,9 @@ namespace Oculus.Platform
   {
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
   #if UNITY_64 || UNITY_EDITOR_64
-    public const string DLL_NAME = "LibOVRPlatform64_1";
+    public const string DLL_NAME = "LibOVRPlatformImpl64_1";
   #else
-    public const string DLL_NAME = "LibOVRPlatform32_1";
+    public const string DLL_NAME = "LibOVRPlatformImpl32_1";
   #endif
 #elif UNITY_EDITOR || UNITY_EDITOR_64
     public const string DLL_NAME = "ovrplatform";

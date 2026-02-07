@@ -1,7 +1,7 @@
 {
   "name": "com.meta.xr.sdk.platform",
   "displayName": "Meta XR Platform SDK",
-  "version": "66.0.0",
+  "version": "67.0.0",
   "description": "Use the Platform SDK to create social VR applications. Add Matchmaking, DLC, In-App Purchases, Cloud Storage, and more to your experience using the individual components of the SDK.",
   "samples": [
     {
@@ -41,15 +41,14 @@
   "licensesUrl": "https://developer.oculus.com/licenses/oculussdk",
   "licenseMessage": "By adding or using this package you agree to the terms and conditions of the Meta Platforms Technologies SDK License Agreement: https://developer.oculus.com/licenses/oculussdk",
   "keywords": [
-    "Oculus",
-    "Platform",
-    "Meta",
-    "SDK",
+    "XR",
     "Quest",
-    "XR"
+    "Meta",
+    "Platform",
+    "Oculus",
+    "SDK"
   ],
   "dependencies": {
-    "com.meta.xr.sdk.core": "66.0.0",
     "com.unity.ugui": "1.0.0"
   }
 }

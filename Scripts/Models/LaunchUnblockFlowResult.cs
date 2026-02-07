@@ -8,6 +8,7 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
+  /// Results of the launched unblock dialog including user actions.
   public class LaunchUnblockFlowResult
   {
     /// Whether the viewer chose to cancel the unblock flow.

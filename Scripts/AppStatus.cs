@@ -10,24 +10,32 @@ namespace Oculus.Platform
     [Description("UNKNOWN")]
     Unknown,
 
+    /// User has valid entitlement to the app but it is not currently installed on
+    /// the device.
     [Description("ENTITLED")]
     Entitled,
 
+    /// Download of the app is currently queued.
     [Description("DOWNLOAD_QUEUED")]
     DownloadQueued,
 
+    /// Download of the app is currently in progress.
     [Description("DOWNLOADING")]
     Downloading,
 
+    /// Install of the app is currently in progress.
     [Description("INSTALLING")]
     Installing,
 
+    /// App is installed on the device.
     [Description("INSTALLED")]
     Installed,
 
+    /// App is being uninstalled from the device.
     [Description("UNINSTALLING")]
     Uninstalling,
 
+    /// Install of the app is currently queued.
     [Description("INSTALL_QUEUED")]
     InstallQueued,
 

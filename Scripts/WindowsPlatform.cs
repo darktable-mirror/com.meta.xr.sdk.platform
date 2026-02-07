@@ -29,7 +29,13 @@ namespace Oculus.Platform
                 throw new UnityException("AppID must not be null or empty");
             }
 
-            CAPI.ovr_UnityInitWrapperWindows(appId, getCallbackPointer());
+            try {
+                CAPI.ovr_UnityInitWrapperWindows(appId, getCallbackPointer());
+            } catch (DllNotFoundException e) {
+                Debug.LogWarning("Oculus Platform Runtime was not found. Please ensure that the Oculus PC App is installed and up-to-date.");
+                throw e;
+            }
+
             return true;
         }
 
@@ -40,8 +46,13 @@ namespace Oculus.Platform
                 throw new UnityException("AppID must not be null or empty");
             }
 
-            return new Request<Models.PlatformInitialize>(
-                CAPI.ovr_UnityInitWrapperWindowsAsynchronous(appId, getCallbackPointer()));
+            try {
+                return new Request<Models.PlatformInitialize>(
+                    CAPI.ovr_UnityInitWrapperWindowsAsynchronous(appId, getCallbackPointer()));
+            } catch (DllNotFoundException e) {
+                Debug.LogWarning("Oculus Platform Runtime was not found. Please ensure that the Oculus PC App is installed and up-to-date.");
+                throw e;
+            }
         }
     }
 }

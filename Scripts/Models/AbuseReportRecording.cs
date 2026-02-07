@@ -8,6 +8,7 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
+  /// A video recording evidence collected as part of the abuse report.
   public class AbuseReportRecording
   {
     /// A UUID associated with the Abuse Report recording.

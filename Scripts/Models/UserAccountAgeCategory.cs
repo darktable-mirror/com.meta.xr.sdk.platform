@@ -8,6 +8,7 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
+  /// A UserAccountAgeCategory contains the age category for a Meta user.
   public class UserAccountAgeCategory
   {
     /// Age category of the user in Meta account.

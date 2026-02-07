@@ -8,6 +8,8 @@ namespace Oculus.Platform.Models
   using System.Collections.Generic;
   using UnityEngine;
 
+  /// Represents the result of CheckAppDownloadProgress API. This can be used to
+  /// check the progress and the status of an ongoing app download operation.
   public class AppDownloadProgressResult
   {
     /// Total number of bytes that need to be downloaded
