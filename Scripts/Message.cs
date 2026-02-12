@@ -135,17 +135,6 @@ namespace Oculus.Platform
       Challenges_Join                                    = 0x21248069,
       Challenges_Leave                                   = 0x296116E5,
       Challenges_UpdateInfo                              = 0x1175BE60,
-      Cowatching_GetNextCowatchViewerArrayPage           = 0x1D403932,
-      Cowatching_GetPresenterData                        = 0x49864735,
-      Cowatching_GetViewersData                          = 0x5CD7A24F,
-      Cowatching_IsInSession                             = 0x651B4884,
-      Cowatching_JoinSession                             = 0x6388A554,
-      Cowatching_LaunchInviteDialog                      = 0x22933297,
-      Cowatching_LeaveSession                            = 0x3C9E46CD,
-      Cowatching_RequestToPresent                        = 0x7F79BCAA,
-      Cowatching_ResignFromPresenting                    = 0x4B49C202,
-      Cowatching_SetPresenterData                        = 0x6D1C8906,
-      Cowatching_SetViewerData                           = 0x3CDBE826,
       DeviceApplicationIntegrity_GetIntegrityToken       = 0x3271ABDA,
       Entitlement_GetIsViewerEntitled                    = 0x186B58B1,
       GroupPresence_Clear                                = 0x6DAA9CC3,
@@ -221,38 +210,6 @@ namespace Oculus.Platform
 
       /// Sent to indicate download progress for asset files.
       Notification_AssetFile_DownloadUpdate = 0x2FDD0CCD,
-
-      /// Sets a callback function that will be triggered when the user is no longer
-      /// in a copresent state and cowatching actions should not be performed.
-      Notification_Cowatching_ApiNotReady = 0x66093981,
-
-      /// Sets a callback function that will be triggered when the user is in a
-      /// copresent state and cowatching is ready to begin.
-      Notification_Cowatching_ApiReady = 0x09956693,
-
-      /// Sets a callback function that will be triggered when the current user
-      /// joins/leaves the cowatching session.
-      Notification_Cowatching_InSessionChanged = 0x0DF93113,
-
-      /// Sets a callback function that will be triggered when the cowatching API has
-      /// been initialized. At this stage, the API is not yet ready for use.
-      Notification_Cowatching_Initialized = 0x74D948F3,
-
-      /// Sets a callback function that will be triggered when the presenter updates
-      /// the presenter data.
-      Notification_Cowatching_PresenterDataChanged = 0x4E078EEE,
-
-      /// Sets a callback function that will be triggered when a user has started a
-      /// cowatching session, and the ID of the session is reflected in the payload.
-      Notification_Cowatching_SessionStarted = 0x7321939C,
-
-      /// Sets a callback function that will be triggered when a cowatching session
-      /// has ended.
-      Notification_Cowatching_SessionStopped = 0x49E6DBFA,
-
-      /// Sets a callback function that will be triggered when a user joins or
-      /// updates their viewer data.
-      Notification_Cowatching_ViewersDataChanged = 0x68F2F1FF,
 
       /// Sent when the user is finished using the invite panel to send out
       /// invitations. Contains a list of invitees. Parameter: Callback is a function
@@ -405,12 +362,6 @@ namespace Oculus.Platform
     public virtual ChallengeEntryList GetChallengeEntryList() { return null; }
     /// Returns the value of the ChallengeList property, or false/null depending on the type of the property.
     public virtual ChallengeList GetChallengeList() { return null; }
-    /// Returns the value of the CowatchingState property, or false/null depending on the type of the property.
-    public virtual CowatchingState GetCowatchingState() { return null; }
-    /// Returns the value of the CowatchViewerList property, or false/null depending on the type of the property.
-    public virtual CowatchViewerList GetCowatchViewerList() { return null; }
-    /// Returns the value of the CowatchViewerUpdate property, or false/null depending on the type of the property.
-    public virtual CowatchViewerUpdate GetCowatchViewerUpdate() { return null; }
     /// Returns the value of the DestinationList property, or false/null depending on the type of the property.
     public virtual DestinationList GetDestinationList() { return null; }
     /// Returns the value of the GroupPresenceJoinIntent property, or false/null depending on the type of the property.
@@ -617,20 +568,6 @@ namespace Oculus.Platform
           message = new MessageWithChallengeEntryList(messageHandle);
           break;
 
-        case Message.MessageType.Cowatching_GetNextCowatchViewerArrayPage:
-        case Message.MessageType.Cowatching_GetViewersData:
-          message = new MessageWithCowatchViewerList(messageHandle);
-          break;
-
-        case Message.MessageType.Notification_Cowatching_ViewersDataChanged:
-          message = new MessageWithCowatchViewerUpdate(messageHandle);
-          break;
-
-        case Message.MessageType.Cowatching_IsInSession:
-        case Message.MessageType.Notification_Cowatching_InSessionChanged:
-          message = new MessageWithCowatchingState(messageHandle);
-          break;
-
         case Message.MessageType.RichPresence_GetDestinations:
         case Message.MessageType.RichPresence_GetNextDestinationArrayPage:
           message = new MessageWithDestinationList(messageHandle);
@@ -639,13 +576,6 @@ namespace Oculus.Platform
         case Message.MessageType.AbuseReport_ReportRequestHandled:
         case Message.MessageType.ApplicationLifecycle_RegisterSessionKey:
         case Message.MessageType.Challenges_Delete:
-        case Message.MessageType.Cowatching_JoinSession:
-        case Message.MessageType.Cowatching_LaunchInviteDialog:
-        case Message.MessageType.Cowatching_LeaveSession:
-        case Message.MessageType.Cowatching_RequestToPresent:
-        case Message.MessageType.Cowatching_ResignFromPresenting:
-        case Message.MessageType.Cowatching_SetPresenterData:
-        case Message.MessageType.Cowatching_SetViewerData:
         case Message.MessageType.Entitlement_GetIsViewerEntitled:
         case Message.MessageType.GroupPresence_Clear:
         case Message.MessageType.GroupPresence_LaunchMultiplayerErrorDialog:
@@ -779,16 +709,9 @@ namespace Oculus.Platform
 
         case Message.MessageType.ApplicationLifecycle_GetSessionKey:
         case Message.MessageType.Application_LaunchOtherApp:
-        case Message.MessageType.Cowatching_GetPresenterData:
         case Message.MessageType.DeviceApplicationIntegrity_GetIntegrityToken:
         case Message.MessageType.Notification_AbuseReport_ReportButtonPressed:
         case Message.MessageType.Notification_ApplicationLifecycle_LaunchIntentChanged:
-        case Message.MessageType.Notification_Cowatching_ApiNotReady:
-        case Message.MessageType.Notification_Cowatching_ApiReady:
-        case Message.MessageType.Notification_Cowatching_Initialized:
-        case Message.MessageType.Notification_Cowatching_PresenterDataChanged:
-        case Message.MessageType.Notification_Cowatching_SessionStarted:
-        case Message.MessageType.Notification_Cowatching_SessionStopped:
         case Message.MessageType.Notification_Voip_MicrophoneAvailabilityStateUpdate:
         case Message.MessageType.Notification_Vrcamera_GetDataChannelMessageUpdate:
         case Message.MessageType.Notification_Vrcamera_GetSurfaceUpdate:
@@ -1196,57 +1119,6 @@ namespace Oculus.Platform
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
       var obj = CAPI.ovr_Message_GetChallengeEntryArray(msg);
       return new ChallengeEntryList(obj);
-    }
-
-  }
-  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
-  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
-  public class MessageWithCowatchViewerList : Message<CowatchViewerList>
-  {
-    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
-    public MessageWithCowatchViewerList(IntPtr c_message) : base(c_message) { }
-    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
-    public override CowatchViewerList GetCowatchViewerList() { return Data; }
-    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
-    protected override CowatchViewerList GetDataFromMessage(IntPtr c_message)
-    {
-      var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
-      var obj = CAPI.ovr_Message_GetCowatchViewerArray(msg);
-      return new CowatchViewerList(obj);
-    }
-
-  }
-  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
-  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
-  public class MessageWithCowatchViewerUpdate : Message<CowatchViewerUpdate>
-  {
-    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
-    public MessageWithCowatchViewerUpdate(IntPtr c_message) : base(c_message) { }
-    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
-    public override CowatchViewerUpdate GetCowatchViewerUpdate() { return Data; }
-    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
-    protected override CowatchViewerUpdate GetDataFromMessage(IntPtr c_message)
-    {
-      var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
-      var obj = CAPI.ovr_Message_GetCowatchViewerUpdate(msg);
-      return new CowatchViewerUpdate(obj);
-    }
-
-  }
-  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
-  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
-  public class MessageWithCowatchingState : Message<CowatchingState>
-  {
-    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
-    public MessageWithCowatchingState(IntPtr c_message) : base(c_message) { }
-    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
-    public override CowatchingState GetCowatchingState() { return Data; }
-    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
-    protected override CowatchingState GetDataFromMessage(IntPtr c_message)
-    {
-      var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
-      var obj = CAPI.ovr_Message_GetCowatchingState(msg);
-      return new CowatchingState(obj);
     }
 
   }
