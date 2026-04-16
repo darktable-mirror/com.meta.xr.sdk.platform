@@ -170,7 +170,6 @@ namespace Oculus.Platform
       Leaderboard_GetPreviousEntries                     = 0x4901DAC0,
       Leaderboard_WriteEntry                             = 0x117FC8FE,
       Leaderboard_WriteEntryWithSupplementaryMetric      = 0x72C692FA,
-      Media_ShareToFacebook                              = 0x00E38AEF,
       Notification_MarkAsRead                            = 0x717259E3,
       PushNotification_Register                          = 0x663A8B5F,
       RichPresence_Clear                                 = 0x57B752B3,
@@ -434,8 +433,6 @@ namespace Oculus.Platform
     public virtual SdkAccountList GetSdkAccountList() { return null; }
     /// Returns the value of the SendInvitesResult property, or false/null depending on the type of the property.
     public virtual SendInvitesResult GetSendInvitesResult() { return null; }
-    /// Returns the value of the ShareMediaResult property, or false/null depending on the type of the property.
-    public virtual ShareMediaResult GetShareMediaResult() { return null; }
     /// Returns the value of the String property, or false/null depending on the type of the property.
     public virtual string GetString() { return null; }
     /// Returns the value of the SystemVoipState property, or false/null depending on the type of the property.
@@ -701,10 +698,6 @@ namespace Oculus.Platform
 
         case Message.MessageType.GroupPresence_SendInvites:
           message = new MessageWithSendInvitesResult(messageHandle);
-          break;
-
-        case Message.MessageType.Media_ShareToFacebook:
-          message = new MessageWithShareMediaResult(messageHandle);
           break;
 
         case Message.MessageType.ApplicationLifecycle_GetSessionKey:
@@ -1731,23 +1724,6 @@ namespace Oculus.Platform
       var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
       var obj = CAPI.ovr_Message_GetSendInvitesResult(msg);
       return new SendInvitesResult(obj);
-    }
-
-  }
-  /// Represents a response from the backend with a typed and structured model payload. See more details [here](https://developer.oculus.com/documentation/native/ps-requests-and-messages/).
-  /// Your app should constantly check the message queue for messages from the Platform SDK. We recommend that you check the queue every frame for new messages.
-  public class MessageWithShareMediaResult : Message<ShareMediaResult>
-  {
-    /// A typed Message subclass that wraps a native message handle pointer. Used internally by Platform SDK to wrap the message.
-    public MessageWithShareMediaResult(IntPtr c_message) : base(c_message) { }
-    /// Returns the retrieved the model payload. Intended to be used by clients to handle the structured payload.
-    public override ShareMediaResult GetShareMediaResult() { return Data; }
-    /// Retrieves the model payload from the response Message. Used internally by Platform SDK to parse the response into the model.
-    protected override ShareMediaResult GetDataFromMessage(IntPtr c_message)
-    {
-      var msg = CAPI.ovr_Message_GetNativeMessage(c_message);
-      var obj = CAPI.ovr_Message_GetShareMediaResult(msg);
-      return new ShareMediaResult(obj);
     }
 
   }

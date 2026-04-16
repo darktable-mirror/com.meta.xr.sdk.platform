@@ -1594,24 +1594,6 @@ namespace Oculus.Platform
     /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
     /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
     /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
-    public static ulong ovr_Media_ShareToFacebook(string postTextSuggestion, string filePath, MediaContentType contentType) {
-      IntPtr postTextSuggestion_native = StringToNative(postTextSuggestion);
-      IntPtr filePath_native = StringToNative(filePath);
-      var result = (ovr_Media_ShareToFacebook_Native(postTextSuggestion_native, filePath_native, contentType));
-      Marshal.FreeCoTaskMem(postTextSuggestion_native);
-      Marshal.FreeCoTaskMem(filePath_native);
-      return result;
-    }
-
-    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
-    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
-    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
-    [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl, EntryPoint="ovr_Media_ShareToFacebook")]
-    private static extern ulong ovr_Media_ShareToFacebook_Native(IntPtr postTextSuggestion, IntPtr filePath, MediaContentType contentType);
-
-    /// The Meta Quest Platform offers features that you can use to create engaging and social game experiences.
-    /// Supporting objectives: Identity, Social and Community, Engagement, Revenue, and Security.
-    /// See more details at [here](https://developer.oculus.com/reference/platform-unity/latest/).
     [DllImport(DLL_NAME, CallingConvention=CallingConvention.Cdecl)]
     public static extern ulong ovr_NetSync_Connect(IntPtr connect_options);
 

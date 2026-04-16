@@ -23,7 +23,8 @@ MonoBehaviour:
     - name: Platform
     - name: Production
     - name: Publishing
-  thumbnail: {fileID: 2800000, guid: 120ddf7de3b2f2448a083969e5509a8b, type: 3}
+  thumbnail: {fileID: 0}
+  remoteThumbnailContentId: 25180471298304643
   order: 0
   prefab: {fileID: 6202047906858020985, guid: 963a347878c78464a863f2ecb0273474, type: 3}
   externalBlockDependencies: []

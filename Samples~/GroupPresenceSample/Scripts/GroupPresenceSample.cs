@@ -6,6 +6,7 @@ using Oculus.Platform;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 /**
  * This class shows a very simple way to integrate setting the Group Presence
@@ -66,11 +67,6 @@ public class GroupPresenceSample : MonoBehaviour
                  * Listen for future join intents that might come in
                  */
                 GroupPresence.SetJoinIntentReceivedNotificationCallback(OnJoinIntentChangeNotif);
-
-                /**
-                 * Listen for future leave that might come in
-                 */
-                GroupPresence.SetLeaveIntentReceivedNotificationCallback(OnLeaveIntentChangeNotif);
 
                 /**
                  * Listen for the list of users that the current users have invitted
@@ -245,30 +241,6 @@ public class GroupPresenceSample : MonoBehaviour
         }
     }
 
-    // User has interacted with the roster to leave the current destination / lobby / match
-    void OnLeaveIntentChangeNotif(Message<Oculus.Platform.Models.GroupPresenceLeaveIntent> message)
-    {
-        if (message.IsError)
-        {
-            UpdateConsole(message.GetError().Message);
-        }
-        else
-        {
-            var leaveIntent = message.Data;
-
-            var destinationApiName = leaveIntent.DestinationApiName;
-            MatchSessionID = leaveIntent.MatchSessionId;
-            LobbySessionID = leaveIntent.LobbySessionId;
-
-            var detailsString = "-Api Name:\n" + destinationApiName + "\n-Lobby Session Id:\n" + LobbySessionID + "\n-Match Session Id:\n" + MatchSessionID;
-            detailsString += "\n";
-            UpdateConsole("Clearing presence because user wishes to leave:\n" + detailsString);
-
-            // User left
-            GroupPresence.Clear();
-        }
-    }
-
     // User has invited users
     void OnInviteSentNotif(Message<Oculus.Platform.Models.LaunchInvitePanelFlowResult> message)
     {
@@ -427,56 +399,56 @@ public class GroupPresenceSample : MonoBehaviour
     private bool PressAButton()
     {
 #if USE_OVRINPUT
-    return OVRInput.GetUp(OVRInput.Button.One) || Input.GetKeyUp(KeyCode.A);
+        return OVRInput.GetUp(OVRInput.Button.One) || (Keyboard.current != null && Keyboard.current.aKey.wasReleasedThisFrame);
 #else
-        return Input.GetKeyUp(KeyCode.A);
+        return Keyboard.current != null && Keyboard.current.aKey.wasReleasedThisFrame;
 #endif
     }
 
     private bool PressBButton()
     {
 #if USE_OVRINPUT
-    return OVRInput.GetUp(OVRInput.Button.Two) || Input.GetKeyUp(KeyCode.B);
+        return OVRInput.GetUp(OVRInput.Button.Two) || (Keyboard.current != null && Keyboard.current.bKey.wasReleasedThisFrame);
 #else
-        return Input.GetKeyUp(KeyCode.B);
+        return Keyboard.current != null && Keyboard.current.bKey.wasReleasedThisFrame;
 #endif
     }
 
     private bool PressXButton()
     {
 #if USE_OVRINPUT
-    return OVRInput.GetUp(OVRInput.Button.Three) || Input.GetKeyUp(KeyCode.X);
+        return OVRInput.GetUp(OVRInput.Button.Three) || (Keyboard.current != null && Keyboard.current.xKey.wasReleasedThisFrame);
 #else
-        return Input.GetKeyUp(KeyCode.X);
+        return Keyboard.current != null && Keyboard.current.xKey.wasReleasedThisFrame;
 #endif
     }
 
     private bool PressYButton()
     {
 #if USE_OVRINPUT
-    return OVRInput.GetUp(OVRInput.Button.Four) || Input.GetKeyUp(KeyCode.Y);
+        return OVRInput.GetUp(OVRInput.Button.Four) || (Keyboard.current != null && Keyboard.current.yKey.wasReleasedThisFrame);
 #else
-        return Input.GetKeyUp(KeyCode.Y);
+        return Keyboard.current != null && Keyboard.current.yKey.wasReleasedThisFrame;
 #endif
     }
 
     private bool PressUp()
     {
 #if USE_OVRINPUT
-    Vector2 axis = OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick);
-    return (axis.y > 0.2 || Input.GetKeyUp(KeyCode.UpArrow));
+        Vector2 axis = OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick);
+        return (axis.y > 0.2 || (Keyboard.current != null && Keyboard.current.upArrowKey.wasReleasedThisFrame));
 #else
-        return Input.GetKeyUp(KeyCode.UpArrow);
+        return Keyboard.current != null && Keyboard.current.upArrowKey.wasReleasedThisFrame;
 #endif
     }
 
     private bool PressDown()
     {
 #if USE_OVRINPUT
-    Vector2 axis = OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick);
-    return (axis.y < -0.2 || Input.GetKeyUp(KeyCode.DownArrow));
+        Vector2 axis = OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick);
+        return (axis.y < -0.2 || (Keyboard.current != null && Keyboard.current.downArrowKey.wasReleasedThisFrame));
 #else
-        return Input.GetKeyUp(KeyCode.DownArrow);
+        return Keyboard.current != null && Keyboard.current.downArrowKey.wasReleasedThisFrame;
 #endif
     }
 

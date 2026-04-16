@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class AppDeeplinkRunner : MonoBehaviour
 {
@@ -20,6 +21,10 @@ public class AppDeeplinkRunner : MonoBehaviour
 
     Oculus.Platform.Models.LaunchDetails _details;
 
+    // Track previous thumbstick state to detect "press" moments
+    bool _wasThumbstickDown;
+    bool _wasThumbstickUp;
+
     void Start()
     {
         // init ovr platform
@@ -32,17 +37,41 @@ public class AppDeeplinkRunner : MonoBehaviour
 
     void Update()
     {
+        // Get current input states
+        var gamepad = Gamepad.current;
+        var keyboard = Keyboard.current;
+        var mouse = Mouse.current;
+
         // Touch Controller A, Keyboard Ctrl, Mouse LMB
-        if (Input.GetButtonDown("Fire1"))
+        bool fire1Pressed = (gamepad != null && gamepad.buttonSouth.wasPressedThisFrame) ||
+                            (keyboard != null && keyboard.ctrlKey.wasPressedThisFrame) ||
+                            (mouse != null && mouse.leftButton.wasPressedThisFrame);
+        if (fire1Pressed)
             LaunchSelf();
 
+        // Check thumbstick vertical axis for up/down
+        float vertical = gamepad != null ? gamepad.leftStick.y.ReadValue() : 0f;
+        bool isThumbstickDown = vertical < -0.8f;
+        bool isThumbstickUp = vertical > 0.8f;
+
         // Left Touch Controller Down, Keyboard Alt, Mouse RMB
-        if (Input.GetAxis("Vertical") < -0.8f || Input.GetButtonDown("Fire2"))
+        bool fire2Pressed = (gamepad != null && gamepad.buttonEast.wasPressedThisFrame) ||
+                            (keyboard != null && keyboard.altKey.wasPressedThisFrame) ||
+                            (mouse != null && mouse.rightButton.wasPressedThisFrame);
+        bool thumbstickDownPressed = isThumbstickDown && !_wasThumbstickDown;
+        if (thumbstickDownPressed || fire2Pressed)
             LaunchUnityDeeplinkSample();
 
         // Left Touch Controller Up, Keyboard Shift, Mouse Middle
-        if (Input.GetAxis("Vertical") > 0.8f || Input.GetButtonDown("Fire3"))
+        bool fire3Pressed = (gamepad != null && gamepad.buttonWest.wasPressedThisFrame) ||
+                            (keyboard != null && keyboard.shiftKey.wasPressedThisFrame) ||
+                            (mouse != null && mouse.middleButton.wasPressedThisFrame);
+        bool thumbstickUpPressed = isThumbstickUp && !_wasThumbstickUp;
+        if (thumbstickUpPressed || fire3Pressed)
             LaunchUnrealDeeplinkSample();
+
+        _wasThumbstickDown = isThumbstickDown;
+        _wasThumbstickUp = isThumbstickUp;
 
         if (Application.platform != RuntimePlatform.Android)
             return;

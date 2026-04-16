@@ -39,7 +39,7 @@ namespace Oculus.Platform
 
             OVRPlugin.SendUnifiedEvent(
                 ovrBool,
-                productType,
+                OVRPlugin.ProductType.PlatformSdk,
                 eventName,
                 event_metadata_json,
                 projectName,

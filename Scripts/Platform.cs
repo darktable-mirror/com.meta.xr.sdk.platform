@@ -1650,28 +1650,6 @@ namespace Oculus.Platform
       );
     }
 
-    /// Sent when the user has chosen to leave the destination/lobby/match from the
-    /// Oculus menu. Read the specific fields to check the user is currently from
-    /// the destination/lobby/match and take the appropriate actions to remove
-    /// them. Update the user's presence clearing the appropriate fields to
-    /// indicate the user has left. Parameter: Callback is a function that will be
-    /// called when the user has chosen to leave the destination/lobby/match.
-    /// Models.GroupPresenceLeaveIntent has 3 members: string
-    /// GroupPresenceLeaveIntent#DestinationApiName - The destination the current
-    /// user wants to leave. string GroupPresenceLeaveIntent#LobbySessionId - The
-    /// lobby session the current user wants to leave. string
-    /// GroupPresenceLeaveIntent#MatchSessionId - The match session the current
-    /// user wants to leave.
-    ///
-    public static void SetLeaveIntentReceivedNotificationCallback(Message<Models.GroupPresenceLeaveIntent>.Callback callback)
-    {
-      EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_GroupPresence_LeaveIntentReceivedNotificationCallback", "");
-      Callback.SetNotificationCallback(
-        Message.MessageType.Notification_GroupPresence_LeaveIntentReceived,
-        callback
-      );
-    }
-
   }
 
   /// The IAP (In-App Purchases) API provides methods for managing in-app
@@ -1990,42 +1968,6 @@ namespace Oculus.Platform
         Message.MessageType.Notification_Livestreaming_StatusChange,
         callback
       );
-    }
-
-  }
-
-  /// The media API provides a convenient and seamless way to share local media
-  /// files, such as photos (currently the only supported type), directly to
-  /// Facebook from within your application. This allows users to easily share
-  /// their favorite moments and memories with their friends and family on the
-  /// world's largest social media platform. With just a few simple steps, you
-  /// can enable your users to share their media files to Facebook, making it
-  /// easy for them to spread the word about your app and increase its
-  /// visibility. The payload returned for the sharing result is defined as
-  /// Models.ShareMediaResult.
-  public static partial class Media
-  {
-    /// Launch the Share to Facebook modal, allowing users to share local media
-    /// files to Facebook. Accepts a postTextSuggestion string for the default text
-    /// of the Facebook post. Requires a filePath string as the path to the image
-    /// to be shared to Facebook. This image should be located in your app's
-    /// internal storage directory. Requires a contentType indicating the type of
-    /// media to be shared (only 'photo' is currently supported). The payload for
-    /// the result is defined as Models.ShareMediaResult.
-    /// \param postTextSuggestion this text will prepopulate the facebook status text-input box within the share modal
-    /// \param filePath path to the file to be shared to facebook
-    /// \param contentType content type of the media to be shared
-    ///
-    public static Request<Models.ShareMediaResult> ShareToFacebook(string postTextSuggestion, string filePath, MediaContentType contentType)
-    {
-      if (Core.IsInitialized())
-      {
-        EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_" + "Media" + "_" + "ShareToFacebook", "");
-        return new Request<Models.ShareMediaResult>(CAPI.ovr_Media_ShareToFacebook(postTextSuggestion, filePath, contentType));
-      }
-
-      Debug.LogError(Oculus.Platform.Core.PlatformUninitializedError);
-      return null;
     }
 
   }

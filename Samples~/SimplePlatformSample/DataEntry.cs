@@ -2,6 +2,7 @@ namespace Oculus.Platform.Samples.SimplePlatformSample
 {
     using UnityEngine;
     using UnityEngine.UI;
+    using UnityEngine.InputSystem;
     using System;
     using System.Collections;
     using System.Collections.Generic;
@@ -24,7 +25,10 @@ namespace Oculus.Platform.Samples.SimplePlatformSample
         {
             string currentText = GetComponent<InputField>().text;
 
-            if (Input.GetKey(KeyCode.Return))
+            var keyboard = Keyboard.current;
+            bool returnPressed = keyboard != null && keyboard.enterKey.wasPressedThisFrame;
+
+            if (returnPressed)
             {
                 if (currentText != "")
                 {

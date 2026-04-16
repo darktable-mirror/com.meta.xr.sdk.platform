@@ -2,7 +2,8 @@
     "name": "Oculus.Platform",
     "rootNamespace": "",
     "references": [
-        "Oculus.VR"
+        "Oculus.VR",
+        "Unity.InputSystem"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
