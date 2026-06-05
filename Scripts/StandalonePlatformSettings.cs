@@ -1,8 +1,14 @@
+// (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+
 namespace Oculus.Platform
 {
     using System.Text.RegularExpressions;
-    /// Represents standalone platform settings in the Unity editor.These settings are used for StandalonePlatform initialization.
+
+    /// <summary>
+    /// Represents standalone platform settings in the Unity editor.
+    /// These settings are used for StandalonePlatform initialization.
     /// It contains properties and methods to manage test user credentials such as email, password, and access token.
+    /// </summary>
     public sealed class StandalonePlatformSettings
     {
 #if UNITY_EDITOR
@@ -13,9 +19,9 @@ namespace Oculus.Platform
 
         private static void ClearOldStoredPassword()
         {
-          // Ensure that we are not storing the old passwords anywhere on the machine
-          string key = "OculusStandaloneUserPassword_" + _ProjectName;
-          if (UnityEditor.EditorPrefs.HasKey(key))
+            // Ensure that we are not storing the old passwords anywhere on the machine
+            string key = "OculusStandaloneUserPassword_" + _ProjectName;
+            if (UnityEditor.EditorPrefs.HasKey(key))
             {
                 UnityEditor.EditorPrefs.SetString(key, "0000");
                 UnityEditor.EditorPrefs.DeleteKey(key);
@@ -23,7 +29,10 @@ namespace Oculus.Platform
         }
 #endif
 
-        /// Represents the test user's email address for the Unity Editor settings. It has two methods to get and set the email address of the test user.
+        /// <summary>
+        /// Represents the test user's email address for the Unity Editor settings.
+        /// It has two methods to get and set the email address of the test user.
+        /// </summary>
         public static string OculusPlatformTestUserEmail
         {
             get
@@ -41,7 +50,11 @@ namespace Oculus.Platform
 #endif
             }
         }
-        /// Represents the test user's password for the Unity Editor settings. It has two methods to get and set the password of the test user.
+
+        /// <summary>
+        /// Represents the test user's password for the Unity Editor settings.
+        /// It has two methods to get and set the password of the test user.
+        /// </summary>
         public static string OculusPlatformTestUserPassword
         {
             get
@@ -61,7 +74,12 @@ namespace Oculus.Platform
 #endif
             }
         }
-        /// Represents the test user's access token for the Unity Editor settings. It has two methods to get and set the access token of the test user. It is used by StandalonePlatform.InitializeInEditor().
+
+        /// <summary>
+        /// Represents the test user's access token for the Unity Editor settings.
+        /// It has two methods to get and set the access token of the test user.
+        /// It is used by StandalonePlatform initialization in the Editor.
+        /// </summary>
         public static string OculusPlatformTestUserAccessToken
         {
             get

@@ -1,3 +1,5 @@
+// (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+
 #if USING_XR_MANAGEMENT && USING_XR_SDK_OCULUS
 #define USING_XR_SDK
 #endif
@@ -12,8 +14,10 @@ namespace Oculus.Platform
     using UnityEngine;
     using UnityEngine.Networking;
 
-    // This classes implements a UI to edit the PlatformSettings class.
-    // The UI is accessible from a the menu bar via: Oculus Platform -> Edit Settings
+    /// <summary>
+    /// This class implements a UI to edit the PlatformSettings class.
+    /// The UI is accessible from the menu bar via: Meta/Platform/Edit Settings
+    /// </summary>
     [CustomEditor(typeof(PlatformSettings))]
     public class OculusPlatformSettingsEditor : Editor
     {
@@ -28,7 +32,7 @@ namespace Oculus.Platform
         {
             isUnityEditorSettingsExpanded = true;
             isBuildSettingsExpanded = true;
-            EventManager.SendUnifiedEvent(true, "platform_sdk", "PSDK_EDITOR_SETTINGS_PANEL_OPENED", "");
+            EventManager.SendUnifiedEvent(true, "platform_sdk", "HzPSDK_EDITOR_SETTINGS_PANEL_OPENED");
         }
 
         [UnityEditor.MenuItem("Meta/Platform/Edit Settings")]
@@ -54,15 +58,15 @@ namespace Oculus.Platform
             }
 
 #if UNITY_ANDROID
-      if (String.IsNullOrEmpty(PlatformSettings.MobileAppID))
-      {
-        EditorGUILayout.HelpBox("Please enter a valid App ID for the Meta Quest line of products", MessageType.Error);
-      }
-      else
-      {
-        var msg = "Configured to connect with App ID " + PlatformSettings.MobileAppID;
-        EditorGUILayout.HelpBox(msg, MessageType.Info);
-      }
+            if (String.IsNullOrEmpty(PlatformSettings.MobileAppID))
+            {
+                EditorGUILayout.HelpBox("Please enter a valid App ID for the Meta Quest line of products", MessageType.Error);
+            }
+            else
+            {
+                var msg = "Configured to connect with App ID " + PlatformSettings.MobileAppID;
+                EditorGUILayout.HelpBox(msg, MessageType.Info);
+            }
 #else
             if (String.IsNullOrEmpty(PlatformSettings.AppID))
             {
@@ -96,14 +100,14 @@ namespace Oculus.Platform
                     if (PlatformSettings.UseStandalonePlatform)
                     {
                         if (!HasTestAccessToken &&
-                (String.IsNullOrEmpty(StandalonePlatformSettings.OculusPlatformTestUserEmail) ||
-                String.IsNullOrEmpty(StandalonePlatformSettings.OculusPlatformTestUserPassword)))
+                            (String.IsNullOrEmpty(StandalonePlatformSettings.OculusPlatformTestUserEmail) ||
+                            String.IsNullOrEmpty(StandalonePlatformSettings.OculusPlatformTestUserPassword)))
                         {
                             EditorGUILayout.HelpBox("Please enter a valid user credentials.", MessageType.Error);
                         }
                         else
                         {
-                            var msg = "The Unity editor will use the supplied test user credentials and operate in standalone mode.  Some user data will be mocked.";
+                            var msg = "The Unity editor will use the supplied test user credentials and operate in standalone mode. Some user data will be mocked.";
                             EditorGUILayout.HelpBox(msg, MessageType.Info);
                         }
                     }
@@ -114,11 +118,11 @@ namespace Oculus.Platform
                     }
 
                     var useStandaloneLabel = "Use Standalone Platform [?]";
-                    var useStandaloneHint = "If this is checked your app will use a debug platform with the User info below.  "
-              + "Otherwise your app will connect to the Oculus Platform.  This setting only applies to the Unity Editor on Windows";
+                    var useStandaloneHint = "If this is checked your app will use a debug platform with the User info below. "
+                        + "Otherwise your app will connect to the Oculus Platform. This setting only applies to the Unity Editor on Windows";
 
                     PlatformSettings.UseStandalonePlatform =
-              MakeToggle(new GUIContent(useStandaloneLabel, useStandaloneHint), PlatformSettings.UseStandalonePlatform);
+                        MakeToggle(new GUIContent(useStandaloneLabel, useStandaloneHint), PlatformSettings.UseStandalonePlatform);
 
                     if (PlatformSettings.UseStandalonePlatform)
                     {
@@ -126,7 +130,7 @@ namespace Oculus.Platform
                         var useMobileAppIdHint = "If this is checked Platform SDK will use Mobile App ID instead of Rift ID when testing in editor";
 
                         PlatformSettings.UseMobileAppIDInEditor =
-                  MakeToggle(new GUIContent(useMobileAppIdLabel, useMobileAppIdHint), PlatformSettings.UseMobileAppIDInEditor);
+                            MakeToggle(new GUIContent(useMobileAppIdLabel, useMobileAppIdHint), PlatformSettings.UseMobileAppIDInEditor);
                     }
                     else
                     {
@@ -139,15 +143,15 @@ namespace Oculus.Platform
                     {
                         var emailLabel = "Test User Email: ";
                         var emailHint = "Test users can be configured at " +
-                  "https://developer.oculus.com/manage/organizations/<your org ID>/testusers " +
-                  "however any valid Oculus account email may be used.";
+                            "https://developer.oculus.com/manage/organizations/<your org ID>/testusers " +
+                            "however any valid Oculus account email may be used.";
                         StandalonePlatformSettings.OculusPlatformTestUserEmail =
-                  MakeTextBox(new GUIContent(emailLabel, emailHint), StandalonePlatformSettings.OculusPlatformTestUserEmail);
+                            MakeTextBox(new GUIContent(emailLabel, emailHint), StandalonePlatformSettings.OculusPlatformTestUserEmail);
 
                         var passwdLabel = "Test User Password: ";
                         var passwdHint = "Password associated with the email address.";
                         StandalonePlatformSettings.OculusPlatformTestUserPassword =
-                  MakePasswordBox(new GUIContent(passwdLabel, passwdHint), StandalonePlatformSettings.OculusPlatformTestUserPassword);
+                            MakePasswordBox(new GUIContent(passwdLabel, passwdHint), StandalonePlatformSettings.OculusPlatformTestUserPassword);
 
                         var isLoggingIn = (getAccessTokenRequest != null);
                         var loginLabel = (!isLoggingIn) ? "Login" : "Logging in...";
@@ -211,20 +215,20 @@ namespace Oculus.Platform
                 {
                     PlayerSettings.bundleVersion = MakeTextBox(new GUIContent("Bundle Version"), PlayerSettings.bundleVersion);
 #if UNITY_5_3 || UNITY_5_4 || UNITY_5_5
-          PlayerSettings.bundleIdentifier = MakeTextBox(new GUIContent("Bundle Identifier"), PlayerSettings.bundleIdentifier);
+                    PlayerSettings.bundleIdentifier = MakeTextBox(new GUIContent("Bundle Identifier"), PlayerSettings.bundleIdentifier);
 #else
                     BuildTargetGroup buildTargetGroup = EditorUserBuildSettings.selectedBuildTargetGroup;
-#pragma warning disable CS0618 // Type or member is obsolete
+#pragma warning disable CS0618
                     PlayerSettings.SetApplicationIdentifier(
-                      buildTargetGroup,
-                      MakeTextBox(
-                        new GUIContent("Bundle Identifier"),
-                        PlayerSettings.GetApplicationIdentifier(buildTargetGroup)));
-#pragma warning restore CS0618 // Type or member is obsolete
+                        buildTargetGroup,
+                        MakeTextBox(
+                            new GUIContent("Bundle Identifier"),
+                            PlayerSettings.GetApplicationIdentifier(buildTargetGroup)));
+#pragma warning restore CS0618
 #endif
                     bool canEnableARM64Support = false;
 #if UNITY_2018_1_OR_NEWER
-          canEnableARM64Support = true;
+                    canEnableARM64Support = true;
 #endif
                     if (!canEnableARM64Support)
                     {
@@ -249,7 +253,7 @@ namespace Oculus.Platform
             EditorGUILayout.Separator();
 
 #if UNITY_EDITOR_WIN
-      EditorGUILayout.HelpBox("For full Unity logs, please check C:\\Users\\<username>\\AppData\\Local\\Unity\\Editor\\Editor.log", MessageType.Info);
+            EditorGUILayout.HelpBox("For full Unity logs, please check C:\\Users\\<username>\\AppData\\Local\\Unity\\Editor\\Editor.log", MessageType.Info);
 #endif
         }
 
@@ -372,7 +376,6 @@ namespace Oculus.Platform
             }
         }
 
-        // TODO: Merge this with core utilities plugin updater functionality. Piggybacking here to avoid an orphaned delete in the future.
         private const string PluginSubPathAndroid32 = @"/Plugins/Android32/libovrplatformloader.so";
         private const string PluginSubPathAndroid64 = @"/Plugins/Android64/libovrplatformloader.so";
         private const string PluginDisabledSuffix = @".disabled";
@@ -390,7 +393,6 @@ namespace Oculus.Platform
 
         private static string GetPlatformRootPath()
         {
-            // use the path to OculusPluginUpdaterStub as a relative path anchor point
             var so = ScriptableObject.CreateInstance(typeof(OculusPluginUpdaterStub));
             var script = MonoScript.FromScriptableObject(so);
             string assetPath = AssetDatabase.GetAssetPath(script);
@@ -418,7 +420,6 @@ namespace Oculus.Platform
             return path;
         }
 
-        //[UnityEditor.MenuItem("Oculus/Platform/EnforcePluginPlatformSettings")]
         public static void EnforcePluginPlatformSettings()
         {
             EnforcePluginPlatformSettings(PluginPlatform.Android32);
@@ -457,7 +458,7 @@ namespace Oculus.Platform
                 pi.SetCompatibleWithPlatform(BuildTarget.StandaloneLinuxUniversal, false);
 #endif
 #if UNITY_2017_3_OR_NEWER
-        pi.SetCompatibleWithPlatform(BuildTarget.StandaloneOSX, false);
+                pi.SetCompatibleWithPlatform(BuildTarget.StandaloneOSX, false);
 #else
                 pi.SetCompatibleWithPlatform(BuildTarget.StandaloneOSXUniversal, false);
                 pi.SetCompatibleWithPlatform(BuildTarget.StandaloneOSXIntel, false);
@@ -515,7 +516,6 @@ namespace Oculus.Platform
             AssetDatabase.Refresh();
             AssetDatabase.SaveAssets();
 
-            // Force reserialization of platform settings meta data
             EnforcePluginPlatformSettings(platform);
         }
 

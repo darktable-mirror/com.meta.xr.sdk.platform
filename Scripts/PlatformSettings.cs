@@ -1,3 +1,5 @@
+// (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+
 namespace Oculus.Platform
 {
     using UnityEngine;
@@ -6,41 +8,45 @@ namespace Oculus.Platform
 #if UNITY_EDITOR
     [UnityEditor.InitializeOnLoad]
 #endif
-    /**
-     * This class contains the configurations for the platform settings of a Model.Application. To modify the values, there is an editor accessible from the menu bar via: Oculus Platform -> Edit Settings. This is important for initializing the Platform SDK.
-    */
+    /// <summary>
+    /// This class contains the configurations for the platform settings of a Model.Application.
+    /// To modify the values, there is an editor accessible from the menu bar via: Meta/Platform/Edit Settings.
+    /// This is important for initializing the Platform SDK.
+    /// </summary>
     public sealed class PlatformSettings : ScriptableObject
     {
-        /**
-        * This is the ID that belongs to your Models.Application. You can find this on the Oculus Dashboard. This is will be used to build the rift/windows target.
-        */
+        /// <summary>
+        /// This is the ID that belongs to your Models.Application. You can find this on the Meta Dashboard.
+        /// This will be used to build the rift/windows target.
+        /// </summary>
         public static string AppID
         {
             get { return Instance.ovrAppID; }
             set { Instance.ovrAppID = value; }
         }
 
-        /**
-        * This is the ID that belongs to your Models.application. You can find this on the Oculus Dashboard. This will be used to build the android target.
-        */
+        /// <summary>
+        /// This is the ID that belongs to your Models.application. You can find this on the Meta Dashboard.
+        /// This will be used to build the android target.
+        /// </summary>
         public static string MobileAppID
         {
             get { return Instance.ovrMobileAppID; }
             set { Instance.ovrMobileAppID = value; }
         }
 
-        /**
-        * This is a flag that determines whether your app will build using the Oculus Platform or a debug platform.
-        */
+        /// <summary>
+        /// This is a flag that determines whether your app will build using the Oculus Platform or a debug platform.
+        /// </summary>
         public static bool UseStandalonePlatform
         {
             get { return Instance.ovrUseStandalonePlatform; }
             set { Instance.ovrUseStandalonePlatform = value; }
         }
 
-        /**
-        * This is a flag that determines whethe Platform SDK will use the mobile app id instead of the rift app id in the editor.
-        */
+        /// <summary>
+        /// This is a flag that determines whether Platform SDK will use the mobile app id instead of the rift app id in the editor.
+        /// </summary>
         public static bool UseMobileAppIDInEditor
         {
             get { return Instance.ovrUseMobileAppIDInEditor; }
