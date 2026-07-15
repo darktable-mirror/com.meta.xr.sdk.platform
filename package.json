@@ -1,7 +1,7 @@
 {
   "name": "com.meta.xr.sdk.platform",
   "displayName": "Meta XR Platform SDK",
-  "version": "203.0.0",
+  "version": "203.0.1",
   "description": "Meta XR Platform SDK",
   "samples": [
     {
