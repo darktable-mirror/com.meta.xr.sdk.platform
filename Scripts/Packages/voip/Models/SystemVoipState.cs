@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<cd963f521045d25f81c41a8b1743c97a>>
+ * @generated SignedSource<<47a6aaf28c520da767c77a0d4999c996>>
  */
 
 #pragma warning disable 0618
@@ -21,16 +21,13 @@ namespace Oculus.Platform.Models
     /// contains different statuses that is used to control the microphone and
     /// input/output for commands or chat in your application. You can read more
     /// about system voip
-    /// [here](https://developer.oculus.com/documentation/{{platform_doc_path}}/ps-
-    /// parties/#voip-options).
+    /// [here](https://developer.oculus.com/documentation/unity/ps-parties/#voip-options).
     [Preserve]
     public class SystemVoipState
     {
         /// A flag that is used to indicate the current state of the microphone. The
-        /// status can be of the following types: - Unknown:
-        /// @internal_link(horizon.platform.voip.enums.VoipMuteState#unknown) - Muted:
-        /// @internal_link(horizon.platform.voip.enums.VoipMuteState#muted) - Unmuted:
-        /// @internal_link(horizon.platform.voip.enums.VoipMuteState#unmuted)
+        /// status can be of the following types: - Unknown: VoipMuteState.Unknown -
+        /// Muted: VoipMuteState.Muted - Unmuted: VoipMuteState.Unmuted
         [JsonProperty("microphone_muted")]
         [JsonConverter(typeof(EnumDescriptionConverter<VoipMuteState>))]
         [Preserve]
@@ -45,13 +42,9 @@ namespace Oculus.Platform.Models
         [Preserve]
         public int SharedMemoryHandle { get; set; }
         /// The status enum that indicates the current state of the system voip. The
-        /// status can be of the following types: - Unknown:
-        /// @internal_link(horizon.platform.voip.enums.SystemVoipStatus#unknown) -
-        /// Unavailable:
-        /// @internal_link(horizon.platform.voip.enums.SystemVoipStatus#unavailable) -
-        /// Suppressed:
-        /// @internal_link(horizon.platform.voip.enums.SystemVoipStatus#suppressed) -
-        /// Active: @internal_link(horizon.platform.voip.enums.SystemVoipStatus#active)
+        /// status can be of the following types: - Unknown: SystemVoipStatus.Unknown -
+        /// Unavailable: SystemVoipStatus.Unavailable - Suppressed:
+        /// SystemVoipStatus.Suppressed - Active: SystemVoipStatus.Active
         [JsonProperty("status")]
         [JsonConverter(typeof(EnumDescriptionConverter<SystemVoipStatus>))]
         [Preserve]

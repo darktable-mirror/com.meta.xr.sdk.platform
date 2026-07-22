@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<c4d2d8dca9b6860d3740befebfe764eb>>
+ * @generated SignedSource<<ce2c545d7bf10ee404b8695abf514b35>>
  */
 
 #pragma warning disable 0618
@@ -19,9 +19,8 @@ namespace Oculus.Platform.Models
 
     /// Parties allow users to start a voice chat with other members of the party.
     /// Party voice chats persist across apps in VR and users can continue to
-    /// interact while navigating between apps. You can use
-    /// @internal_link(horizon.platform.parties.Parties#get_current()) to load the
-    /// party the current user is in.
+    /// interact while navigating between apps. You can use Parties.GetCurrent to
+    /// load the party the current user is in.
     [Preserve]
     public class Party
     {
@@ -44,10 +43,8 @@ namespace Oculus.Platform.Models
         public User LeaderOptional { get; set; }
         /// An array that contains the users who are currently in this party. These
         /// users will remain in the party while navigating between apps. Each user in
-        /// the party will get the update by
-        /// @internal_link(horizon.platform.parties.Parties#party_update()) which is
-        /// intended to update the user on various actions that are occurring in the
-        /// party.
+        /// the party will get the update by Parties.PartyUpdate which is intended to
+        /// update the user on various actions that are occurring in the party.
         [JsonProperty("users")]
         // May be null. Check before using.
         [Preserve]

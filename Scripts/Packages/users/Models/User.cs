@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<ea400fc0cfdcb235fa8b0b719a8f45bc>>
+ * @generated SignedSource<<49c8e58c58ac21a732f31d83403429f7>>
  */
 
 #pragma warning disable 0618
@@ -21,12 +21,11 @@ namespace Oculus.Platform.Models
     /// application. Use the User object to retrieve information about your users,
     /// help them interact with your application, and customize their experience.
     /// You can query for information about a particular user using their user id,
-    /// @internal_link(horizon.platform.users.models.User#id). To learn more, read
-    /// our
-    /// [docs](https://developer.oculus.com/documentation/{{platform_doc_path}}/ps-
-    /// presence/#user-and-friends) about users. Note: You must complete a Data Use
-    /// Checkup(DUC) in order to gain access to user platform features. Read more
-    /// about DUC [here](https://developer.oculus.com/resources/publish-data-use/).
+    /// User.Id. To learn more, read our
+    /// [docs](https://developer.oculus.com/documentation/unity/ps-presence/#user-and-friends)
+    /// about users. Note: You must complete a Data Use Checkup(DUC) in order to
+    /// gain access to user platform features. Read more about DUC
+    /// [here](https://developer.oculus.com/resources/publish-data-use/).
     [Preserve]
     public class User
     {
@@ -35,24 +34,21 @@ namespace Oculus.Platform.Models
         [JsonProperty("display_name")]
         [Preserve]
         public string DisplayName { get; set; }
-        /// The ID of the user, @internal_link(horizon.platform.users.models.User#id).
-        /// This is a unique value for every individual user.
+        /// The ID of the user, User.Id. This is a unique value for every individual
+        /// user.
         [JsonProperty("id")]
         [JsonConverter(typeof(UInt64EmptyStringConverter))]
         [Preserve]
         public UInt64 ID { get; set; }
         /// The url of the profile picture that is chosen by the user. Retrieve this
-        /// url by using
-        /// @internal_link(horizon.platform.users.Users#get_logged_in_user()).
+        /// url by using Users.GetLoggedInUser.
         [JsonProperty("profile_url")]
         [Preserve]
         public string ImageURL { get; set; }
-        /// Managed account info,
-        /// @internal_link(horizon.platform.users.models.ManagedInfo), for the user
-        /// which contains further metadata that is only available if the user is a
-        /// Meta Managed Account(MMA). There must be user consent via dialog during
-        /// installation, your app must have DUC enabled, and the app must be admin-
-        /// approved.
+        /// Managed account info, ManagedInfo, for the user which contains further
+        /// metadata that is only available if the user is a Meta Managed Account(MMA).
+        /// There must be user consent via dialog during installation, your app must
+        /// have DUC enabled, and the app must be admin-approved.
         [JsonProperty("managed_info")]
         // May be null. Check before using.
         [Preserve]
@@ -74,9 +70,8 @@ namespace Oculus.Platform.Models
         [JsonProperty("presence_deeplink_message")]
         [Preserve]
         public string PresenceDeeplinkMessage { get; set; }
-        /// If provided, this is the unique API Name that refers to the
-        /// @internal_link(horizon.platform.group_presence.models.Destination) this
-        /// user is currently at in the app. Read more about destinations
+        /// If provided, this is the unique API Name that refers to the Destination
+        /// this user is currently at in the app. Read more about destinations
         /// [here](https://developer.oculus.com/documentation/{{platform_doc_path}}/ps-
         /// destinations-overview/)
         [JsonProperty("presence_destination_api_name")]
@@ -84,31 +79,26 @@ namespace Oculus.Platform.Models
         public string PresenceDestinationApiName { get; set; }
         /// If provided, the lobby session this user is currently at in the
         /// application. If the ApplicationInvite is generated from rich presence, the
-        /// lobby session id will be auto populated by calling @internal_link(horizon.p
-        /// latform.users.models.User#presence_lobby_session_id) from the inviters'
-        /// viewer context.
+        /// lobby session id will be auto populated by calling
+        /// User.PresenceLobbySessionId from the inviters' viewer context.
         [JsonProperty("presence_lobby_session_id")]
         [Preserve]
         public string PresenceLobbySessionId { get; set; }
         /// If provided, the match session this user is currently at in the
         /// application. If the ApplicationInvite is generated from rich presence, the
-        /// match session id will be auto populated by calling @internal_link(horizon.p
-        /// latform.users.models.User#presence_match_session_id) from the inviters'
-        /// viewer context.
+        /// match session id will be auto populated by calling
+        /// User.PresenceMatchSessionId from the inviters' viewer context.
         [JsonProperty("presence_match_session_id")]
         [Preserve]
         public string PresenceMatchSessionId { get; set; }
         /// An enum value for the different statuses representing what the user is
-        /// currently doing. The different statuses can be
-        /// @internal_link(horizon.platform.users.enums.UserPresenceStatus#unknown),
-        /// @internal_link(horizon.platform.users.enums.UserPresenceStatus#offline),
-        /// @internal_link(horizon.platform.users.enums.UserPresenceStatus#online).
+        /// currently doing. The different statuses can be UserPresenceStatus.Unknown,
+        /// UserPresenceStatus.Offline, UserPresenceStatus.Online.
         [JsonProperty("presence_status")]
         [Preserve]
         public UserPresenceStatus PresenceStatus { get; set; }
         /// The url of the smaller/secondary profile picture that is chosen by the
-        /// user. Retrieve this url by using
-        /// @internal_link(horizon.platform.users.models.User#small_image_url).
+        /// user. Retrieve this url by using User.SmallImageUrl.
         [JsonProperty("profile_url_small")]
         [Preserve]
         public string SmallImageUrl { get; set; }

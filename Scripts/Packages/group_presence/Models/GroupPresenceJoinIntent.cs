@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<7ee3aec67fd10f6c8334017d90b73582>>
+ * @generated SignedSource<<bd7981e86895efb5260310e12d4631bf>>
  */
 
 #pragma warning disable 0618
@@ -18,11 +18,10 @@ namespace Oculus.Platform.Models
     using UnityEngine.Scripting;
 
     /// An GroupPresenceJoinIntent represents a user's intent to join a group
-    /// presence which is user's presence to be at a
-    /// @internal_link(horizon.platform.group_presence.models.Destination) and
-    /// session. People with same session id are considered to be co-present
-    /// together. Every combination of destination api name, lobby session id and
-    /// match session id can uniquely identify a destination.
+    /// presence which is user's presence to be at a Destination and session.
+    /// People with same session id are considered to be co-present together. Every
+    /// combination of destination api name, lobby session id and match session id
+    /// can uniquely identify a destination.
     [Preserve]
     public class GroupPresenceJoinIntent
     {
@@ -30,8 +29,8 @@ namespace Oculus.Platform.Models
         [JsonProperty("deeplink_message")]
         [Preserve]
         public string DeeplinkMessage { get; set; }
-        /// @internal_link(horizon.platform.group_presence.models.Destination#api_name)
-        /// is the unique API Name that refers to an in-app destination.
+        /// Destination.ApiName is the unique API Name that refers to an in-app
+        /// destination.
         [JsonProperty("destination_api_name")]
         [Preserve]
         public string DestinationApiName { get; set; }

@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<9fbbd55a2853b007941510cc6d55373b>>
+ * @generated SignedSource<<de8f9387a4ed963241bf1e8d38ded9d6>>
  */
 
 namespace Oculus.Platform
@@ -14,9 +14,8 @@ namespace Oculus.Platform
     /// It's an enum that represents the possible outcomes of starting a
     /// livestreaming session. This allows the API to return a standardized and
     /// well-defined set of values to indicate the outcome of starting a
-    /// livestreaming session. It can be used in @internal_link(horizon.platform.li
-    /// vestreaming.models.LivestreamingStartResult#streaming_result) as type
-    /// information.
+    /// livestreaming session. It can be used in
+    /// LivestreamingStartResult.StreamingResult as type information.
     [Preserve]
     public enum LivestreamingStartStatus : int
     {

@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<6a8647a5db3b9fc54470dae7455b11b0>>
+ * @generated SignedSource<<652bc503ccb9cf50b515ba32877c3aac>>
  */
 
 namespace Oculus.Platform
@@ -13,10 +13,9 @@ namespace Oculus.Platform
 
     /// Result of installing an app. In case of an error during install process,
     /// the error message contains the string representation of this result. This
-    /// is returned from @internal_link(horizon.platform.application.Application#st
-    /// art_app_download()), @internal_link(horizon.platform.application.Applicatio
-    /// n#cancel_app_download()) and @internal_link(horizon.platform.application.Ap
-    /// plication#install_app_update_and_relaunch(ApplicationOptions)) APIs.
+    /// is returned from Application.StartAppDownload,
+    /// Application.CancelAppDownload and Application.InstallAppUpdateAndRelaunch
+    /// APIs.
     [Preserve]
     public enum AppInstallResult : int
     {

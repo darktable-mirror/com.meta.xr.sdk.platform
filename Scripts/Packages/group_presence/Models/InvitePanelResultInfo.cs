@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<8ec70dec6d752e471e9782f84a653721>>
+ * @generated SignedSource<<e3f1da67c188f00a2ec7ced187ced134>>
  */
 
 namespace Oculus.Platform.Models
@@ -17,9 +17,8 @@ namespace Oculus.Platform.Models
 
     /// It contains information about the user's invitation to others to join their
     /// current session. It is used to provide feedback to the user about whether
-    /// their invitations have been successfully sent. It can be retrieved using @i
-    /// nternal_link(horizon.platform.group_presence.GroupPresence#launch_invite_pa
-    /// nel(InviteOptions)).
+    /// their invitations have been successfully sent. It can be retrieved using
+    /// GroupPresence.LaunchInvitePanel.
     [Preserve]
     public class InvitePanelResultInfo
     {

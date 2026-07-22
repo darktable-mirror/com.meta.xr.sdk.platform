@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<00b7ee513c9cfe7143644f8be1acbcba>>
+ * @generated SignedSource<<c42b4f7d675207ee4815be6f9b4f8b97>>
  */
 
 #pragma warning disable 0618
@@ -19,9 +19,9 @@ namespace Oculus.Platform.Models
 
     /// Leaderboards provide a way for a game to keep track of players and their
     /// scores in relation to other. The leaderboard object contains information
-    /// about this leaderboard ID, API name and destination. Lean more about [leade
-    /// rboard](https://developer.oculus.com/documentation/{{platform_doc_path}}/ps
-    /// -leaderboards/) on our website.
+    /// about this leaderboard ID, API name and destination. Lean more about
+    /// [leaderboard](https://developer.oculus.com/documentation/unity/ps-leaderboards/)
+    /// on our website.
     [Preserve]
     public class Leaderboard
     {
@@ -30,10 +30,8 @@ namespace Oculus.Platform.Models
         [JsonProperty("api_name")]
         [Preserve]
         public string ApiName { get; set; }
-        /// An optional deep link
-        /// @internal_link(horizon.platform.group_presence.models.Destination), which
-        /// means when a user clicks on the leaderboard, they will be taken to this in-
-        /// app destination.
+        /// An optional deep link Destination, which means when a user clicks on the
+        /// leaderboard, they will be taken to this in-app destination.
         [JsonProperty("destination")]
         // May be null. Check before using.
         [Preserve]

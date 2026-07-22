@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<afd69765bf01906c8b5f365b0babe143>>
+ * @generated SignedSource<<0d17cd0138cfbcd47c4daf91a1ed0883>>
  */
 
 namespace Oculus.Platform
@@ -14,9 +14,8 @@ namespace Oculus.Platform
     /// This is an enum that defines the possible states for the Opus codec's
     /// discontinuous transmission (DTX) feature. It allows you to control whether
     /// the Opus codec uses DTX to conserve battery power and reduce transmission
-    /// rate during pauses in the voice chat. It can be used as the type for the @i
-    /// nternal_link(horizon.platform.voip.options.VoipOptions#create_new_connectio
-    /// n_use_dtx)
+    /// rate during pauses in the voice chat. It can be used as the type for the
+    /// VoipOptions.CreateNewConnectionUseDtx
     [Preserve]
     public enum VoipDtxState : int
     {

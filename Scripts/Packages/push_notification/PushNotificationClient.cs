@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<c1f96b7df1f225f0ba8e17f05e00ef29>>
+ * @generated SignedSource<<11b8f2440bc31f7611a399c98121cdf2>>
  */
 
 using UnityEngine;
@@ -13,11 +13,14 @@ using System.Collections.Generic;
 
 namespace Oculus.Platform
 {
+    /// Push notification PushNotificationResult provides a simple and efficient
+    /// way for devices to register for and receive push notifications, enabling
+    /// developers to build engaging and interactive applications that deliver
+    /// timely updates and alerts to users.
     public static partial class PushNotification
     {
         /// Register the device to receive push notification. The registered
-        /// notification id can be fetched by @internal_link(horizon.platform.push_noti
-        /// fication.models.PushNotificationResult#id).
+        /// notification id can be fetched by PushNotificationResult.Id.
         public static Request<PushNotificationResult> Register()
         {
             if (Core.IsInitialized())

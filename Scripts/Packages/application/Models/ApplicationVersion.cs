@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<aadfe4d51754f84595fd6822b1435dec>>
+ * @generated SignedSource<<4ebc3a745bd12d9e794dd1738750e7b0>>
  */
 
 #pragma warning disable 0618
@@ -20,8 +20,7 @@ namespace Oculus.Platform.Models
     /// Represents the version information for an application. The information
     /// includes the date of latest release, the size of the latest release and the
     /// application name and version code of currently installed version and the
-    /// latest release. You can retrieve it with
-    /// @internal_link(horizon.platform.application.Application#get_version()).
+    /// latest release. You can retrieve it with Application.GetVersion.
     [Preserve]
     public class ApplicationVersion
     {

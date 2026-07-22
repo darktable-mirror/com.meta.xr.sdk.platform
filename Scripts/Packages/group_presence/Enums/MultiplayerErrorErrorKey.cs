@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<c968dab6cbebfb69d15ec8fd10968eea>>
+ * @generated SignedSource<<a603ab30f559b9882e2c65e3d4ad1819>>
  */
 
 namespace Oculus.Platform
@@ -12,10 +12,9 @@ namespace Oculus.Platform
     using UnityEngine.Scripting;
 
     /// Possible keys of the errors which could occurred when using the
-    /// [multiplayer features](https://developer.oculus.com/documentation/{{platfor
-    /// m_doc_path}}/ps-multiplayer-overview/). e.g., you may need to use
-    /// `destination_unavailable` for destinations feature and use
-    /// `inviter_not_joinable` for invite feature and so on.
+    /// [multiplayer features](https://developer.oculus.com/documentation/unity/ps-multiplayer-overview/).
+    /// e.g., you may need to use `destination_unavailable` for destinations
+    /// feature and use `inviter_not_joinable` for invite feature and so on.
     [Preserve]
     public enum MultiplayerErrorErrorKey : int
     {
@@ -48,9 +47,8 @@ namespace Oculus.Platform
         GroupFull,
 
         /// This error key will be used in explaining why an inviter cannot invite a
-        /// recepient successfully. The group presence can be set to joinable by using 
-        /// @internal_link(horizon.platform.group_presence.GroupPresence#set_is_joinabl
-        /// e(Boolean)).
+        /// recepient successfully. The group presence can be set to joinable by using
+        /// GroupPresence.SetIsJoinable.
         [Description("INVITER_NOT_JOINABLE")]
         [Preserve]
         InviterNotJoinable,

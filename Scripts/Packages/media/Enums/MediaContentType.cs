@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<144beb4b770282f0015bf14d86ffd1b8>>
+ * @generated SignedSource<<df864151700514e472099c8757d03000>>
  */
 
 namespace Oculus.Platform
@@ -14,9 +14,7 @@ namespace Oculus.Platform
     /// An enum that represents the type of media content being shared, which can
     /// be useful for various purposes such as displaying the media content in a
     /// specific way or applying certain filters or effects to it. It can be used
-    /// as a type of parameter in
-    /// @internal_link(horizon.platform.media.Media#share_to_facebook(String,
-    /// String, MediaContentType)).
+    /// as a type of parameter in Media.ShareToFacebook.
     [Preserve]
     public enum MediaContentType : int
     {

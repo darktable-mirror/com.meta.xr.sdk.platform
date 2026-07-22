@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<d6fd2d414871e0aa95b4f41ff00c2721>>
+ * @generated SignedSource<<cd1e3a55bf432c6691a5f188a278c2fa>>
  */
 
 using System;
@@ -18,12 +18,8 @@ namespace Oculus.Platform
 {
     /// The Abuse Report Options provide a way for developers to customize the
     /// reporting flow and specify the type of content being reported, which can be
-    /// either a
-    /// @internal_link(horizon.platform.abuse_report.enums.AbuseReportType#user) or
-    /// an
-    /// @internal_link(horizon.platform.abuse_report.enums.AbuseReportType#object),
-    /// helping to maintain a safe and respectful community within their
-    /// application.
+    /// either a AbuseReportType.User or an AbuseReportType.Object, helping to
+    /// maintain a safe and respectful community within their application.
     [Serializable]
     [Preserve]
     public class AbuseReportOptions {
@@ -32,19 +28,18 @@ namespace Oculus.Platform
         /// interactions within the platform.
         [JsonProperty("prevent_people_chooser")]
         [Preserve]
-        public bool PreventPeopleChooser;
-        /// The intended entity type
-        /// @internal_link(horizon.platform.abuse_report.enums.AbuseReportType) being
-        /// reported, it can be either a user
-        /// @internal_link(horizon.platform.abuse_report.enums.AbuseReportType#user) or
-        /// an object/content
-        /// @internal_link(horizon.platform.abuse_report.enums.AbuseReportType#object).
+        public bool PreventPeopleChooser = false;
+        /// The intended entity type AbuseReportType.User or an object/content
+        /// AbuseReportType.Object.
         [JsonProperty("report_type")]
         [JsonConverter(typeof(EnumDescriptionConverter<AbuseReportType>))]
         [Preserve]
         public AbuseReportType ReportType = AbuseReportType.Unknown;
         
-        public string Json => JsonUtility.ToJson(this);
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
+        }
 
         [Preserve]
         public AbuseReportOptions()

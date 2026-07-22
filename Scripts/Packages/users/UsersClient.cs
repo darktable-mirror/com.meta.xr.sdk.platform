@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<2a121c4891ef53bd508fe1b80e20097b>>
+ * @generated SignedSource<<4596d1dae0a657a8cca02d6182981b9e>>
  */
 
 using UnityEngine;
@@ -13,6 +13,13 @@ using System.Collections.Generic;
 
 namespace Oculus.Platform
 {
+    /// This class provides methods to access information about the User. It allows
+    /// you to retrieve a user's ID, access token, and org-scoped ID, as well as
+    /// their friends list and recently met users. Additionally, it provides
+    /// methods to launch various flows such as blocking, unblocking, reporting,
+    /// and sending friend requests. It's useful when you need to manage user
+    /// relationships or perform actions that require user authentication within
+    /// your application.
     public static partial class Users
     {
         /// Retrieve the user with the given ID. This might fail if the ID is invalid
@@ -90,9 +97,7 @@ namespace Oculus.Platform
 
         /// Returns a list of linked accounts that are associated with the specified
         /// service providers. Customization can be done via UserOptions. Create this
-        /// object with @internal_link(horizon.platform.users.options.UserOptions). The
-        /// params that could be used are: 1. @internal_link(horizon.platform.users.opt
-        /// ions.UsersOptions#service_provider.add()) - returns the list of linked
+        /// object with UsersOptions.ServiceProvider.add - returns the list of linked
         /// accounts that are associated with these specified service providers.
         /// Example custom C++ usage: {{code_samples[0]}}
         public static Request<LinkedAccountList> GetLinkedAccounts(UserOptions userOptions)
@@ -151,9 +156,8 @@ namespace Oculus.Platform
         }
 
         /// Retrieve a list of the logged in user's bidirectional followers. The
-        /// payload type will be an array of
-        /// @internal_link(horizon.platform.users.models.User) A list of the logged in
-        /// user's bidirectional followers.
+        /// payload type will be an array of User A list of the logged in user's
+        /// bidirectional followers.
         public static Request<UserList> GetLoggedInUserFriends()
         {
             if (Core.IsInitialized())
@@ -250,9 +254,7 @@ namespace Oculus.Platform
             return null;
         }
 
-        /// Fetches all the
-        /// @internal_link(horizon.platform.users.models.UserCapability) for the
-        /// logged-in user
+        /// Fetches all the UserCapability for the logged-in user
         public static Request<UserCapabilityList> GetUserCapabilities()
         {
             if (Core.IsInitialized())
@@ -276,13 +278,11 @@ namespace Oculus.Platform
         }
 
         /// Part of the scheme to confirm the identity of a particular user in your
-        /// backend. You can pass the result of
-        /// @internal_link(horizon.platform.users.Users#get_user_proof()) and a user ID
-        /// from @internal_link(horizon.platform.users.models.User#id) to your backend.
-        /// Your server can then use our api to verify identity. 'https://graph.oculus.
-        /// com/user_nonce_validate?nonce=USER_PROOF&amp;user_id=USER_ID&amp;access_tok
-        /// en=ACCESS_TOKEN' NOTE: The nonce is only good for one check and then it is
-        /// invalidated.
+        /// backend. You can pass the result of Users.GetUserProof and a user ID from
+        /// User.Id to your backend. Your server can then use our api to verify
+        /// identity. 'https://graph.oculus.com/user_nonce_validate?nonce=USER_PROOF&am
+        /// p;user_id=USER_ID&amp;access_token=ACCESS_TOKEN' NOTE: The nonce is only
+        /// good for one check and then it is invalidated.
         public static Request<UserProof> GetUserProof()
         {
             if (Core.IsInitialized())
@@ -299,6 +299,30 @@ namespace Oculus.Platform
 
                 ulong requestHandle = PlatformClient.MakeRequest("users", "get_user_proof", 1, jsonRequest, 0);
                 return new Request<UserProof>(requestHandle);
+            }
+
+            Debug.LogError(Core.PlatformUninitializedError);
+            return null;
+        }
+
+        /// Launch the Avacam Settings activity used to configure the appearance of the
+        /// Avatar Camera.
+        public static Request<LaunchAvacamSettingsResult> LaunchAvacamSettings()
+        {
+            if (Core.IsInitialized())
+            {
+                  var request = new Dictionary<string, object>
+                {
+                };
+
+                var settings = new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore
+                };
+                string jsonRequest = JsonConvert.SerializeObject(request, settings);
+
+                ulong requestHandle = PlatformClient.MakeRequest("users", "launch_avacam_settings", 1, jsonRequest, 0);
+                return new Request<LaunchAvacamSettingsResult>(requestHandle);
             }
 
             Debug.LogError(Core.PlatformUninitializedError);

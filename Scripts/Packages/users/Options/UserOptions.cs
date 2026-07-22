@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<1b14ba9a486bb7074d57723fe19fe2be>>
+ * @generated SignedSource<<5f0bbefb8a6e3a7b7f62b26235ce0e32>>
  */
 
 using System;
@@ -17,22 +17,19 @@ using UnityEngine.Scripting;
 namespace Oculus.Platform
 {
     /// The user_options configuration is used to specify additional settings for
-    /// the @internal_link(horizon.platform.users.models.User). It allows you to
-    /// customize the response by specifying the time window, maximum number of
-    /// users, and service providers for which linked accounts should be retrieved.
+    /// the User. It allows you to customize the response by specifying the time
+    /// window, maximum number of users, and service providers for which linked
+    /// accounts should be retrieved.
     [Serializable]
     [Preserve]
     public class UserOptions {
-        /// This field specifies the maximum number of
-        /// @internal_link(horizon.platform.users.models.User) that should be returned
-        /// in the response.
+        /// This field specifies the maximum number of User that should be returned in
+        /// the response.
         [JsonProperty("max_users")]
         [Preserve]
-        public uint MaxUsers;
-        /// It's an array of
-        /// @internal_link(horizon.platform.users.enums.ServiceProvider) objects that
-        /// specifies the service providers for which linked accounts should be
-        /// retrieved.
+        public uint MaxUsers = 0;
+        /// It's an array of ServiceProvider objects that specifies the service
+        /// providers for which linked accounts should be retrieved.
         [JsonProperty("service_providers")]
         [JsonConverter(typeof(EnumArrayDescriptionConverter<ServiceProvider>))]
         [Preserve]
@@ -44,7 +41,10 @@ namespace Oculus.Platform
         [Preserve]
         public TimeWindow TimeWindow = TimeWindow.Unknown;
         
-        public string Json => JsonUtility.ToJson(this);
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
+        }
 
         [Preserve]
         public UserOptions()

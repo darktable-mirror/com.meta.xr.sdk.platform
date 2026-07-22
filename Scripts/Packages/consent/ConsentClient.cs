@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<cc9587cce07075140ab2e1ef986530ed>>
+ * @generated SignedSource<<e931c1d48fdddaad586d2b46c65e2bb7>>
  */
 
 using UnityEngine;
@@ -13,6 +13,8 @@ using System.Collections.Generic;
 
 namespace Oculus.Platform
 {
+    /// Consent APIs provide platform methods to check status of different consent
+    /// types. And also provides way to launch a consent flow if required.
     public static partial class Consent
     {
         /// Returns the current status of a consent.

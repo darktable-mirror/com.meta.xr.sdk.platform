@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<716e77885de2773d090cdfb0a36dcbf2>>
+ * @generated SignedSource<<edb7716895ffd1cf95abceab25ffdfac>>
  */
 
 using System;
@@ -50,7 +50,10 @@ namespace Oculus.Platform
         [Preserve]
         public PositionInput Position;
         
-        public string Json => JsonUtility.ToJson(this);
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
+        }
 
         [Preserve]
         public MetricEventInput()

@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<5fc8b871f92fa41955edd241440bf52a>>
+ * @generated SignedSource<<1eb0dfd9218341fb8c3685835002de94>>
  */
 
 namespace Oculus.Platform.Models
@@ -17,14 +17,12 @@ namespace Oculus.Platform.Models
 
     /// The result of sending an invite to a user or list of users shows invites
     /// were sent successfully through the resulting array. This is the model
-    /// returned in a successful response to the @internal_link(horizon.platform.gr
-    /// oup_presence.GroupPresence#send_invites(List<ID>, UInt)) api.
+    /// returned in a successful response to the GroupPresence.SendInvites api.
     [Preserve]
     public class SendInvitesResult
     {
-        /// The list of invites that was sent through @internal_link(horizon.platform.g
-        /// roup_presence.GroupPresence#send_invites(List<ID>, UInt)). This invite list
-        /// can comprise of friends and recently met users.
+        /// The list of invites that was sent through GroupPresence.SendInvites. This
+        /// invite list can comprise of friends and recently met users.
         [JsonProperty("invites")]
         [Preserve]
         public ApplicationInviteList Invites { get; set; }

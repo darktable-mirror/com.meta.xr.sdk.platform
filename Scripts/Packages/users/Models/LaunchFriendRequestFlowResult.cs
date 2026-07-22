@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<3c794a6eda5ed1333e4a296ecdd09589>>
+ * @generated SignedSource<<45440d971dfeeb943834550c1a0e5acb>>
  */
 
 namespace Oculus.Platform.Models
@@ -21,8 +21,7 @@ namespace Oculus.Platform.Models
     /// may find this process more convenient than using the Meta Quest mobile app
     /// or returning to Meta Horizon Home to send follow requests since it is less
     /// disruptive to the app experience they are currently focused on. You can
-    /// retrieve it using @internal_link(horizon.platform.users.Users#launch_friend
-    /// _request_flow(ID)).
+    /// retrieve it using Users.LaunchFriendRequestFlow.
     [Preserve]
     public class LaunchFriendRequestFlowResult
     {

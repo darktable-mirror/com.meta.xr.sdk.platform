@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<ef2250223d297d528bc41f2b4e99434d>>
+ * @generated SignedSource<<4a303c5c26b723758d85b2456a7ac888>>
  */
 
 namespace Oculus.Platform.Models
@@ -23,8 +23,7 @@ namespace Oculus.Platform.Models
     public class LivestreamingStartResult
     {
         /// This livestreaming result represents the start status of your livestream.
-        /// You can refer to @internal_link(horizon.platform.livestreaming.enums.Livest
-        /// reamingStartStatus) for possible status info.
+        /// You can refer to LivestreamingStartStatus for possible status info.
         [JsonProperty("streaming_result_string")]
         [JsonConverter(typeof(EnumDescriptionConverter<LivestreamingStartStatus>))]
         [Preserve]

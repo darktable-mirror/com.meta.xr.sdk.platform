@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<43423d2bd7a0ef0299b7c8905abcd281>>
+ * @generated SignedSource<<dc6666c38d1bb840137efa84337f38df>>
  */
 
 #pragma warning disable 0618
@@ -17,6 +17,8 @@ namespace Oculus.Platform.Models
     using Newtonsoft.Json.Converters;
     using UnityEngine.Scripting;
 
+    ///
+    /// The API has been deprecated. Please use LaunchReportFlowResult instead.
     [Preserve]
     public class UserReportID
     {

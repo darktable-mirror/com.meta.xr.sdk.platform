@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<e53c6280188554a42cef75bf39cb01e6>>
+ * @generated SignedSource<<90fcacc843d6071d089c6892a8df8aa6>>
  */
 
 namespace Oculus.Platform
@@ -13,9 +13,8 @@ namespace Oculus.Platform
 
     /// It's a enum that represent the different types of audiences that can be
     /// selected for a livestreaming. It can be used to specify the audience when a
-    /// live streaming starts. The livestreaming status change will be notified by 
-    /// @internal_link(horizon.platform.livestreaming.Livestreaming#status_change()
-    /// )
+    /// live streaming starts. The livestreaming status change will be notified by
+    /// Livestreaming.StatusChange
     [Preserve]
     public enum LivestreamingAudience : int
     {

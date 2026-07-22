@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<4c06affdccc53f7397d887987d1cca9b>>
+ * @generated SignedSource<<36f8970854412881347cd2e8543956bf>>
  */
 
 using UnityEngine;
@@ -13,6 +13,11 @@ using System.Collections.Generic;
 
 namespace Oculus.Platform
 {
+    /// The IAP (In-App Purchases) API provides methods for managing in-app
+    /// purchases, including retrieving purchase history, getting detailed product
+    /// information by Purchase.Sku, and consuming purchases as needed. For more
+    /// information, see
+    /// [here](https://developer.oculus.com/documentation/unity/ps-iap/).
     public static partial class IAP
     {
         /// Allow the consumable IAP product to be purchased again. Conceptually, this
@@ -47,7 +52,7 @@ namespace Oculus.Platform
         /// provide a list of SKUs (Stock Keeping Units) to retrieve the corresponding
         /// product information. The SKUs are used to identify the products in the
         /// Oculus store, which can be retrieved by accessing the Developer Dashboard
-        /// or by @internal_link(horizon.platform.iap.models.Purchase#sku).
+        /// or by Purchase.Sku.
         public static Request<ProductList> GetProductsBySKU(string[] skus)
         {
             if (Core.IsInitialized())
@@ -100,10 +105,9 @@ namespace Oculus.Platform
 
         /// Retrieve a list of Purchase that the Logged-In-User has made. This list
         /// will only contain durable purchase (non-consumable) and is populated from a
-        /// device cache. Important: It is recommended to use
-        /// @internal_link(horizon.platform.iap.Iap#get_viewer_purchases()) first and
-        /// only check the cache if that fails. This method is intended as a fallback
-        /// mechanism and may not always return up-to-date results.
+        /// device cache. Important: It is recommended to use IAP.GetViewerPurchases
+        /// first and only check the cache if that fails. This method is intended as a
+        /// fallback mechanism and may not always return up-to-date results.
         public static Request<PurchaseList> GetViewerPurchasesDurableCache()
         {
             if (Core.IsInitialized())
@@ -130,9 +134,8 @@ namespace Oculus.Platform
         /// tries handle and fix as many errors as possible. Home returns the
         /// appropriate error message and how to resolve it, if possible. Returns a
         /// purchase on success, and an error on user cancellation or other errors. In
-        /// the case of a user cancelation, the
-        /// @internal_link(horizon.platform.common.models.Error#message) value will
-        /// contain a JSON object with a `"category"` property containing a value of
+        /// the case of a user cancelation, the Error.Message value will contain a JSON
+        /// object with a `"category"` property containing a value of
         /// `"user_canceled"`.
         public static Request<Purchase> LaunchCheckoutFlow(string sku)
         {

@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<e6096d8a9c04d2df7a3be5155af827f5>>
+ * @generated SignedSource<<64a5f7842d85b250c2e1f3dd6a118b65>>
  */
 
 using UnityEngine;
@@ -13,6 +13,10 @@ using System.Collections.Generic;
 
 namespace Oculus.Platform
 {
+    /// The Application API provides ways to manage and interact with applications
+    /// on the platform, including retrieving information about installed apps, for
+    /// example: getting ApplicationVersion.CurrentCode, launching other apps and
+    /// managing app downloads and updates.
     public static partial class Application
     {
         /// Cancel an app download that is in progress. It will return a result when
@@ -63,9 +67,7 @@ namespace Oculus.Platform
         }
 
         /// Retrieves an array of all applications that are currently installed, the
-        /// elements of which are
-        /// @internal_link(horizon.platform.application.models.InstalledApplication)
-        /// instances.
+        /// elements of which are InstalledApplication instances.
         public static Request<InstalledApplicationList> GetInstalledApplications()
         {
             if (Core.IsInitialized())
@@ -88,15 +90,11 @@ namespace Oculus.Platform
             return null;
         }
 
-        /// Requests version information, including the @internal_link(horizon.platform
-        /// .application.models.ApplicationVersion#current_code) and @internal_link(hor
-        /// izon.platform.application.models.ApplicationVersion#current_name) of the
-        /// currently installed app and @internal_link(horizon.platform.application.mod
-        /// els.ApplicationVersion#latest_code), @internal_link(horizon.platform.applic
-        /// ation.models.ApplicationVersion#latest_name),
-        /// @internal_link(horizon.platform.application.models.ApplicationVersion#size)
-        /// and @internal_link(horizon.platform.application.models.ApplicationVersion#r
-        /// elease_date) of the latest app update.
+        /// Requests version information, including the ApplicationVersion.CurrentCode
+        /// and ApplicationVersion.CurrentName of the currently installed app and
+        /// ApplicationVersion.LatestCode, ApplicationVersion.LatestName,
+        /// ApplicationVersion.Size and ApplicationVersion.ReleaseDate of the latest
+        /// app update.
         public static Request<ApplicationVersion> GetVersion()
         {
             if (Core.IsInitialized())
@@ -174,8 +172,8 @@ namespace Oculus.Platform
         }
 
         /// Starts an app download. It will return a result when the download is
-        /// finished. Download progress can be monitored using the @internal_link(horiz
-        /// on.platform.application.Application#check_app_download_progress()).
+        /// finished. Download progress can be monitored using the
+        /// Application.CheckAppDownloadProgress.
         public static Request<AppDownloadResult> StartAppDownload()
         {
             if (Core.IsInitialized())

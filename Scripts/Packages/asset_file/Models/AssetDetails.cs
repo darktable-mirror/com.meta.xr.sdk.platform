@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<ef7d7a526afb98c5b8fbcc5605930037>>
+ * @generated SignedSource<<32f07aa5be5152c1d1d640ca564fdf20>>
  */
 
 #pragma warning disable 0618
@@ -20,13 +20,12 @@ namespace Oculus.Platform.Models
     /// An AssetDetails object contains detailed metadata for an asset file,
     /// including the asset file ID, file path, asset type, and additional metadata
     /// that characterizes the asset. You can retrieve the asset details using
-    /// @internal_link(horizon.platform.asset_file.AssetFile#get_list())
+    /// AssetFile.GetList
     [Preserve]
     public class AssetDetails
     {
         /// ID of the asset file. You can use this ID to uniquely identify a single
-        /// asset. You can find more details from
-        /// @internal_link(horizon.platform.asset_file.AssetFile#status_by_id(ID))
+        /// asset. You can find more details from AssetFile.StatusById
         [JsonProperty("asset_id")]
         [JsonConverter(typeof(UInt64EmptyStringConverter))]
         [Preserve]

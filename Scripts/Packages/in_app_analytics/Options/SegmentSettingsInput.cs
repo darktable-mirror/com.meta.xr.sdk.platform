@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<95a27a476aab4b2c1690fdbb9ce51311>>
+ * @generated SignedSource<<299c1cfba9bcc45c71bd8f20a7fbbf4d>>
  */
 
 using System;
@@ -34,7 +34,10 @@ namespace Oculus.Platform
         [Preserve]
         public string GameMode = null;
         
-        public string Json => JsonUtility.ToJson(this);
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
+        }
 
         [Preserve]
         public SegmentSettingsInput()

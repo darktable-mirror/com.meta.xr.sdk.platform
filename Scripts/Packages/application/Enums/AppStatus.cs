@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<ea9b51214d02a29f789a77dec238ec39>>
+ * @generated SignedSource<<f8cda25d93688dc122d5bdf5c046b9d5>>
  */
 
 namespace Oculus.Platform
@@ -13,9 +13,8 @@ namespace Oculus.Platform
 
     /// This property indicates the current status of the app on the device. It is
     /// important to note that an app can only query its own status, not the status
-    /// of other apps installed on the device. It can be retrieved by @internal_lin
-    /// k(horizon.platform.application.models.AppDownloadProgressResult#status_code
-    /// ).
+    /// of other apps installed on the device. It can be retrieved by
+    /// AppDownloadProgressResult.StatusCode.
     [Preserve]
     public enum AppStatus : int
     {

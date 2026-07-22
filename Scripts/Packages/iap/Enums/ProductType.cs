@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<7912b1a9beaf078d6efce471d5314323>>
+ * @generated SignedSource<<db82b19d66ae02791d7242d05c96025d>>
  */
 
 namespace Oculus.Platform
@@ -11,9 +11,8 @@ namespace Oculus.Platform
     using Description = System.ComponentModel.DescriptionAttribute;
     using UnityEngine.Scripting;
 
-    /// This `enum` value represents the possible types of a
-    /// @internal_link(horizon.platform.iap.models.Product), which is an item
-    /// purchased in the application. An In-app purchase (IAP) add-on can be
+    /// This `enum` value represents the possible types of a Product, which is an
+    /// item purchased in the application. An In-app purchase (IAP) add-on can be
     /// durable, consuable, or a subscription.
     [Preserve]
     public enum ProductType : int

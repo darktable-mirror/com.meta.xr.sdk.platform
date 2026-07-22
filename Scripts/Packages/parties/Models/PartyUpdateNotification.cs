@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<3022cedde31b4d37e4546aa8d25107e6>>
+ * @generated SignedSource<<e6adc2a5ab2eff398f6b02a86744da65>>
  */
 
 #pragma warning disable 0618
@@ -20,34 +20,26 @@ namespace Oculus.Platform.Models
     /// The notification about updating a party status information to a
     /// participating user. Party Notifications are intended to update the user on
     /// various actions that are occurring in the user's party. It can be retrieved
-    /// using @internal_link(horizon.platform.parties.Parties#party_update()).
+    /// using Parties.PartyUpdate.
     [Preserve]
     public class PartyUpdateNotification
     {
         /// An enum that specifies the type of action related to the party and user
-        /// that this notification holds.
-        /// @internal_link(horizon.platform.parties.enums.PartyUpdateAction#join): The
-        /// user joined the party.
-        /// @internal_link(horizon.platform.parties.enums.PartyUpdateAction#leave): The
-        /// user left the party.
-        /// @internal_link(horizon.platform.parties.enums.PartyUpdateAction#invite):
-        /// The user was invited to the party.
-        /// @internal_link(horizon.platform.parties.enums.PartyUpdateAction#uninvite):
-        /// The user was uninvited to the party.
+        /// that this notification holds. PartyUpdateAction.Join: The user joined the
+        /// party. PartyUpdateAction.Leave: The user left the party.
+        /// PartyUpdateAction.Invite: The user was invited to the party.
+        /// PartyUpdateAction.Uninvite: The user was uninvited to the party.
         [JsonProperty("action")]
         [JsonConverter(typeof(EnumDescriptionConverter<PartyUpdateAction>))]
         [Preserve]
         public PartyUpdateAction Action { get; set; }
         /// The ID of the party that will be updated. This can be retrieved with
-        /// @internal_link(horizon.platform.parties.models.PartyID).
+        /// PartyID.
         [JsonProperty("party_id")]
         [JsonConverter(typeof(UInt64EmptyStringConverter))]
         [Preserve]
         public UInt64 PartyId { get; set; }
-        /// The id of the @internal_link(horizon.platform.users.models.User) who
-        /// initiated the action that this party update status notification is in
-        /// reference to. This is equivalent to
-        /// @internal_link(horizon.platform.users.models.User#id) for this user.
+        /// The id of the User.Id for this user.
         [JsonProperty("sender_id")]
         [JsonConverter(typeof(UInt64EmptyStringConverter))]
         [Preserve]
@@ -57,23 +49,18 @@ namespace Oculus.Platform.Models
         [JsonProperty("update_timestamp")]
         [Preserve]
         public string UpdateTimestamp { get; set; }
-        /// The alias of the @internal_link(horizon.platform.users.models.User) whose
-        /// party status has changed. This is an alias that is set by the user.
+        /// The alias of the User whose party status has changed. This is an alias that
+        /// is set by the user.
         [JsonProperty("user_alias")]
         [Preserve]
         public string UserAlias { get; set; }
-        /// The ID of the user, @internal_link(horizon.platform.users.models.User#id),
-        /// whose party status has changed. This is a unique value for every
-        /// @internal_link(horizon.platform.users.models.User).
+        /// The ID of the user, User.Id, whose party status has changed. This is a
+        /// unique value for every User.
         [JsonProperty("user_id")]
         [JsonConverter(typeof(UInt64EmptyStringConverter))]
         [Preserve]
         public UInt64 UserId { get; set; }
-        /// The displayable name of the
-        /// @internal_link(horizon.platform.users.models.User) whose party status has
-        /// changed. This is equivalent to
-        /// @internal_link(horizon.platform.users.models.User#display_name) for this
-        /// user.
+        /// The displayable name of the User.DisplayName for this user.
         [JsonProperty("user_name")]
         [Preserve]
         public string UserName { get; set; }

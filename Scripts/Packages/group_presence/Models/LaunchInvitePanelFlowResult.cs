@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<c21420eec5cecfd27bb998502cb1f9ed>>
+ * @generated SignedSource<<26e776fdee56f6bc4332adbf67d4ec3b>>
  */
 
 namespace Oculus.Platform.Models
@@ -19,13 +19,12 @@ namespace Oculus.Platform.Models
     /// is used to send out invitations to other users. It provides a way for
     /// developers to track the results of a user's interaction with the invite
     /// panel, including the list of users who were invited to the session. It can
-    /// be retrieved using @internal_link(horizon.platform.group_presence.GroupPres
-    /// ence#invitations_sent()).
+    /// be retrieved using GroupPresence.InvitationsSent.
     [Preserve]
     public class LaunchInvitePanelFlowResult
     {
-        /// A list of @internal_link(horizon.platform.users.models.User) who were
-        /// invited to the session by the user who interacted with the invite panel.
+        /// A list of User who were invited to the session by the user who interacted
+        /// with the invite panel.
         [JsonProperty("invited_users")]
         [Preserve]
         public UserList InvitedUsers { get; set; }

@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<2daedd820d7831889e4b868c94466400>>
+ * @generated SignedSource<<12faf382834e7edf16a25f2fe4eb3310>>
  */
 
 namespace Oculus.Platform
@@ -14,8 +14,7 @@ namespace Oculus.Platform
     /// The visibility of the challenge. A challenge may be invite-only, public, or
     /// private. The visibility setting determines who can see and participate in
     /// the challenge. See more details of Challenges in
-    /// [here](https://developer.oculus.com/documentation/{{platform_doc_path}}/ps-
-    /// challenges/).
+    /// [here](https://developer.oculus.com/documentation/unity/ps-challenges/).
     [Preserve]
     public enum ChallengeVisibility : int
     {

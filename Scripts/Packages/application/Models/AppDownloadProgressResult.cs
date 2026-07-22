@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<f59e39bcb44d80c1c3e31d1be470edd3>>
+ * @generated SignedSource<<552fa061b04017f403764d71175935a5>>
  */
 
 namespace Oculus.Platform.Models
@@ -16,9 +16,9 @@ namespace Oculus.Platform.Models
     using UnityEngine.Scripting;
 
     /// Represents the result of the download of an application. You can retrieve
-    /// it using CheckAppDownloadProgress API (@internal_link(horizon.platform.appl
-    /// ication.Application#check_app_download_progress())). You can use this to
-    /// check the progress and the status of an ongoing app download operation.
+    /// it using CheckAppDownloadProgress API
+    /// (Application.CheckAppDownloadProgress). You can use this to check the
+    /// progress and the status of an ongoing app download operation.
     [Preserve]
     public class AppDownloadProgressResult
     {
@@ -26,9 +26,8 @@ namespace Oculus.Platform.Models
         [JsonProperty("downloadSizeBytes")]
         [Preserve]
         public long DownloadBytes { get; set; }
-        /// Number of bytes that have already been downloaded. You can use this and @in
-        /// ternal_link(horizon.platform.application.models.AppDownloadProgressResult#d
-        /// ownload_bytes) to implement the progress bar.
+        /// Number of bytes that have already been downloaded. You can use this and
+        /// AppDownloadProgressResult.DownloadBytes to implement the progress bar.
         [JsonProperty("downloadedSizeBytes")]
         [Preserve]
         public long DownloadedBytes { get; set; }

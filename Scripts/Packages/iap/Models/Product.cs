@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<3b99b451fd0dd5f261685454e019d86c>>
+ * @generated SignedSource<<006edadac528239aee1978d7b5fe4216>>
  */
 
 #pragma warning disable 0618
@@ -19,9 +19,7 @@ namespace Oculus.Platform.Models
 
     /// The class that represents the product information for a specific IAP which
     /// is available for purchase in your app. You can retrieve more information
-    /// about the product(s) by using their SKU with
-    /// @internal_link(horizon.platform.iap.Iap#get_products_by_sku(List<String>,
-    /// Integer))
+    /// about the product(s) by using their SKU with IAP.GetProductsBySKU
     [Preserve]
     public class Product
     {
@@ -30,15 +28,14 @@ namespace Oculus.Platform.Models
         // May be null. Check before using.
         [Preserve]
         public BillingPlanList BillingPlansOptional { get; set; }
-        /// The content rating of a @internal_link(horizon.platform.iap.models.Product)
-        /// that specifies the age rating as well as other important information that
-        /// needs to be displayed to the user per local regulations.
+        /// The content rating of a Product that specifies the age rating as well as
+        /// other important information that needs to be displayed to the user per
+        /// local regulations.
         [JsonProperty("content_rating")]
         // May be null. Check before using.
         [Preserve]
         public ContentRating ContentRatingOptional { get; set; }
-        /// The URI for the cover image for the
-        /// @internal_link(horizon.platform.iap.models.Product) being sold.
+        /// The URI for the cover image for the Product being sold.
         [JsonProperty("cover_url")]
         [Preserve]
         public string CoverUrl { get; set; }
@@ -47,13 +44,11 @@ namespace Oculus.Platform.Models
         [JsonProperty("description")]
         [Preserve]
         public string Description { get; set; }
-        /// The formatted string for the
-        /// @internal_link(horizon.platform.iap.models.Price). This is the same value
-        /// stored in @internal_link(horizon.platform.iap.models.Price).
+        /// The formatted string for the Price. This is the same value stored in Price.
         [JsonProperty("formatted_price")]
         [Preserve]
         public string FormattedPrice { get; set; }
-        /// The URI for @internal_link(horizon.platform.iap.models.Product) icon.
+        /// The URI for Product icon.
         [JsonProperty("icon_url")]
         [Preserve]
         public string IconUrl { get; set; }
@@ -62,17 +57,13 @@ namespace Oculus.Platform.Models
         [JsonProperty("name")]
         [Preserve]
         public string Name { get; set; }
-        /// The @internal_link(horizon.platform.iap.models.Price) of the product
-        /// contains the currency code, the amount in hundredths, and the formatted
-        /// string representation.
+        /// The Price of the product contains the currency code, the amount in
+        /// hundredths, and the formatted string representation.
         [JsonProperty("price")]
         [Preserve]
         public Price Price { get; set; }
-        /// The short description of a
-        /// @internal_link(horizon.platform.iap.models.Product) which provides more
-        /// information about the @internal_link(horizon.platform.iap.models.Product).
-        /// To be used in conjunction with the description of the
-        /// @internal_link(horizon.platform.iap.models.Product).
+        /// The short description of a Product which provides more information about
+        /// the Product. To be used in conjunction with the description of the Product.
         [JsonProperty("short_description")]
         [Preserve]
         public string ShortDescription { get; set; }
@@ -82,9 +73,7 @@ namespace Oculus.Platform.Models
         [Preserve]
         public string Sku { get; set; }
         /// The type of product. An In-app purchase (IAP) add-on can be
-        /// @internal_link(horizon.platform.iap.enums.ProductType#durable),
-        /// @internal_link(horizon.platform.iap.enums.ProductType#consumable), or a
-        /// @internal_link(horizon.platform.iap.enums.ProductType#subscription).
+        /// ProductType.Durable, ProductType.Consumable, or a ProductType.Subscription.
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumDescriptionConverter<ProductType>))]
         [Preserve]

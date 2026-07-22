@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<963ff0dd37a644d87ff1514e16796db2>>
+ * @generated SignedSource<<220ade40113716fe0fb58f4750ea5854>>
  */
 
 #pragma warning disable 0618
@@ -18,12 +18,9 @@ namespace Oculus.Platform.Models
     using UnityEngine.Scripting;
 
     /// Results of the launched report dialog including resulting report ID and
-    /// user action. It can be retrieved using @internal_link(horizon.platform.abus
-    /// e_report.AbuseReport#launch_advanced_report_flow(String,
-    /// AdvancedAbuseReportOptions)) to handle the result of a report request.
-    /// Learn more about our [User Reporting
-    /// Service](https://developer.oculus.com/resources/reporting-
-    /// service#faq_856753478660534).
+    /// user action. It can be retrieved using AbuseReport.LaunchAdvancedReportFlow
+    /// to handle the result of a report request. Learn more about our
+    /// [User Reporting Service](https://developer.oculus.com/resources/reporting-service#faq_856753478660534).
     [Preserve]
     public class LaunchReportFlowResult
     {

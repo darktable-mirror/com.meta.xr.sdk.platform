@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<80b2995d26dcb3e8b56444fefc358f22>>
+ * @generated SignedSource<<73fd589850d61d0582422f89745a426f>>
  */
 
 namespace Oculus.Platform.Models
@@ -17,9 +17,8 @@ namespace Oculus.Platform.Models
 
     /// The livestreaming application status represents the status result of
     /// whether the livestreaming is enabled for an app. If your app is enabled,
-    /// you will receive a notification by @internal_link(horizon.platform.livestre
-    /// aming.Livestreaming#status_change()) when the livestreaming session gets
-    /// updated.
+    /// you will receive a notification by Livestreaming.StatusChange when the
+    /// livestreaming session gets updated.
     [Preserve]
     public class LivestreamingApplicationStatus
     {

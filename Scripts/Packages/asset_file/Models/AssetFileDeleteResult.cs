@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<dca205ddf8db4bb18c6bfc5a30c6b20c>>
+ * @generated SignedSource<<2ea67d53ee26b5cd84b2576211d9caa2>>
  */
 
 namespace Oculus.Platform.Models
@@ -16,12 +16,10 @@ namespace Oculus.Platform.Models
     using UnityEngine.Scripting;
 
     /// An AssetFileDeleteResult contains the result of a deleted asset file. You
-    /// can delete an asset file by using
-    /// @internal_link(horizon.platform.asset_file.AssetFile#delete_by_id(ID)) or @
-    /// internal_link(horizon.platform.asset_file.AssetFile#delete_by_name(String))
-    /// . The delete result contains the @internal_link(horizon.platform.asset_file
-    /// .models.AssetFileDeleteResult#asset_id), the file path, and the success
-    /// status of the deleted asset.
+    /// can delete an asset file by using AssetFile.DeleteById or
+    /// AssetFile.DeleteByName. The delete result contains the
+    /// AssetFileDeleteResult.AssetId, the file path, and the success status of the
+    /// deleted asset.
     [Preserve]
     public class AssetFileDeleteResult
     {
@@ -29,11 +27,10 @@ namespace Oculus.Platform.Models
         [JsonConverter(typeof(UInt64EmptyStringConverter))]
         [Preserve]
         public UInt64 AssetFileId { get; set; }
-        /// This represents the ID of the asset file. When you want to use @internal_li
-        /// nk(horizon.platform.asset_file.models.AssetFileDeleteResult#asset_file_id),
-        /// you need to use @internal_link(horizon.platform.asset_file.models.AssetFile
-        /// DeleteResult#asset_id) instead. It can be retrieved using
-        /// @internal_link(horizon.platform.asset_file.models.AssetDetails#asset_id).
+        /// This represents the ID of the asset file. When you want to use
+        /// AssetFileDeleteResult.AssetFileId, you need to use
+        /// AssetFileDeleteResult.AssetId instead. It can be retrieved using
+        /// AssetDetails.AssetId.
         [JsonProperty("asset_id")]
         [JsonConverter(typeof(UInt64EmptyStringConverter))]
         [Preserve]

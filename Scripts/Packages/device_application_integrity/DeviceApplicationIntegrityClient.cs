@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<3ee7ec789c64e4f20bc9f6b86c7505ad>>
+ * @generated SignedSource<<a7cfdbf0031db6b45cb47abb0f890e8d>>
  */
 
 using UnityEngine;
@@ -13,6 +13,12 @@ using System.Collections.Generic;
 
 namespace Oculus.Platform
 {
+    /// The Device Application Integrity API is a key function for developers
+    /// committed to protecting their applications from unauthorized modifications
+    /// and potential security breaches. Leveraging this API can greatly enhance
+    /// the security of your applications, ensuring a seamless and safe user
+    /// experience. See more details
+    /// [here](https://developer.oculus.com/documentation/unity/ps-attestation-api/).
     public static partial class DeviceApplicationIntegrity
     {
         /// Returns Device and Application Integrity Attestation JSON Web Token. The

@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<1e4295f44b6c606ee2f83e113e82144c>>
+ * @generated SignedSource<<cf1c63d17182f59a06988b969acb584a>>
  */
 
 using UnityEngine;
@@ -13,11 +13,18 @@ using System.Collections.Generic;
 
 namespace Oculus.Platform
 {
+    /// The Leaderboards API provides a way to manage and interact with
+    /// leaderboards in your application. The API allows you to retrieve
+    /// information about a single leaderboard, write entries to a leaderboard, and
+    /// retrieve blocks of leaderboard entries based on different criterias.
+    /// Leaderboard-integrated apps get Challenges for free, accessible through the
+    /// Scoreboards UI. Visit our
+    /// [website](https://developer.oculus.com/documentation/unity/ps-leaderboards/)
+    /// for more information about leaderboards.
     public static partial class Leaderboards
     {
         /// Retrieves detailed information for a single leaderboard with a specified
-        /// name, returning an array of
-        /// @internal_link(horizon.platform.leaderboards.models.Leaderboard).
+        /// name, returning an array of Leaderboard.
         public static Request<LeaderboardList> Get(string leaderboardName)
         {
             if (Core.IsInitialized())
@@ -123,9 +130,9 @@ namespace Oculus.Platform
             return null;
         }
 
-        /// Writes a single entry to the leaderboard, returning @internal_link(horizon.
-        /// platform.leaderboards.models.LeaderboardUpdateStatus) indicating whether
-        /// the update was successful and providing the updated challenge IDs.
+        /// Writes a single entry to the leaderboard, returning LeaderboardUpdateStatus
+        /// indicating whether the update was successful and providing the updated
+        /// challenge IDs.
         public static Request<bool> WriteEntry(string leaderboardName, long score, byte[] extraData = null, bool? forceUpdate = null)
         {
             if (Core.IsInitialized())
@@ -153,9 +160,8 @@ namespace Oculus.Platform
         }
 
         /// Writes a single entry to a leaderboard which can include supplementary
-        /// metrics, returning @internal_link(horizon.platform.leaderboards.models.Lead
-        /// erboardUpdateStatus) indicating whether the update was successful and
-        /// providing the updated challenge IDs.
+        /// metrics, returning LeaderboardUpdateStatus indicating whether the update
+        /// was successful and providing the updated challenge IDs.
         public static Request<bool> WriteEntryWithSupplementaryMetric(string leaderboardName, long score, long supplementaryMetric, byte[] extraData = null, bool? forceUpdate = null)
         {
             if (Core.IsInitialized())
@@ -177,6 +183,38 @@ namespace Oculus.Platform
 
                 ulong requestHandle = PlatformClient.MakeRequest("leaderboards", "write_entry_with_supplementary_metric", 1, jsonRequest, 0);
                 return new Request<bool>(requestHandle);
+            }
+
+            Debug.LogError(Core.PlatformUninitializedError);
+            return null;
+        }
+
+        /// Resets the leaderboard by bumping an internal watermark timestamp, making
+        /// all existing entries invisible to queries (entries are not physically
+        /// deleted). After reset, subsequent entry queries will return an empty result
+        /// set. Cached entries may briefly remain visible. In-flight write operations
+        /// started before the reset may be rejected by the backend. Only the
+        /// application owner (developer dashboard admin) is authorized to perform this
+        /// operation; unauthorized callers will receive a
+        /// LEADERBOARD_RESET_NOT_AUTHORIZED error. Useful for season or tournament
+        /// resets where historical data should be preserved.
+        public static Request ResetEntries(string leaderboardName)
+        {
+            if (Core.IsInitialized())
+            {
+                  var request = new Dictionary<string, object>
+                {
+                    { "leaderboard_name", leaderboardName }
+                };
+
+                var settings = new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore
+                };
+                string jsonRequest = JsonConvert.SerializeObject(request, settings);
+
+                ulong requestHandle = PlatformClient.MakeRequest("leaderboards", "reset_entries", 1, jsonRequest, 0);
+                return new Request(requestHandle);
             }
 
             Debug.LogError(Core.PlatformUninitializedError);

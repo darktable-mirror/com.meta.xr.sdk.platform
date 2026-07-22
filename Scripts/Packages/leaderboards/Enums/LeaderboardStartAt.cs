@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<1c6c630f9b5ab2193bc61ffbadd62eb6>>
+ * @generated SignedSource<<0da3ff4bc9289ad94098d6d33e758c51>>
  */
 
 namespace Oculus.Platform
@@ -12,10 +12,9 @@ namespace Oculus.Platform
     using UnityEngine.Scripting;
 
     /// An enum that allows you to specify the starting point for the leaderboard
-    /// entries. It can be used as a params in @internal_link(horizon.platform.lead
-    /// erboards.Leaderboards#get_entries(String, Integer, LeaderboardFilterType,
-    /// LeaderboardStartAt)) to the starting point for the leaderboard entries that
-    /// are returned in the response.
+    /// entries. It can be used as a params in Leaderboards.GetEntries to the
+    /// starting point for the leaderboard entries that are returned in the
+    /// response.
     [Preserve]
     public enum LeaderboardStartAt : int
     {

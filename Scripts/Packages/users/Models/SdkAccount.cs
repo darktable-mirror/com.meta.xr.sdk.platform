@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<d48a35269015eec085f4c7b8bfd53b6f>>
+ * @generated SignedSource<<dac5b1ac7b3ded09463c8f285a16e478>>
  */
 
 namespace Oculus.Platform.Models
@@ -17,23 +17,19 @@ namespace Oculus.Platform.Models
 
     /// A single user can have multiple sdk accounts associated with it. SDK
     /// accounts represent the oculus user and x-accounts that are linked to the
-    /// particular user. Retrieve the SDK accounts by using,
-    /// @internal_link(horizon.platform.users.Users#get_sdk_accounts()).
+    /// particular user. Retrieve the SDK accounts by using, Users.GetSdkAccounts.
     [Preserve]
     public class SdkAccount
     {
         /// The specific type of account that this sdk account represents. The type can
-        /// be one of the following:
-        /// @internal_link(horizon.platform.users.enums.SdkAccountType#unknown)
-        /// @internal_link(horizon.platform.users.enums.SdkAccountType#oculus) @interna
-        /// l_link(horizon.platform.users.enums.SdkAccountType#facebook_gameroom)
+        /// be one of the following: SdkAccountType.Unknown SdkAccountType.Oculus
+        /// SdkAccountType.FacebookGameroom
         [JsonProperty("account_type")]
         [JsonConverter(typeof(EnumDescriptionConverter<SdkAccountType>))]
         [Preserve]
         public SdkAccountType AccountType { get; set; }
-        /// The ID of the user, @internal_link(horizon.platform.users.models.User#id),
-        /// of the sdk account. This is a unique value for every
-        /// @internal_link(horizon.platform.users.models.User).
+        /// The ID of the user, User.Id, of the sdk account. This is a unique value for
+        /// every User.
         [JsonProperty("user_id")]
         [JsonConverter(typeof(UInt64EmptyStringConverter))]
         [Preserve]

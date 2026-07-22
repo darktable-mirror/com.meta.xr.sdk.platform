@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<8809cb6aeac99e0416738c7331a376b5>>
+ * @generated SignedSource<<855f83976271d0b569f9efe8c3c7f6c9>>
  */
 
 using UnityEngine;
@@ -13,6 +13,10 @@ using System.Collections.Generic;
 
 namespace Oculus.Platform
 {
+    /// The Asset File API provides methods for managing asset files in a virtual
+    /// environment. The methods include getting details and status
+    /// AssetDetails.DownloadStatus, downloading by ID or name, canceling
+    /// downloads, and deleting files by ID or name.
     public static partial class AssetFile
     {
         public static Request<AssetFileDeleteResult> Delete(UInt64 assetFileID)
@@ -114,9 +118,8 @@ namespace Oculus.Platform
         }
 
         /// Downloads an asset file by its ID on demand. Returns an object containing
-        /// the asset ID and filepath. Sends periodic
-        /// @internal_link(horizon.platform.asset_file.AssetFile#download_update()) to
-        /// track the downloads.
+        /// the asset ID and filepath. Sends periodic AssetFile.DownloadUpdate to track
+        /// the downloads.
         public static Request<AssetFileDownloadResult> DownloadById(UInt64 assetFileID)
         {
             if (Core.IsInitialized())
@@ -142,9 +145,8 @@ namespace Oculus.Platform
 
         /// Downloads a list of asset files by their IDs on demand. Returns a session
         /// ID that can be used to track the batch download progress. All assets must
-        /// succeed or fail together. Sends periodic
-        /// @internal_link(horizon.platform.asset_file.AssetFile#download_update()) to
-        /// track the downloads.
+        /// succeed or fail together. Sends periodic AssetFile.DownloadUpdate to track
+        /// the downloads.
         public static Request<int> DownloadByIdList(UInt64[] assetFileIdList)
         {
             if (Core.IsInitialized())
@@ -297,10 +299,8 @@ namespace Oculus.Platform
         }
 
         /// Returns an array of asset details with asset file names and their
-        /// associated IDs
-        /// @internal_link(horizon.platform.asset_file.models.AssetDetails#asset_id),
-        /// and whether it's currently installed @internal_link(horizon.platform.asset_
-        /// file.models.AssetDetails#download_status).
+        /// associated IDs AssetDetails.AssetId, and whether it's currently installed
+        /// AssetDetails.DownloadStatus.
         public static Request<AssetDetailsList> GetList()
         {
             if (Core.IsInitialized())
@@ -346,9 +346,8 @@ namespace Oculus.Platform
             return null;
         }
 
-        /// Returns the details
-        /// @internal_link(horizon.platform.asset_file.models.AssetDetails) on a single
-        /// asset: ID, file name, and whether it's currently installed
+        /// Returns the details AssetDetails on a single asset: ID, file name, and
+        /// whether it's currently installed
         public static Request<AssetDetails> StatusById(UInt64 assetFileID)
         {
             if (Core.IsInitialized())
@@ -372,9 +371,8 @@ namespace Oculus.Platform
             return null;
         }
 
-        /// Returns the details
-        /// @internal_link(horizon.platform.asset_file.models.AssetDetails) on a single
-        /// asset: ID, file name, and whether it's currently installed
+        /// Returns the details AssetDetails on a single asset: ID, file name, and
+        /// whether it's currently installed
         public static Request<AssetDetails> StatusByName(string assetFileName)
         {
             if (Core.IsInitialized())

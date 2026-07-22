@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<0b66868c627b91cc786d52a189c2c01b>>
+ * @generated SignedSource<<46d8121242a3840179bda9504a2c23f5>>
  */
 
 using UnityEngine;
@@ -13,6 +13,7 @@ using System.Collections.Generic;
 
 namespace Oculus.Platform
 {
+    /// Dummy Package to test the Runtime app E2E
     public static partial class RuntimeTest
     {
         /// Method to test the serviceConnection.makeRequest() method

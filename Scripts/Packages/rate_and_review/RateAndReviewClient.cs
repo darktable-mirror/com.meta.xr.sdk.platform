@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<eeac501e14b3eb6bb64cdd94fbb8d0d6>>
+ * @generated SignedSource<<62877124c6d4f1a9a7bf4aa99d63a885>>
  */
 
 using UnityEngine;
@@ -13,6 +13,9 @@ using System.Collections.Generic;
 
 namespace Oculus.Platform
 {
+    /// The RateAndReview APIs proviide methods for rating and review related
+    /// operations, including soliciting rating and checking the eligibility of
+    /// soliciting rating
     public static partial class RateAndReview
     {
         /// Check the eligibility to launch UI for soliciting ratings and review for

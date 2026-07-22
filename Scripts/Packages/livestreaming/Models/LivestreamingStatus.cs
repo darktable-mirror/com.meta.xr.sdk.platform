@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<b47c67d5ed106c7be6b42221ce8a71ca>>
+ * @generated SignedSource<<68bf663d9ddd344c15edc78ca970aa9c>>
  */
 
 #pragma warning disable 0618
@@ -18,10 +18,10 @@ namespace Oculus.Platform.Models
     using UnityEngine.Scripting;
 
     /// The livestreaming status represents the status of a livestreaming event in
-    /// your app. You will receive a notification by @internal_link(horizon.platfor
-    /// m.livestreaming.Livestreaming#status_change()) whenever your livestreaming
-    /// session gets updated. The status contains info about your livestream type,
-    /// whether your mic is enabled, whether the comments are visible and etc.
+    /// your app. You will receive a notification by Livestreaming.StatusChange
+    /// whenever your livestreaming session gets updated. The status contains info
+    /// about your livestream type, whether your mic is enabled, whether the
+    /// comments are visible and etc.
     [Preserve]
     public class LivestreamingStatus
     {
@@ -36,9 +36,8 @@ namespace Oculus.Platform.Models
         [Preserve]
         public bool IsPaused { get; set; }
         /// This boolean field indicates if your app is livestreaming enabled. If your
-        /// app is enabled, you will receive a notification by @internal_link(horizon.p
-        /// latform.livestreaming.Livestreaming#status_change()) when the livestreaming
-        /// session gets updated.
+        /// app is enabled, you will receive a notification by
+        /// Livestreaming.StatusChange when the livestreaming session gets updated.
         [JsonProperty("livestreaming_enabled")]
         [Preserve]
         public bool LivestreamingEnabled { get; set; }

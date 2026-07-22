@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<00ab6c8ee909b7a9c964973b3d6e84b8>>
+ * @generated SignedSource<<96ec3fb367a3bc319b8ba7d2e172bcb6>>
  */
 
 namespace Oculus.Platform.Models
@@ -15,10 +15,10 @@ namespace Oculus.Platform.Models
     using Newtonsoft.Json.Converters;
     using UnityEngine.Scripting;
 
-    /// The price of a @internal_link(horizon.platform.iap.models.Product). A price
-    /// contains a currency code, an amount in hundredths, and its formatted string
-    /// representation. For example, a price with a currency code of "USD" and an
-    /// amount in hundredths of 99 has a formatted string of "$0.99".
+    /// The price of a Product. A price contains a currency code, an amount in
+    /// hundredths, and its formatted string representation. For example, a price
+    /// with a currency code of "USD" and an amount in hundredths of 99 has a
+    /// formatted string of "$0.99".
     [Preserve]
     public class Price
     {
@@ -32,8 +32,7 @@ namespace Oculus.Platform.Models
         [Preserve]
         public string Currency { get; set; }
         /// The formatted string representation of the price, e.g., "$0.78". The value
-        /// depends on the @internal_link(horizon.platform.iap.models.Price#currency)
-        /// and @internal_link(horizon.platform.iap.models.Price#amount_in_hundredths).
+        /// depends on the Price.Currency and Price.AmountInHundredths.
         [JsonProperty("formatted")]
         [Preserve]
         public string Formatted { get; set; }

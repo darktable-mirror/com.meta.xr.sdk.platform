@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<b4df8acc77293842b69adcf4fad05790>>
+ * @generated SignedSource<<26f72d2cd0db1c9740241b2f6b29ab03>>
  */
 
 using System;
@@ -16,26 +16,25 @@ using UnityEngine.Scripting;
 
 namespace Oculus.Platform
 {
-    /// The roster option, to be passed into @internal_link(horizon.platform.group_
-    /// presence.GroupPresence#launch_roster_panel(RosterOptions)) which is used to
-    /// launch the panel displaying the current users in the roster/party. You can
-    /// read more about rosters in our
-    /// [docs](https://developer.oculus.com/documentation/{{platform_doc_path}}/ps-
-    /// roster/).
+    /// The roster option, to be passed into GroupPresence.LaunchRosterPanel which
+    /// is used to launch the panel displaying the current users in the
+    /// roster/party. You can read more about rosters in our
+    /// [docs](https://developer.oculus.com/documentation/unity/ps-roster/).
     [Serializable]
     [Preserve]
     public class RosterOptions {
-        /// Passing in these users will add them to the invitable users list. From the 
-        /// @internal_link(horizon.platform.group_presence.GroupPresence#launch_roster_
-        /// panel(RosterOptions)), the
-        /// @internal_link(horizon.platform.users.models.User) can open the invite
-        /// list, where the suggested users will be added.
+        /// Passing in these users will add them to the invitable users list. From the
+        /// GroupPresence.LaunchRosterPanel, the User can open the invite list, where
+        /// the suggested users will be added.
         [JsonProperty("suggested_users")]
         [JsonConverter(typeof(UInt64ArrayAsStringConverter))]
         [Preserve]
         public UInt64[] SuggestedUsers;
         
-        public string Json => JsonUtility.ToJson(this);
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
+        }
 
         [Preserve]
         public RosterOptions()

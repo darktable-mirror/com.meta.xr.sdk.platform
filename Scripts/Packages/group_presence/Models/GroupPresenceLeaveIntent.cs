@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<f19d91daa520dc87006b75282ff783b5>>
+ * @generated SignedSource<<8936b586474ffdfb5fd2782091f1baa5>>
  */
 
 #pragma warning disable 0618
@@ -18,16 +18,15 @@ namespace Oculus.Platform.Models
     using UnityEngine.Scripting;
 
     /// An GroupPresenceLeaveIntent represents a user's intent to leave a group
-    /// presence which is user's presence to be at a
-    /// @internal_link(horizon.platform.group_presence.models.Destination) and
-    /// session. People with same session id are considered to be co-present
-    /// together. Every combination of destination api name, lobby session id and
-    /// match session id can uniquely identify a destination.
+    /// presence which is user's presence to be at a Destination and session.
+    /// People with same session id are considered to be co-present together. Every
+    /// combination of destination api name, lobby session id and match session id
+    /// can uniquely identify a destination.
     [Preserve]
     public class GroupPresenceLeaveIntent
     {
-        /// @internal_link(horizon.platform.group_presence.models.Destination#api_name)
-        /// is the unique API Name that refers to an in-app destination.
+        /// Destination.ApiName is the unique API Name that refers to an in-app
+        /// destination.
         [JsonProperty("destination_api_name")]
         [Preserve]
         public string DestinationApiName { get; set; }

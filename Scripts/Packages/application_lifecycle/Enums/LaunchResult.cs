@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<ba399b4e75ccbe250126f77095bc1663>>
+ * @generated SignedSource<<63c449df743fc961f4472641be0f37b8>>
  */
 
 namespace Oculus.Platform
@@ -13,8 +13,7 @@ namespace Oculus.Platform
 
     /// An enum that specifies the whether the attempt to launch this application
     /// via a deeplink was successful. The value is meant to be reported after a
-    /// deeplink by calling @internal_link(horizon.platform.application_lifecycle.A
-    /// pplicationLifecycle#log_deeplink_result(String, LaunchResult))
+    /// deeplink by calling ApplicationLifecycle.LogDeeplinkResult
     [Preserve]
     public enum LaunchResult : int
     {

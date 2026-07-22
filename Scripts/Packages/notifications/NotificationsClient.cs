@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<f29902b52e58647eb66c9079e6ea33ca>>
+ * @generated SignedSource<<5c9c3f5afd08572e85b78d291b0c1a73>>
  */
 
 using UnityEngine;
@@ -13,6 +13,11 @@ using System.Collections.Generic;
 
 namespace Oculus.Platform
 {
+    /// The Notifications class provides a way to manage and display notifications
+    /// to the user. Notifications can be used to inform the user of important
+    /// events, such as new messages, friend requests, or updates to installed
+    /// apps. See more info about Platform Solutions
+    /// [here](https://developer.oculus.com/documentation/unity/ps-platform-intro/).
     public static partial class Notifications
     {
         /// Triggers event-based notifications to be delivered to users based on events

@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<904444979418027f350a6d018e9f612c>>
+ * @generated SignedSource<<5703e955cb14c577d6e4c98c97d08f2a>>
  */
 
 namespace Oculus.Platform.Models
@@ -15,17 +15,15 @@ namespace Oculus.Platform.Models
     using Newtonsoft.Json.Converters;
     using UnityEngine.Scripting;
 
-    /// An ID for a @internal_link(horizon.platform.users.models.User) which is
-    /// unique per Developer Center organization. This ID allows different apps
-    /// within the same org to be able to identify the user. You can retrieve this
-    /// ID by using
-    /// @internal_link(horizon.platform.users.Users#get_org_scoped_id(ID)).
+    /// An ID for a User which is unique per Developer Center organization. This ID
+    /// allows different apps within the same org to be able to identify the user.
+    /// You can retrieve this ID by using Users.GetOrgScopedID.
     [Preserve]
     public class OrgScopedID
     {
-        /// The unique id of the @internal_link(horizon.platform.users.models.User) in
-        /// each organization, allowing different apps within the same Developer Center
-        /// organization to have a consistent id for the same user.
+        /// The unique id of the User in each organization, allowing different apps
+        /// within the same Developer Center organization to have a consistent id for
+        /// the same user.
         [JsonProperty("org_scoped_id")]
         [JsonConverter(typeof(UInt64EmptyStringConverter))]
         [Preserve]

@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<6671ce1ffabf87972923e7673a3145cc>>
+ * @generated SignedSource<<33d3de3835f7eff2c326b2850605cff6>>
  */
 
 namespace Oculus.Platform.Models
@@ -17,15 +17,12 @@ namespace Oculus.Platform.Models
 
     /// This is a supplemental piece of data that is used for a single write to
     /// leaderboard entries. This metric is used for tiebreaker scenarios. You can
-    /// make such an entry by using @internal_link(horizon.platform.leaderboards.Le
-    /// aderboards#write_entry_with_supplementary_metric(String, Long, Long,
-    /// List<Byte>, UInt, Boolean))
+    /// make such an entry by using Leaderboards.WriteEntryWithSupplementaryMetric
     [Preserve]
     public class SupplementaryMetric
     {
         /// The ID of the leaderboard that this supplementary metric belongs to. This
-        /// is the unique value for every
-        /// @internal_link(horizon.platform.leaderboards.models.Leaderboard).
+        /// is the unique value for every Leaderboard.
         [JsonProperty("id")]
         [JsonConverter(typeof(UInt64EmptyStringConverter))]
         [Preserve]

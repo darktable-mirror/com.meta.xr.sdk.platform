@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<7ad8b447c1acbe410068c7b9aa7f6abd>>
+ * @generated SignedSource<<cebac8a341951f25af0a6ae46f5a3f60>>
  */
 
 namespace Oculus.Platform.Models
@@ -17,14 +17,12 @@ namespace Oculus.Platform.Models
 
     /// It contains an array of users who have been blocked by the logged in user.
     /// You can't follow, be followed, invited, or searched by a blocked user. It
-    /// can be retrieved using
-    /// @internal_link(horizon.platform.users.Users#get_blocked_users()).
+    /// can be retrieved using Users.GetBlockedUsers.
     [Preserve]
     public class BlockedUser
     {
         /// It represents the user ID that has been blocked by the logged in user. It
-        /// is a type of ID and can be retrieved using
-        /// @internal_link(horizon.platform.users.models.User#id).
+        /// is a type of ID and can be retrieved using User.Id.
         [JsonProperty("id")]
         [JsonConverter(typeof(UInt64EmptyStringConverter))]
         [Preserve]

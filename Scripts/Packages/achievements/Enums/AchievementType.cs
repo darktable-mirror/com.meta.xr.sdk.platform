@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<94f77d36d9a5e0f6b4344ddee14c8fd6>>
+ * @generated SignedSource<<1c214cb23ad5d77cbc11e53b634f82bc>>
  */
 
 namespace Oculus.Platform
@@ -15,8 +15,7 @@ namespace Oculus.Platform
     /// types of achievements that can be used in the game. Each type has its own
     /// unique characteristics and requirements for unlocking. See more details
     /// about achievement
-    /// [here](https://developer.oculus.com/documentation/{{platform_doc_path}}/ps-
-    /// achievements/).
+    /// [here](https://developer.oculus.com/documentation/unity/ps-achievements/).
     [Preserve]
     public enum AchievementType : int
     {

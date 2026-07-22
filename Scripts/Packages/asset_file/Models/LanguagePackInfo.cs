@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<143003e30f38bfc80dcb62e5bb6722f4>>
+ * @generated SignedSource<<cf7b55a9f304dbd38f10838e6fc064a3>>
  */
 
 namespace Oculus.Platform.Models
@@ -18,10 +18,9 @@ namespace Oculus.Platform.Models
     /// It contains information about a specific language, including its
     /// identification tag, and names in both English and the native language. It
     /// is useful for applications supporting multiple languages. It can be
-    /// retrieved using
-    /// @internal_link(horizon.platform.asset_file.models.AssetDetails#language).
-    /// Learn more about language pack in our [website](https://developer.oculus.co
-    /// m/documentation/{{platform_doc_path}}/ps-language-packs/)
+    /// retrieved using AssetDetails.Language. Learn more about language pack in
+    /// our
+    /// [website](https://developer.oculus.com/documentation/unity/ps-language-packs/)
     [Preserve]
     public class LanguagePackInfo
     {

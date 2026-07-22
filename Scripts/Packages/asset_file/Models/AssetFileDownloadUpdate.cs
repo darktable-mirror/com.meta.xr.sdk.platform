@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<ee5c9fb80f2a737a1ac7732d796b5c82>>
+ * @generated SignedSource<<069d5b2934776dc00d8731c6cd074999>>
  */
 
 namespace Oculus.Platform.Models
@@ -18,12 +18,9 @@ namespace Oculus.Platform.Models
     /// An AssetFileDownloadUpdate represents the download status of an update for
     /// an asset file. It contains the asset file ID, the download progress of the
     /// update, and its completion status. It can be retrieved using
-    /// @internal_link(horizon.platform.asset_file.AssetFile#download_update()). @i
-    /// nternal_link(horizon.platform.asset_file.models.AssetFileDownloadUpdate#com
-    /// pleted) is true means downloaded but probably not installed yet. Call
-    /// @internal_link(horizon.platform.asset_file.AssetFile#status_by_id(ID))
-    /// until @internal_link(horizon.platform.asset_file.models.AssetDetails#downlo
-    /// ad_status) changes from 'available' to 'installed'.
+    /// AssetFile.DownloadUpdate. AssetFileDownloadUpdate.Completed is true means
+    /// downloaded but probably not installed yet. Call AssetFile.StatusById until
+    /// AssetDetails.DownloadStatus changes from 'available' to 'installed'.
     [Preserve]
     public class AssetFileDownloadUpdate
     {
@@ -31,8 +28,7 @@ namespace Oculus.Platform.Models
         [JsonConverter(typeof(UInt64EmptyStringConverter))]
         [Preserve]
         public UInt64 AssetFileId { get; set; }
-        /// ID of the asset file. It can be retrieved using
-        /// @internal_link(horizon.platform.asset_file.models.AssetDetails#asset_id).
+        /// ID of the asset file. It can be retrieved using AssetDetails.AssetId.
         [JsonProperty("asset_id")]
         [JsonConverter(typeof(UInt64EmptyStringConverter))]
         [Preserve]

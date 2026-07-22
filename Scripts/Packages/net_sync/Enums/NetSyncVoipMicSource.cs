@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<38130ea91ddcb27dfff9359ec8fc777b>>
+ * @generated SignedSource<<c775dd601d95430302f701c8ced43b65>>
  */
 
 namespace Oculus.Platform
@@ -12,8 +12,7 @@ namespace Oculus.Platform
     using UnityEngine.Scripting;
 
     /// A network synchronization system allows multiple clients to connect and
-    /// communicate with each other in real-time. Once a
-    /// @internal_link(horizon.platform.net_sync.models.NetSyncConnection) is
+    /// communicate with each other in real-time. Once a NetSyncConnection is
     /// established, it uses Voice over Internet Protocol to allow users to make
     /// voice calls using the internet. The mic source will represent the current
     /// source of the mic in the call.

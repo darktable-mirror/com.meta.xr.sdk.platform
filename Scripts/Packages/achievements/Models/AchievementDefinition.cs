@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<84dd177df8830c54d9030986704adf74>>
+ * @generated SignedSource<<f6196ac829fce3a46b036beeb136555e>>
  */
 
 namespace Oculus.Platform.Models
@@ -17,35 +17,34 @@ namespace Oculus.Platform.Models
 
     /// An AchievementDefinition defines an achievement; this includes its name and
     /// how it is unlocked. For an individual user's progress in unlocking an
-    /// achievement, see AchievementProgress. It can be retrieved using @internal_l
-    /// ink(horizon.platform.achievements.Achievements#get_all_definitions()).
+    /// achievement, see AchievementProgress. It can be retrieved using
+    /// Achievements.GetAllDefinitions.
     [Preserve]
     public class AchievementDefinition
     {
         /// This is the type of achievement. There are three types of achievement:
-        /// @internal_link(horizon.platform.achievements.enums.AchievementType#simple)
-        /// - unlocked by completion of a single event or objective, @internal_link(hor
-        /// izon.platform.achievements.enums.AchievementType#bitfield) - unlocked when
-        /// a number of bits in a bitfield are set, and
-        /// @internal_link(horizon.platform.achievements.enums.AchievementType#count) -
-        /// unlocked when a counter reaches a defined target.
+        /// AchievementType.Simple - unlocked by completion of a single event or
+        /// objective, AchievementType.Bitfield - unlocked when a number of bits in a
+        /// bitfield are set, and AchievementType.Count - unlocked when a counter
+        /// reaches a defined target.
         [JsonProperty("achievement_type")]
         [JsonConverter(typeof(EnumDescriptionConverter<AchievementType>))]
         [Preserve]
         public AchievementType Type { get; set; }
         /// A string of the api name of the achievement. It can be used to get the
-        /// achievement progress by name by the function @internal_link(horizon.platfor
-        /// m.achievements.Achievements#get_progress_by_name(List<String>, Integer)).
+        /// achievement progress by name by the function
+        /// Achievements.GetProgressByName.
         [JsonProperty("api_name")]
         [Preserve]
         public string Name { get; set; }
-        /// It is required for bitfield achievements: @internal_link(horizon.platform.a
-        /// chievements.enums.AchievementType#bitfield). This represents the size of
-        /// the bitfield for this achievement.
+        /// It is required for bitfield achievements: AchievementType.Bitfield. This
+        /// represents the size of the bitfield for this achievement.
         [JsonProperty("bitfield_length")]
         [Preserve]
         public uint BitfieldLength { get; set; }
-        /// FIXME: Add doc comment for this field!
+        /// The target value for this achievement. For AchievementType.Count
+        /// achievements, this is the counter value that must be reached to unlock the
+        /// achievement.
         [JsonProperty("target")]
         [Preserve]
         public ulong Target { get; set; }

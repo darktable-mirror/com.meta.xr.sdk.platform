@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<f6d4c1e7a0cb6433c9be4d8457e8ed39>>
+ * @generated SignedSource<<9338be9dc2e55c28d41d322a5974bbea>>
  */
 
 using UnityEngine;
@@ -13,6 +13,11 @@ using System.Collections.Generic;
 
 namespace Oculus.Platform
 {
+    /// The Achievements API enables developers to create engaging experiences by
+    /// awarding trophies, badges, and awards for reaching goals. Users can see
+    /// friends' achievements Achievements.GetAllDefinitions, fostering
+    /// competition, and earned achievements are displayed in Meta Quest Home,
+    /// showcasing progress Achievements.Unlock and driving engagement.
     public static partial class Achievements
     {
         /// Add 'count' to the achievement with the given name. This must be a COUNT
@@ -172,15 +177,14 @@ namespace Oculus.Platform
         /// achievements are all-or-nothing. They are unlocked by a single event or
         /// objective completion. For example, a simple achievement is unlocked when
         /// Frodo reaches Mount Doom. Count achievements are unlocked when a counter
-        /// reaches a defined target. Define the @internal_link(horizon.platform.achiev
-        /// ements.models.AchievementDefinition#target) to reach that triggers the
-        /// achievement. For example, a target achievement is unlocked when Darth Vader
-        /// chokes 3 disappointing Imperial officers. Bitfield achievements are
-        /// unlocked when a target number of bits in a bitfield are set. Define the @in
-        /// ternal_link(horizon.platform.achievements.models.AchievementDefinition#targ
-        /// et) and @internal_link(horizon.platform.achievements.models.AchievementDefi
-        /// nition#bitfield_length) that triggers the achievement. For example, a
-        /// bitfield achievement is unlocked when Harry destroys 5 of the 7 Horcruxes.
+        /// reaches a defined target. Define the AchievementDefinition.Target to reach
+        /// that triggers the achievement. For example, a target achievement is
+        /// unlocked when Darth Vader chokes 3 disappointing Imperial officers.
+        /// Bitfield achievements are unlocked when a target number of bits in a
+        /// bitfield are set. Define the AchievementDefinition.Target and
+        /// AchievementDefinition.BitfieldLength that triggers the achievement. For
+        /// example, a bitfield achievement is unlocked when Harry destroys 5 of the 7
+        /// Horcruxes.
         public static Request<AchievementUpdate> Unlock(string name)
         {
             if (Core.IsInitialized())

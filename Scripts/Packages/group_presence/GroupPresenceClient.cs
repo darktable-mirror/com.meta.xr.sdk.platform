@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<66793cf0f76bf83d9ec104cf936291e3>>
+ * @generated SignedSource<<d608a444d05b82de420d374ae38d5d31>>
  */
 
 using UnityEngine;
@@ -13,6 +13,17 @@ using System.Collections.Generic;
 
 namespace Oculus.Platform
 {
+    /// The Group Presence API currently supports immersive apps and is designed to
+    /// update the platform with a user's current Destination.ApiName and status,
+    /// including whether they are GroupPresenceOptions.IsJoinable, their
+    /// GroupPresenceOptions.LobbySessionId, and
+    /// GroupPresenceOptions.MatchSessionId. This allows a user's location to be
+    /// displayed both in VR and outside of it on social platforms, and highlights
+    /// popular destinations in your app. "Joinable" indicates that a user is in an
+    /// area of your app that supports other users interacting with them. Note
+    /// These APIs are currently supported only for immersive mode. For
+    /// non-immersive apps, such as regular Android-based panel apps or 2D
+    /// experiences, this functionality is not yet supported.
     public static partial class GroupPresence
     {
         /// Clears the current group presence settings for your app. Use this when a
@@ -142,11 +153,10 @@ namespace Oculus.Platform
         }
 
         /// Launch the dialog allowing users to rejoin a previous lobby or match.
-        /// Either the user's @internal_link(horizon.platform.group_presence.options.Gr
-        /// oupPresenceOptions#lobby_session_id), their @internal_link(horizon.platform
-        /// .group_presence.options.GroupPresenceOptions#match_session_id), or both
-        /// must be populated as valid rejoinable destinations. Check the Rejoin
-        /// documentation for use cases and information on this feature.
+        /// Either the user's GroupPresenceOptions.LobbySessionId, their
+        /// GroupPresenceOptions.MatchSessionId, or both must be populated as valid
+        /// rejoinable destinations. Check the Rejoin documentation for use cases and
+        /// information on this feature.
         public static Request<RejoinDialogResult> LaunchRejoinDialog(string lobby_session_id, string match_session_id, string destination_api_name)
         {
             if (Core.IsInitialized())
@@ -199,13 +209,11 @@ namespace Oculus.Platform
         }
 
         /// Sends invites to the current application to the list of userIDs passed in.
-        /// You can fetch a list of users to pass in via the @internal_link(horizon.pla
-        /// tform.group_presence.GroupPresence#get_invitable_users(InviteOptions)).
-        /// This API works as an alternative to @internal_link(horizon.platform.group_p
-        /// resence.GroupPresence#launch_invite_panel(InviteOptions)) which delegates
-        /// the invite flow to the system invite module. @internal_link(horizon.platfor
-        /// m.group_presence.GroupPresence#launch_invite_panel(InviteOptions)) is the
-        /// recommended approach.
+        /// You can fetch a list of users to pass in via the
+        /// GroupPresence.GetInvitableUsers. This API works as an alternative to
+        /// GroupPresence.LaunchInvitePanel which delegates the invite flow to the
+        /// system invite module. GroupPresence.LaunchInvitePanel is the recommended
+        /// approach.
         public static Request<SendInvitesResult> SendInvites(UInt64[] userIds)
         {
             if (Core.IsInitialized())
@@ -232,11 +240,10 @@ namespace Oculus.Platform
         /// Sets group presence information for your current app. It is recommended
         /// that you use this parameter and its methods to set group presence
         /// information for your app. An example of using this parameter can be found
-        /// on the Group Presence overview page where the methods to set @internal_link
-        /// (horizon.platform.group_presence.options.GroupPresenceOptions#destination_a
-        /// pi_name), @internal_link(horizon.platform.group_presence.options.GroupPrese
-        /// nceOptions#match_session_id), and @internal_link(horizon.platform.group_pre
-        /// sence.options.GroupPresenceOptions#lobby_session_id) are used.
+        /// on the Group Presence overview page where the methods to set
+        /// GroupPresenceOptions.DestinationApiName,
+        /// GroupPresenceOptions.MatchSessionId, and
+        /// GroupPresenceOptions.LobbySessionId are used.
         public static Request Set(GroupPresenceOptions groupPresenceOptions)
         {
             if (Core.IsInitialized())
@@ -260,20 +267,16 @@ namespace Oculus.Platform
             return null;
         }
 
-        /// Sets the user's @internal_link(horizon.platform.group_presence.options.Grou
-        /// pPresenceOptions#deeplink_message_override) while keeping the other group
-        /// presence parameters the same. If the destination of the user is not set,
-        /// the deeplink message cannot be set as there's no deeplink message to
-        /// override. This method does not power travel from the Meta Quest platform to
-        /// your app. You must set a user's @internal_link(horizon.platform.group_prese
-        /// nce.options.GroupPresenceOptions#destination_api_name), @internal_link(hori
-        /// zon.platform.group_presence.options.GroupPresenceOptions#is_joinable)
-        /// status, and @internal_link(horizon.platform.group_presence.options.GroupPre
-        /// senceOptions#lobby_session_id) to enable travel to your app. Check Group
-        /// Presence overview for more information about these values. Note: Instead of
-        /// using this standalone API, we recommend setting all GroupPresence
-        /// parameters in one call to @internal_link(horizon.platform.group_presence.Gr
-        /// oupPresence#set(GroupPresenceOptions)).
+        /// Sets the user's GroupPresenceOptions.DeeplinkMessageOverride while keeping
+        /// the other group presence parameters the same. If the destination of the
+        /// user is not set, the deeplink message cannot be set as there's no deeplink
+        /// message to override. This method does not power travel from the Meta Quest
+        /// platform to your app. You must set a user's
+        /// GroupPresenceOptions.DestinationApiName, GroupPresenceOptions.IsJoinable
+        /// status, and GroupPresenceOptions.Lobby_session_id) to enable travel to your
+        /// app. Check Group Presence overview for more information about these values.
+        /// Note: Instead of using this standalone API, we recommend setting all
+        /// GroupPresence parameters in one call to @internal_link.
         public static Request SetDeeplinkMessageOverride(string deeplinkMessage)
         {
             if (Core.IsInitialized())
@@ -297,16 +300,14 @@ namespace Oculus.Platform
             return null;
         }
 
-        /// Replaces the user's current @internal_link(horizon.platform.group_presence.
-        /// options.GroupPresenceOptions#destination_api_name) with the provided one.
-        /// Use this to set a user's current destination while keeping all the other
-        /// Group Presence parameters the same. Setting a user's destination is
-        /// required to enable travel from the Meta Quest Platform to your app. NOTE
-        /// instead of using the standalone API, we recommend setting all GroupPresence
-        /// parameters in one call to @internal_link(horizon.platform.group_presence.Gr
-        /// oupPresence#set(GroupPresenceOptions)). This helps ensure that all relevant
-        /// presence information is singularly updated and helps reduce presence
-        /// errors.
+        /// Replaces the user's current GroupPresenceOptions.Destination_api_name) with
+        /// the provided one. Use this to set a user's current destination while
+        /// keeping all the other Group Presence parameters the same. Setting a user's
+        /// destination is required to enable travel from the Meta Quest Platform to
+        /// your app. NOTE instead of using the standalone API, we recommend setting
+        /// all GroupPresence parameters in one call to @internal_link. This helps
+        /// ensure that all relevant presence information is singularly updated and
+        /// helps reduce presence errors.
         public static Request SetDestination(string api_name)
         {
             if (Core.IsInitialized())
@@ -333,18 +334,15 @@ namespace Oculus.Platform
         /// Sets a user's current presence as joinable. Use this method to update a
         /// user's joinability as it changes. For example, when the game starts, the
         /// lobby becomes full, the user moves to a private, non joinable instance
-        /// while keeping all other GroupPresence parameters (i.e  @internal_link(horiz
-        /// on.platform.group_presence.options.GroupPresenceOptions#destination_api_nam
-        /// e), @internal_link(horizon.platform.group_presence.options.GroupPresenceOpt
-        /// ions#lobby_session_id), @internal_link(horizon.platform.group_presence.opti
-        /// ons.GroupPresenceOptions#match_session_id)) the same. Setting a user's
-        /// destination is required to enable travel from the Meta Quest Platform to
-        /// your app. Note: Instead of using this individual API, we recommend setting
-        /// all GroupPresence information with the @internal_link(horizon.platform.grou
-        /// p_presence.GroupPresence#set(GroupPresenceOptions)) method and its
-        /// associated parameters to simply managing all presence information. This
-        /// helps ensure that all relevant presence information is singularly updated
-        /// and helps reduce presence errors.
+        /// while keeping all other GroupPresence parameters (i.e
+        /// GroupPresenceOptions.DestinationApiName,
+        /// GroupPresenceOptions.LobbySessionId), @internalLink the same. Setting a
+        /// user's destination is required to enable travel from the Meta Quest
+        /// Platform to your app. Note: Instead of using this individual API, we
+        /// recommend setting all GroupPresence information with the GroupPresence.Set
+        /// method and its associated parameters to simply managing all presence
+        /// information. This helps ensure that all relevant presence information is
+        /// singularly updated and helps reduce presence errors.
         public static Request SetIsJoinable(bool is_joinable)
         {
             if (Core.IsInitialized())
@@ -368,16 +366,15 @@ namespace Oculus.Platform
             return null;
         }
 
-        /// Replaces the user's current @internal_link(horizon.platform.group_presence.
-        /// options.GroupPresenceOptions#lobby_session_id) for the provided string. Use
-        /// this to set a user's current lobby session id while keeping all other
-        /// GroupPresence parameters the same. Setting a user's lobby session id is
-        /// required to enable travel from the Meta Quest Platform to your app. Check
-        /// Group presence overview for more information. NOTE instead of using the
-        /// standalone API, we recommend setting all GroupPresence parameters in one
-        /// call to @internal_link(horizon.platform.group_presence.GroupPresence#set(Gr
-        /// oupPresenceOptions)). This helps ensure that all relevant presence
-        /// information is singularly updated and helps reduce presence errors.
+        /// Replaces the user's current GroupPresenceOptions.Lobby_session_id) for the
+        /// provided string. Use this to set a user's current lobby session id while
+        /// keeping all other GroupPresence parameters the same. Setting a user's lobby
+        /// session id is required to enable travel from the Meta Quest Platform to
+        /// your app. Check Group presence overview for more information. NOTE instead
+        /// of using the standalone API, we recommend setting all GroupPresence
+        /// parameters in one call to @internal_link. This helps ensure that all
+        /// relevant presence information is singularly updated and helps reduce
+        /// presence errors.
         public static Request SetLobbySession(string id)
         {
             if (Core.IsInitialized())
@@ -401,22 +398,19 @@ namespace Oculus.Platform
             return null;
         }
 
-        /// Replaces the user's current @internal_link(horizon.platform.group_presence.
-        /// options.GroupPresenceOptions#match_session_id) for the provided one. Use
-        /// this to update the user's current match session id while keeping all other
-        /// GroupPresence parameters the same. @internal_link(horizon.platform.group_pr
-        /// esence.options.GroupPresenceOptions#match_session_id) works in conjuction
-        /// with @internal_link(horizon.platform.group_presence.options.GroupPresenceOp
-        /// tions#lobby_session_id) to determine if users are playing together. If a
-        /// user's match and lobby session ids are the same, they should be in the same
-        /// multiplayer instance together. Users with the same lobby session id but
-        /// different match session ids may be in the same lobby for things like voice
-        /// chat while in different instances in your app. WARNING match session id is
-        /// often treated the same as lobby session id, but this is in fact a distinct
-        /// parameter and is not used for travel from the Meta Quest Platform. NOTE
-        /// instead of using the standalone API, we recommend setting all GroupPresence
-        /// parameters in one call to @internal_link(horizon.platform.group_presence.Gr
-        /// oupPresence#set(GroupPresenceOptions)).
+        /// Replaces the user's current GroupPresenceOptions.MatchSessionId for the
+        /// provided one. Use this to update the user's current match session id while
+        /// keeping all other GroupPresence parameters the same.
+        /// GroupPresenceOptions.MatchSessionId works in conjuction with
+        /// GroupPresenceOptions.Lobby_session_id) to determine if users are playing
+        /// together. If a user's match and lobby session ids are the same, they should
+        /// be in the same multiplayer instance together. Users with the same lobby
+        /// session id but different match session ids may be in the same lobby for
+        /// things like voice chat while in different instances in your app. WARNING
+        /// match session id is often treated the same as lobby session id, but this is
+        /// in fact a distinct parameter and is not used for travel from the Meta Quest
+        /// Platform. NOTE instead of using the standalone API, we recommend setting
+        /// all GroupPresence parameters in one call to @internal_link.
         public static Request SetMatchSession(string id)
         {
             if (Core.IsInitialized())
@@ -442,11 +436,9 @@ namespace Oculus.Platform
 
         /// Sent when the user is finished using the invite panel to send out
         /// invitations. Contains a list of invitees. Parameter: Callback is a function
-        /// that will be called when the invitation sent status changes. @internal_link
-        /// (horizon.platform.group_presence.models.LaunchInvitePanelFlowResult) has 1
-        /// member: UserList @internal_link(horizon.platform.group_presence.models.Laun
-        /// chInvitePanelFlowResult#invited_users) - A list of users that were sent an
-        /// invitation to the session.
+        /// that will be called when the invitation sent status changes.
+        /// LaunchInvitePanelFlowResult.InvitedUsers - A list of users that were sent
+        /// an invitation to the session.
         
         public static void SetInvitationsSentNotificationCallback(Message<LaunchInvitePanelFlowResult>.Callback callback)
         {
@@ -468,17 +460,13 @@ namespace Oculus.Platform
         /// provide adequate messaging to the user on why they cannot go there. These
         /// notifications should be responded to immediately. Parameter: Callback is a
         /// function that will be called when a user has chosen to join the
-        /// destination/lobby/match. @internal_link(horizon.platform.group_presence.mod
-        /// els.GroupPresenceJoinIntent) has 4 members: string @internal_link(horizon.p
-        /// latform.group_presence.models.GroupPresenceJoinIntent#deeplink_message) -
-        /// An opaque string provided by the developer to help them deeplink to
-        /// content. string @internal_link(horizon.platform.group_presence.models.Group
-        /// PresenceJoinIntent#destination_api_name) - The destination the current user
-        /// wants to go to. string @internal_link(horizon.platform.group_presence.model
-        /// s.GroupPresenceJoinIntent#lobby_session_id) - The lobby session the current
-        /// user wants to go to. string @internal_link(horizon.platform.group_presence.
-        /// models.GroupPresenceJoinIntent#match_session_id) - The match session the
-        /// current user wants to go to.
+        /// destination/lobby/match. GroupPresenceJoinIntent.DeeplinkMessage - An
+        /// opaque string provided by the developer to help them deeplink to content.
+        /// string GroupPresenceJoinIntent.DestinationApiName - The destination the
+        /// current user wants to go to. string GroupPresenceJoinIntent.LobbySessionId
+        /// - The lobby session the current user wants to go to. string
+        /// GroupPresenceJoinIntent.MatchSessionId - The match session the current user
+        /// wants to go to.
         
         public static void SetJoinIntentReceivedNotificationCallback(Message<GroupPresenceJoinIntent>.Callback callback)
         {
@@ -499,15 +487,12 @@ namespace Oculus.Platform
         /// the destination/lobby/match and take the appropriate actions to remove
         /// them. Update the user's presence clearing the appropriate fields to
         /// indicate the user has left. Parameter: Callback is a function that will be
-        /// called when the user has chosen to leave the destination/lobby/match. @inte
-        /// rnal_link(horizon.platform.group_presence.models.GroupPresenceLeaveIntent)
-        /// has 3 members: string @internal_link(horizon.platform.group_presence.models
-        /// .GroupPresenceLeaveIntent#destination_api_name) - The destination the
-        /// current user wants to leave. string @internal_link(horizon.platform.group_p
-        /// resence.models.GroupPresenceLeaveIntent#lobby_session_id) - The lobby
-        /// session the current user wants to leave. string @internal_link(horizon.plat
-        /// form.group_presence.models.GroupPresenceLeaveIntent#match_session_id) - The
-        /// match session the current user wants to leave.
+        /// called when the user has chosen to leave the destination/lobby/match.
+        /// GroupPresenceLeaveIntent.DestinationApiName - The destination the current
+        /// user wants to leave. string GroupPresenceLeaveIntent.LobbySessionId - The
+        /// lobby session the current user wants to leave. string
+        /// GroupPresenceLeaveIntent.MatchSessionId - The match session the current
+        /// user wants to leave.
         
         public static void SetLeaveIntentReceivedNotificationCallback(Message<GroupPresenceLeaveIntent>.Callback callback)
         {
@@ -523,9 +508,7 @@ namespace Oculus.Platform
             }
         }
 
-        /// Gets all the
-        /// @internal_link(horizon.platform.group_presence.models.Destination) that the
-        /// presence can be set to
+        /// Gets all the Destination that the presence can be set to
         public static Request<DestinationList> GetDestinations()
         {
             if (Core.IsInitialized())

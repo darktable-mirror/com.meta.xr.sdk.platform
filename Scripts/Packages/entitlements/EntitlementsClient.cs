@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<d1726bb880ffb0d4a560762bbd9d3de0>>
+ * @generated SignedSource<<f94f04875bc495a444655063c0d998ca>>
  */
 
 using UnityEngine;
@@ -13,6 +13,17 @@ using System.Collections.Generic;
 
 namespace Oculus.Platform
 {
+    /// The Entitlement API is a crucial component of the Meta Quest Store's app
+    /// verification process. It allows developers to check whether a user has
+    /// purchased or obtained their app legitimately, ensuring that only authorized
+    /// users can access the app. The API must be called within 10 seconds of the
+    /// user launching the app and does not require internet connectivity. In the
+    /// event of a failed entitlement check, developers are responsible for
+    /// handling the error in their app code, such as by displaying an error
+    /// message and quitting the app. This API plays a vital role in maintaining
+    /// the security and integrity of the Meta Quest Store ecosystem. See more
+    /// details
+    /// [here](https://developer.oculus.com/documentation/android-apps/ps-entitlement-check/).
     public static partial class Entitlements
     {
         /// Returns whether the current user is entitled to the current app. The

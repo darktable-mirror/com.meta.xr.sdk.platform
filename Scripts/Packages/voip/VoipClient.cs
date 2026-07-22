@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<47476de9d71a6ee2564c9512cfd673c8>>
+ * @generated SignedSource<<7af62ac2f8711f09fdbab9cbd58923d0>>
  */
 
 using UnityEngine;
@@ -13,13 +13,17 @@ using System.Collections.Generic;
 
 namespace Oculus.Platform
 {
+    /// The voip API provides platform methods to interact with the voip
+    /// connections, inputs, syncing, and systems. You can also retrieve different
+    /// statuses for the current voip state. These methods exist to help integrate
+    /// a platform solution for voip in your app. Read more about voip in our
+    /// [docs](https://developer.oculus.com/documentation/unity/ps-parties/)
     public static partial class Voip
     {
         /// Gets whether the microphone is currently available to the app. This can be
         /// used to show if the user's voice is able to be heard by other users.
         /// Returns a microphone availability state flag which determines whether it is
-        /// available or not -
-        /// @internal_link(horizon.platform.voip.models.MicrophoneAvailabilityState).
+        /// available or not - MicrophoneAvailabilityState.
         public static Request<MicrophoneAvailabilityState> GetMicrophoneAvailability()
         {
             if (Core.IsInitialized())
@@ -43,9 +47,8 @@ namespace Oculus.Platform
         }
 
         /// Indicates that the current microphone availability state has been updated.
-        /// Use
-        /// @internal_link(horizon.platform.voip.Voip#get_microphone_availability()) to
-        /// extract the microphone availability state.
+        /// Use Voip.GetMicrophoneAvailability to extract the microphone availability
+        /// state.
         
         public static void SetMicrophoneAvailabilityStateUpdateNotificationCallback(Message<String>.Callback callback)
         {
@@ -62,9 +65,7 @@ namespace Oculus.Platform
         }
 
         /// Sent to indicate that some part of the overall state of SystemVoip has
-        /// changed. Use
-        /// @internal_link(horizon.platform.voip.models.SystemVoipState#status) and the
-        /// properties of @internal_link(horizon.platform.voip.models.SystemVoipState)
+        /// changed. Use SystemVoipState.Status and the properties of SystemVoipState
         /// to extract the state that triggered the notification. Note that the state
         /// may have changed further since the notification was generated, and that you
         /// may call the `GetSystemVoip...()` family of functions at any time to get
@@ -163,8 +164,8 @@ namespace Oculus.Platform
 
         /// Returns the size of the internal ringbuffer used by the voip system in
         /// elements.  This size is the maximum number of elements that can ever be
-        /// returned by @internal_link(horizon.platform.voip.Voip#get_pcm(ID,
-        /// List<Short>, Size)). This function can be safely called from any thread.
+        /// returned by Voip.GetPcm. This function can be safely called from any
+        /// thread.
         public static Request<UIntPtr> GetOutputBufferMaxSize()
         {
             if (Core.IsInitialized())
@@ -190,8 +191,7 @@ namespace Oculus.Platform
         /// Returns the current number of audio samples available to read for the
         /// specified user. This function is inherently racy; it's possible that more
         /// data can be added between a call to this function and a subsequent call to
-        /// @internal_link(horizon.platform.voip.Voip#get_pcm(ID, List<Short>, Size)).
-        /// This function can be safely called from any thread.
+        /// Voip.GetPcm. This function can be safely called from any thread.
         public static Request<UIntPtr> GetPcmSize(UInt64 senderId)
         {
             if (Core.IsInitialized())
@@ -244,20 +244,16 @@ namespace Oculus.Platform
         /// Returns a timestamp used for synchronizing audio samples sent to the given
         /// user with an external data stream. Timestamps associated with audio frames
         /// are implicitly transmitted to remote peers; on the receiving side, they can
-        /// be obtained by using
-        /// @internal_link(horizon.platform.voip.Voip#get_pcm_with_timestamp(ID,
-        /// List<Short>, Size, UInt32Ptr)).
-        /// @internal_link(horizon.platform.voip.Voip#get_pcm_with_timestamp(ID,
-        /// List<Short>, Size, UInt32Ptr)) is used to fetch those timestamps on the
-        /// sending side -- an application can insert the value returned by this
-        /// function into each data packet and compare it to the value returned by
-        /// GetPCMWithTimestamp() on the receiving side in order to determine the
-        /// ordering of two events (sampling audio and composing a data packet). Note:
-        /// the timestamp is generated by an unspecified clock; it's doesn't generally
-        /// represent wall-clock time.  Use @internal_link(horizon.platform.voip.Voip#g
-        /// et_sync_timestamp_difference(UInt32, UInt32)) to convert the difference
-        /// between two timestamps to microseconds. This function assumes that a voice
-        /// connection to the user already exists; it returns 0 if that isn't the case.
+        /// be obtained by using Voip.GetPcmWithTimestamp.  Voip.GetPcmWithTimestamp is
+        /// used to fetch those timestamps on the sending side -- an application can
+        /// insert the value returned by this function into each data packet and
+        /// compare it to the value returned by GetPCMWithTimestamp() on the receiving
+        /// side in order to determine the ordering of two events (sampling audio and
+        /// composing a data packet). Note: the timestamp is generated by an
+        /// unspecified clock; it's doesn't generally represent wall-clock time.  Use
+        /// Voip.GetSyncTimestampDifference to convert the difference between two
+        /// timestamps to microseconds. This function assumes that a voice connection
+        /// to the user already exists; it returns 0 if that isn't the case.
         public static Request<UInt32> GetSyncTimestamp(UInt64 userId)
         {
             if (Core.IsInitialized())
@@ -282,12 +278,11 @@ namespace Oculus.Platform
         }
 
         /// Calculates the difference between two sync timestamps, returned by either
-        /// @internal_link(horizon.platform.voip.Voip#get_sync_timestamp(ID)) or
-        /// @internal_link(horizon.platform.voip.Voip#get_pcm_with_timestamp(ID,
-        /// List<Short>, Size, UInt32Ptr)), and converts it to microseconds. Return
-        /// value will be negative if lhs is smaller than rhs, zero if both timestamps
-        /// are the same, and positive otherwise.  The absolute value of the result is
-        /// the time in microseconds between two sync timestamps.
+        /// Voip.GetSyncTimestamp or Voip.GetPcmWithTimestamp, and converts it to
+        /// microseconds. Return value will be negative if lhs is smaller than rhs,
+        /// zero if both timestamps are the same, and positive otherwise.  The absolute
+        /// value of the result is the time in microseconds between two sync
+        /// timestamps.
         public static Request<long> GetSyncTimestampDifference(UInt32 lhs, UInt32 rhs)
         {
             if (Core.IsInitialized())
@@ -440,9 +435,8 @@ namespace Oculus.Platform
         }
 
         /// Attempts to establish a VoIP session with the specified user. A message of
-        /// type @internal_link(horizon.platform.voip.Voip#system_voip_state()) will be
-        /// posted when the session is established. This function can be safely called
-        /// from any thread.
+        /// type Voip.SystemVoipState will be posted when the session is established.
+        /// This function can be safely called from any thread.
         public static Request StartRequest(UInt64 userId)
         {
             if (Core.IsInitialized())

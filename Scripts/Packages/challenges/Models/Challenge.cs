@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<29444aad7831017f6519f79d68aee46c>>
+ * @generated SignedSource<<c010f7547bdec62e392d6ab36dc1ae17>>
  */
 
 #pragma warning disable 0618
@@ -17,20 +17,17 @@ namespace Oculus.Platform.Models
     using Newtonsoft.Json.Converters;
     using UnityEngine.Scripting;
 
-    /// Challenges leverage
-    /// @internal_link(horizon.platform.group_presence.models.Destination) and
-    /// Group Presence to create shareable links that allow players to compete
-    /// directly based on score. Challenges can be ranked by highest or lowest
-    /// scores within a time period. Any application that uses Leaderboards gets
-    /// Challenges for free. It appears in the Scoreboards UI. Players can create
-    /// Challenges and send invites through the Challenges app.
+    /// Challenges leverage Destination and Group Presence to create shareable
+    /// links that allow players to compete directly based on score. Challenges can
+    /// be ranked by highest or lowest scores within a time period. Any application
+    /// that uses Leaderboards gets Challenges for free. It appears in the
+    /// Scoreboards UI. Players can create Challenges and send invites through the
+    /// Challenges app.
     [Preserve]
     public class Challenge
     {
-        /// An enum that specifies if this challenge was created by a user (@internal_l
-        /// ink(horizon.platform.challenges.enums.ChallengeCreationType#user_created))
-        /// or the app developer (@internal_link(horizon.platform.challenges.enums.Chal
-        /// lengeCreationType#developer_created)).
+        /// An enum that specifies if this challenge was created by a user
+        /// (ChallengeCreationType.UserCreated)) or the app developer .
         [JsonProperty("creation_type")]
         [JsonConverter(typeof(EnumDescriptionConverter<ChallengeCreationType>))]
         [Preserve]
@@ -56,9 +53,8 @@ namespace Oculus.Platform.Models
         // May be null. Check before using.
         [Preserve]
         public UserList InvitedUsersOptional { get; set; }
-        /// The @internal_link(horizon.platform.leaderboards.models.Leaderboard)
-        /// associated with this challenge. You can retrieve the leaderboard ID from
-        /// the response of the challenge creation request.
+        /// The Leaderboard associated with this challenge. You can retrieve the
+        /// leaderboard ID from the response of the challenge creation request.
         [JsonProperty("leaderboard")]
         [Preserve]
         public Leaderboard Leaderboard { get; set; }
@@ -77,12 +73,10 @@ namespace Oculus.Platform.Models
         [JsonProperty("title")]
         [Preserve]
         public string Title { get; set; }
-        /// An enum that specifies who can see and participate in this challenge. @inte
-        /// rnal_link(horizon.platform.challenges.enums.ChallengeVisibility#invite_only
-        /// ) - Only those invited can participate in it. Everyone can see it. @interna
-        /// l_link(horizon.platform.challenges.enums.ChallengeVisibility#public) -
-        /// Everyone can participate and see this challenge. @internal_link(horizon.pla
-        /// tform.challenges.enums.ChallengeVisibility#private) - Only those invited
+        /// An enum that specifies who can see and participate in this challenge.
+        /// ChallengeVisibility.InviteOnly - Only those invited can participate in it.
+        /// Everyone can see it. ChallengeVisibility.Public - Everyone can participate
+        /// and see this challenge. ChallengeVisibility.Private - Only those invited
         /// can participate and see this challenge.
         [JsonProperty("visibility")]
         [JsonConverter(typeof(EnumDescriptionConverter<ChallengeVisibility>))]

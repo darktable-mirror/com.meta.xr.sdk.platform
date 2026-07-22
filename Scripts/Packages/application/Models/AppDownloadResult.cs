@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<6e1f2684015f5fd8f3aecf0c693c9c69>>
+ * @generated SignedSource<<19a30d31488f26070290a6a5629e6aaf>>
  */
 
 namespace Oculus.Platform.Models
@@ -18,18 +18,15 @@ namespace Oculus.Platform.Models
     /// Represents the result of an app download. You will use it when you start an
     /// app download, cancel an app download or install an app update which was
     /// previous downloaded. In those scenarios, the app download result will be
-    /// the payload of @internal_link(horizon.platform.application.Application#star
-    /// t_app_download()), @internal_link(horizon.platform.application.Application#
-    /// cancel_app_download()) or @internal_link(horizon.platform.application.Appli
-    /// cation#install_app_update_and_relaunch(ApplicationOptions)) API calls.
+    /// the payload of Application.StartAppDownload, Application.CancelAppDownload
+    /// or Application.InstallAppUpdateAndRelaunch API calls.
     [Preserve]
     public class AppDownloadResult
     {
         /// Result of the install operation returned by the installer. You can find
-        /// more information about possible members from
-        /// @internal_link(horizon.platform.application.enums.AppInstallResult). In
-        /// case of an error during install process, the error message contains the
-        /// string representation of this result.
+        /// more information about possible members from AppInstallResult. In case of
+        /// an error during install process, the error message contains the string
+        /// representation of this result.
         [JsonProperty("installResult")]
         [JsonConverter(typeof(EnumDescriptionConverter<AppInstallResult>))]
         [Preserve]

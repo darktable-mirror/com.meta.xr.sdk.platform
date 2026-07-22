@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<e8f74508e596da535322ffcc7c23b924>>
+ * @generated SignedSource<<2f9529c5e472b6082d948777fe867467>>
  */
 
 using UnityEngine;
@@ -13,6 +13,11 @@ using System.Collections.Generic;
 
 namespace Oculus.Platform
 {
+    /// It represents a network synchronization system that allows multiple clients
+    /// to connect and communicate with each other in real-time. It provides a way
+    /// to manage and facilitate real-time communication and data synchronization
+    /// between multiple clients in a networked environment and it can be retrieved
+    /// using NetSyncConnection.
     public static partial class NetSync
     {
         /// Creates a new connection to the given zone. If already connected to a zone,
@@ -385,7 +390,7 @@ namespace Oculus.Platform
         }
 
         /// Sent when the status of a connection has changed. The payload will be a
-        /// type of @internal_link(horizon.platform.net_sync.models.NetSyncConnection).
+        /// type of NetSyncConnection.
         
         public static void SetConnectionStatusChangedNotificationCallback(Message<NetSyncConnection>.Callback callback)
         {
@@ -402,8 +407,8 @@ namespace Oculus.Platform
         }
 
         /// Sent when the list of known connected sessions has changed. Contains the
-        /// new list of sessions. The payload will be a type of @internal_link(horizon.
-        /// platform.net_sync.models.NetSyncSessionsChangedNotification).
+        /// new list of sessions. The payload will be a type of
+        /// NetSyncSessionsChangedNotification.
         
         public static void SetSessionsChangedNotificationCallback(Message<NetSyncSessionsChangedNotification>.Callback callback)
         {

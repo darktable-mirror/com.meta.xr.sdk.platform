@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<5ad3e89bfdb0068fcc5f7c4838356566>>
+ * @generated SignedSource<<3e70b88e513e3b56b345d3131c598a42>>
  */
 
 #pragma warning disable 0618
@@ -19,8 +19,7 @@ namespace Oculus.Platform.Models
 
     /// Details about the launch of the appplication. It can be used to check if
     /// your app is being launched using App to App Travel. It can be retrieved
-    /// using @internal_link(horizon.platform.application_lifecycle.ApplicationLife
-    /// cycle#get_launch_details()).
+    /// using ApplicationLifecycle.GetLaunchDetails.
     [Preserve]
     public class LaunchDetails
     {
@@ -39,15 +38,10 @@ namespace Oculus.Platform.Models
         [JsonProperty("launch_source")]
         [Preserve]
         public string LaunchSource { get; set; }
-        /// A @internal_link(horizon.platform.application_lifecycle.enums.LaunchType)
-        /// that defines the different ways in which an application can be launched. @i
-        /// nternal_link(horizon.platform.application_lifecycle.enums.LaunchType#normal
-        /// ) - Normal launch from the user's library. @internal_link(horizon.platform.
-        /// application_lifecycle.enums.LaunchType#invite) - Launch from the user
-        /// accepting an invite. @internal_link(horizon.platform.application_lifecycle.
-        /// enums.LaunchType#deeplink) - Launched from a deeplink. This flow is
-        /// typically kicked off from @internal_link(horizon.platform.application.Appli
-        /// cation#launch_other_app(ID, ApplicationOptions))
+        /// A LaunchType.Normal - Normal launch from the user's library.
+        /// LaunchType.Invite - Launch from the user accepting an invite.
+        /// LaunchType.Deeplink) - Launched from a deeplink. This flow is typically
+        /// kicked off from @internal_link
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumDescriptionConverter<LaunchType>))]
         [Preserve]

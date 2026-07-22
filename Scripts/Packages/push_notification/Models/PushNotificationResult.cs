@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<e9b1b917c6a4e294df3168603bb4654b>>
+ * @generated SignedSource<<6eab57e3cfef04e48ea5093ec7a1d97e>>
  */
 
 namespace Oculus.Platform.Models
@@ -18,8 +18,8 @@ namespace Oculus.Platform.Models
     /// A PushNotificationResult represents the outcome of a user registering for
     /// third-party (3P) notifications. This object contains essential information
     /// about the registered notification, which can be used to send push
-    /// notifications to the user. It can be retrieved using @internal_link(horizon
-    /// .platform.push_notification.PushNotification#register())
+    /// notifications to the user. It can be retrieved using
+    /// PushNotification.Register
     [Preserve]
     public class PushNotificationResult
     {

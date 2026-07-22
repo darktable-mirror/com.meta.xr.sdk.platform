@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<09bcfb3f6ec54d80c46a98f48ca59117>>
+ * @generated SignedSource<<f74efe449fe613a859f5cf47d9a2261d>>
  */
 
 #pragma warning disable 0618
@@ -22,6 +22,9 @@ namespace Oculus.Platform.Models
     /// via dialog during installation, your app must have
     /// [DUC](https://developer.oculus.com/resources/publish-data-use/) enabled,
     /// and the app must be admin-approved.
+    ///
+    /// The API has been deprecated from version 203. Please use No longer
+    /// supported instead.
     [Preserve]
     public class ManagedInfo
     {

@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<a3290fc7c8fee1e276c56d5b9a72b995>>
+ * @generated SignedSource<<8b669cae66dd2e1b72293b07cf8fe619>>
  */
 
 #pragma warning disable 0618
@@ -17,16 +17,16 @@ namespace Oculus.Platform.Models
     using Newtonsoft.Json.Converters;
     using UnityEngine.Scripting;
 
-    /// A Content Rating of a @internal_link(horizon.platform.iap.models.Product).
-    /// This rating is sourced by the International Age Rating Coalition (IARC)
-    /// certificate from the local rating authority. An Add-on's Content Rating can
-    /// be configured by adding a IARC certificate in the developer dashboard. The
-    /// Add-on can also inherit the Content Rating of the base App.
+    /// A Content Rating of a Product. This rating is sourced by the International
+    /// Age Rating Coalition (IARC) certificate from the local rating authority. An
+    /// Add-on's Content Rating can be configured by adding a IARC certificate in
+    /// the developer dashboard. The Add-on can also inherit the Content Rating of
+    /// the base App.
     [Preserve]
     public class ContentRating
     {
         /// URI for the image that needs to be shown for the content rating of the
-        /// @internal_link(horizon.platform.iap.models.Product).
+        /// Product.
         [JsonProperty("age_rating_image_uri")]
         [Preserve]
         public string AgeRatingImageUri { get; set; }
@@ -41,9 +41,8 @@ namespace Oculus.Platform.Models
         [JsonProperty("descriptors")]
         [Preserve]
         public readonly String[] Descriptors;/// The list of interactive elements, which advise consumers up front that a
-        /// @internal_link(horizon.platform.iap.models.Product) includes interactive or
-        /// online behaviors/options that may be of interest or concern, e.g., "In-App
-        /// Purchases".
+        /// Product includes interactive or online behaviors/options that may be of
+        /// interest or concern, e.g., "In-App Purchases".
         [JsonProperty("interactive_elements")]
         [Preserve]
         public readonly String[] InteractiveElements;/// The URI pointing to a website with International Age Rating Coalition

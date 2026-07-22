@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<36f02dcd8afaf4821eee4a3297f35813>>
+ * @generated SignedSource<<52a8ce812271a97b04e46689f4d776ba>>
  */
 
 namespace Oculus.Platform
@@ -12,7 +12,7 @@ namespace Oculus.Platform
     using UnityEngine.Scripting;
 
     /// Describe the current status of the user and it can be retrieved with
-    /// @internal_link(horizon.platform.users.models.User#presence_status).
+    /// User.PresenceStatus.
     [Preserve]
     public enum UserPresenceStatus : int
     {

@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<7d892456e7e3d3baac6e3765d972bd94>>
+ * @generated SignedSource<<6852a4868960748d519500d89e563020>>
  */
 
 namespace Oculus.Platform
@@ -11,10 +11,9 @@ namespace Oculus.Platform
     using Description = System.ComponentModel.DescriptionAttribute;
     using UnityEngine.Scripting;
 
-    /// It represents the possible status of a
-    /// @internal_link(horizon.platform.net_sync.models.NetSyncConnection) which
-    /// allows multiple clients to connect and communicate with each other in real-
-    /// time. The connection provides a way to manage and facilitate real-time
+    /// It represents the possible status of a NetSyncConnection which allows
+    /// multiple clients to connect and communicate with each other in real-time.
+    /// The connection provides a way to manage and facilitate real-time
     /// communication and data synchronization between multiple clients in a
     /// networked environment.
     [Preserve]

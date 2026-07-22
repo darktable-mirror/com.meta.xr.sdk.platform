@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<239b0aab44c4c77b4ebfc0e2b2fb0318>>
+ * @generated SignedSource<<965e3b68847b7bb67a6f268680539fd2>>
  */
 
 #pragma warning disable 0618
@@ -39,14 +39,13 @@ namespace Oculus.Platform.Models
         [Preserve]
         public string Status { get; set; }
         /// It's a type of `int` represents the current version code of the installed
-        /// application. It can be retreiving using @internal_link(horizon.platform.app
-        /// lication.models.ApplicationVersion#current_code)
+        /// application. It can be retreiving using ApplicationVersion.CurrentCode
         [JsonProperty("version_code")]
         [Preserve]
         public int VersionCode { get; set; }
         /// It's a type of `string` represents the current version name of the
-        /// installed application. It can be retreiving using @internal_link(horizon.pl
-        /// atform.application.models.ApplicationVersion#current_name)
+        /// installed application. It can be retreiving using
+        /// ApplicationVersion.CurrentName
         [JsonProperty("version_name")]
         [Preserve]
         public string VersionName { get; set; }

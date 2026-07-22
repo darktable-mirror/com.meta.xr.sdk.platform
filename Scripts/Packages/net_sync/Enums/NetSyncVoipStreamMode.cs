@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<41e559ae47d7cc558aa6b444073dab7b>>
+ * @generated SignedSource<<5329b4eb119b468cc91ca5694169729b>>
  */
 
 namespace Oculus.Platform
@@ -12,12 +12,10 @@ namespace Oculus.Platform
     using UnityEngine.Scripting;
 
     /// A network synchronization system allows multiple clients to connect and
-    /// communicate with each other in real-time. Once a
-    /// @internal_link(horizon.platform.net_sync.models.NetSyncConnection) is
-    /// established, user can choose the stream mode for the connection. The @inter
-    /// nal_link(horizon.platform.net_sync.options.NetSyncOptions#voip_stream_defau
-    /// lt) will be used when a new VoIP(Voice over Internet Protocol) user
-    /// connects.
+    /// communicate with each other in real-time. Once a NetSyncConnection is
+    /// established, user can choose the stream mode for the connection. The
+    /// NetSyncOptions.VoipStreamDefault will be used when a new VoIP(Voice over
+    /// Internet Protocol) user connects.
     [Preserve]
     public enum NetSyncVoipStreamMode : int
     {
@@ -27,11 +25,10 @@ namespace Oculus.Platform
         Unknown,
 
         /// This `enum` member represents the ambisonic steam mode the VoIP stream
-        /// uses. It is the default value of @internal_link(horizon.platform.net_sync.o
-        /// ptions.NetSyncOptions#voip_stream_default). Since it allows for the
-        /// creation of immersive, surround sound experiences that simulate real-world
-        /// audio environments, it typically used in virtual reality (VR) and augmented
-        /// reality (AR) applications.
+        /// uses. It is the default value of NetSyncOptions.VoipStreamDefault. Since it
+        /// allows for the creation of immersive, surround sound experiences that
+        /// simulate real-world audio environments, it typically used in virtual
+        /// reality (VR) and augmented reality (AR) applications.
         [Description("AMBISONIC")]
         [Preserve]
         Ambisonic,

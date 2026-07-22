@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<e7bcd1e35e9b96659b2bb0742ad569cd>>
+ * @generated SignedSource<<20dc1c2a65ae69654c0b0427cf3c91ca>>
  */
 
 using UnityEngine;
@@ -13,6 +13,7 @@ using System.Collections.Generic;
 
 namespace Oculus.Platform
 {
+    /// TODO: add top-level comment for client!
     public static partial class GraphAPI
     {
         /// Make an authenticated HTTP GET request to graph.oculus.com/{url} Example

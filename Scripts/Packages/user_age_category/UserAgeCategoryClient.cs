@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<1653aa8af2749ea237afe316696cf430>>
+ * @generated SignedSource<<8205fe490c0e6fd47fec90b9960a0d54>>
  */
 
 using UnityEngine;
@@ -13,11 +13,16 @@ using System.Collections.Generic;
 
 namespace Oculus.Platform
 {
+    /// Users are divided into three categories based on their age:
+    /// -AccountAgeCategory.Ch: Child age group for users between the ages of 10-12
+    /// (or applicable age in user's region). -AccountAgeCategory.Tn: Teenage age
+    /// group for users between the ages of 13-17 (or applicable age in user's
+    /// region). -AccountAgeCategory.Ad: Adult age group for users ages 18 and up
+    /// (or applicable age in user's region).
     public static partial class UserAgeCategory
     {
-        /// Retrieve the user age category for the current user. It can be used in @int
-        /// ernal_link(horizon.platform.user_age_category.models.UserAccountAgeCategory
-        /// #age_category)
+        /// Retrieve the user age category for the current user. It can be used in
+        /// UserAccountAgeCategory.AgeCategory
         public static Request<UserAccountAgeCategory> Get()
         {
             if (Core.IsInitialized())

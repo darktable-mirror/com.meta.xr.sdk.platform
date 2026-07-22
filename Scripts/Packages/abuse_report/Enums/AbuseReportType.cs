@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<30b3019768e6ca1dbae74d196cb8ea54>>
+ * @generated SignedSource<<38e222a3d072b7a4926775efaa71b8aa>>
  */
 
 namespace Oculus.Platform
@@ -13,8 +13,7 @@ namespace Oculus.Platform
 
     /// Represents the type of abuse report, can be categorized as either
     /// concerning a user, an object, or being unknown. It can be specified as a
-    /// field in the @internal_link(horizon.platform.abuse_report.options.AbuseRepo
-    /// rtOptions#report_type) option.
+    /// field in the AbuseReportOptions.ReportType option.
     [Preserve]
     public enum AbuseReportType : int
     {

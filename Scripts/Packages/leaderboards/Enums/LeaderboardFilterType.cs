@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<4d3b082470f763eaace58c7dd2733932>>
+ * @generated SignedSource<<e5f30c5e992dc4f1c652aaabe7ae5a7b>>
  */
 
 namespace Oculus.Platform
@@ -12,10 +12,8 @@ namespace Oculus.Platform
     using UnityEngine.Scripting;
 
     /// An enum that defines the different types of filters that can be applied to
-    /// a leaderboard. It can be used in @internal_link(horizon.platform.leaderboar
-    /// ds.Leaderboards#get_entries(String, Integer, LeaderboardFilterType,
-    /// LeaderboardStartAt)) to filter the leaderboard entries, such as only
-    /// friends or specific user IDs.
+    /// a leaderboard. It can be used in Leaderboards.GetEntries to filter the
+    /// leaderboard entries, such as only friends or specific user IDs.
     [Preserve]
     public enum LeaderboardFilterType : int
     {

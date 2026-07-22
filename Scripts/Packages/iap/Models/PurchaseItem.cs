@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<4582a7a2958dfacfa87a16ebf1e08032>>
+ * @generated SignedSource<<70675b4aeec6fdeb51971492dc8d0eb1>>
  */
 
 #pragma warning disable 0618
@@ -17,24 +17,16 @@ namespace Oculus.Platform.Models
     using Newtonsoft.Json.Converters;
     using UnityEngine.Scripting;
 
-    /// The details for an IAP @internal_link(horizon.platform.iap.models.Product)
-    /// that was purchased
+    /// The details for an IAP Product that was purchased
     [Preserve]
     public class PurchaseItem
     {
-        /// The SKU of the IAP @internal_link(horizon.platform.iap.models.Product) that
-        /// was purchased. This value is case-sensitive. To retrieve the product
-        /// information, you can use this value when calling
-        /// @internal_link(horizon.platform.iap.Iap#get_products_by_sku(List<String>,
-        /// Integer)).
+        /// The SKU of the IAP Iap.GetProductsBySku.
         [JsonProperty("sku")]
         [Preserve]
         public string Sku { get; set; }
-        /// The Type of the IAP @internal_link(horizon.platform.iap.models.Product)
-        /// that was purchased. The values can be
-        /// @internal_link(horizon.platform.iap.enums.ProductType#durable),
-        /// @internal_link(horizon.platform.iap.enums.ProductType#consumable), or a
-        /// @internal_link(horizon.platform.iap.enums.ProductType#subscription).
+        /// The Type of the IAP ProductType.Durable, ProductType.Consumable, or a
+        /// ProductType.Subscription.
         [JsonProperty("type")]
         [Preserve]
         public ProductType Type { get; set; }

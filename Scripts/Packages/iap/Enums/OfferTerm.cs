@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<e05128c3192cced11fc131ded19cc2c0>>
+ * @generated SignedSource<<cc5003b1446399560e9438e61ac025fb>>
  */
 
 namespace Oculus.Platform
@@ -11,8 +11,7 @@ namespace Oculus.Platform
     using Description = System.ComponentModel.DescriptionAttribute;
     using UnityEngine.Scripting;
 
-    /// An enumeration that defines the type of the
-    /// @internal_link(horizon.platform.iap.models.TrialOffer). This can be
+    /// An enumeration that defines the type of the TrialOffer. This can be
     /// utilized to determine the length of time for which the offer is valid. By
     /// setting this field, you can easily manage the duration of your offers and
     /// provide a better user experience for your customers.

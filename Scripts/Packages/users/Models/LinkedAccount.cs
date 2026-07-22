@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<c96314714a6c8f3b80203490939922ba>>
+ * @generated SignedSource<<a266d86c65420f976540336f80a3520f>>
  */
 
 #pragma warning disable 0618
@@ -17,11 +17,10 @@ namespace Oculus.Platform.Models
     using Newtonsoft.Json.Converters;
     using UnityEngine.Scripting;
 
-    /// Represents a linked account that is associated with the
-    /// @internal_link(horizon.platform.users.models.User)'s account in the system.
-    /// It provides a way to store and manage information about linked accounts in
-    /// the system, allowing users to easily access and manage their data or
-    /// services from multiple platforms in one place
+    /// Represents a linked account that is associated with the User's account in
+    /// the system. It provides a way to store and manage information about linked
+    /// accounts in the system, allowing users to easily access and manage their
+    /// data or services from multiple platforms in one place
     [Preserve]
     public class LinkedAccount
     {
@@ -32,14 +31,13 @@ namespace Oculus.Platform.Models
         [Preserve]
         public string AccessToken { get; set; }
         /// Service provider with which the linked account is associated. There are
-        /// several possible service providers that can be found in
-        /// @internal_link(horizon.platform.users.enums.ServiceProvider).
+        /// several possible service providers that can be found in ServiceProvider.
         [JsonProperty("service_provider")]
         [JsonConverter(typeof(EnumDescriptionConverter<ServiceProvider>))]
         [Preserve]
         public ServiceProvider ServiceProvider { get; set; }
         /// A unique identifier represents the user ID of the linked account. It can be
-        /// retrieved using @internal_link(horizon.platform.users.models.User#id)
+        /// retrieved using User.Id
         [JsonProperty("user_id")]
         [Preserve]
         public string UserId { get; set; }

@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<715366c5d2611b61d73dbe21ca1955e4>>
+ * @generated SignedSource<<63bad17f33a4d617d2995a8a75ae9bdd>>
  */
 
 using UnityEngine;
@@ -13,6 +13,15 @@ using System.Collections.Generic;
 
 namespace Oculus.Platform
 {
+    /// The media API provides a convenient and seamless way to share local media
+    /// files, such as photos (currently the only supported type), directly to
+    /// Facebook from within your application. This allows users to easily share
+    /// their favorite moments and memories with their friends and family on the
+    /// world's largest social media platform. With just a few simple steps, you
+    /// can enable your users to share their media files to Facebook, making it
+    /// easy for them to spread the word about your app and increase its
+    /// visibility. The payload returned for the sharing result is defined as
+    /// ShareMediaResult.
     public static partial class Media
     {
         /// Launch the Share to Facebook modal, allowing users to share local media
@@ -21,8 +30,7 @@ namespace Oculus.Platform
         /// to be shared to Facebook. This image should be located in your app's
         /// internal storage directory. Requires a contentType indicating the type of
         /// media to be shared (only 'photo' is currently supported). The payload for
-        /// the result is defined as
-        /// @internal_link(horizon.platform.media.models.ShareMediaResult).
+        /// the result is defined as ShareMediaResult.
         public static Request<ShareMediaResult> ShareToFacebook(string postTextSuggestion, string filePath, MediaContentType contentType)
         {
             if (Core.IsInitialized())

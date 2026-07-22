@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<91c38238867b6773fdcdfa8b740882fe>>
+ * @generated SignedSource<<60208013abd1d97b4c32d9f6e5339615>>
  */
 
 namespace Oculus.Platform.Models
@@ -18,7 +18,7 @@ namespace Oculus.Platform.Models
     /// It's used to unblock a user. Results of the launched unblock dialog
     /// including whether the user was successfully unblocked and whether the
     /// viewer canceled the unblock flow. It can be retrieved using
-    /// @internal_link(horizon.platform.users.Users#launch_unblock_flow(ID)).
+    /// Users.LaunchUnblockFlow.
     [Preserve]
     public class LaunchUnblockFlowResult
     {

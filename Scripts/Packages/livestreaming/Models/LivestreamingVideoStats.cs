@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<8f505f84a078e6a6de00d228fffc574d>>
+ * @generated SignedSource<<cc2226c847a4391f4f1ecf8a91c5a84f>>
  */
 
 namespace Oculus.Platform.Models
@@ -18,9 +18,8 @@ namespace Oculus.Platform.Models
     /// The livestreaming video statistics represents the statistics info about a
     /// livestreaming video in your app. The statistics include the total number of
     /// views, the number of reactions and the number of comments. You can retrieve
-    /// the information about whether your comments are visible from @internal_link
-    /// (horizon.platform.livestreaming.models.LivestreamingStatus#comments_visible
-    /// ).
+    /// the information about whether your comments are visible from
+    /// LivestreamingStatus.CommentsVisible.
     [Preserve]
     public class LivestreamingVideoStats
     {

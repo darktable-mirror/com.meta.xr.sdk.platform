@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<d27f75faea9fe7fdc772a8f3907997d9>>
+ * @generated SignedSource<<1cda2cf6ace5bf87621cc764dabd0f18>>
  */
 
 using UnityEngine;
@@ -13,13 +13,18 @@ using System.Collections.Generic;
 
 namespace Oculus.Platform
 {
+    /// This ApplicationLifecycle API provides methods for managing the lifecycle
+    /// of an application, including retrieving information about how the
+    /// application was started, such as the type of intent
+    /// LaunchDetails.LaunchType, logging the results of deeplinking attempts,
+    /// whether it was LaunchResult.Success or not, and handling changes to the
+    /// launch intent.
     public static partial class ApplicationLifecycle
     {
         /// This event is triggered when a launch intent is received, whether it's a
         /// cold or warm start. The payload contains the type of intent that was
-        /// received. To obtain additional details, you should call the @internal_link(
-        /// horizon.platform.application_lifecycle.ApplicationLifecycle#get_launch_deta
-        /// ils()) function.
+        /// received. To obtain additional details, you should call the
+        /// ApplicationLifecycle.GetLaunchDetails function.
         
         public static void SetLaunchIntentChangedNotificationCallback(Message<String>.Callback callback)
         {
@@ -36,11 +41,11 @@ namespace Oculus.Platform
         }
 
         /// Returns information about how the application was started. This function
-        /// provides details about the launch intent, such as the type of intent @inter
-        /// nal_link(horizon.platform.application_lifecycle.models.LaunchDetails#launch
-        /// _type) and any additional data that was passed along with it. By calling
-        /// this function, you can gain insight into how your application was launched
-        /// and take appropriate action based on that information.
+        /// provides details about the launch intent, such as the type of intent
+        /// LaunchDetails.LaunchType and any additional data that was passed along with
+        /// it. By calling this function, you can gain insight into how your
+        /// application was launched and take appropriate action based on that
+        /// information.
         public static Request<LaunchDetails> GetLaunchDetailsRequest()
         {
             if (Core.IsInitialized())
@@ -66,10 +71,9 @@ namespace Oculus.Platform
         /// Logs if the user successfully deeplinked to a destination. This function
         /// takes two parameters: a string tracking ID and a launch result. The
         /// tracking ID is used to identify the specific deeplink attempt, while the
-        /// launch result indicates whether the deeplink was @internal_link(horizon.pla
-        /// tform.application_lifecycle.enums.LaunchResult#success) or not. By logging
-        /// this information, you can track the effectiveness of your deeplinking
-        /// efforts and make adjustments as needed.
+        /// launch result indicates whether the deeplink was LaunchResult.Success or
+        /// not. By logging this information, you can track the effectiveness of your
+        /// deeplinking efforts and make adjustments as needed.
         public static Request LogDeeplinkResultRequest(string trackingId, LaunchResult result)
         {
             if (Core.IsInitialized())

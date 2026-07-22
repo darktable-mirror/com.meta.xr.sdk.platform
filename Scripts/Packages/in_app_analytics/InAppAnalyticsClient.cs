@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<570194599f8fd6a25ba0dac490c84510>>
+ * @generated SignedSource<<2457a771708877445e69975d528e51af>>
  */
 
 using UnityEngine;
@@ -13,6 +13,10 @@ using System.Collections.Generic;
 
 namespace Oculus.Platform
 {
+    /// In-World Analytics provides an event processing system for tracking segment
+    /// and metric events within an application. It supports batch processing,
+    /// segment lifecycle management, and event counters for aggregating
+    /// high-frequency metrics.
     public static partial class InAppAnalytics
     {
         /// Queues a segment event for batch processing. The event will be sent to the

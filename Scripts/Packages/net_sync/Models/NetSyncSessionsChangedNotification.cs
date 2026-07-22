@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<0354f2ab917e18e195963a57347e4fe6>>
+ * @generated SignedSource<<0369182eb9557cbbc1578cb1f36e4e88>>
  */
 
 namespace Oculus.Platform.Models
@@ -16,10 +16,9 @@ namespace Oculus.Platform.Models
     using UnityEngine.Scripting;
 
     /// When a new list of sessions was added or the list of known connected
-    /// sessions has changed, this
-    /// @internal_link(horizon.platform.net_sync.NetSync#sessions_changed()) will
-    /// be sent. When the status of a connection has changed, the @internal_link(ho
-    /// rizon.platform.net_sync.NetSync#connection_status_changed()) will be sent.
+    /// sessions has changed, this NetSync.SessionsChanged will be sent. When the
+    /// status of a connection has changed, the NetSync.ConnectionStatusChanged
+    /// will be sent.
     [Preserve]
     public class NetSyncSessionsChangedNotification
     {
@@ -28,8 +27,7 @@ namespace Oculus.Platform.Models
         [JsonProperty("connection_id")]
         [Preserve]
         public long ConnectionId { get; set; }
-        /// An `array` which contains the new list of
-        /// @internal_link(horizon.platform.net_sync.models.NetSyncSession).
+        /// An `array` which contains the new list of NetSyncSession.
         [JsonProperty("sessions")]
         [Preserve]
         public NetSyncSessionList Sessions { get; set; }

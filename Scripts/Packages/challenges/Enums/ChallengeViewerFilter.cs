@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<dca55e344eb860eac696f51f06b7c539>>
+ * @generated SignedSource<<8b3928ec8112ae18f7468d9aaa6b4e94>>
  */
 
 namespace Oculus.Platform
@@ -11,14 +11,11 @@ namespace Oculus.Platform
     using Description = System.ComponentModel.DescriptionAttribute;
     using UnityEngine.Scripting;
 
-    /// The available filtering options on the
-    /// @internal_link(horizon.platform.challenges.models.Challenge) returned by @i
-    /// nternal_link(horizon.platform.challenges.Challenges#get_list(ChallengeOptio
-    /// ns, Integer)). These filters allow users to customize their search results
-    /// and retrieve only the challenges that meet specific criteria. See more
-    /// details of Challenges in
-    /// [here](https://developer.oculus.com/documentation/{{platform_doc_path}}/ps-
-    /// challenges/).
+    /// The available filtering options on the Challenge returned by
+    /// Challenges.GetList. These filters allow users to customize their search
+    /// results and retrieve only the challenges that meet specific criteria. See
+    /// more details of Challenges in
+    /// [here](https://developer.oculus.com/documentation/unity/ps-challenges/).
     [Preserve]
     public enum ChallengeViewerFilter : int
     {
@@ -27,14 +24,10 @@ namespace Oculus.Platform
         [Preserve]
         Unknown,
 
-        /// Returns all public ((@internal_link(horizon.platform.challenges.enums.Chall
-        /// engeVisibility#public))) and invite-only (@internal_link(horizon.platform.c
-        /// hallenges.enums.ChallengeVisibility#invite_only))
-        /// @internal_link(horizon.platform.challenges.models.Challenge)s in which the
-        /// user is a participant or invitee. Excludes private (@internal_link(horizon.
-        /// platform.challenges.enums.ChallengeVisibility#private)) challenges. This
-        /// filter is useful for users who want to see all challenges they are involved
-        /// in, regardless of their visibility settings.
+        /// Returns all public ((ChallengeVisibility.Public))) and invite-only
+        /// ChallengeVisibility.Private) challenges. This filter is useful for users
+        /// who want to see all challenges they are involved in, regardless of their
+        /// visibility settings.
         [Description("ALL_VISIBLE")]
         [Preserve]
         AllVisible,

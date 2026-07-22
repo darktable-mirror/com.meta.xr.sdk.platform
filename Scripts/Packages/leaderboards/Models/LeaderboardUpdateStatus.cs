@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<f27b76a71b4d8978672018a57531bbb8>>
+ * @generated SignedSource<<830850ec6ba5136ddedec29ff8e256b3>>
  */
 
 #pragma warning disable 0618
@@ -19,10 +19,8 @@ namespace Oculus.Platform.Models
 
     /// This object is a response from the server that contains information about
     /// the status of the request to update the leaderboard. It can be retrieved
-    /// using two different API requests: @internal_link(horizon.platform.leaderboa
-    /// rds.Leaderboards#write_entry(String, Long, List<Byte>, UInt, Boolean)) and 
-    /// @internal_link(horizon.platform.leaderboards.Leaderboards#write_entry_with_
-    /// supplementary_metric(String, Long, Long, List<Byte>, UInt, Boolean)).
+    /// using two different API requests: Leaderboards.WriteEntry and
+    /// Leaderboards.WriteEntryWithSupplementaryMetric.
     [Preserve]
     public class LeaderboardUpdateStatus
     {
@@ -31,12 +29,8 @@ namespace Oculus.Platform.Models
         [Preserve]
         public bool DidUpdate { get; set; }
         /// If the leaderboard is updated, this represents the updated challenge IDs.
-        /// The updated challenge IDs can be used by
-        /// @internal_link(horizon.platform.challenges.Challenges#get_entries(ID,
-        /// Integer, LeaderboardFilterType, LeaderboardStartAt)), @internal_link(horizo
-        /// n.platform.challenges.Challenges#get_entries_after_rank(ID, Integer,
-        /// ULong)), or @internal_link(horizon.platform.challenges.Challenges#get_entri
-        /// es_by_ids(ID, Integer, LeaderboardStartAt, List<ID>, UInt)) APIs.
+        /// The updated challenge IDs can be used by Challenges.GetEntries,
+        /// Challenges.GetEntriesAfterRank, or Challenges.GetEntriesByIds APIs.
         [JsonProperty("updated_challenge_ids")]
         [JsonConverter(typeof(UInt64EmptyStringConverter))]
         [Preserve]

@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<a79b4b3fae2d64192d8189e796ed1ec5>>
+ * @generated SignedSource<<8f404e2a96d06dab778213e55651b008>>
  */
 
 namespace Oculus.Platform.Models
@@ -15,11 +15,11 @@ namespace Oculus.Platform.Models
     using Newtonsoft.Json.Converters;
     using UnityEngine.Scripting;
 
-    /// The value is used in the [VoIP system](https://developer.oculus.com/documen
-    /// tation/{{platform_doc_path}}/ps-parties/#voip-options). The value
-    /// determines how much the audio volume is reduced as the distance between
-    /// players increases. This helps to create a more immersive experience by
-    /// making distant players' voices sound fainter.
+    /// The value is used in the
+    /// [VoIP system](https://developer.oculus.com/documentation/unity/ps-parties/#voip-options).
+    /// The value determines how much the audio volume is reduced as the distance
+    /// between players increases. This helps to create a more immersive experience
+    /// by making distant players' voices sound fainter.
     [Preserve]
     public class NetSyncVoipAttenuationValue
     {

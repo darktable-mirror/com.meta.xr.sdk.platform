@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<6be2fd12344e6617c67789acf5db87fd>>
+ * @generated SignedSource<<0cd1a1581c957b96fd4458b740810ee9>>
  */
 
 #pragma warning disable 0618
@@ -18,20 +18,18 @@ namespace Oculus.Platform.Models
     using UnityEngine.Scripting;
 
     /// This object represents a permission or capability for the logged in user,
-    /// which can be retrieved by
-    /// @internal_link(horizon.platform.users.Users#get_logged_in_user()). It's a
-    /// type of array and there is a unique name for every user capability.
+    /// which can be retrieved by Users.GetLoggedInUser. It's a type of array and
+    /// there is a unique name for every user capability.
     [Preserve]
     public class UserCapability
     {
         /// The human readable description of the capability describing what possessing
-        /// it entails for a given @internal_link(horizon.platform.users.models.User).
+        /// it entails for a given User.
         [JsonProperty("description")]
         [Preserve]
         public string Description { get; set; }
         /// Whether the capability is currently enabled for the user. When false, this
-        /// field will gate the @internal_link(horizon.platform.users.models.User) from
-        /// the specified services.
+        /// field will gate the User from the specified services.
         [JsonProperty("is_enabled")]
         [Preserve]
         public bool IsEnabled { get; set; }
@@ -41,10 +39,10 @@ namespace Oculus.Platform.Models
         [Preserve]
         public string Name { get; set; }
         /// This field specifies the reason the capability was enabled or disabled for
-        /// the given @internal_link(horizon.platform.users.models.User). List of
-        /// Reason Codes: - REASON_UNKOWN - SOCIAL_DISTANCING - VERBAL_ABUSE -
-        /// TEXT_ABUSE - PARENTAL_CONTROL - DEVELOPER_ACTION - SALSA_RESTRICTION -
-        /// SOCIAL_SUSPENSION - PAYMENT_SUSPENSION - PAYMENT_GIFTING_SUSPENSION
+        /// the given User. List of Reason Codes: - REASON_UNKOWN - SOCIAL_DISTANCING -
+        /// VERBAL_ABUSE - TEXT_ABUSE - PARENTAL_CONTROL - DEVELOPER_ACTION -
+        /// SALSA_RESTRICTION - SOCIAL_SUSPENSION - PAYMENT_SUSPENSION -
+        /// PAYMENT_GIFTING_SUSPENSION
         [JsonProperty("reason_code")]
         [Preserve]
         public string ReasonCode { get; set; }

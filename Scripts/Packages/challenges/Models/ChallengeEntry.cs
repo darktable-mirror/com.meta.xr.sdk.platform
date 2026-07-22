@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<c25d1e3b97e0c5ae351bd8e95d30480d>>
+ * @generated SignedSource<<4fccc7acc58a5fff0ca1cbb4d4f1588e>>
  */
 
 #pragma warning disable 0618
@@ -20,10 +20,7 @@ namespace Oculus.Platform.Models
     /// A challenge entry object contains information about an individual entry
     /// within a challenge such as the user who made the entry, the score achieved,
     /// and other relevant details. It's the array element type of
-    /// @internal_link(horizon.platform.challenges.models.ChallengeEntryArray) and
-    /// can be retrieved using
-    /// @internal_link(horizon.platform.challenges.Challenges#get_entries(ID,
-    /// Integer, LeaderboardFilterType, LeaderboardStartAt)).
+    /// ChallengeEntryArray and can be retrieved using Challenges.GetEntries.
     [Preserve]
     public class ChallengeEntry
     {
@@ -37,11 +34,8 @@ namespace Oculus.Platform.Models
         [JsonProperty("extra_data_base64")]
         [Preserve]
         public byte[] ExtraData { get; set; }
-        /// The unique identifier of this challenge entry which can be used by @interna
-        /// l_link(horizon.platform.challenges.Challenges#get_entries_by_ids(ID,
-        /// Integer, LeaderboardStartAt, List<ID>, UInt)) and
-        /// @internal_link(horizon.platform.challenges.Challenges#get_entries(ID,
-        /// Integer, LeaderboardFilterType, LeaderboardStartAt)).
+        /// The unique identifier of this challenge entry which can be used by
+        /// Challenges.GetEntriesByIds and Challenges.GetEntries.
         [JsonProperty("id")]
         [JsonConverter(typeof(UInt64EmptyStringConverter))]
         [Preserve]

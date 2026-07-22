@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<c44411ff84f1a7b58e172f9c3407115f>>
+ * @generated SignedSource<<c58d6c831bd14a9fba59d05d303d629a>>
  */
 
 using System;
@@ -16,26 +16,22 @@ using UnityEngine.Scripting;
 
 namespace Oculus.Platform
 {
-    /// The Challenge Option is a parameter that can be passed in the @internal_lin
-    /// k(horizon.platform.challenges.Challenges#get_list(ChallengeOptions,
-    /// Integer)) method to retrieve a list of challenges that match the specified
-    /// options. The
-    /// @internal_link(horizon.platform.challenges.options.ChallengeOptions)
-    /// parameter allows you to specify the criteria for the challenges you want to
-    /// retrieve, such as the viewer filter, the visibility, or the date range.
+    /// The Challenge Option is a parameter that can be passed in the
+    /// Challenges.GetList method to retrieve a list of challenges that match the
+    /// specified options. The ChallengeOptions parameter allows you to specify the
+    /// criteria for the challenges you want to retrieve, such as the viewer
+    /// filter, the visibility, or the date range.
     [Serializable]
     [Preserve]
     public class ChallengeOptions {
         /// The description of the challenge is a detailed and informative text that
         /// provides a comprehensive overview of the challenge's objectives, rules, and
-        /// requirements, which can be retrieved with
-        /// @internal_link(horizon.platform.challenges.models.Challenge#description).
+        /// requirements, which can be retrieved with Challenge.Description.
         [JsonProperty("description")]
         [Preserve]
         public string Description = "";
         /// The challenge end date is the timestamp when this challenge ends, which can
-        /// be retrieved using
-        /// @internal_link(horizon.platform.challenges.models.Challenge#end_date).
+        /// be retrieved using Challenge.EndDate.
         [JsonProperty("end_date")]
         [JsonConverter(typeof(UnixDateTimeConverter))]
         [Preserve]
@@ -65,48 +61,41 @@ namespace Oculus.Platform
         [Preserve]
         public string LeaderboardName = "";
         /// The challenge start date is the timestamp when this challenge begins, which
-        /// can be retrieved using
-        /// @internal_link(horizon.platform.challenges.models.Challenge#start_date).
+        /// can be retrieved using Challenge.StartDate.
         [JsonProperty("start_date")]
         [JsonConverter(typeof(UnixDateTimeConverter))]
         [Preserve]
         public DateTime? StartDate = null;
         /// The title of the challenge is a descriptive label that provides a concise
         /// summary of the challenge's purpose and objectives, which can be retrieved
-        /// with @internal_link(horizon.platform.challenges.models.Challenge#title).
+        /// with Challenge.Title.
         [JsonProperty("title")]
         [Preserve]
         public string Title = "";
         /// An enum that specifies what filter to apply to the list of returned
-        /// challenges. Returns all public (@internal_link(horizon.platform.challenges.
-        /// enums.ChallengeVisibility#public)) and invite-only (@internal_link(horizon.
-        /// platform.challenges.enums.ChallengeVisibility#invite_only))
-        /// @internal_link(horizon.platform.challenges.models.Challenge) in which the
-        /// user is a participant or invitee. Excludes private (@internal_link(horizon.
-        /// platform.challenges.enums.ChallengeVisibility#private)) challenges. @intern
-        /// al_link(horizon.platform.challenges.enums.ChallengeViewerFilter#participati
-        /// ng) - Returns challenges the user is participating in. @internal_link(horiz
-        /// on.platform.challenges.enums.ChallengeViewerFilter#invited) - Returns
-        /// challenges the user is invited to. @internal_link(horizon.platform.challeng
-        /// es.enums.ChallengeViewerFilter#participating_or_invited) - Returns
+        /// challenges. Returns all public (ChallengeVisibility.Public)) and invite-
+        /// only  ChallengeVisibility.Private) challenges.
+        /// ChallengeViewerFilter.Participating - Returns challenges the user is
+        /// participating in. ChallengeViewerFilter.Invited - Returns challenges the
+        /// user is invited to. ChallengeViewerFilter.ParticipatingOrInvited - Returns
         /// challenges the user is either participating in or invited to.
         [JsonProperty("viewer_filter")]
         [JsonConverter(typeof(EnumDescriptionConverter<ChallengeViewerFilter>))]
         [Preserve]
         public ChallengeViewerFilter ViewerFilter = ChallengeViewerFilter.Unknown;
         /// The challenge visibility setting specifies who can see and participate in
-        /// this challenge, which be retrieved with
-        /// @internal_link(horizon.platform.challenges.models.Challenge#visibility).
-        /// There are three visibility levels: @internal_link(horizon.platform.challeng
-        /// es.enums.ChallengeVisibility#public), @internal_link(horizon.platform.chall
-        /// enges.enums.ChallengeVisibility#invite_only) and @internal_link(horizon.pla
-        /// tform.challenges.enums.ChallengeVisibility#private).
+        /// this challenge, which be retrieved with Challenge.Visibility. There are
+        /// three visibility levels: ChallengeVisibility.Public,
+        /// ChallengeVisibility.InviteOnly and ChallengeVisibility.Private.
         [JsonProperty("visibility")]
         [JsonConverter(typeof(EnumDescriptionConverter<ChallengeVisibility>))]
         [Preserve]
         public ChallengeVisibility Visibility = ChallengeVisibility.Unknown;
         
-        public string Json => JsonUtility.ToJson(this);
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
+        }
 
         [Preserve]
         public ChallengeOptions()

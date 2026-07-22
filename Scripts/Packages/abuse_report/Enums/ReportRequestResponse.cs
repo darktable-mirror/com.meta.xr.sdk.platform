@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<49292dfaeece5fc9ac02dabc5a13c220>>
+ * @generated SignedSource<<95ad67ab748d8bf4819a348778b5bfb6>>
  */
 
 namespace Oculus.Platform
@@ -15,9 +15,8 @@ namespace Oculus.Platform
     /// in-app reporting flow. This report request response represents the possible
     /// states that the app can respond to the platform notification, i.e., the
     /// running application indicates whether they want to show their in-app
-    /// reporting flow or that they choose to ignore the request via @internal_link
-    /// (horizon.platform.abuse_report.AbuseReport#report_request_handled(ReportReq
-    /// uestResponse)).
+    /// reporting flow or that they choose to ignore the request via
+    /// AbuseReport.ReportRequestHandled.
     [Preserve]
     public enum ReportRequestResponse : int
     {

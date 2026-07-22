@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<fd5a931bb51b42cf0105b0862c08a897>>
+ * @generated SignedSource<<fa60b4061234a69fab86640fbf8675dc>>
  */
 
 namespace Oculus.Platform.Models
@@ -15,18 +15,14 @@ namespace Oculus.Platform.Models
     using Newtonsoft.Json.Converters;
     using UnityEngine.Scripting;
 
-    /// A @internal_link(horizon.platform.net_sync.models.NetSyncConnection) allows
-    /// multiple clients to connect and communicate with each other in real-time.
-    /// This is the payload from setting the properties of
-    /// @internal_link(horizon.platform.net_sync.models.NetSyncSession). You can
-    /// retrieve the result session via @internal_link(horizon.platform.net_sync.mo
-    /// dels.NetSyncSetSessionPropertyResult#session).
+    /// A NetSyncConnection allows multiple clients to connect and communicate with
+    /// each other in real-time. This is the payload from setting the properties of
+    /// NetSyncSession. You can retrieve the result session via
+    /// NetSyncSetSessionPropertyResult.Session.
     [Preserve]
     public class NetSyncSetSessionPropertyResult
     {
-        /// It contains the
-        /// @internal_link(horizon.platform.net_sync.models.NetSyncSession) that the
-        /// operation was modifying.
+        /// It contains the NetSyncSession that the operation was modifying.
         [JsonProperty("session")]
         [Preserve]
         public NetSyncSession Session { get; set; }

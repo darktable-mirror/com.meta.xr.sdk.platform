@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<c4e81674328114415c6a1ed99d1de264>>
+ * @generated SignedSource<<ca8bc8515e2072c274535e84e2726cea>>
  */
 
 using System;
@@ -16,10 +16,9 @@ using UnityEngine.Scripting;
 
 namespace Oculus.Platform
 {
-    /// The Notification Params, to be passed in to @internal_link(horizon.platform
-    /// .notifications.Notifications#device_notification(DeviceNotificationConfig))
-    /// , is a field that allows developers to specify a list of parameters to
-    /// config the on device notification.
+    /// The Notification Params, to be passed in to
+    /// Notifications.DeviceNotification, is a field that allows developers to
+    /// specify a list of parameters to config the on device notification.
     [Serializable]
     [Preserve]
     public class DeviceNotificationConfig {
@@ -53,8 +52,8 @@ namespace Oculus.Platform
         [Preserve]
         public string AppPackageNameForAppIcon = null;
         /// The notification action display type, which determines whether actions are
-        /// displayed as ICONABLE, ICONABLE_COLORLESS, or TEXT_ONLY. (see
-        /// https://fburl.com/code/nfqxeecd)
+        /// displayed as ActionDisplayType.Iconable,
+        /// ActionDisplayType.IconableColorless, or ActionDisplayType.TextOnly.
         [JsonProperty("action_display_type")]
         [JsonConverter(typeof(EnumDescriptionConverter<ActionDisplayType>))]
         [Preserve]
@@ -92,7 +91,10 @@ namespace Oculus.Platform
         [Preserve]
         public string ActionIntentExtras = null;
         
-        public string Json => JsonUtility.ToJson(this);
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
+        }
 
         [Preserve]
         public DeviceNotificationConfig()

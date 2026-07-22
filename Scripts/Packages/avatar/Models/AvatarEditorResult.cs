@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<59b39f2adcbc833b2140fa99dbef955e>>
+ * @generated SignedSource<<53b148acb099e8fed576073663386b6f>>
  */
 
 #pragma warning disable 0618
@@ -18,10 +18,9 @@ namespace Oculus.Platform.Models
     using UnityEngine.Scripting;
 
     /// This is the result that can be extracted from message payload when the
-    /// avatar editor is launched via a call to @internal_link(horizon.platform.ava
-    /// tar.Avatar#launch_avatar_editor(AvatarEditorOptions)). It contains
-    /// information about whether the avatar editor result has successfully been
-    /// sent.
+    /// avatar editor is launched via a call to Avatar.LaunchAvatarEditor. It
+    /// contains information about whether the avatar editor result has
+    /// successfully been sent.
     [Preserve]
     public class AvatarEditorResult
     {

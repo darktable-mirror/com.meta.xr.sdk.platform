@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<18aaa4f5b7028a50f439570e5a343a2f>>
+ * @generated SignedSource<<702edabcc992354ccb9af4cde5eac160>>
  */
 
 using System;
@@ -20,22 +20,19 @@ namespace Oculus.Platform
     /// streams. It includes 'zone_id' for unique identifiers within the
     /// application, 'voip_stream_default' to set default VoIP stream modes, and
     /// 'voip_group' to assign a VoIP group upon connection. It can be set when
-    /// create a new connection and retrieved using
-    /// @internal_link(horizon.platform.net_sync.models.NetSyncConnection).
+    /// create a new connection and retrieved using NetSyncConnection.
     [Serializable]
     [Preserve]
     public class NetSyncOptions {
         /// If provided, immediately set the voip_group to this value upon connection
-        /// and can be retrieved using
-        /// @internal_link(horizon.platform.net_sync.models.NetSyncSession#voip_group)
+        /// and can be retrieved using NetSyncSession.VoipGroup
         [JsonProperty("voip_group")]
         [Preserve]
         public string VoipGroup = "";
         /// When a new remote voip user connects, default that connection to this
-        /// stream type by default. There are three modes: @internal_link(horizon.platf
-        /// orm.net_sync.enums.NetSyncVoipStreamMode#unknown), @internal_link(horizon.p
-        /// latform.net_sync.enums.NetSyncVoipStreamMode#ambisonic),
-        /// @internal_link(horizon.platform.net_sync.enums.NetSyncVoipStreamMode#mono).
+        /// stream type by default. There are three modes:
+        /// NetSyncVoipStreamMode.Unknown, NetSyncVoipStreamMode.Ambisonic,
+        /// NetSyncVoipStreamMode.Mono.
         [JsonProperty("voip_stream_default")]
         [JsonConverter(typeof(EnumDescriptionConverter<NetSyncVoipStreamMode>))]
         [Preserve]
@@ -46,7 +43,10 @@ namespace Oculus.Platform
         [Preserve]
         public string ZoneId = "";
         
-        public string Json => JsonUtility.ToJson(this);
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
+        }
 
         [Preserve]
         public NetSyncOptions()

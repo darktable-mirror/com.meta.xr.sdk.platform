@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<0bccb900f9bf56fcfb972462c0c395e4>>
+ * @generated SignedSource<<01be00449446bec3fafb53244bcaebc5>>
  */
 
 using System;
@@ -18,12 +18,9 @@ namespace Oculus.Platform
 {
     /// The Advanced Abuse Report Options provides a way for developers to
     /// customize the reporting flow and specify the type of content being
-    /// reported, which can be either a
-    /// @internal_link(horizon.platform.abuse_report.enums.AbuseReportType#user) or
-    /// an
-    /// @internal_link(horizon.platform.abuse_report.enums.AbuseReportType#object),
-    /// helping to maintain a safe and respectful community within their
-    /// application.
+    /// reported, which can be either a AbuseReportType.User or an
+    /// AbuseReportType.Object, helping to maintain a safe and respectful community
+    /// within their application.
     [Serializable]
     [Preserve]
     public class AdvancedAbuseReportOptions {
@@ -32,20 +29,14 @@ namespace Oculus.Platform
         /// received by the developer.
         [JsonProperty("developer_defined_context")]
         [Preserve]
-        public Dictionary<string, string> DeveloperDefinedContext;
-        /// If @internal_link(horizon.platform.abuse_report.enums.AbuseReportType) is
-        /// @internal_link(horizon.platform.abuse_report.enums.AbuseReportType#object),
-        /// a string representing the type of content being reported. This should
-        /// correspond to the object_type string used in the UI.
+        public Dictionary<string, string> DeveloperDefinedContext = null;
+        /// If AbuseReportType.Object, a string representing the type of content being
+        /// reported. This should correspond to the object_type string used in the UI.
         [JsonProperty("object_type")]
         [Preserve]
-        public string ObjectType;
-        /// The intended entity type
-        /// @internal_link(horizon.platform.abuse_report.enums.AbuseReportType) being
-        /// reported, it can be either a user
-        /// @internal_link(horizon.platform.abuse_report.enums.AbuseReportType#user) or
-        /// an object/content
-        /// @internal_link(horizon.platform.abuse_report.enums.AbuseReportType#object).
+        public string ObjectType = "";
+        /// The intended entity type AbuseReportType.User or an object/content
+        /// AbuseReportType.Object.
         [JsonProperty("report_type")]
         [JsonConverter(typeof(EnumDescriptionConverter<AbuseReportType>))]
         [Preserve]
@@ -57,21 +48,19 @@ namespace Oculus.Platform
         [JsonConverter(typeof(UInt64ArrayAsStringConverter))]
         [Preserve]
         public UInt64[] SuggestedUsers;
-        /// The video mode
-        /// @internal_link(horizon.platform.abuse_report.enums.AbuseReportVideoMode)
-        /// controls whether or not the abuse report flow should collect evidence and
-        /// whether it is optional or not. @internal_link(horizon.platform.abuse_report
-        /// .enums.AbuseReportVideoMode#collect) requires video evidence to be provided
-        /// by the user. @internal_link(horizon.platform.abuse_report.enums.AbuseReport
-        /// VideoMode#optional) presents the user with the option to provide video
-        /// evidence. @internal_link(horizon.platform.abuse_report.enums.AbuseReportVid
-        /// eoMode#skip) bypasses the video evidence collection step altogether.
+        /// The video mode AbuseReportVideoMode.Collect requires video evidence to be
+        /// provided by the user. AbuseReportVideoMode.Optional presents the user with
+        /// the option to provide video evidence. AbuseReportVideoMode.Skip bypasses
+        /// the video evidence collection step altogether.
         [JsonProperty("video_mode")]
         [JsonConverter(typeof(EnumDescriptionConverter<AbuseReportVideoMode>))]
         [Preserve]
         public AbuseReportVideoMode VideoMode = AbuseReportVideoMode.Unknown;
         
-        public string Json => JsonUtility.ToJson(this);
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
+        }
 
         [Preserve]
         public AdvancedAbuseReportOptions()

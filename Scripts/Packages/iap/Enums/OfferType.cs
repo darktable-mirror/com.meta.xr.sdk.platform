@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<be3237dac92707df731a46fa8af1c875>>
+ * @generated SignedSource<<4a0214e2820ecfe06628bcd74956bdee>>
  */
 
 namespace Oculus.Platform
@@ -11,8 +11,7 @@ namespace Oculus.Platform
     using Description = System.ComponentModel.DescriptionAttribute;
     using UnityEngine.Scripting;
 
-    /// An enumeration that defines the type of the
-    /// @internal_link(horizon.platform.iap.models.TrialOffer). This can be
+    /// An enumeration that defines the type of the TrialOffer. This can be
     /// utilized to identify the specific type of offer, such as a free trial or an
     /// intro offer. By setting this field, you can easily differentiate between
     /// different types of offers and provide a better user experience for your

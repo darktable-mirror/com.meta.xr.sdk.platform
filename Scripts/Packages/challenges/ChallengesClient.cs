@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<60d23f1eb64707b95d8cbeb67aeae192>>
+ * @generated SignedSource<<68321d465982ddd85a2039be888ef2c0>>
  */
 
 using UnityEngine;
@@ -13,6 +13,13 @@ using System.Collections.Generic;
 
 namespace Oculus.Platform
 {
+    /// The Challenges API enhances social interactions in your app, which use
+    /// GroupPresence.SetDestination to create shareable links for score-based
+    /// competition. Players can repeatedly challenge others, get to know them, and
+    /// compete asynchronously. Challenges can be ranked by highest/lowest scores
+    /// within a time period. Leaderboard-integrated apps get Challenges for free,
+    /// accessible through the Scoreboards UI. Players can create and invite others
+    /// to Challenges via the Challenges app.
     public static partial class Challenges
     {
         public static Request<Challenge> Create(string leaderboardName, ChallengeOptions challengeOptions)
@@ -41,7 +48,7 @@ namespace Oculus.Platform
 
         /// If the current user has the necessary permissions, they can decline a
         /// challenge by providing the challenge ID, which can be obtained using
-        /// @internal_link(horizon.platform.challenges.models.Challenge#id).
+        /// Challenge.Id.
         public static Request<Challenge> DeclineInvite(UInt64 challengeID)
         {
             if (Core.IsInitialized())
@@ -89,8 +96,7 @@ namespace Oculus.Platform
         }
 
         /// Gets detailed information for a single challenge by providing the challenge
-        /// ID, which can be retrieved by calling
-        /// @internal_link(horizon.platform.challenges.models.Challenge#id).
+        /// ID, which can be retrieved by calling Challenge.Id.
         public static Request<Challenge> Get(UInt64 challengeID)
         {
             if (Core.IsInitialized())
@@ -208,10 +214,9 @@ namespace Oculus.Platform
         }
 
         /// Returns a list of challenges that match the specified options. The
-        /// @internal_link(horizon.platform.challenges.options.ChallengeOptions)
-        /// parameter allows you to specify the criteria for the challenges you want to
-        /// retrieve. The limit parameter allows you to control the number of
-        /// challenges returned.
+        /// ChallengeOptions parameter allows you to specify the criteria for the
+        /// challenges you want to retrieve. The limit parameter allows you to control
+        /// the number of challenges returned.
         public static Request<ChallengeList> GetList(ChallengeOptions challengeOptions, int limit)
         {
             if (Core.IsInitialized())
@@ -236,9 +241,35 @@ namespace Oculus.Platform
             return null;
         }
 
+        /// Invites users to a challenge by providing the challenge ID and a list of
+        /// user IDs to invite.
+        public static Request<Challenge> InviteUsers(UInt64 challengeID, UInt64[] userIDs)
+        {
+            if (Core.IsInitialized())
+            {
+                  var request = new Dictionary<string, object>
+                {
+                    { "challenge_id", challengeID.ToString() },
+                    { "user_ids", Array.ConvertAll(userIDs, id => id.ToString()) }
+                };
+
+                var settings = new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore
+                };
+                string jsonRequest = JsonConvert.SerializeObject(request, settings);
+
+                ulong requestHandle = PlatformClient.MakeRequest("challenges", "invite_users", 1, jsonRequest, 0);
+                return new Request<Challenge>(requestHandle);
+            }
+
+            Debug.LogError(Core.PlatformUninitializedError);
+            return null;
+        }
+
         /// If the current user has the necessary permissions to join, participate in a
         /// challenge by providing the challenge ID, which can be retrieved using
-        /// @internal_link(horizon.platform.challenges.models.Challenge#id).
+        /// Challenge.Id.
         public static Request<Challenge> Join(UInt64 challengeID)
         {
             if (Core.IsInitialized())
@@ -264,7 +295,7 @@ namespace Oculus.Platform
 
         /// If the current user has the necessary permissions, they can leave a
         /// challenge by providing the challenge ID, which can be obtained using
-        /// @internal_link(horizon.platform.challenges.models.Challenge#id).
+        /// Challenge.Id.
         public static Request<Challenge> Leave(UInt64 challengeID)
         {
             if (Core.IsInitialized())

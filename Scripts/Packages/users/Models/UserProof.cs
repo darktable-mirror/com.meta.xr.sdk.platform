@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<5f5241a434a6c1853f748fedef2d349d>>
+ * @generated SignedSource<<2325292690de53453fc19baab64878ed>>
  */
 
 namespace Oculus.Platform.Models
@@ -15,13 +15,11 @@ namespace Oculus.Platform.Models
     using Newtonsoft.Json.Converters;
     using UnityEngine.Scripting;
 
-    /// This object is retrieved from the
-    /// @internal_link(horizon.platform.users.Users#get_user_proof()) request and
-    /// will contain a nonce that is used to verify the identity of the User. Read
-    /// more about user verification in our [User Verification
-    /// guide](https://developer.oculus.com/documentation/{{platform_doc_path}}/ps-
-    /// ownership/#integrate-user-verification) NOTE: The nonce is only good for
-    /// one check and then it is invalidated.
+    /// This object is retrieved from the Users.GetUserProof request and will
+    /// contain a nonce that is used to verify the identity of the User. Read more
+    /// about user verification in our
+    /// [User Verification guide](https://developer.oculus.com/documentation/unity/ps-ownership/#integrate-user-verification)
+    /// NOTE: The nonce is only good for one check and then it is invalidated.
     [Preserve]
     public class UserProof
     {

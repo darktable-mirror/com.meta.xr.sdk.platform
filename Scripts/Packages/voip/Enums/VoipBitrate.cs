@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<18af6ad70e8988ef7d0564116da4be6f>>
+ * @generated SignedSource<<39bb9f7f5efe6b3afba19b709012953c>>
  */
 
 namespace Oculus.Platform
@@ -12,10 +12,9 @@ namespace Oculus.Platform
     using UnityEngine.Scripting;
 
     /// It's a set of predefined values that represent different levels of audio
-    /// quality for Voice over IP (VoIP) connections. It can be used in @internal_l
-    /// ink(horizon.platform.voip.options.VoipOptions#bitrate_for_new_connection)
-    /// to set the maximum average bitrate the audio codec should use for new VoIP
-    /// connections.
+    /// quality for Voice over IP (VoIP) connections. It can be used in
+    /// VoipOptions.BitrateForNewConnection to set the maximum average bitrate the
+    /// audio codec should use for new VoIP connections.
     [Preserve]
     public enum VoipBitrate : int
     {

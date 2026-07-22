@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<31ba32487c907e8d688950e9de426e99>>
+ * @generated SignedSource<<73aae97c512760eacaa1a1163b4a65af>>
  */
 
 namespace Oculus.Platform.Models
@@ -17,11 +17,9 @@ namespace Oculus.Platform.Models
 
     /// Represents an update to an existing achievement. It will be the payload if
     /// there is any updates on achievements, as unlocking an achievement by
-    /// @internal_link(horizon.platform.achievements.Achievements#unlock(String)),
-    /// adding 'count' to the achievement by
-    /// @internal_link(horizon.platform.achievements.Achievements#add_count(String,
-    /// ULong)), and unlocking fields of a BITFIELD achievement by @internal_link(h
-    /// orizon.platform.achievements.Achievements#add_fields(String, String)).
+    /// Achievements.Unlock, adding 'count' to the achievement by
+    /// Achievements.AddCount, and unlocking fields of a BITFIELD achievement by
+    /// Achievements.AddFields.
     [Preserve]
     public class AchievementUpdate
     {
@@ -29,9 +27,8 @@ namespace Oculus.Platform.Models
         [JsonProperty("just_unlocked")]
         [Preserve]
         public bool JustUnlocked { get; set; }
-        /// The unique @internal_link(horizon.platform.achievements.models.AchievementD
-        /// efinition#api_name) used to reference the updated achievement, as specified
-        /// in the developer dashboard.
+        /// The unique AchievementDefinition.ApiName used to reference the updated
+        /// achievement, as specified in the developer dashboard.
         [JsonProperty("api_name")]
         [Preserve]
         public string Name { get; set; }

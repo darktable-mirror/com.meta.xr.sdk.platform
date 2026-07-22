@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<fe6ff48c7afdd330af87cfc86000208e>>
+ * @generated SignedSource<<6bc12d1c90021147b68fdc0cfde43b45>>
  */
 
 using UnityEngine;
@@ -13,6 +13,8 @@ using System.Collections.Generic;
 
 namespace Oculus.Platform
 {
+    /// Rich Presence has been deprecated in favor of
+    /// [Group Presence](https://developers.meta.com/horizon/documentation/unity/ps-group-presence-overview).
     public static partial class RichPresence
     {
         public static Request Clear()
@@ -37,9 +39,7 @@ namespace Oculus.Platform
             return null;
         }
 
-        /// Gets all the
-        /// @internal_link(horizon.platform.rich_presence.models.Destination) that the
-        /// presence can be set to
+        /// Gets all the Destination that the presence can be set to
         public static Request<DestinationList> GetDestinations()
         {
             if (Core.IsInitialized())

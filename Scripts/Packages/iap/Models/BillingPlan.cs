@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<707cdb2e0462735828488dcddf79f11f>>
+ * @generated SignedSource<<07714bad7ed99182258b1f634d9f521f>>
  */
 
 #pragma warning disable 0618
@@ -18,22 +18,17 @@ namespace Oculus.Platform.Models
     using UnityEngine.Scripting;
 
     /// Contains the detailed billing plan information for a
-    /// @internal_link(horizon.platform.iap.enums.ProductType#subscription). A
-    /// BillingPlan can have a
-    /// @internal_link(horizon.platform.iap.models.PaidOffer) and an array of
-    /// @internal_link(horizon.platform.iap.models.TrialOffer). The
-    /// @internal_link(horizon.platform.iap.models.TrialOfferArray) can contain a
-    /// FREE_TRIAL and an INTRO_OFFER.
+    /// ProductType.Subscription. A BillingPlan can have a PaidOffer and an array
+    /// of TrialOffer. The TrialOfferArray can contain a FREE_TRIAL and an
+    /// INTRO_OFFER.
     [Preserve]
     public class BillingPlan
     {
-        /// Represents the @internal_link(horizon.platform.iap.models.PaidOffer)
-        /// associated with the billing_plan.
+        /// Represents the PaidOffer associated with the billing_plan.
         [JsonProperty("paid_offer")]
         [Preserve]
         public PaidOffer PaidOffer { get; set; }
-        /// A list of @internal_link(horizon.platform.iap.models.TrialOffer) associated
-        /// with the billing_plan.
+        /// A list of TrialOffer associated with the billing_plan.
         [JsonProperty("trial_offers")]
         // May be null. Check before using.
         [Preserve]

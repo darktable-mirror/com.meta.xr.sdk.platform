@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<43190df3e0796c35edcadee7ec6a5c4d>>
+ * @generated SignedSource<<1129f9f3e4eb34360fb5976251c418b4>>
  */
 
 using System;
@@ -16,20 +16,18 @@ using UnityEngine.Scripting;
 
 namespace Oculus.Platform
 {
-    /// The Group Presence Option, to be passed in to @internal_link(horizon.platfo
-    /// rm.group_presence.GroupPresence#set(GroupPresenceOptions)), is a set of
-    /// fields that allows developers to specify the presence of a user in a
+    /// The Group Presence Option, to be passed in to GroupPresence.Set, is a set
+    /// of fields that allows developers to specify the presence of a user in a
     /// group/squad/party. It provides a way for developers to create a more
     /// immersive and social experience for their users by allowing them to join
     /// and interact with other users.
     [Serializable]
     [Preserve]
     public class GroupPresenceOptions {
-        /// Use @internal_link(horizon.platform.group_presence.options.GroupPresenceOpt
-        /// ions#lobby_session_id) or @internal_link(horizon.platform.group_presence.op
-        /// tions.GroupPresenceOptions#match_session_id) to specify the session. Use
-        /// the deeplink message override for any additional data in whatever format
-        /// you wish to aid in bringing users together. If not specified, the
+        /// Use GroupPresenceOptions.LobbySessionId or
+        /// GroupPresenceOptions.MatchSessionId to specify the session. Use the
+        /// deeplink message override for any additional data in whatever format you
+        /// wish to aid in bringing users together. If not specified, the
         /// deeplink_message for the user will default to the one on the destination.
         [JsonProperty("deeplink_message_override")]
         [Preserve]
@@ -65,7 +63,10 @@ namespace Oculus.Platform
         [Preserve]
         public string MatchSessionId = "";
         
-        public string Json => JsonUtility.ToJson(this);
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
+        }
 
         [Preserve]
         public GroupPresenceOptions()

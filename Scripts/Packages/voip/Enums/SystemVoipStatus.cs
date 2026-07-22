@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<3e9697f7b8d33754a889ddc710b355f1>>
+ * @generated SignedSource<<8f90641c0bb1c7fbe33b0e54c44be392>>
  */
 
 namespace Oculus.Platform
@@ -11,13 +11,11 @@ namespace Oculus.Platform
     using Description = System.ComponentModel.DescriptionAttribute;
     using UnityEngine.Scripting;
 
-    /// The system voip status is the priamary status in every
-    /// @internal_link(horizon.platform.voip.models.SystemVoipState). The system
-    /// voip state is used in parties and horizon home to describe the current
-    /// state of the input/output for voip in an application. You can read more
-    /// about system voip
-    /// [here](https://developer.oculus.com/documentation/{{platform_doc_path}}/ps-
-    /// parties/#voip-options).
+    /// The system voip status is the priamary status in every SystemVoipState. The
+    /// system voip state is used in parties and horizon home to describe the
+    /// current state of the input/output for voip in an application. You can read
+    /// more about system voip
+    /// [here](https://developer.oculus.com/documentation/unity/ps-parties/#voip-options).
     [Preserve]
     public enum SystemVoipStatus : int
     {

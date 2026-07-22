@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<41d33698445c559974194a296aad5780>>
+ * @generated SignedSource<<50a12fb115181c765af5e93e0cfa47ef>>
  */
 
 namespace Oculus.Platform.Models
@@ -16,18 +16,14 @@ namespace Oculus.Platform.Models
     using UnityEngine.Scripting;
 
     /// The result from users launching the Share to Facebook modal which enables
-    /// them to share local media files through
-    /// @internal_link(horizon.platform.media.Media#share_to_facebook(String,
-    /// String, MediaContentType)). The result will contain a status field,
-    /// @internal_link(horizon.platform.media.enums.ShareMediaStatus).
+    /// them to share local media files through Media.ShareToFacebook. The result
+    /// will contain a status field, ShareMediaStatus.
     [Preserve]
     public class ShareMediaResult
     {
         /// The status of the share media result. The status can be of the following
-        /// types:
-        /// @internal_link(horizon.platform.media.enums.ShareMediaStatus#unknown)
-        /// @internal_link(horizon.platform.media.enums.ShareMediaStatus#shared)
-        /// @internal_link(horizon.platform.media.enums.ShareMediaStatus#canceled)
+        /// types: ShareMediaStatus.Unknown ShareMediaStatus.Shared
+        /// ShareMediaStatus.Canceled
         [JsonProperty("status")]
         [JsonConverter(typeof(EnumDescriptionConverter<ShareMediaStatus>))]
         [Preserve]

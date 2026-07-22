@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<1783741324952ecc443d13fa706c63d4>>
+ * @generated SignedSource<<c78017546e6a5fd9ccf80e3c28461d16>>
  */
 
 using System;
@@ -16,25 +16,26 @@ using UnityEngine.Scripting;
 
 namespace Oculus.Platform
 {
-    /// The Invite Option, to be passed in to @internal_link(horizon.platform.group
-    /// _presence.GroupPresence#get_invitable_users(InviteOptions)) and @internal_l
-    /// ink(horizon.platform.group_presence.GroupPresence#launch_invite_panel(Invit
-    /// eOptions)), is a field that allows developers to specify a list of
-    /// suggested users to be added to the invitable users list, making it easier
-    /// for users to connect with others and create a more social experience.
+    /// The Invite Option, to be passed in to GroupPresence.GetInvitableUsers and
+    /// GroupPresence.LaunchInvitePanel, is a field that allows developers to
+    /// specify a list of suggested users to be added to the invitable users list,
+    /// making it easier for users to connect with others and create a more social
+    /// experience.
     [Serializable]
     [Preserve]
     public class InviteOptions {
-        /// Passing in these users will add them to the invitable users list. From the 
-        /// @internal_link(horizon.platform.group_presence.GroupPresence#launch_invite_
-        /// panel(InviteOptions)), the user can open the invite list, where the
-        /// suggested users will be added.
+        /// Passing in these users will add them to the invitable users list. From the
+        /// GroupPresence.LaunchInvitePanel, the user can open the invite list, where
+        /// the suggested users will be added.
         [JsonProperty("suggested_users")]
         [JsonConverter(typeof(UInt64ArrayAsStringConverter))]
         [Preserve]
         public UInt64[] SuggestedUsers;
         
-        public string Json => JsonUtility.ToJson(this);
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
+        }
 
         [Preserve]
         public InviteOptions()

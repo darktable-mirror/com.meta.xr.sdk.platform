@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<4c6f491ca496f391ec0df742d1977d9f>>
+ * @generated SignedSource<<6101a0b5ae765ef3a00a39989cc9a6a6>>
  */
 
 #pragma warning disable 0618
@@ -17,9 +17,8 @@ namespace Oculus.Platform.Models
     using Newtonsoft.Json.Converters;
     using UnityEngine.Scripting;
 
-    /// A purchase is made when a user buys a
-    /// @internal_link(horizon.platform.iap.models.Product). The IAP product, which
-    /// can represent a consumable item, a durable item, or a subscription, must be
+    /// A purchase is made when a user buys a Product. The IAP product, which can
+    /// represent a consumable item, a durable item, or a subscription, must be
     /// defined for purchase through the developer dashboard.
     [Preserve]
     public class Purchase
@@ -28,25 +27,20 @@ namespace Oculus.Platform.Models
         [JsonProperty("developer_payload")]
         [Preserve]
         public string DeveloperPayload { get; set; }
-        /// The time when the purchased
-        /// @internal_link(horizon.platform.iap.models.Product) expires. This value
-        /// only applies to subscriptions, and will be null for durable and consumable
-        /// IAP items.
+        /// The time when the purchased Product expires. This value only applies to
+        /// subscriptions, and will be null for durable and consumable IAP items.
         [JsonProperty("expiration_time")]
         [JsonConverter(typeof(UnixDateTimeConverter))]
         [Preserve]
         public DateTime ExpirationTime { get; set; }
         /// The timestamp that represents when the user was granted entitlement to the
-        /// @internal_link(horizon.platform.iap.models.Product) that was purchased.
+        /// Product that was purchased.
         [JsonProperty("grant_time")]
         [JsonConverter(typeof(UnixDateTimeConverter))]
         [Preserve]
         public DateTime GrantTime { get; set; }
-        /// The unique identifier of a
-        /// @internal_link(horizon.platform.iap.models.Purchase) represents a user's
-        /// unique entitlement to a
-        /// @internal_link(horizon.platform.iap.models.Product). This value is 0 for
-        /// shared IAP entitlements.
+        /// The unique identifier of a Purchase represents a user's unique entitlement
+        /// to a Product. This value is 0 for shared IAP entitlements.
         [JsonProperty("id")]
         [Preserve]
         public string ID { get; set; }
@@ -54,19 +48,12 @@ namespace Oculus.Platform.Models
         [JsonProperty("reporting_id")]
         [Preserve]
         public string ReportingId { get; set; }
-        /// The SKU of the IAP @internal_link(horizon.platform.iap.models.Product) that
-        /// was purchased. This value is case-sensitive. To retrieve the product
-        /// information, you can use this value when calling
-        /// @internal_link(horizon.platform.iap.Iap#get_products_by_sku(List<String>,
-        /// Integer)).
+        /// The SKU of the IAP Iap.GetProductsBySku.
         [JsonProperty("sku")]
         [Preserve]
         public string Sku { get; set; }
-        /// The Type of the IAP @internal_link(horizon.platform.iap.models.Product)
-        /// that was purchased. The values can be
-        /// @internal_link(horizon.platform.iap.enums.ProductType#durable),
-        /// @internal_link(horizon.platform.iap.enums.ProductType#consumable), or a
-        /// @internal_link(horizon.platform.iap.enums.ProductType#subscription).
+        /// The Type of the IAP ProductType.Durable, ProductType.Consumable, or a
+        /// ProductType.Subscription.
         [JsonProperty("type")]
         [Preserve]
         public ProductType Type { get; set; }

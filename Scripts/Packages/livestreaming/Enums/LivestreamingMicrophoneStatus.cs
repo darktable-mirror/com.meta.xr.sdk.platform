@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<cb28cae18ba9d44a36317122332f8b86>>
+ * @generated SignedSource<<9da348713d398550a8d57c4643030ac0>>
  */
 
 namespace Oculus.Platform
@@ -15,9 +15,8 @@ namespace Oculus.Platform
     /// livestream. It provides a simple and standardized way to represent the
     /// status of a microphone during a livestream, which can be useful for various
     /// applications and use cases. See
-    /// [livestreaming](https://developer.oculus.com/blog/sharing-via-
-    /// livestreaming-now-available-for-rift-applications/) documentation for more
-    /// details.
+    /// [livestreaming](https://developer.oculus.com/blog/sharing-via-livestreaming-now-available-for-rift-applications/)
+    /// documentation for more details.
     [Preserve]
     public enum LivestreamingMicrophoneStatus : int
     {

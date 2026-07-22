@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<975d88de18abafef4018a6bb3ec9c26d>>
+ * @generated SignedSource<<f25f90042f0dad3d3c389acc24e42fe5>>
  */
 
 using UnityEngine;
@@ -13,6 +13,7 @@ using System.Collections.Generic;
 
 namespace Oculus.Platform
 {
+    /// TODO: add top-level comment for client!
     public static partial class TestUnreleased
     {
         /// Tests that unreleased options objects do not appear in the public SDK

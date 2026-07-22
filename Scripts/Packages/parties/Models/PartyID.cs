@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<cf2546ab6ad5347316a30cd1eb554e44>>
+ * @generated SignedSource<<c2005825d6abc2d5382cf58757211a20>>
  */
 
 namespace Oculus.Platform.Models
@@ -17,15 +17,13 @@ namespace Oculus.Platform.Models
 
     /// The party ID is a unique identifier of the party that will be generated for
     /// every distinct party. This ID can be used to make requests such as
-    /// @internal_link(horizon.platform.parties.Parties#get_current()) to get the
-    /// current party by its id. Read more about [parties](https://developer.oculus
-    /// .com/documentation/{{platform_doc_path}}/ps-parties/).
+    /// Parties.GetCurrent to get the current party by its id. Read more about
+    /// [parties](https://developer.oculus.com/documentation/unity/ps-parties/).
     [Preserve]
     public class PartyID
     {
-        /// The party ID can be used to retrieve
-        /// @internal_link(horizon.platform.parties.models.Party). Every party will
-        /// have a unique ID that is associated with it.
+        /// The party ID can be used to retrieve Party. Every party will have a unique
+        /// ID that is associated with it.
         [JsonProperty("party_id")]
         [JsonConverter(typeof(UInt64EmptyStringConverter))]
         [Preserve]

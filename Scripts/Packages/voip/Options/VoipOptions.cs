@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<c7b16babe5f6b2d3be317e12d26d7f18>>
+ * @generated SignedSource<<8ee019f445f04600df6506faeb1bd515>>
  */
 
 using System;
@@ -17,12 +17,10 @@ using UnityEngine.Scripting;
 namespace Oculus.Platform
 {
     /// The voip_options configuration is used to specify additional settings for
-    /// the VoIP transmission for a
-    /// @internal_link(horizon.platform.users.models.User). It consists of two
-    /// primary options which include using DTX for transmission and setting a
-    /// maxmimum bitrate for the network connection. You can read more about VoIP
-    /// [here](https://developer.oculus.com/documentation/unity/ps-parties/#voip-
-    /// options).
+    /// the VoIP transmission for a User. It consists of two primary options which
+    /// include using DTX for transmission and setting a maxmimum bitrate for the
+    /// network connection. You can read more about VoIP
+    /// [here](https://developer.oculus.com/documentation/unity/ps-parties/#voip-options).
     [Serializable]
     [Preserve]
     public class VoipOptions {
@@ -37,17 +35,19 @@ namespace Oculus.Platform
         public VoipBitrate BitrateForNewConnections = VoipBitrate.B32000;
         /// Set the opus codec to use discontinous transmission (DTX). DTX only
         /// transmits data when a person is speaking. Setting this to
-        /// @internal_link(horizon.platform.voip.enums.VoipDtxState#enabled) takes
-        /// advantage of the fact that in a two-way converstation each individual
-        /// speaks for less than half the time. Enabling DTX will conserve battery
-        /// power and reduce transmission rate when a pause in the voice chat is
-        /// detected.
+        /// VoipDtxState.Enabled takes advantage of the fact that in a two-way
+        /// converstation each individual speaks for less than half the time. Enabling
+        /// DTX will conserve battery power and reduce transmission rate when a pause
+        /// in the voice chat is detected.
         [JsonProperty("create_new_connection_use_dtx")]
         [JsonConverter(typeof(EnumDescriptionConverter<VoipDtxState>))]
         [Preserve]
         public VoipDtxState CreateNewConnectionUseDtx = VoipDtxState.Enabled;
         
-        public string Json => JsonUtility.ToJson(this);
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
+        }
 
         [Preserve]
         public VoipOptions()

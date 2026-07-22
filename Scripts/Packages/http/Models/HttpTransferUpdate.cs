@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<ef77f08087ecb5cb7b8740ddcdf36c5b>>
+ * @generated SignedSource<<76f63d70b6bf84777980e1751525ea1c>>
  */
 
 namespace Oculus.Platform.Models
@@ -18,7 +18,7 @@ namespace Oculus.Platform.Models
     /// Represents an update to an HTTP transfer, which is a process of
     /// transferring data over the internet using the HTTP protocol. It provides a
     /// way for developers to monitor the progress of an HTTP transfer and can be
-    /// retrieved using @internal_link(horizon.platform.http.Http#transfer()).
+    /// retrieved using Http.Transfer.
     [Preserve]
     public class HttpTransferUpdate
     {
@@ -27,8 +27,7 @@ namespace Oculus.Platform.Models
         [Preserve]
         public byte[] Payload { get; set; }
         /// It's a unique identifier for the HTTP transfer. It is used to track the
-        /// progress of the transfer and can be retrieved using
-        /// @internal_link(horizon.platform.common.models.Message#request_id).
+        /// progress of the transfer and can be retrieved using Message.RequestId.
         [JsonProperty("id")]
         [Preserve]
         public UInt64 ID { get; set; }

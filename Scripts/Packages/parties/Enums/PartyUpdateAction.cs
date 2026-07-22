@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<96bdab8085c4deb974314e67f29354d7>>
+ * @generated SignedSource<<47dedf423a6c336b63608131d9c43f36>>
  */
 
 namespace Oculus.Platform
@@ -12,9 +12,9 @@ namespace Oculus.Platform
     using UnityEngine.Scripting;
 
     /// An enum that specifies the type of action related to the party and the
-    /// user. For example, @internal_link(horizon.platform.parties.models.PartyUpda
-    /// teNotification#action) contains the information about the user joined or
-    /// left the party or the user was invited or uninvited to the party.
+    /// user. For example, PartyUpdateNotification.Action contains the information
+    /// about the user joined or left the party or the user was invited or
+    /// uninvited to the party.
     [Preserve]
     public enum PartyUpdateAction : int
     {

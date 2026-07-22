@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<6de7d29a67f96620ce1e38f1cdf3d4c9>>
+ * @generated SignedSource<<3128319238ab44365eacd9926783515b>>
  */
 
 using UnityEngine;
@@ -13,6 +13,10 @@ using System.Collections.Generic;
 
 namespace Oculus.Platform
 {
+    /// The party API allows you to retrieve information about parties and manage
+    /// various interactions between users and their respective Party. Calling
+    /// Parties.GetCurrent with a party ID will grab the Party object and the
+    /// associated metadata.
     public static partial class Parties
     {
         /// Create a new party and adds the caller to it.
@@ -186,8 +190,7 @@ namespace Oculus.Platform
         }
 
         /// Indicates that party has been updated. This will return a
-        /// @internal_link(horizon.platform.parties.models.PartyUpdateNotification)
-        /// object.
+        /// PartyUpdateNotification object.
         
         public static void SetPartyUpdateNotificationCallback(Message<PartyUpdateNotification>.Callback callback)
         {

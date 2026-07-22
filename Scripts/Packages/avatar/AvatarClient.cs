@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<cfaf01582b5d5213cdb6c288e3f5affe>>
+ * @generated SignedSource<<7a2cdb1453d18a577e30aaf9b5857648>>
  */
 
 using UnityEngine;
@@ -13,14 +13,19 @@ using System.Collections.Generic;
 
 namespace Oculus.Platform
 {
+    /// The Avatars API allows developers to create highly expressive, diverse, and
+    /// customizable avatar identities for the Meta ecosystem, Unity VR apps, and
+    /// other multiplayer experiences. The Avatar.LaunchAvatarEditor method
+    /// launches the Avatar Editor, where users can create and customize their
+    /// avatars, the result can be retrieved by AvatarEditorResult.RequestSent.
     public static partial class Avatar
     {
         /// Launches the Avatar Editor. Meta Avatars Editor is a feature that allows
         /// users to edit their Meta Avatars appearances within the VR application that
         /// they are currently using. This experience is often used by users to switch
         /// their outfit and accessories to better suit the VR experience they are
-        /// experiencing. The result can be retrieved by @internal_link(horizon.platfor
-        /// m.avatar.models.AvatarEditorResult#request_sent).
+        /// experiencing. The result can be retrieved by
+        /// AvatarEditorResult.RequestSent.
         public static Request<AvatarEditorResult> LaunchAvatarEditor(AvatarEditorOptions options = null)
         {
             if (Core.IsInitialized())

@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<d9e09c174d6119cc709252a475d1831b>>
+ * @generated SignedSource<<724ec48512452e156d8c229a4dabde94>>
  */
 
 namespace Oculus.Platform
@@ -12,11 +12,10 @@ namespace Oculus.Platform
     using UnityEngine.Scripting;
 
     /// Determines under what circumstances the frontend UI will attempt to gather
-    /// video evidence to support a report, and the object_type is defined in @inte
-    /// rnal_link(horizon.platform.abuse_report.options.AdvancedAbuseReportOptions#
-    /// object_type). This setting is crucial in ensuring that the reporting
-    /// process is thorough and accurate, as video evidence can provide valuable
-    /// context and proof of misconduct.
+    /// video evidence to support a report, and the object_type is defined in
+    /// AdvancedAbuseReportOptions.ObjectType. This setting is crucial in ensuring
+    /// that the reporting process is thorough and accurate, as video evidence can
+    /// provide valuable context and proof of misconduct.
     [Preserve]
     public enum AbuseReportVideoMode : int
     {
@@ -26,8 +25,7 @@ namespace Oculus.Platform
         Unknown,
 
         /// The UI will collect video evidence if the object_type supports it, the
-        /// object_type is defined in @internal_link(horizon.platform.abuse_report.opti
-        /// ons.AdvancedAbuseReportOptions#object_type).
+        /// object_type is defined in AdvancedAbuseReportOptions.ObjectType.
         [Description("COLLECT")]
         [Preserve]
         Collect,

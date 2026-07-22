@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<7a3867e354ffd099cc035e99114cd0d6>>
+ * @generated SignedSource<<a85197e21180ad8b8de7742db04cd20f>>
  */
 
 namespace Oculus.Platform.Models
@@ -15,10 +15,9 @@ namespace Oculus.Platform.Models
     using Newtonsoft.Json.Converters;
     using UnityEngine.Scripting;
 
-    /// It's used to block a user. Results of the launched block dialog including
+    /// It's used to block a user. Results of the launched block dialog including 
     /// whether the user was successfully blocked and whether the viewer canceled
-    /// the block flow. It can be retrieved using
-    /// @internal_link(horizon.platform.users.Users#launch_block_flow(ID))
+    /// the block flow. It can be retrieved using Users.LaunchBlockFlow
     [Preserve]
     public class LaunchBlockFlowResult
     {

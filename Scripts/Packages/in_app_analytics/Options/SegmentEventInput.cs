@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<6d66bb3e732f1d427a00b160122677cc>>
+ * @generated SignedSource<<ae0ade5a29ab67b88710de261762ec7b>>
  */
 
 using System;
@@ -63,7 +63,10 @@ namespace Oculus.Platform
         [Preserve]
         public string SegName;
         
-        public string Json => JsonUtility.ToJson(this);
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
+        }
 
         [Preserve]
         public SegmentEventInput()

@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<a38bb3f892de8750cb1c0140ad612745>>
+ * @generated SignedSource<<8560e3b14c35a4b65c47b3f5906a0fb4>>
  */
 
 namespace Oculus.Platform
@@ -14,10 +14,9 @@ namespace Oculus.Platform
     /// The age category in a Meta account is used to determine eligibility for
     /// certain features and services. This information is important for ensuring
     /// that users are able to access the appropriate content and functionality
-    /// based on their age. The values are used in @internal_link(horizon.platform.
-    /// user_age_category.models.UserAccountAgeCategory) API. See more details
-    /// [here](https://developer.oculus.com/documentation/android-apps/ps-get-age-
-    /// category-api).
+    /// based on their age. The values are used in UserAccountAgeCategory API. See
+    /// more details
+    /// [here](https://developer.oculus.com/documentation/android-apps/ps-get-age-category-api).
     [Preserve]
     public enum AppAgeCategory : int
     {

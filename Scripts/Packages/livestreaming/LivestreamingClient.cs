@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<fb83375141dd81c18847abea269d99eb>>
+ * @generated SignedSource<<31de05ef62e01d55732c220077116668>>
  */
 
 using UnityEngine;
@@ -13,6 +13,11 @@ using System.Collections.Generic;
 
 namespace Oculus.Platform
 {
+    /// The livestreaming API provides a way to receive notifications
+    /// Livestreaming.StatusChange when the streaming session changes, such as when
+    /// the user starts or stops streaming, or when the streaming status changes.
+    /// This allows developers to respond to changes in the streaming session in
+    /// real-time, providing a seamless and engaging experience for users.
     public static partial class Livestreaming
     {
         /// Query if an application is allowed to LS. Only permissioned apps can call
@@ -161,9 +166,8 @@ namespace Oculus.Platform
 
         /// Indicates that the livestreaming session has been updated. You can use this
         /// information to throttle your game performance or increase CPU/GPU
-        /// performance.  Use
-        /// @internal_link(horizon.platform.livestreaming.models.LivestreamingStatus)
-        /// to extract the updated livestreaming status.
+        /// performance.  Use LivestreamingStatus to extract the updated livestreaming
+        /// status.
         
         public static void SetStatusChangeNotificationCallback(Message<LivestreamingStatus>.Callback callback)
         {

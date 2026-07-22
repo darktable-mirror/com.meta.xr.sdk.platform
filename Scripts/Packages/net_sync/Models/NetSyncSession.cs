@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<76e792a541559682670989c8e0d49cc6>>
+ * @generated SignedSource<<73d4f559a0d8ac1593d1d50536c1f50d>>
  */
 
 namespace Oculus.Platform.Models
@@ -15,17 +15,14 @@ namespace Oculus.Platform.Models
     using Newtonsoft.Json.Converters;
     using UnityEngine.Scripting;
 
-    /// It represents the session of
-    /// @internal_link(horizon.platform.net_sync.models.NetSyncConnection) that
-    /// allows multiple clients to connect and communicate with each other in real-
-    /// time. It provides a way to manage and facilitate real-time communication
-    /// and data synchronization between multiple clients in a networked
-    /// environment.
+    /// It represents the session of NetSyncConnection that allows multiple clients
+    /// to connect and communicate with each other in real-time. It provides a way
+    /// to manage and facilitate real-time communication and data synchronization
+    /// between multiple clients in a networked environment.
     [Preserve]
     public class NetSyncSession
     {
-        /// A `long` integer represents the unique ID of the
-        /// @internal_link(horizon.platform.net_sync.models.NetSyncConnection) within
+        /// A `long` integer represents the unique ID of the NetSyncConnection within
         /// which this session exists.
         [JsonProperty("connection_id")]
         [Preserve]

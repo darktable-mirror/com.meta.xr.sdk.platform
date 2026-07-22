@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<0ab46e7230f389fd4f9d95b4727a85ad>>
+ * @generated SignedSource<<c30f01f3f336cf0977d9ff60ccbcfb04>>
  */
 
 using UnityEngine;
@@ -13,6 +13,10 @@ using System.Collections.Generic;
 
 namespace Oculus.Platform
 {
+    /// The Abuse Report API provides a way for users to report abusive behavior or
+    /// content within the platform. It allows developers to submit reports for
+    /// various types of content, including users AbuseReportType.User, or an
+    /// object/content AbuseReportType.Object.
     public static partial class AbuseReport
     {
         /// Launch the flow for reporting a user or piece of content. This advanced

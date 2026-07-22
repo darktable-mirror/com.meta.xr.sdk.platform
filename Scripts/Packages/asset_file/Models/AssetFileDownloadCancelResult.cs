@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<fc440c7a386845fa222772e5a7bf5741>>
+ * @generated SignedSource<<e86502e96b6e2cec4040cfdb1edd4e77>>
  */
 
 namespace Oculus.Platform.Models
@@ -17,12 +17,10 @@ namespace Oculus.Platform.Models
 
     /// An AssetFileDownloadCancelResult represents the result of a canceled
     /// download action of an asset file. You can cancel a download of an asset
-    /// file by using @internal_link(horizon.platform.asset_file.AssetFile#download
-    /// _cancel_by_id(ID)) or @internal_link(horizon.platform.asset_file.AssetFile#
-    /// download_cancel_by_name(String)). The result contains three fields which
-    /// are the asset file ID(use @internal_link(horizon.platform.asset_file.models
-    /// .AssetFileDownloadCancelResult#asset_id) to access), the file path, and
-    /// success status of the canceled download.
+    /// file by using AssetFile.DownloadCancelById or
+    /// AssetFile.DownloadCancelByName. The result contains three fields which are
+    /// the asset file ID(use AssetFileDownloadCancelResult.AssetId to access), the
+    /// file path, and success status of the canceled download.
     [Preserve]
     public class AssetFileDownloadCancelResult
     {
