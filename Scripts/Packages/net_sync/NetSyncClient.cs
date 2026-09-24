@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<2f9529c5e472b6082d948777fe867467>>
+ * @generated SignedSource<<470c85e2c01c68cb8d7242a555e7b713>>
  */
 
 using UnityEngine;
@@ -542,7 +542,7 @@ namespace Oculus.Platform
         /// 0 } The coordinate system used for ambisonic mixing is as right handed:
         /// positive X pointing right, positive Y pointing upward, positive Z pointing
         /// backward A value of 1.0 is equal to 1 meter.
-        public static Request<bool> GetListenerPosition(long connectionId, UInt64 sessionId, Vector3 position)
+        public static Request<bool> GetListenerPosition(long connectionId, UInt64 sessionId, NetSyncVector3 position)
         {
             if (Core.IsInitialized())
             {
@@ -653,7 +653,7 @@ namespace Oculus.Platform
 
         /// gets the voip amplitude of other sessions. the amplitude range is from
         /// [0.0f, 1.0f] when successfully set the function returns true, else false.
-        public static Request<bool> GetVoipAmplitude(long connectionId, UInt64 sessionId, Vector3 amplitude)
+        public static Request<bool> GetVoipAmplitude(long connectionId, UInt64 sessionId, NetSyncVector3 amplitude)
         {
             if (Core.IsInitialized())
             {
@@ -681,7 +681,7 @@ namespace Oculus.Platform
         /// Sets the position of the listener for spatialized audio, which is used to
         /// mix the ambisonic stream on the server. This is also used as the position
         /// for the microphone.
-        public static Request SetListenerPosition(long connectionId, Vector3 position)
+        public static Request SetListenerPosition(long connectionId, NetSyncVector3 position)
         {
             if (Core.IsInitialized())
             {

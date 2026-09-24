@@ -16,7 +16,7 @@ namespace Oculus.Platform
 
     /// <summary>
     /// This class implements a UI to edit the PlatformSettings class.
-    /// The UI is accessible from the menu bar via: Meta/Platform/Edit Settings
+    /// The UI is accessible from the menu bar via: Window/Meta/Platform/Edit Settings
     /// </summary>
     [CustomEditor(typeof(PlatformSettings))]
     public class OculusPlatformSettingsEditor : Editor
@@ -35,7 +35,11 @@ namespace Oculus.Platform
             EventManager.SendUnifiedEvent(true, "platform_sdk", "HzPSDK_EDITOR_SETTINGS_PANEL_OPENED");
         }
 
-        [UnityEditor.MenuItem("Meta/Platform/Edit Settings")]
+        // Unity asks that every Meta SDK hang its public entries off Window/Meta rather than a
+        // top-level "Meta" menu (D109765935 did this for Meta XR Core SDK). 3300 matches the
+        // priority Core uses for its Window/Meta/Tools and Window/Meta/Guides entries, so Platform
+        // sorts alongside them instead of into its own separator group.
+        [UnityEditor.MenuItem("Window/Meta/Platform/Edit Settings", false, 3300)]
         public static void Edit()
         {
             UnityEditor.Selection.activeObject = PlatformSettings.Instance;

@@ -16,7 +16,9 @@ namespace Oculus.Platform
 
         private static string ProjectRoot => Path.GetDirectoryName(UnityEngine.Application.dataPath);
 
-        [MenuItem("Meta/Platform/Install AI Rules && Skills")]
+        // Moves with Edit Settings: leaving a single entry behind under a top-level "Meta" would
+        // keep that menu on screen and defeat the consolidation Unity asked for.
+        [MenuItem("Window/Meta/Platform/Install AI Rules && Skills", false, 3300)]
         static void Install()
         {
             if (IsInstalled())

@@ -1,12 +1,13 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
 using Newtonsoft.Json;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Scripting;
 
 [Preserve]
 [JsonConverter(typeof(DeserializableListConverter))]
-public class DeserializableList<T>
+public class DeserializableList<T> : IList<T>
 {
     [Preserve]
     public DeserializableList()
@@ -29,9 +30,12 @@ public class DeserializableList<T>
     public SummaryJSON Summary { get; set; }
 
 
-    // Added to enable running foreach on this class which dev frequently uses.
-    // Making LeaderboarEntryList implements IEnumerator directly breaks json deserialization.
-    // C# compiler supports patterned based foreach loop, hence adding just this is enough.
+    // Implements IList<T> so callers can use LINQ (.Where/.Select/.ToList/...) and pass
+    // these lists where an IList<T>/IEnumerable<T> is expected, matching the legacy SDK and
+    // avoiding migration churn. Implementing IEnumerable<T> would normally make Newtonsoft
+    // treat the type as a JSON array and break the {data,paging,summary} object response, but
+    // the class-level [JsonConverter(typeof(DeserializableListConverter))] fully controls
+    // (de)serialization and overrides that default contract, so the interface is safe here.
     public IEnumerator<T> GetEnumerator()
     {
         if (Data == null)
@@ -40,6 +44,11 @@ public class DeserializableList<T>
             Data = new List<T>();
         }
         return Data.GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
     }
 
     public T this[int index]
@@ -75,6 +84,11 @@ public class DeserializableList<T>
             }
             return Data.Count;
         }
+    }
+
+    public bool IsReadOnly
+    {
+        get { return false; }
     }
 
     public int IndexOf(T item)

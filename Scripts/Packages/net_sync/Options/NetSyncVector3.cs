@@ -2,7 +2,7 @@
 /*
  * This file was @generated with arvr/projects/horizon-platform-sdk/tools/codegen. Do not modify it!
  * To regenerate this file, run: `buck run //arvr/projects/horizon-platform-sdk/tools/codegen:cli - - -all -g "Unity, CSharp"`
- * @generated SignedSource<<d367597dcde1480422b001349ea10c98>>
+ * @generated SignedSource<<009647bba7de982bf6135f2123370410>>
  */
 
 using System;
@@ -19,7 +19,7 @@ namespace Oculus.Platform
     /// Representation of 3D vectors and points.
     [Serializable]
     [Preserve]
-    public class Vector3 {
+    public class NetSyncVector3 {
         /// X component of the vector
         [JsonProperty("x")]
         [Preserve]
@@ -39,7 +39,7 @@ namespace Oculus.Platform
         }
 
         [Preserve]
-        public Vector3()
+        public NetSyncVector3()
         {
         }
         
@@ -61,7 +61,7 @@ namespace Oculus.Platform
             Z = value;
         }
         
-        ~Vector3()
+        ~NetSyncVector3()
         {
         }
     }

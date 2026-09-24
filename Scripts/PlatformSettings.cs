@@ -10,7 +10,7 @@ namespace Oculus.Platform
 #endif
     /// <summary>
     /// This class contains the configurations for the platform settings of a Model.Application.
-    /// To modify the values, there is an editor accessible from the menu bar via: Meta/Platform/Edit Settings.
+    /// To modify the values, there is an editor accessible from the menu bar via: Window/Meta/Platform/Edit Settings.
     /// This is important for initializing the Platform SDK.
     /// </summary>
     public sealed class PlatformSettings : ScriptableObject

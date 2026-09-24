@@ -12,10 +12,15 @@ namespace Oculus.Platform
     public class Request<T> : Request
     {
         public readonly Type requestType;
-        public bool HasCallback => _genericCallback != null;
+        public bool HasCallback => _callback != null || _genericCallback != null || _tcs != null;
 
         private Message<T>.Callback _genericCallback = null;
         private TaskCompletionSource<Message<T>> _tcs = null;
+
+        // Holds a response that arrived before any handler was attached, so it can be
+        // delivered once OnComplete()/Gen() runs instead of being dropped. See HandleMessage.
+        private Message<T> _pendingMessage = null;
+        private readonly object _handlerLock = new object();
 
         public Request(ulong requestID) : base(requestID)
         {
@@ -24,13 +29,23 @@ namespace Oculus.Platform
 
         public Request<T> OnComplete(Message<T>.Callback callback)
         {
-            if (_genericCallback != null || _tcs != null)
+            Message<T> buffered;
+            lock (_handlerLock)
             {
-                throw new UnityException("Attempted to attach multiple handlers to a Request.  This is not allowed.");
+                if (_genericCallback != null || _tcs != null)
+                {
+                    throw new UnityException("Attempted to attach multiple handlers to a Request.  This is not allowed.");
+                }
+
+                _genericCallback = callback;
+                buffered = TakePendingMessage();
             }
 
-            _genericCallback = callback;
             Callback.AddRequest(this);
+            if (buffered != null)
+            {
+                Deliver(buffered);
+            }
             return this;
         }
 
@@ -38,13 +53,23 @@ namespace Oculus.Platform
         // Legacy await handler: await Leaderboards.GetEntries().Gen();
         public new async Task<Message<T>> Gen()
         {
-            if (_genericCallback != null || _tcs != null)
+            Message<T> buffered;
+            lock (_handlerLock)
             {
-                throw new UnityException("Attempted to attach multiple handlers to a Request.  This is not allowed.");
+                if (_genericCallback != null || _tcs != null)
+                {
+                    throw new UnityException("Attempted to attach multiple handlers to a Request.  This is not allowed.");
+                }
+
+                _tcs = new TaskCompletionSource<Message<T>>();
+                buffered = TakePendingMessage();
             }
 
-            _tcs = new TaskCompletionSource<Message<T>>();
             Callback.AddRequest(this);
+            if (buffered != null)
+            {
+                Deliver(buffered);
+            }
             return await _tcs.Task;
         }
 
@@ -59,6 +84,24 @@ namespace Oculus.Platform
         {
             Message<T> typedMessage = new Message<T>(msg.requestID, msg.sessionID, msg.cookie, msg.data, msg.status);
 
+            lock (_handlerLock)
+            {
+                // A response can arrive before the caller has attached a handler — e.g.
+                // Core.AsyncInitialize delivers on a background thread that may finish
+                // before the caller's await/OnComplete runs. Buffer it and let
+                // OnComplete()/Gen() deliver it once a handler is attached.
+                if (_callback == null && _genericCallback == null && _tcs == null)
+                {
+                    _pendingMessage = typedMessage;
+                    return;
+                }
+            }
+
+            Deliver(typedMessage);
+        }
+
+        private void Deliver(Message<T> typedMessage)
+        {
             // handles the case with non typed message, where dev choose to convert themselves
             //
             // Leaderboards.GetEntries().OnComplete((Message message) => {
@@ -93,6 +136,14 @@ namespace Oculus.Platform
             }
 
             throw new UnityException("Request<T> with no handler. This should never happen.");
+        }
+
+        // Must be called while holding _handlerLock.
+        private Message<T> TakePendingMessage()
+        {
+            Message<T> pending = _pendingMessage;
+            _pendingMessage = null;
+            return pending;
         }
     }
 

@@ -102,13 +102,14 @@ namespace Oculus.Platform
                     message = new Message<PlatformInitialize>(request.RequestID, 0, 0, jsonRequest, status);
                 }
 
-                if (request.HasCallback)
+                // Always deliver the result. The caller attaches its handler after this
+                // background task is launched (await sets the TaskCompletionSource,
+                // OnComplete sets the callback), so gating on a handler being present here
+                // would drop the await path. Request<T> buffers until a handler attaches.
+                unityContext.Post(_ =>
                 {
-                    unityContext.Post(_ =>
-                    {
-                        request.HandleMessage(message);
-                    }, null);
-                }
+                    request.HandleMessage(message);
+                }, null);
 
             });
             return request;
@@ -170,13 +171,14 @@ namespace Oculus.Platform
                     message = new Message<PlatformInitialize>(request.RequestID, 0, 0, jsonRequest, status);
                 }
 
-                if (request.HasCallback)
+                // Always deliver the result. The caller attaches its handler after this
+                // background task is launched (await sets the TaskCompletionSource,
+                // OnComplete sets the callback), so gating on a handler being present here
+                // would drop the await path. Request<T> buffers until a handler attaches.
+                unityContext.Post(_ =>
                 {
-                    unityContext.Post(_ =>
-                    {
-                        request.HandleMessage(message);
-                    }, null);
-                }
+                    request.HandleMessage(message);
+                }, null);
             });
 
             return request;
